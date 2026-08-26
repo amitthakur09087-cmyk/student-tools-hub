@@ -1,113 +1,3926 @@
-html = r'''<!DOCTYPE html>
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>StudyVerse ⚡ | Class 11 CBSE</title>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}:root{--bg:#04050a;--panel:#0b0e17;--text:#f7f9ff;--muted:#9299aa;--cyan:#00eaff;--purple:#8b5cff;--pink:#ff1593;--green:#00ff91;--line:rgba(255,255,255,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(circle at 8% 10%,rgba(0,234,255,.08),transparent 25%),radial-gradient(circle at 92% 18%,rgba(139,92,255,.09),transparent 27%),var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh;overflow-x:hidden}button,input,textarea,select{font:inherit}.rgb{position:fixed;top:0;bottom:0;width:4px;z-index:9999;background:linear-gradient(180deg,#00eaff,#8b5cff,#ff1593,#00ff91,#00eaff);background-size:100% 300%;animation:rgbMove 4s linear infinite;box-shadow:0 0 12px #00eaff,0 0 28px #8b5cff}.rgb.left{left:0}.rgb.right{right:0}@keyframes rgbMove{0%{background-position:0 0}100%{background-position:0 300%}}
-header{position:sticky;top:0;z-index:2000;background:rgba(4,5,10,.78);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}nav{max-width:1350px;margin:auto;min-height:72px;padding:12px 25px;display:flex;align-items:center;justify-content:space-between;gap:18px}.logo{font-size:25px;font-weight:900;white-space:nowrap}.logo b{color:var(--cyan);text-shadow:0 0 18px rgba(0,234,255,.8)}.nav{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end}.nav button{background:transparent;color:#9da3b2;border:0;padding:9px 11px;border-radius:9px;cursor:pointer;font-weight:700}.nav button:hover{color:#fff;background:rgba(0,234,255,.08)}
-.hero{max-width:1350px;margin:auto;min-height:620px;padding:75px 25px 55px;display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}.pill{display:inline-flex;padding:8px 13px;border:1px solid rgba(0,234,255,.25);border-radius:30px;background:rgba(0,234,255,.05);color:var(--cyan);font-size:12px;font-weight:800;letter-spacing:.6px;margin-bottom:20px}.hero h1{font-size:clamp(48px,7vw,88px);line-height:.9;letter-spacing:-4px}.hero h1 span{background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));-webkit-background-clip:text;color:transparent}.hero p{color:var(--muted);max-width:680px;font-size:17px;line-height:1.75;margin-top:25px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{border:0;border-radius:12px;padding:13px 19px;color:#fff;background:linear-gradient(90deg,#009dff,#7c42ff);font-weight:800;cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(0,234,255,.2)}.btn.dark{background:#111621;border:1px solid var(--line)}.btn.green{background:linear-gradient(90deg,#00aa70,#00d8b5)}
-.dashboard{background:linear-gradient(145deg,rgba(16,21,34,.95),rgba(7,9,15,.95));border:1px solid var(--line);border-radius:26px;padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.45)}.dashTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.live{color:var(--green);font-size:11px;font-weight:900}.live i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);margin-right:5px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{padding:18px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.05);border-radius:15px}.stat strong{display:block;font-size:25px;color:var(--cyan)}.stat small{color:var(--muted)}.progress{margin-top:15px}.progressLine{height:9px;background:#171c27;border-radius:10px;overflow:hidden}.progressLine span{display:block;width:68%;height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));box-shadow:0 0 15px rgba(0,234,255,.35)}
-.searchWrap{max-width:1350px;padding:0 25px;margin:auto}.search{width:100%;padding:16px 18px;border-radius:15px;border:1px solid var(--line);background:#0a0d15;color:#fff;outline:none}.search:focus{border-color:rgba(0,234,255,.5);box-shadow:0 0 20px rgba(0,234,255,.08)}
-.section{max-width:1350px;margin:auto;padding:55px 25px}.sectionTitle{margin-bottom:25px}.sectionTitle h2{font-size:32px}.sectionTitle p{color:var(--muted);margin-top:7px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:linear-gradient(145deg,#0e121d,#090c13);border:1px solid var(--line);border-radius:20px;padding:21px;transition:.25s}.card:hover{transform:translateY(-5px);border-color:rgba(0,234,255,.25);box-shadow:0 15px 45px rgba(0,0,0,.25)}.subject{min-height:195px;cursor:pointer;position:relative;overflow:hidden}.subject:after{content:"";position:absolute;width:120px;height:120px;right:-50px;bottom:-50px;border-radius:50%;background:var(--glow);filter:blur(45px);opacity:.35}.icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:rgba(255,255,255,.055);font-size:23px;margin-bottom:17px}.card h3{margin-bottom:8px}.card p{color:var(--muted);line-height:1.65;font-size:14px}.chapterGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.chapter{cursor:pointer;min-height:150px}.tag{display:inline-block;font-size:10px;color:var(--cyan);border:1px solid rgba(0,234,255,.2);padding:5px 8px;border-radius:20px;margin-bottom:12px}.read{display:inline-block;color:var(--cyan);margin-top:14px;font-size:12px;font-weight:800}.toolGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.tool{text-align:center;cursor:pointer;padding:25px 15px}.tool .icon{margin:0 auto 14px}.questionGrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.question span{color:var(--cyan);font-size:10px;font-weight:900}.question h3{margin-top:9px;font-size:16px;line-height:1.5}
-.ai{border:1px solid rgba(0,234,255,.18);border-radius:25px;padding:20px;background:radial-gradient(circle at 15% 15%,rgba(0,234,255,.07),transparent 25%),radial-gradient(circle at 85% 80%,rgba(139,92,255,.08),transparent 30%),#080b12;box-shadow:0 20px 70px rgba(0,0,0,.35)}.aiHeader{display:flex;align-items:center;justify-content:space-between;gap:15px;padding-bottom:18px;border-bottom:1px solid var(--line)}.aiBrand{display:flex;gap:13px;align-items:center}.aiLogo{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:27px;background:#101827;border:1px solid rgba(0,234,255,.3);box-shadow:0 0 25px rgba(0,234,255,.1)}.aiBrand p{color:var(--muted);font-size:13px;margin-top:3px}.online{color:var(--green);font-size:11px;font-weight:900}.online:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);margin-right:6px}.aiControls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 10px}.aiControls input,.aiControls select{width:100%;padding:13px;background:#0f1420;color:#fff;border:1px solid var(--line);border-radius:11px;outline:none}.prompts{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}.prompts button{background:#101521;color:#aeb5c4;border:1px solid var(--line);padding:8px 11px;border-radius:10px;cursor:pointer}.chat{height:440px;overflow-y:auto;padding:17px;background:#04060a;border-radius:18px;border:1px solid rgba(255,255,255,.05)}.msg{display:flex;gap:9px;margin-bottom:17px}.msg.user{flex-direction:row-reverse}.avatar{min-width:35px;width:35px;height:35px;border-radius:11px;background:#121824;display:flex;align-items:center;justify-content:center}.bubble{max-width:82%;padding:12px 14px;background:#101520;border:1px solid rgba(255,255,255,.06);border-radius:14px;line-height:1.65}.msg.user .bubble{background:#111b29}.bubble strong{display:block;color:var(--cyan);margin-bottom:4px}.bubble p{color:#c4c9d4}.aiInput{display:flex;gap:10px;margin-top:13px}.aiInput textarea{flex:1;resize:none;background:#0e131e;color:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;outline:none}.send{width:115px;border:0;border-radius:14px;background:linear-gradient(90deg,#00a8ff,#8149ff);color:#fff;font-weight:900;cursor:pointer}.send:disabled{opacity:.5}
-.gameGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.game{text-align:center;cursor:pointer;min-height:190px}.gameIcon{font-size:50px;margin:10px 0 16px;transition:.2s}.game:hover .gameIcon{transform:scale(1.15) rotate(-4deg)}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(9px);z-index:5000;display:none;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.modalBox{width:min(900px,100%);max-height:90vh;overflow:auto;background:#090c14;border:1px solid rgba(0,234,255,.22);border-radius:23px;padding:25px;box-shadow:0 0 80px rgba(0,234,255,.08)}.modalHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.close{width:38px;height:38px;border:0;border-radius:50%;background:#151a25;color:#fff;font-size:23px;cursor:pointer}.modalBox h3{color:var(--cyan);margin:20px 0 9px}.modalBox p,.modalBox li{color:#b8beca;line-height:1.75}.modalBox ul{padding-left:21px}.field{width:100%;padding:13px;margin:7px 0;border-radius:11px;background:#101521;color:#fff;border:1px solid var(--line);outline:none}.gameArea{height:400px;background:linear-gradient(rgba(0,234,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,234,255,.03) 1px,transparent 1px),#030508;background-size:30px 30px;border:1px solid rgba(0,234,255,.12);border-radius:16px;position:relative;overflow:hidden}.gameScore{text-align:center;color:var(--cyan);font-weight:900;margin-bottom:10px}.car{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:43px}.rock{position:absolute;font-size:35px}.target{position:absolute;font-size:38px;cursor:pointer}.air{position:absolute;font-size:40px;left:70px;top:180px}
-footer{text-align:center;padding:40px 20px;border-top:1px solid var(--line);color:#707887}footer b{color:var(--cyan)}
-@media(max-width:1050px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.chapterGrid{grid-template-columns:1fr 1fr}.toolGrid{grid-template-columns:1fr 1fr}.gameGrid{grid-template-columns:1fr 1fr}}@media(max-width:650px){nav{align-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}.grid,.chapterGrid,.toolGrid,.gameGrid,.questionGrid{grid-template-columns:1fr}.hero{padding-top:45px}.hero h1{letter-spacing:-2px}.stats{grid-template-columns:1fr}.aiControls{grid-template-columns:1fr}.aiInput{flex-direction:column}.send{height:48px;width:100%}.bubble{max-width:90%}}
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+ --bg:#03050a;
+ --panel:#0b0f18;
+ --panel2:#101622;
+ --text:#f5f7ff;
+ --muted:#9299aa;
+ --cyan:#00eaff;
+ --purple:#8b5cff;
+ --pink:#ff1593;
+ --green:#00ff91;
+ --orange:#ff9d00;
+ --red:#ff426d;
+ --line:rgba(255,255,255,.09);
+}
+
+html{scroll-behavior:smooth}
+
+body{
+ background:
+ radial-gradient(circle at 8% 8%,rgba(0,234,255,.09),transparent 25%),
+ radial-gradient(circle at 92% 18%,rgba(139,92,255,.10),transparent 27%),
+ radial-gradient(circle at 50% 90%,rgba(255,21,147,.06),transparent 28%),
+ var(--bg);
+ color:var(--text);
+ font-family:Inter,Segoe UI,Arial,sans-serif;
+ min-height:100vh;
+ overflow-x:hidden;
+}
+
+button,input,textarea,select{font:inherit}
+
+/* RGB SIDES */
+.rgb{
+ position:fixed;
+ top:0;
+ bottom:0;
+ width:4px;
+ z-index:9999;
+ background:linear-gradient(
+  180deg,
+  #00eaff,
+  #8b5cff,
+  #ff1593,
+  #00ff91,
+  #00eaff
+ );
+ background-size:100% 300%;
+ animation:rgbMove 4s linear infinite;
+ box-shadow:0 0 14px #00eaff,0 0 30px #8b5cff;
+}
+.rgb.left{left:0}
+.rgb.right{right:0}
+
+@keyframes rgbMove{
+ from{background-position:0 0}
+ to{background-position:0 300%}
+}
+
+/* HEADER */
+header{
+ position:sticky;
+ top:0;
+ z-index:2000;
+ background:rgba(3,5,10,.78);
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid var(--line);
+}
+
+nav{
+ max-width:1400px;
+ min-height:72px;
+ margin:auto;
+ padding:12px 26px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:20px;
+}
+
+.logo{
+ font-size:25px;
+ font-weight:950;
+ white-space:nowrap;
+}
+
+.logo b{
+ color:var(--cyan);
+ text-shadow:0 0 20px rgba(0,234,255,.8);
+}
+
+.nav{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:flex-end;
+ gap:5px;
+}
+
+.nav button{
+ background:transparent;
+ border:0;
+ color:#9da4b4;
+ padding:9px 11px;
+ border-radius:9px;
+ cursor:pointer;
+ font-weight:750;
+ transition:.2s;
+}
+
+.nav button:hover{
+ color:white;
+ background:rgba(0,234,255,.08);
+}
+
+/* HERO */
+.hero{
+ max-width:1400px;
+ min-height:650px;
+ margin:auto;
+ padding:80px 26px 60px;
+ display:grid;
+ grid-template-columns:1.2fr .8fr;
+ gap:45px;
+ align-items:center;
+}
+
+.pill{
+ display:inline-flex;
+ padding:8px 14px;
+ border:1px solid rgba(0,234,255,.25);
+ border-radius:30px;
+ background:rgba(0,234,255,.05);
+ color:var(--cyan);
+ font-size:12px;
+ font-weight:850;
+ letter-spacing:.5px;
+ margin-bottom:20px;
+}
+
+.hero h1{
+ font-size:clamp(50px,7vw,92px);
+ line-height:.9;
+ letter-spacing:-5px;
+}
+
+.gradient{
+ background:linear-gradient(
+  90deg,
+  var(--cyan),
+  var(--purple),
+  var(--pink)
+ );
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent;
+}
+
+.hero p{
+ max-width:720px;
+ color:var(--muted);
+ font-size:17px;
+ line-height:1.75;
+ margin-top:25px;
+}
+
+.actions{
+ display:flex;
+ flex-wrap:wrap;
+ gap:12px;
+ margin-top:30px;
+}
+
+.btn{
+ border:0;
+ border-radius:12px;
+ padding:13px 19px;
+ color:white;
+ background:linear-gradient(90deg,#009dff,#7c42ff);
+ font-weight:850;
+ cursor:pointer;
+ transition:.2s;
+}
+
+.btn:hover{
+ transform:translateY(-3px);
+ box-shadow:0 0 28px rgba(0,234,255,.18);
+}
+
+.btn.dark{
+ background:#111722;
+ border:1px solid var(--line);
+}
+
+.btn.green{
+ background:linear-gradient(90deg,#00a96e,#00d9b2);
+}
+
+.btn.red{
+ background:linear-gradient(90deg,#d51f52,#ff426d);
+}
+
+/* DASHBOARD */
+.dashboard{
+ background:
+ linear-gradient(145deg,rgba(16,22,35,.96),rgba(7,9,15,.96));
+ border:1px solid var(--line);
+ border-radius:26px;
+ padding:22px;
+ box-shadow:0 30px 90px rgba(0,0,0,.5);
+}
+
+.dashTop{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:18px;
+}
+
+.live,.online{
+ color:var(--green);
+ font-size:11px;
+ font-weight:900;
+}
+
+.live i{
+ display:inline-block;
+ width:7px;
+ height:7px;
+ border-radius:50%;
+ background:var(--green);
+ box-shadow:0 0 12px var(--green);
+ margin-right:6px;
+}
+
+.stats{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+}
+
+.stat{
+ padding:18px;
+ background:rgba(255,255,255,.035);
+ border:1px solid rgba(255,255,255,.05);
+ border-radius:15px;
+}
+
+.stat strong{
+ display:block;
+ font-size:25px;
+ color:var(--cyan);
+}
+
+.stat small{color:var(--muted)}
+
+.progress{
+ margin-top:17px;
+}
+
+.progressLine{
+ height:9px;
+ margin-top:7px;
+ background:#171c27;
+ border-radius:10px;
+ overflow:hidden;
+}
+
+.progressLine span{
+ display:block;
+ width:68%;
+ height:100%;
+ background:linear-gradient(
+  90deg,
+  var(--cyan),
+  var(--purple),
+  var(--pink)
+ );
+ box-shadow:0 0 15px rgba(0,234,255,.35);
+}
+
+/* SEARCH */
+.searchWrap{
+ max-width:1400px;
+ margin:auto;
+ padding:0 26px;
+}
+
+.search{
+ width:100%;
+ padding:16px 18px;
+ border-radius:15px;
+ border:1px solid var(--line);
+ background:#090c14;
+ color:white;
+ outline:none;
+}
+
+.search:focus{
+ border-color:rgba(0,234,255,.5);
+ box-shadow:0 0 22px rgba(0,234,255,.08);
+}
+
+/* SECTIONS */
+.section{
+ max-width:1400px;
+ margin:auto;
+ padding:65px 26px;
+}
+
+.sectionTitle{
+ margin-bottom:25px;
+}
+
+.sectionTitle h2{
+ font-size:34px;
+}
+
+.sectionTitle p{
+ color:var(--muted);
+ margin-top:7px;
+}
+
+/* CARDS */
+.grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:16px;
+}
+
+.card{
+ background:linear-gradient(145deg,#0e121d,#080b12);
+ border:1px solid var(--line);
+ border-radius:20px;
+ padding:21px;
+ transition:.25s;
+}
+
+.card:hover{
+ transform:translateY(-5px);
+ border-color:rgba(0,234,255,.25);
+ box-shadow:0 18px 50px rgba(0,0,0,.3);
+}
+
+.subject{
+ min-height:205px;
+ cursor:pointer;
+ position:relative;
+ overflow:hidden;
+}
+
+.subject:after{
+ content:"";
+ position:absolute;
+ width:130px;
+ height:130px;
+ right:-50px;
+ bottom:-50px;
+ border-radius:50%;
+ background:var(--glow);
+ filter:blur(45px);
+ opacity:.35;
+}
+
+.icon{
+ width:48px;
+ height:48px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ border-radius:14px;
+ background:rgba(255,255,255,.055);
+ font-size:23px;
+ margin-bottom:17px;
+}
+
+.card h3{margin-bottom:8px}
+
+.card p{
+ color:var(--muted);
+ line-height:1.65;
+ font-size:14px;
+}
+
+/* CHAPTERS */
+.chapterGrid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:14px;
+}
+
+.chapter{
+ cursor:pointer;
+ min-height:170px;
+}
+
+.tag{
+ display:inline-block;
+ font-size:10px;
+ color:var(--cyan);
+ border:1px solid rgba(0,234,255,.2);
+ padding:5px 8px;
+ border-radius:20px;
+ margin-bottom:12px;
+}
+
+.read{
+ display:inline-block;
+ color:var(--cyan);
+ margin-top:14px;
+ font-size:12px;
+ font-weight:850;
+}
+
+/* TOOLS */
+.toolGrid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:15px;
+}
+
+.tool{
+ text-align:center;
+ cursor:pointer;
+ padding:25px 15px;
+ min-height:175px;
+}
+
+.tool .icon{
+ margin:0 auto 14px;
+}
+
+/* QUESTIONS */
+.questionGrid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:15px;
+}
+
+.question span{
+ color:var(--cyan);
+ font-size:10px;
+ font-weight:900;
+}
+
+.question h3{
+ margin-top:9px;
+ font-size:16px;
+ line-height:1.5;
+}
+
+/* AI */
+.ai{
+ border:1px solid rgba(0,234,255,.18);
+ border-radius:25px;
+ padding:20px;
+ background:
+ radial-gradient(circle at 15% 15%,rgba(0,234,255,.07),transparent 25%),
+ radial-gradient(circle at 85% 80%,rgba(139,92,255,.08),transparent 30%),
+ #080b12;
+ box-shadow:0 20px 70px rgba(0,0,0,.35);
+}
+
+.aiHeader{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:15px;
+ padding-bottom:18px;
+ border-bottom:1px solid var(--line);
+}
+
+.aiBrand{
+ display:flex;
+ align-items:center;
+ gap:13px;
+}
+
+.aiLogo{
+ width:52px;
+ height:52px;
+ border-radius:16px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:27px;
+ background:#101827;
+ border:1px solid rgba(0,234,255,.3);
+ box-shadow:0 0 25px rgba(0,234,255,.1);
+}
+
+.aiBrand p{
+ color:var(--muted);
+ font-size:13px;
+ margin-top:3px;
+}
+
+.aiControls{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+ margin:16px 0 10px;
+}
+
+.aiControls input,
+.aiControls select{
+ width:100%;
+ padding:13px;
+ background:#0f1420;
+ color:white;
+ border:1px solid var(--line);
+ border-radius:11px;
+ outline:none;
+}
+
+.prompts{
+ display:flex;
+ flex-wrap:wrap;
+ gap:7px;
+ margin-bottom:14px;
+}
+
+.prompts button{
+ background:#101521;
+ color:#aeb5c4;
+ border:1px solid var(--line);
+ padding:8px 11px;
+ border-radius:10px;
+ cursor:pointer;
+}
+
+.prompts button:hover{
+ color:white;
+ border-color:rgba(0,234,255,.3);
+}
+
+.chat{
+ height:440px;
+ overflow-y:auto;
+ padding:17px;
+ background:#04060a;
+ border-radius:18px;
+ border:1px solid rgba(255,255,255,.05);
+}
+
+.msg{
+ display:flex;
+ gap:9px;
+ margin-bottom:17px;
+}
+
+.msg.user{
+ flex-direction:row-reverse;
+}
+
+.avatar{
+ min-width:35px;
+ width:35px;
+ height:35px;
+ border-radius:11px;
+ background:#121824;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+
+.bubble{
+ max-width:82%;
+ padding:12px 14px;
+ background:#101520;
+ border:1px solid rgba(255,255,255,.06);
+ border-radius:14px;
+ line-height:1.65;
+}
+
+.msg.user .bubble{
+ background:#111b29;
+}
+
+.bubble strong{
+ display:block;
+ color:var(--cyan);
+ margin-bottom:4px;
+}
+
+.bubble p{
+ color:#c4c9d4;
+}
+
+.aiInput{
+ display:flex;
+ gap:10px;
+ margin-top:13px;
+}
+
+.aiInput textarea{
+ flex:1;
+ resize:none;
+ background:#0e131e;
+ color:white;
+ border:1px solid var(--line);
+ border-radius:14px;
+ padding:14px;
+ outline:none;
+}
+
+.send{
+ width:120px;
+ border:0;
+ border-radius:14px;
+ background:linear-gradient(90deg,#00a8ff,#8149ff);
+ color:white;
+ font-weight:900;
+ cursor:pointer;
+}
+
+.send:disabled{opacity:.5}
+
+.dots span{
+ display:inline-block;
+ width:6px;
+ height:6px;
+ border-radius:50%;
+ background:var(--cyan);
+ margin:0 2px;
+ animation:dots 1s infinite;
+}
+
+.dots span:nth-child(2){animation-delay:.15s}
+.dots span:nth-child(3){animation-delay:.3s}
+
+@keyframes dots{
+ 0%,100%{opacity:.25;transform:translateY(0)}
+ 50%{opacity:1;transform:translateY(-4px)}
+}
+
+/* GAMES */
+.gameGrid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:15px;
+}
+
+.game{
+ text-align:center;
+ cursor:pointer;
+ min-height:195px;
+}
+
+.gameIcon{
+ font-size:50px;
+ margin:10px 0 16px;
+ transition:.2s;
+}
+
+.game:hover .gameIcon{
+ transform:scale(1.15) rotate(-4deg);
+}
+
+/* MODAL */
+.modal{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.78);
+ backdrop-filter:blur(9px);
+ z-index:5000;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:18px;
+}
+
+.modal.show{display:flex}
+
+.modalBox{
+ width:min(950px,100%);
+ max-height:90vh;
+ overflow:auto;
+ background:#090c14;
+ border:1px solid rgba(0,234,255,.22);
+ border-radius:23px;
+ padding:25px;
+ box-shadow:0 0 80px rgba(0,234,255,.08);
+}
+
+.modalHead{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ margin-bottom:18px;
+}
+
+.close{
+ width:38px;
+ height:38px;
+ border:0;
+ border-radius:50%;
+ background:#151a25;
+ color:white;
+ font-size:23px;
+ cursor:pointer;
+}
+
+.modalBox h3{
+ color:var(--cyan);
+ margin:20px 0 9px;
+}
+
+.modalBox p,
+.modalBox li{
+ color:#b8beca;
+ line-height:1.75;
+}
+
+.modalBox ul{
+ padding-left:21px;
+}
+
+.field{
+ width:100%;
+ padding:13px;
+ margin:7px 0;
+ border-radius:11px;
+ background:#101521;
+ color:white;
+ border:1px solid var(--line);
+ outline:none;
+}
+
+textarea.field{
+ resize:vertical;
+}
+
+/* GAME AREA */
+.gameScore{
+ text-align:center;
+ color:var(--cyan);
+ font-weight:900;
+ margin-bottom:10px;
+}
+
+.gameArea{
+ height:400px;
+ background:
+ linear-gradient(rgba(0,234,255,.03) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(0,234,255,.03) 1px,transparent 1px),
+ #030508;
+ background-size:30px 30px;
+ border:1px solid rgba(0,234,255,.12);
+ border-radius:16px;
+ position:relative;
+ overflow:hidden;
+}
+
+.car{
+ position:absolute;
+ bottom:20px;
+ left:50%;
+ transform:translateX(-50%);
+ font-size:43px;
+}
+
+.rock{
+ position:absolute;
+ font-size:35px;
+}
+
+.target{
+ position:absolute;
+ font-size:38px;
+ cursor:pointer;
+ user-select:none;
+}
+
+.air{
+ position:absolute;
+ font-size:40px;
+ left:70px;
+ top:180px;
+}
+
+/* FLASHCARD */
+.flashcard{
+ min-height:250px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ padding:35px;
+ cursor:pointer;
+ background:
+ radial-gradient(circle,rgba(0,234,255,.08),transparent 60%),
+ #0c111b;
+ border:1px solid rgba(0,234,255,.2);
+ border-radius:20px;
+}
+
+.flashcard h2{
+ color:var(--cyan);
+ margin-bottom:15px;
+}
+
+.flashcard p{
+ color:#c7ccd7;
+ font-size:17px;
+ line-height:1.7;
+}
+
+/* FOOTER */
+footer{
+ text-align:center;
+ padding:45px 20px;
+ border-top:1px solid var(--line);
+ color:#707887;
+}
+
+footer b{color:var(--cyan)}
+
+/* MOBILE */
+@media(max-width:1050px){
+ .hero{grid-template-columns:1fr}
+ .grid{grid-template-columns:1fr 1fr}
+ .chapterGrid{grid-template-columns:1fr 1fr}
+ .toolGrid{grid-template-columns:1fr 1fr}
+ .gameGrid{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:650px){
+ nav{
+  align-items:flex-start;
+  flex-direction:column;
+ }
+ .nav{justify-content:flex-start}
+ .grid,
+ .chapterGrid,
+ .toolGrid,
+ .gameGrid,
+ .questionGrid{
+  grid-template-columns:1fr;
+ }
+ .hero{padding-top:45px}
+ .hero h1{letter-spacing:-2px}
+ .stats{grid-template-columns:1fr}
+ .aiControls{grid-template-columns:1fr}
+ .aiInput{flex-direction:column}
+ .send{
+  height:48px;
+  width:100%;
+ }
+ .bubble{max-width:90%}
+}
 </style>
 </head>
+
 <body>
-<div class="rgb left"></div><div class="rgb right"></div>
-<header><nav><div class="logo">Study<b>Verse</b> ⚡</div><div class="nav">
-<button onclick="go('home')">Home</button><button onclick="go('subjects')">Subjects</button><button onclick="go('chapters')">Notes</button><button onclick="go('ai')">AI</button><button onclick="go('tools')">Tools</button><button onclick="go('questions')">Questions</button><button onclick="go('games')">Games</button></div></nav></header>
+
+<div class="rgb left"></div>
+<div class="rgb right"></div>
+
+<header>
+<nav>
+
+<div class="logo">Study<b>Verse</b> ⚡</div>
+
+<div class="nav">
+<button onclick="go('home')">Home</button>
+<button onclick="go('subjects')">Subjects</button>
+<button onclick="go('chapters')">Notes</button>
+<button onclick="go('ai')">AI</button>
+<button onclick="go('tools')">Tools</button>
+<button onclick="go('questions')">Questions</button>
+<button onclick="go('games')">Games</button>
+</div>
+
+</nav>
+</header>
+
 <main id="home">
-<section class="hero"><div><div class="pill">CLASS 11 • CBSE • ALL-IN-ONE STUDY HUB</div><h1>Study<br>Smarter.<br><span>Level Up.</span></h1><p>Welcome to StudyVerse — a futuristic Class 11 study dashboard with chapter notes, smart tools, games and your own AI study assistant.</p><div class="actions"><button class="btn" onclick="go('subjects')">Explore Subjects →</button><button class="btn dark" onclick="go('ai')">🤖 Ask AI</button></div></div>
-<div class="dashboard"><div class="dashTop"><h3>⚡ Study Dashboard</h3><div class="live"><i></i>READY</div></div><div class="stats"><div class="stat"><small>Subjects</small><strong>06</strong></div><div class="stat"><small>AI Assistant</small><strong>ON</strong></div><div class="stat"><small>Study Tools</small><strong>08+</strong></div><div class="stat"><small>Games</small><strong>04</strong></div></div><div class="progress"><small style="color:var(--muted)">Daily Study Progress</small><div class="progressLine"><span></span></div></div></div></section>
-<div class="searchWrap"><input id="search" class="search" placeholder="🔎 Search subjects, chapters, notes and questions..." oninput="searchSite()"></div>
-<section class="section" id="subjects"><div class="sectionTitle"><h2>📚 Subjects</h2><p>Complete Class 11 CBSE study sections.</p></div><div class="grid">
-<div class="card subject searchable" style="--glow:#00eaff" onclick="showSubject('Accountancy')"><div class="icon">📒</div><h3>Accountancy</h3><p>Accounting concepts, journal, ledger, trial balance, cash book, depreciation and more.</p></div>
-<div class="card subject searchable" style="--glow:#00ff91" onclick="showSubject('Business Studies')"><div class="icon">💼</div><h3>Business Studies</h3><p>Business organisation, finance, trade, services, entrepreneurship and management basics.</p></div>
-<div class="card subject searchable" style="--glow:#8b5cff" onclick="showSubject('Economics')"><div class="icon">📈</div><h3>Economics</h3><p>Statistics and introductory microeconomics concepts, demand, supply and markets.</p></div>
-<div class="card subject searchable" style="--glow:#ff1593" onclick="showSubject('English')"><div class="icon">📖</div><h3>English</h3><p>Hornbill, Snapshots, reading comprehension and writing skills.</p></div>
-<div class="card subject searchable" style="--glow:#ff9d00" onclick="showSubject('Hindi')"><div class="icon">📝</div><h3>Hindi</h3><p>आरोह, वितान, काव्य, गद्य, अपठित बोध और रचनात्मक लेखन।</p></div>
-<div class="card subject searchable" style="--glow:#00a8ff" onclick="showSubject('Physical Education')"><div class="icon">🏃</div><h3>Physical Education</h3><p>Fitness, yoga, sports, nutrition, physiology and physical education theory.</p></div>
-</div></section>
-<section class="section" id="chapters"><div class="sectionTitle"><h2>📖 Detailed Chapter Notes</h2><p>Open a chapter for structured revision notes.</p></div><div class="chapterGrid">
-<div class="card chapter searchable" onclick="showNote('Accounting Equation')"><span class="tag">ACCOUNTANCY</span><h3>Accounting Equation</h3><p>Assets, capital, liabilities and transaction effects.</p><span class="read">Read Notes →</span></div>
-<div class="card chapter searchable" onclick="showNote('Journal')"><span class="tag">ACCOUNTANCY</span><h3>Journal</h3><p>Debit-credit rules, journal entries and narration.</p><span class="read">Read Notes →</span></div>
-<div class="card chapter searchable" onclick="showNote('Business Organisation')"><span class="tag">BUSINESS STUDIES</span><h3>Forms of Business Organisation</h3><p>Sole proprietorship, partnership, company and cooperative.</p><span class="read">Read Notes →</span></div>
-<div class="card chapter searchable" onclick="showNote('Business Nature')"><span class="tag">BUSINESS STUDIES</span><h3>Nature and Purpose of Business</h3><p>Business meaning, characteristics and objectives.</p><span class="read">Read Notes →</span></div>
-<div class="card chapter searchable" onclick="showNote('Demand')"><span class="tag">ECONOMICS</span><h3>Demand</h3><p>Law of demand, determinants and demand curve.</p><span class="read">Read Notes →</span></div>
-<div class="card chapter searchable" onclick="showNote('Statistics')"><span class="tag">ECONOMICS</span><h3>Statistics for Economics</h3><p>Data collection, organisation and presentation.</p><span class="read">Read Notes →</span></div>
-<div class="card chapter searchable" onclick="showNote('English Writing')"><span class="tag">ENGLISH</span><h3>Writing Skills</h3><p>Notice, speech, debate, advertisement and formats.</p><span class="read">Read Notes →</span></div>
-<div class="card chapter searchable" onclick="showNote('Hindi Writing')"><span class="tag">HINDI</span><h3>रचनात्मक लेखन</h3><p>लेखन की संरचना, भाषा और परीक्षा तैयारी।</p><span class="read">पढ़ें →</span></div>
-<div class="card chapter searchable" onclick="showNote('Physical Fitness')"><span class="tag">PHYSICAL EDUCATION</span><h3>Physical Fitness</h3><p>Fitness components, wellness and exercise.</p><span class="read">Read Notes →</span></div>
-</div></section>
-<section class="section" id="ai"><div class="sectionTitle"><h2>🤖 StudyVerse AI</h2><p>Your personal AI study assistant.</p></div><div class="ai"><div class="aiHeader"><div class="aiBrand"><div class="aiLogo">🤖</div><div><h2>StudyVerse AI</h2><p>Explain • Solve • Revise • Practice</p></div></div><div class="online">AI READY</div></div>
-<div class="aiControls"><select id="aiSubject"><option>General</option><option>Accountancy</option><option>Business Studies</option><option>Economics</option><option>English</option><option>Hindi</option><option>Physical Education</option></select><input id="aiChapter" placeholder="Chapter / Topic"></div>
-<div class="prompts"><button onclick="quickAI('Explain this topic in very simple language.')">🧠 Explain</button><button onclick="quickAI('Make detailed revision notes for this topic.')">📝 Notes</button><button onclick="quickAI('Give me important exam questions from this topic.')">❓ Questions</button><button onclick="quickAI('Create a study plan for this topic.')">🎯 Study Plan</button><button onclick="quickAI('Give me a Class 11 level example and explain it step by step.')">💡 Example</button></div>
-<div class="chat" id="chat"><div class="msg"><div class="avatar">🤖</div><div class="bubble"><strong>StudyVerse AI</strong><p>Hey! 👋 Ask me your Class 11 doubt.<br><br>Example: <b>“Accounting equation simple language mein samjha do.”</b></p></div></div></div>
-<div class="aiInput"><textarea id="aiInput" rows="2" placeholder="Ask your doubt..."></textarea><button class="send" id="sendBtn" onclick="sendAI()">SEND ➤</button></div></div></section>
-<section class="section" id="tools"><div class="sectionTitle"><h2>🛠️ Study Tools</h2><p>Everything you need for daily study.</p></div><div class="toolGrid">
-<div class="card tool" onclick="calculator()"><div class="icon">🧮</div><h3>Calculator</h3><p>Quick calculations</p></div><div class="card tool" onclick="percentage()"><div class="icon">📊</div><h3>Percentage</h3><p>Calculate percentage</p></div><div class="card tool" onclick="marks()"><div class="icon">🎯</div><h3>Marks Calculator</h3><p>Total & percentage</p></div><div class="card tool" onclick="pomodoro()"><div class="icon">⏱️</div><h3>Pomodoro</h3><p>Focus timer</p></div><div class="card tool" onclick="quickNotes()"><div class="icon">📝</div><h3>Quick Notes</h3><p>Save notes locally</p></div><div class="card tool" onclick="todo()"><div class="icon">✅</div><h3>To-Do List</h3><p>Track tasks</p></div><div class="card tool" onclick="wordCounter()"><div class="icon">🔤</div><h3>Word Counter</h3><p>Count words</p></div><div class="card tool" onclick="focusMode()"><div class="icon">🎯</div><h3>Focus Mode</h3><p>Distraction-free mode</p></div></div></section>
-<section class="section" id="questions"><div class="sectionTitle"><h2>⭐ Important Questions</h2><p>Practice these before exams.</p></div><div class="questionGrid">
-<div class="card question searchable"><span>ACCOUNTANCY</span><h3>What is an accounting equation? Explain with a suitable example.</h3></div><div class="card question searchable"><span>ACCOUNTANCY</span><h3>Explain the rules of debit and credit.</h3></div><div class="card question searchable"><span>BUSINESS STUDIES</span><h3>Explain the characteristics of business.</h3></div><div class="card question searchable"><span>BUSINESS STUDIES</span><h3>Distinguish between sole proprietorship and partnership.</h3></div><div class="card question searchable"><span>ECONOMICS</span><h3>Explain the law of demand with assumptions.</h3></div><div class="card question searchable"><span>ECONOMICS</span><h3>Explain different determinants of demand.</h3></div><div class="card question searchable"><span>ENGLISH</span><h3>What are the essential features of a good notice?</h3></div><div class="card question searchable"><span>HINDI</span><h3>पाठ के आधार पर लेखक के विचार स्पष्ट कीजिए।</h3></div><div class="card question searchable"><span>PHYSICAL EDUCATION</span><h3>Explain the importance and components of physical fitness.</h3></div></div></section>
-<section class="section" id="games"><div class="sectionTitle"><h2>🎮 Game Zone</h2><p>Take a short break after studying.</p></div><div class="gameGrid">
-<div class="card game" onclick="carGame()"><div class="gameIcon">🚗</div><h3>Car Racing</h3><p>Dodge obstacles and survive.</p></div><div class="card game" onclick="airGame()"><div class="gameIcon">🚀</div><h3>Airship</h3><p>Fly through obstacles.</p></div><div class="card game" onclick="shootGame()"><div class="gameIcon">🎯</div><h3>Shooting</h3><p>Hit as many targets as possible.</p></div><div class="card game" onclick="reactionGame()"><div class="gameIcon">⚡</div><h3>Reaction</h3><p>Test your reaction speed.</p></div></div></section>
+
+<section class="hero">
+
+<div>
+
+<div class="pill">
+CLASS 11 • CBSE • ALL-IN-ONE STUDY HUB
+</div>
+
+<h1>
+Study<br>
+Smarter.<br>
+<span class="gradient">Level Up.</span>
+</h1>
+
+<p>
+Welcome to StudyVerse — a futuristic Class 11 study dashboard
+with detailed chapter notes, important questions, smart tools,
+four mini games and an AI study assistant.
+</p>
+
+<div class="actions">
+<button class="btn" onclick="go('subjects')">
+Explore Subjects →
+</button>
+
+<button class="btn dark" onclick="go('ai')">
+🤖 Ask AI
+</button>
+</div>
+
+</div>
+
+<div class="dashboard">
+
+<div class="dashTop">
+<h3>⚡ Study Dashboard</h3>
+<div class="live"><i></i>READY</div>
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<small>Subjects</small>
+<strong>06</strong>
+</div>
+
+<div class="stat">
+<small>AI Assistant</small>
+<strong>ON</strong>
+</div>
+
+<div class="stat">
+<small>Study Tools</small>
+<strong>08</strong>
+</div>
+
+<div class="stat">
+<small>Games</small>
+<strong>04</strong>
+</div>
+
+</div>
+
+<div class="progress">
+<small style="color:var(--muted)">
+Daily Study Progress
+</small>
+<div class="progressLine">
+<span></span>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<div class="searchWrap">
+<input
+ id="search"
+ class="search"
+ placeholder="🔎 Search subjects, chapters, notes and questions..."
+ oninput="searchSite()">
+</div>
+
+<!-- SUBJECTS -->
+
+<section class="section" id="subjects">
+
+<div class="sectionTitle">
+<h2>📚 Subjects</h2>
+<p>Class 11 CBSE study sections.</p>
+</div>
+
+<div class="grid">
+
+<div class="card subject searchable"
+style="--glow:#00eaff"
+onclick="showSubject('Accountancy')">
+<div class="icon">📒</div>
+<h3>Accountancy</h3>
+<p>
+Accounting concepts, journal, ledger, trial balance,
+cash book, depreciation and more.
+</p>
+</div>
+
+<div class="card subject searchable"
+style="--glow:#00ff91"
+onclick="showSubject('Business Studies')">
+<div class="icon">💼</div>
+<h3>Business Studies</h3>
+<p>
+Business organisation, finance, trade, services,
+entrepreneurship and management basics.
+</p>
+</div>
+
+<div class="card subject searchable"
+style="--glow:#8b5cff"
+onclick="showSubject('Economics')">
+<div class="icon">📈</div>
+<h3>Economics</h3>
+<p>
+Statistics and introductory microeconomics,
+demand, supply, consumer behaviour and markets.
+</p>
+</div>
+
+<div class="card subject searchable"
+style="--glow:#ff1593"
+onclick="showSubject('English')">
+<div class="icon">📖</div>
+<h3>English</h3>
+<p>
+Hornbill, Snapshots, reading comprehension
+and writing skills.
+</p>
+</div>
+
+<div class="card subject searchable"
+style="--glow:#ff9d00"
+onclick="showSubject('Hindi')">
+<div class="icon">📝</div>
+<h3>Hindi</h3>
+<p>
+आरोह, वितान, काव्य, गद्य, अपठित बोध
+और रचनात्मक लेखन।
+</p>
+</div>
+
+<div class="card subject searchable"
+style="--glow:#00a8ff"
+onclick="showSubject('Physical Education')">
+<div class="icon">🏃</div>
+<h3>Physical Education</h3>
+<p>
+Fitness, yoga, sports, nutrition, physiology
+and physical education theory.
+</p>
+</div>
+
+</div>
+</section>
+
+<!-- NOTES -->
+
+<section class="section" id="chapters">
+
+<div class="sectionTitle">
+<h2>📖 Detailed Chapter Notes</h2>
+<p>
+Open any topic for structured revision notes.
+</p>
+</div>
+
+<div class="chapterGrid">
+
+<div class="card chapter searchable"
+onclick="showNote('Accounting Equation')">
+<span class="tag">ACCOUNTANCY</span>
+<h3>Accounting Equation</h3>
+<p>
+Assets, capital, liabilities, transaction effects,
+profit and drawings.
+</p>
+<span class="read">Read Detailed Notes →</span>
+</div>
+
+<div class="card chapter searchable"
+onclick="showNote('Journal')">
+<span class="tag">ACCOUNTANCY</span>
+<h3>Journal</h3>
+<p>
+Debit-credit rules, journal entries, narration
+and examples.
+</p>
+<span class="read">Read Detailed Notes →</span>
+</div>
+
+<div class="card chapter searchable"
+onclick="showNote('Ledger')">
+<span class="tag">ACCOUNTANCY</span>
+<h3>Ledger</h3>
+<p>
+Posting, balancing and ledger account format.
+</p>
+<span class="read">Read Detailed Notes →</span>
+</div>
+
+<div class="card chapter searchable"
+onclick="showNote('Depreciation')">
+<span class="tag">ACCOUNTANCY</span>
+<h3>Depreciation</h3>
+<p>
+Meaning, causes, methods and basic calculation.
+</p>
+<span class="read">Read Detailed Notes →</span>
+</div>
+
+<div class="card chapter searchable"
+onclick="showNote('Business Organisation')">
+<span class="tag">BUSINESS STUDIES</span>
+<h3>Forms of Business Organisation</h3>
+<p>
+Sole proprietorship, partnership, company
+and cooperative society.
+</p>
+<span class="read">Read Detailed Notes →</span>
+</div>
+
+<div class="card chapter searchable"
+onclick="showNote('Business Nature')">
+<span class="tag">BUSINESS STUDIES</span>
+<h3>Nature and Purpose of Business</h3>
+<p>
+Meaning, characteristics, objectives and risks.
+</p>
+<span class="read">Read Detailed Notes →</span>
+</div>
+
+<div class="card chapter searchable"
+onclick="showNote('Demand')">
+<span class="tag">ECONOMICS</span>
+<h3>Demand</h3>
+<p>
+Law of demand, determinants, schedule and curve.
+</p>
+<span class="read">Read Detailed Notes →</span>
+</div>
+
+<div class="card chapter searchable"
+onclick="showNote('Statistics')">
+<span class="tag">ECONOMICS</span>
+<h3>Statistics for Economics</h3>
+<p>
+Collection, organisation, presentation and analysis.
+</p>
+<span class="read">Read Detailed Notes →</span>
+</div>
+
+<div class="card chapter searchable"
+onclick="showNote('English Writing')">
+<span class="tag">ENGLISH</span>
+<h3>Writing Skills</h3>
+<p>
+Notice, speech, debate, advertisement and format.
+</p>
+<span class="read">Read Detailed Notes →</span>
+</div>
+
+<div class="card chapter searchable"
+onclick="showNote('Hindi Writing')">
+<span class="tag">HINDI</span>
+<h3>रचनात्मक लेखन</h3>
+<p>
+विचार, भाषा, संरचना और परीक्षा लेखन।
+</p>
+<span class="read">पढ़ें →</span>
+</div>
+
+<div class="card chapter searchable"
+onclick="showNote('Physical Fitness')">
+<span class="tag">PHYSICAL EDUCATION</span>
+<h3>Physical Fitness</h3>
+<p>
+Fitness components, wellness and exercise.
+</p>
+<span class="read">Read Detailed Notes →</span>
+</div>
+
+<div class="card chapter searchable"
+onclick="showNote('Yoga')">
+<span class="tag">PHYSICAL EDUCATION</span>
+<h3>Yoga</h3>
+<p>
+Meaning, importance, basic practices and benefits.
+</p>
+<span class="read">Read Detailed Notes →</span>
+</div>
+
+</div>
+</section>
+
+<!-- AI -->
+
+<section class="section" id="ai">
+
+<div class="sectionTitle">
+<h2>🤖 StudyVerse AI</h2>
+<p>
+Ask doubts, create notes, revise topics and practice questions.
+</p>
+</div>
+
+<div class="ai">
+
+<div class="aiHeader">
+
+<div class="aiBrand">
+
+<div class="aiLogo">🤖</div>
+
+<div>
+<h2>StudyVerse AI</h2>
+<p>Explain • Solve • Revise • Practice</p>
+</div>
+
+</div>
+
+<div class="online">
+● AI READY
+</div>
+
+</div>
+
+<div class="aiControls">
+
+<select id="aiSubject">
+<option>General</option>
+<option>Accountancy</option>
+<option>Business Studies</option>
+<option>Economics</option>
+<option>English</option>
+<option>Hindi</option>
+<option>Physical Education</option>
+</select>
+
+<input
+ id="aiChapter"
+ placeholder="Chapter / Topic">
+
+</div>
+
+<div class="prompts">
+
+<button onclick="quickAI('Explain this topic in very simple language.')">
+🧠 Explain
+</button>
+
+<button onclick="quickAI('Make detailed revision notes for this topic.')">
+📝 Notes
+</button>
+
+<button onclick="quickAI('Give me important exam questions from this topic.')">
+❓ Questions
+</button>
+
+<button onclick="quickAI('Create a study plan for this topic.')">
+🎯 Study Plan
+</button>
+
+<button onclick="quickAI('Give me a Class 11 level example and explain it step by step.')">
+💡 Example
+</button>
+
+</div>
+
+<div class="chat" id="chat">
+
+<div class="msg">
+
+<div class="avatar">🤖</div>
+
+<div class="bubble">
+
+<strong>StudyVerse AI</strong>
+
+<p>
+Hey! 👋 Ask me your Class 11 doubt.<br><br>
+Example:
+<b>Accounting equation simple language mein samjha do.</b>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="aiInput">
+
+<textarea
+ id="aiInput"
+ rows="2"
+ placeholder="Ask your doubt..."></textarea>
+
+<button
+ class="send"
+ id="sendBtn"
+ onclick="sendAI()">
+SEND ➤
+</button>
+
+</div>
+
+</div>
+</section>
+
+<!-- TOOLS -->
+
+<section class="section" id="tools">
+
+<div class="sectionTitle">
+<h2>🛠️ Study Tools</h2>
+<p>Useful tools for daily study.</p>
+</div>
+
+<div class="toolGrid">
+
+<div class="card tool" onclick="calculator()">
+<div class="icon">🧮</div>
+<h3>Calculator</h3>
+<p>Quick calculations</p>
+</div>
+
+<div class="card tool" onclick="percentage()">
+<div class="icon">📊</div>
+<h3>Percentage</h3>
+<p>Calculate percentage</p>
+</div>
+
+<div class="card tool" onclick="marks()">
+<div class="icon">🎯</div>
+<h3>Marks Calculator</h3>
+<p>Total and percentage</p>
+</div>
+
+<div class="card tool" onclick="pomodoro()">
+<div class="icon">⏱️</div>
+<h3>Pomodoro</h3>
+<p>Focus timer</p>
+</div>
+
+<div class="card tool" onclick="quickNotes()">
+<div class="icon">📝</div>
+<h3>Quick Notes</h3>
+<p>Save notes locally</p>
+</div>
+
+<div class="card tool" onclick="todo()">
+<div class="icon">✅</div>
+<h3>To-Do List</h3>
+<p>Track study tasks</p>
+</div>
+
+<div class="card tool" onclick="wordCounter()">
+<div class="icon">🔤</div>
+<h3>Word Counter</h3>
+<p>Count words and characters</p>
+</div>
+
+<div class="card tool" onclick="flashcards()">
+<div class="icon">🃏</div>
+<h3>Flashcards</h3>
+<p>Quick revision cards</p>
+</div>
+
+</div>
+</section>
+
+<!-- QUESTIONS -->
+
+<section class="section" id="questions">
+
+<div class="sectionTitle">
+<h2>⭐ Important Questions</h2>
+<p>Practice these before exams.</p>
+</div>
+
+<div class="questionGrid">
+
+<div class="card question searchable">
+<span>ACCOUNTANCY</span>
+<h3>
+What is an accounting equation?
+Explain with a suitable example.
+</h3>
+</div>
+
+<div class="card question searchable">
+<span>ACCOUNTANCY</span>
+<h3>
+Explain the rules of debit and credit.
+</h3>
+</div>
+
+<div class="card question searchable">
+<span>ACCOUNTANCY</span>
+<h3>
+What is depreciation? Explain its causes.
+</h3>
+</div>
+
+<div class="card question searchable">
+<span>BUSINESS STUDIES</span>
+<h3>
+Explain the characteristics of business.
+</h3>
+</div>
+
+<div class="card question searchable">
+<span>BUSINESS STUDIES</span>
+<h3>
+Distinguish between sole proprietorship and partnership.
+</h3>
+</div>
+
+<div class="card question searchable">
+<span>ECONOMICS</span>
+<h3>
+Explain the law of demand with assumptions.
+</h3>
+</div>
+
+<div class="card question searchable">
+<span>ECONOMICS</span>
+<h3>
+Explain different determinants of demand.
+</h3>
+</div>
+
+<div class="card question searchable">
+<span>ENGLISH</span>
+<h3>
+What are the essential features of a good notice?
+</h3>
+</div>
+
+<div class="card question searchable">
+<span>HINDI</span>
+<h3>
+पाठ के आधार पर लेखक के विचार स्पष्ट कीजिए।
+</h3>
+</div>
+
+<div class="card question searchable">
+<span>PHYSICAL EDUCATION</span>
+<h3>
+Explain the importance and components of physical fitness.
+</h3>
+</div>
+
+</div>
+</section>
+
+<!-- GAMES -->
+
+<section class="section" id="games">
+
+<div class="sectionTitle">
+<h2>🎮 Game Zone</h2>
+<p>Take a short break after studying.</p>
+</div>
+
+<div class="gameGrid">
+
+<div class="card game" onclick="carGame()">
+<div class="gameIcon">🚗</div>
+<h3>Car Racing</h3>
+<p>Dodge obstacles and survive.</p>
+</div>
+
+<div class="card game" onclick="airGame()">
+<div class="gameIcon">🚀</div>
+<h3>Airship</h3>
+<p>Fly through obstacles.</p>
+</div>
+
+<div class="card game" onclick="shootGame()">
+<div class="gameIcon">🎯</div>
+<h3>Shooting</h3>
+<p>Hit as many targets as possible.</p>
+</div>
+
+<div class="card game" onclick="reactionGame()">
+<div class="gameIcon">⚡</div>
+<h3>Reaction</h3>
+<p>Test your reaction speed.</p>
+</div>
+
+</div>
+</section>
+
 </main>
-<footer><p>Built for students ❤️ • <b>StudyVerse ⚡</b></p><p style="margin-top:7px">Class 11 CBSE • Learn • Practice • Level Up</p></footer>
-<div class="modal" id="modal"><div class="modalBox"><div class="modalHead"><h2 id="modalTitle">StudyVerse</h2><button class="close" onclick="closeModal()">×</button></div><div id="modalBody"></div></div></div>
+
+<footer>
+<p>
+Built for students ❤️ • <b>StudyVerse ⚡</b>
+</p>
+<p style="margin-top:7px">
+Class 11 CBSE • Learn • Practice • Level Up
+</p>
+</footer>
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+<div class="modalBox">
+
+<div class="modalHead">
+
+<h2 id="modalTitle">StudyVerse</h2>
+
+<button
+ class="close"
+ onclick="closeModal()">
+×
+</button>
+
+</div>
+
+<div id="modalBody"></div>
+
+</div>
+
+</div>
+
 <script>
-function go(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
-function openModal(title,html){document.getElementById("modalTitle").innerText=title;document.getElementById("modalBody").innerHTML=html;document.getElementById("modal").classList.add("show")}
-function closeModal(){document.getElementById("modal").classList.remove("show")}
-document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()})
-function searchSite(){const q=document.getElementById("search").value.toLowerCase();document.querySelectorAll(".searchable").forEach(el=>el.style.display=el.innerText.toLowerCase().includes(q)?"":"none")}
+
+/* =========================
+   BASIC FUNCTIONS
+========================= */
+
+function go(id){
+ const el=document.getElementById(id);
+ if(el)el.scrollIntoView({behavior:"smooth"});
+}
+
+function openModal(title,html){
+ document.getElementById("modalTitle").innerText=title;
+ document.getElementById("modalBody").innerHTML=html;
+ document.getElementById("modal").classList.add("show");
+}
+
+function closeModal(){
+ document.getElementById("modal").classList.remove("show");
+}
+
+document.getElementById("modal").addEventListener("click",e=>{
+ if(e.target.id==="modal")closeModal();
+});
+
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape")closeModal();
+});
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchSite(){
+
+ const q=document
+  .getElementById("search")
+  .value
+  .toLowerCase()
+  .trim();
+
+ document.querySelectorAll(".searchable").forEach(el=>{
+  el.style.display=
+   el.innerText.toLowerCase().includes(q)
+   ?""
+   :"none";
+ });
+}
+
+
+/* =========================
+   SUBJECT DATA
+========================= */
+
 const subjects={
-"Accountancy":`<h3>📒 Accountancy</h3><p>Accountancy is the systematic process of identifying, recording, classifying, summarising and communicating financial information.</p><h3>Major Areas</h3><ul><li>Introduction to Accounting</li><li>Basic Accounting Terms</li><li>Theory Base of Accounting</li><li>Accounting Equation</li><li>Journal</li><li>Ledger</li><li>Trial Balance</li><li>Cash Book</li><li>Bank Reconciliation Statement</li><li>Depreciation</li></ul><h3>⭐ Exam Tip</h3><p>Understand debit and credit rules first. Then practice numerical questions regularly.</p>`,
-"Business Studies":`<h3>💼 Business Studies</h3><p>Business Studies explains how organisations perform economic activities and how business decisions are made.</p><h3>Major Areas</h3><ul><li>Nature and Purpose of Business</li><li>Forms of Business Organisation</li><li>Private, Public and Global Enterprises</li><li>Business Services</li><li>Emerging Modes of Business</li><li>Social Responsibility</li><li>Sources of Business Finance</li><li>Small Business</li><li>Internal Trade</li><li>International Business</li></ul>`,
-"Economics":`<h3>📈 Economics</h3><p>Economics studies the allocation of scarce resources to satisfy unlimited human wants.</p><h3>Major Areas</h3><ul><li>Statistics for Economics</li><li>Collection and Organisation of Data</li><li>Presentation of Data</li><li>Measures of Central Tendency</li><li>Introduction to Microeconomics</li><li>Consumer Behaviour</li><li>Demand</li><li>Producer Behaviour</li><li>Market</li></ul>`,
-"English":`<h3>📖 English</h3><ul><li>Reading Comprehension</li><li>Writing Skills</li><li>Hornbill</li><li>Snapshots</li><li>Notice</li><li>Speech</li><li>Debate</li><li>Advertisement</li></ul>`,
-"Hindi":`<h3>📝 हिन्दी</h3><p>हिन्दी में गद्य, काव्य, साहित्यिक समझ, अपठित बोध और रचनात्मक लेखन पर ध्यान देना चाहिए।</p><ul><li>आरोह</li><li>वितान</li><li>अपठित बोध</li><li>रचनात्मक लेखन</li><li>काव्य व्याख्या</li></ul>`,
-"Physical Education":`<h3>🏃 Physical Education</h3><ul><li>Changing Trends in Physical Education</li><li>Olympic Movement</li><li>Physical Fitness</li><li>Yoga</li><li>Sports and Nutrition</li><li>Anatomy and Physiology</li><li>Kinesiology</li></ul>`};
-function showSubject(n){openModal(n,subjects[n])}
+
+"Accountancy":`
+<h3>📒 Accountancy</h3>
+
+<p>
+Accountancy is the systematic process of identifying, recording,
+classifying, summarising and communicating financial information.
+It helps owners, managers and other users understand the financial
+position and performance of a business.
+</p>
+
+<h3>Major Class 11 Areas</h3>
+
+<ul>
+<li>Introduction to Accounting</li>
+<li>Basic Accounting Terms</li>
+<li>Theory Base of Accounting</li>
+<li>Accounting Equation</li>
+<li>Journal</li>
+<li>Ledger</li>
+<li>Trial Balance</li>
+<li>Cash Book</li>
+<li>Bank Reconciliation Statement</li>
+<li>Depreciation</li>
+<li>Provisions and Reserves</li>
+<li>Financial Statements</li>
+</ul>
+
+<h3>⭐ Study Strategy</h3>
+
+<p>
+First understand the accounting rules and concepts. Then practice
+journal entries and numerical questions regularly. Do not only
+memorise formats; understand why each account is debited or credited.
+</p>
+`,
+
+"Business Studies":`
+<h3>💼 Business Studies</h3>
+
+<p>
+Business Studies explains business activities, forms of organisation,
+finance, trade, services, entrepreneurship and the responsibilities
+of business towards society.
+</p>
+
+<h3>Major Areas</h3>
+
+<ul>
+<li>Nature and Purpose of Business</li>
+<li>Forms of Business Organisation</li>
+<li>Private, Public and Global Enterprises</li>
+<li>Business Services</li>
+<li>Emerging Modes of Business</li>
+<li>Social Responsibility of Business</li>
+<li>Sources of Business Finance</li>
+<li>Small Business</li>
+<li>Internal Trade</li>
+<li>International Business</li>
+</ul>
+
+<h3>⭐ Exam Strategy</h3>
+
+<p>
+Learn definitions carefully and practise differences in table form.
+For long answers, use headings and point-wise explanations.
+</p>
+`,
+
+"Economics":`
+<h3>📈 Economics</h3>
+
+<p>
+Economics studies how individuals and societies use scarce resources
+to satisfy unlimited wants. Class 11 introduces statistics and basic
+microeconomic concepts.
+</p>
+
+<h3>Major Areas</h3>
+
+<ul>
+<li>Statistics for Economics</li>
+<li>Collection of Data</li>
+<li>Organisation of Data</li>
+<li>Presentation of Data</li>
+<li>Measures of Central Tendency</li>
+<li>Introduction to Microeconomics</li>
+<li>Consumer Behaviour</li>
+<li>Demand</li>
+<li>Producer Behaviour</li>
+<li>Market</li>
+</ul>
+`,
+
+"English":`
+<h3>📖 English</h3>
+
+<p>
+Class 11 English focuses on literature, comprehension, vocabulary,
+writing and interpretation.
+</p>
+
+<ul>
+<li>Hornbill</li>
+<li>Snapshots</li>
+<li>Reading Comprehension</li>
+<li>Notice Writing</li>
+<li>Speech</li>
+<li>Debate</li>
+<li>Advertisement</li>
+<li>Grammar and Vocabulary</li>
+</ul>
+`,
+
+"Hindi":`
+<h3>📝 हिन्दी</h3>
+
+<p>
+हिन्दी में साहित्यिक समझ, काव्य और गद्य की व्याख्या,
+अपठित बोध तथा रचनात्मक लेखन पर ध्यान देना चाहिए।
+</p>
+
+<ul>
+<li>आरोह</li>
+<li>वितान</li>
+<li>अपठित बोध</li>
+<li>रचनात्मक लेखन</li>
+<li>काव्य व्याख्या</li>
+<li>गद्य पाठ</li>
+</ul>
+`,
+
+"Physical Education":`
+<h3>🏃 Physical Education</h3>
+
+<ul>
+<li>Changing Trends in Physical Education</li>
+<li>Olympic Movement</li>
+<li>Physical Fitness and Wellness</li>
+<li>Yoga</li>
+<li>Physical Activity and Leadership</li>
+<li>Sports and Nutrition</li>
+<li>Anatomy and Physiology</li>
+<li>Kinesiology and Biomechanics</li>
+</ul>
+`
+};
+
+function showSubject(name){
+ openModal(name,subjects[name]);
+}
+
+
+/* =========================
+   DETAILED NOTES
+========================= */
+
 const notes={
-"Accounting Equation":`<h3>Accounting Equation — Detailed Notes</h3><p>The accounting equation is the foundation of the double-entry system. It explains the relationship between the resources of a business and the claims against those resources.</p><h3>Formula</h3><p><b>Assets = Capital + Liabilities</b></p><h3>Assets</h3><p>Assets are economic resources controlled or owned by a business. Examples include cash, furniture, machinery, building, stock, bank balance and debtors.</p><h3>Capital</h3><p>Capital represents the owner's claim on the assets of the business. It is the amount invested by the owner.</p><h3>Liabilities</h3><p>Liabilities are obligations payable to outsiders. Examples include creditors and bank loans.</p><h3>Example</h3><p>Owner starts business with ₹50,000 cash. Assets = ₹50,000, Capital = ₹50,000, Liabilities = ₹0.</p><h3>Effects</h3><ul><li>Capital introduced increases assets and capital.</li><li>Loan taken increases assets and liabilities.</li><li>Purchase of asset for cash changes the form of assets.</li><li>Payment to creditors decreases assets and liabilities.</li><li>Profit generally increases capital.</li><li>Drawings reduce capital.</li></ul><h3>⭐ Exam Point</h3><p>After every transaction, the accounting equation must remain balanced.</p>`,
-"Journal":`<h3>Journal — Detailed Notes</h3><p>A journal is the book of original entry in which business transactions are recorded chronologically.</p><h3>Format</h3><ul><li>Date</li><li>Particulars</li><li>Ledger Folio</li><li>Debit Amount</li><li>Credit Amount</li></ul><h3>Rules</h3><p>Personal Account: Debit the receiver, credit the giver.</p><p>Real Account: Debit what comes in, credit what goes out.</p><p>Nominal Account: Debit expenses and losses, credit incomes and gains.</p><h3>Example</h3><p>Cash introduced ₹40,000: Cash A/c Dr. ₹40,000<br>To Capital A/c ₹40,000</p><h3>Importance</h3><ul><li>Chronological record</li><li>Helps prepare ledger</li><li>Explains transactions</li><li>Reduces missing entries</li></ul>`,
-"Business Organisation":`<h3>Forms of Business Organisation</h3><h3>Sole Proprietorship</h3><p>A business owned, managed and controlled by one person. The owner receives profits and bears risks.</p><h3>Partnership</h3><p>An association of persons who agree to carry on a business and share profits according to an agreement.</p><h3>Company</h3><p>A company is an artificial legal person with a separate legal identity.</p><h3>Cooperative Society</h3><p>A voluntary association formed to achieve common economic interests of members.</p>`,
-"Business Nature":`<h3>Nature and Purpose of Business</h3><p>Business refers to economic activities undertaken to produce or provide goods and services for satisfying human needs and earning income.</p><h3>Characteristics</h3><ul><li>Economic activity</li><li>Production/procurement</li><li>Sale or exchange</li><li>Regular dealings</li><li>Profit motive</li><li>Risk and uncertainty</li><li>Creation of utility</li></ul><h3>Objectives</h3><ul><li>Profit earning</li><li>Growth</li><li>Market standing</li><li>Customer satisfaction</li><li>Innovation</li><li>Social responsibility</li></ul>`,
-"Demand":`<h3>Demand — Detailed Notes</h3><p>Demand refers to the quantity of a commodity consumers are willing and able to purchase at a particular price during a given period.</p><h3>Law of Demand</h3><p>Other things remaining constant, quantity demanded generally rises when price falls and falls when price rises.</p><h3>Determinants</h3><ul><li>Price</li><li>Income</li><li>Prices of related goods</li><li>Tastes and preferences</li><li>Expectations</li><li>Number of consumers</li></ul><h3>Demand Curve</h3><p>A normal demand curve generally slopes downward from left to right.</p>`,
-"Statistics":`<h3>Statistics for Economics</h3><p>Statistics provides methods for collecting, organising, presenting, analysing and interpreting numerical data.</p><h3>Stages</h3><ul><li>Collection</li><li>Organisation</li><li>Presentation</li><li>Analysis</li><li>Interpretation</li></ul>`,
-"English Writing":`<h3>English Writing Skills</h3><h3>Notice</h3><p>A notice communicates important information briefly. Include heading, date, details and issuing authority.</p><h3>Speech</h3><p>Include greeting, introduction, arguments/ideas and conclusion.</p><h3>Debate</h3><p>Present arguments for or against a proposition using clear reasoning and examples.</p>`,
-"Hindi Writing":`<h3>रचनात्मक लेखन</h3><p>रचनात्मक लेखन में विचारों को स्पष्ट, क्रमबद्ध और प्रभावशाली भाषा में प्रस्तुत किया जाता है।</p><h3>महत्वपूर्ण बातें</h3><ul><li>विषय की समझ</li><li>उचित भाषा</li><li>विचारों का क्रम</li><li>उचित शीर्षक</li><li>निष्कर्ष</li></ul>`,
-"Physical Fitness":`<h3>Physical Fitness</h3><p>Physical fitness is the ability to perform daily activities effectively without excessive fatigue.</p><h3>Components</h3><ul><li>Strength</li><li>Endurance</li><li>Flexibility</li><li>Speed</li><li>Coordination</li><li>Balance</li><li>Agility</li></ul>`};
-function showNote(n){openModal("📖 "+n,notes[n])}
-function calculator(){openModal("🧮 Calculator",`<input class="field" id="calcInput" placeholder="Example: 25*5+10"><button class="btn" onclick="calculate()">Calculate</button><h3 id="calcResult"></h3>`)}
-function calculate(){const x=document.getElementById("calcInput").value;try{document.getElementById("calcResult").innerText="Answer = "+Function('"use strict";return ('+x+')')()}catch{document.getElementById("calcResult").innerText="Invalid calculation"}}
-function percentage(){openModal("📊 Percentage Calculator",`<input class="field" id="obt" type="number" placeholder="Obtained Marks"><input class="field" id="total" type="number" placeholder="Total Marks"><button class="btn" onclick="doPercentage()">Calculate</button><h3 id="percentResult"></h3>`)}
-function doPercentage(){const a=Number(obt.value),b=Number(total.value);percentResult.innerText=b?((a/b)*100).toFixed(2)+"%":"Enter valid marks"}
-function marks(){openModal("🎯 Marks Calculator",`<input class="field" id="marksInput" placeholder="Example: 85,78,91,88,76"><input class="field" id="eachMax" type="number" value="100"><button class="btn" onclick="calculateMarks()">Calculate</button><h3 id="marksResult"></h3>`)}
-function calculateMarks(){const arr=marksInput.value.split(",").map(Number).filter(x=>Number.isFinite(x)),max=Number(eachMax.value)*arr.length,total=arr.reduce((a,b)=>a+b,0);marksResult.innerHTML="Total = "+total+" / "+max+"<br>Percentage = "+(max?((total/max)*100).toFixed(2):0)+"%"}
-let pomTimer,pomSeconds=1500;function pomodoro(){openModal("⏱️ Pomodoro",`<div style="text-align:center"><div id="pomDisplay" style="font-size:65px;font-weight:900;color:var(--cyan)">25:00</div><button class="btn" onclick="startPomodoro()">Start</button><button class="btn dark" onclick="resetPomodoro()">Reset</button></div>`)}function startPomodoro(){clearInterval(pomTimer);pomTimer=setInterval(()=>{if(pomSeconds<=0){clearInterval(pomTimer);alert("🎉 Pomodoro complete!");return}pomSeconds--;updatePom()},1000)}function updatePom(){const e=document.getElementById("pomDisplay");if(!e)return;e.innerText=String(Math.floor(pomSeconds/60)).padStart(2,"0")+":"+String(pomSeconds%60).padStart(2,"0")}function resetPomodoro(){clearInterval(pomTimer);pomSeconds=1500;updatePom()}
-function quickNotes(){openModal("📝 Quick Notes",`<textarea class="field" id="quickText" rows="12" placeholder="Write your notes..."></textarea><button class="btn" onclick="saveQuick()">Save</button><button class="btn dark" onclick="loadQuick()">Load</button>`)}function saveQuick(){localStorage.setItem("svQuick",quickText.value);alert("Saved ✅")}function loadQuick(){quickText.value=localStorage.getItem("svQuick")||""}
-function todo(){openModal("✅ To-Do List",`<input class="field" id="taskInput" placeholder="Enter study task"><button class="btn" onclick="addTask()">Add Task</button><div id="tasks" style="margin-top:15px"></div>`);renderTasks()}function addTask(){if(!taskInput.value.trim())return;const l=JSON.parse(localStorage.getItem("svTasks")||"[]");l.push(taskInput.value.trim());localStorage.setItem("svTasks",JSON.stringify(l));taskInput.value="";renderTasks()}function renderTasks(){const b=document.getElementById("tasks");if(!b)return;const l=JSON.parse(localStorage.getItem("svTasks")||"[]");b.innerHTML=l.map((x,i)=>`<div style="display:flex;justify-content:space-between;padding:11px;margin:6px 0;background:#111723;border-radius:10px"><span>☐ ${escapeHTML(x)}</span><button onclick="removeTask(${i})" style="background:none;border:0;color:#ff1593;cursor:pointer">×</button></div>`).join("")}function removeTask(i){const l=JSON.parse(localStorage.getItem("svTasks")||"[]");l.splice(i,1);localStorage.setItem("svTasks",JSON.stringify(l));renderTasks()}
-function wordCounter(){openModal("🔤 Word Counter",`<textarea class="field" id="wordText" rows="12" oninput="countWords()" placeholder="Type or paste text..."></textarea><h3 id="wordResult">Words: 0 | Characters: 0</h3>`)}function countWords(){const t=wordText.value,w=t.trim()?t.trim().split(/\s+/).length:0;wordResult.innerText="Words: "+w+" | Characters: "+t.length}function focusMode(){openModal("🎯 Focus Mode",`<div style="text-align:center"><h3>FOCUS MODE</h3><p>Close the modal and concentrate on your current study session.</p><button class="btn green" onclick="closeModal()">Start Studying</button></div>`)}
-function escapeHTML(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}function formatAI(t){return escapeHTML(t).replace(/\*\*(.*?)\*\*/g,"<b>$1</b>").replace(/\n/g,"<br>")}
-let aiBusy=false;function addUser(t){chat.innerHTML+=`<div class="msg user"><div class="avatar">👤</div><div class="bubble"><strong>You</strong><p>${escapeHTML(t)}</p></div></div>`;scrollChat()}function addAI(t){chat.innerHTML+=`<div class="msg"><div class="avatar">🤖</div><div class="bubble"><strong>StudyVerse AI</strong><p>${formatAI(t)}</p></div></div>`;scrollChat()}function typing(){chat.innerHTML+=`<div class="msg" id="typing"><div class="avatar">🤖</div><div class="bubble"><strong>StudyVerse AI</strong><p>Thinking... ⚡</p></div></div>`;scrollChat()}function scrollChat(){chat.scrollTop=chat.scrollHeight}function quickAI(p){aiInput.value=p+(aiChapter.value.trim()?" Topic: "+aiChapter.value.trim():"");sendAI()}
-async function sendAI(){if(aiBusy)return;const message=aiInput.value.trim();if(!message)return;aiBusy=true;sendBtn.disabled=true;sendBtn.innerText="THINKING...";addUser(message);aiInput.value="";typing();try{const r=await fetch("/api/ai",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message,subject:aiSubject.value,chapter:aiChapter.value.trim()||"General"})});const d=await r.json();document.getElementById("typing")?.remove();if(!r.ok)addAI(d.error||"AI request failed.");else addAI(d.answer||"No answer received.")}catch(e){document.getElementById("typing")?.remove();addAI("⚠️ AI server se connection nahi ho paaya. Static HTML me /api/ai backend run karna hoga.")}finally{aiBusy=false;sendBtn.disabled=false;sendBtn.innerText="SEND ➤"}}
-aiInput.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendAI()}})
-let carRunning=false,carX=50,carLoop;function carGame(){openModal("🚗 Car Racing",`<div class="gameScore">Use ← → keys</div><div class="gameArea" id="carArea"><div class="car" id="carPlayer">🚗</div></div><div style="text-align:center;margin-top:12px"><button class="btn" onclick="startCar()">Start Race</button></div>`)}document.addEventListener("keydown",e=>{if(carRunning){if(e.key==="ArrowLeft")carX=Math.max(7,carX-5);if(e.key==="ArrowRight")carX=Math.min(93,carX+5);if(carPlayer)carPlayer.style.left=carX+"%"}});function startCar(){const area=document.getElementById("carArea");if(!area)return;carRunning=true;carX=50;let score=0;clearInterval(carLoop);carLoop=setInterval(()=>{if(!carRunning)return;const rock=document.createElement("div");rock.className="rock";rock.innerText="🧱";rock.style.left=(Math.random()*86+5)+"%";rock.style.top="-45px";area.appendChild(rock);let top=-45;const fall=setInterval(()=>{if(!carRunning){clearInterval(fall);return}top+=6;rock.style.top=top+"px";const rx=parseFloat(rock.style.left);if(top>330&&Math.abs(rx-carX)<9){carRunning=false;clearInterval(fall);rock.remove();alert("💥 Race Over! Score: "+score)}if(top>420){clearInterval(fall);rock.remove();score++}},30)},800)}
-let airRunning=false,airY=180;function airGame(){openModal("🚀 Airship",`<div class="gameScore">Use ↑ ↓ keys</div><div class="gameArea" id="airArea"><div class="air" id="airPlayer">🚀</div></div><div style="text-align:center;margin-top:12px"><button class="btn" onclick="startAir()">Start Flight</button></div>`)}document.addEventListener("keydown",e=>{if(airRunning){if(e.key==="ArrowUp")airY=Math.max(10,airY-12);if(e.key==="ArrowDown")airY=Math.min(350,airY+12);if(airPlayer)airPlayer.style.top=airY+"px"}});function startAir(){const area=document.getElementById("airArea");if(!area)return;airRunning=true;airY=180;let score=0;const loop=setInterval(()=>{if(!airRunning){clearInterval(loop);return}const cloud=document.createElement("div");cloud.innerText="☁️";cloud.style.position="absolute";cloud.style.right="-50px";cloud.style.top=Math.random()*330+"px";cloud.style.fontSize="40px";area.appendChild(cloud);let right=-50;const move=setInterval(()=>{if(!airRunning){clearInterval(move);return}right+=6;cloud.style.right=right+"px";const cy=parseFloat(cloud.style.top);if(right>area.clientWidth-140&&Math.abs(cy-airY)<45){airRunning=false;clearInterval(move);cloud.remove();alert("💥 Airship crashed! Score: "+score)}if(right>area.clientWidth){clearInterval(move);cloud.remove();score++}},30)},900)}
-let shootTimer;function shootGame(){openModal("🎯 Shooting Game",`<div class="gameScore">Targets Hit: <span id="hitScore">0</span></div><div class="gameArea" id="shootArea"></div><div style="text-align:center;margin-top:12px"><button class="btn" onclick="startShoot()">Start Shooting</button></div>`)}function startShoot(){const area=document.getElementById("shootArea"),scoreEl=document.getElementById("hitScore");if(!area)return;clearInterval(shootTimer);area.innerHTML="";let score=0;shootTimer=setInterval(()=>{const target=document.createElement("div");target.className="target";target.innerText="🎯";target.style.left=Math.random()*88+"%";target.style.top=Math.random()*82+"%";target.onclick=()=>{score++;scoreEl.innerText=score;target.remove()};area.appendChild(target);setTimeout(()=>target.parentElement&&target.remove(),1300)},650);setTimeout(()=>{clearInterval(shootTimer);alert("🎯 Time Up! Targets Hit: "+score)},20000)}
-let reactionReady=false,reactionStart=0;function reactionGame(){openModal("⚡ Reaction Game",`<div style="text-align:center"><p>Wait for GO, then click as quickly as possible.</p><button id="reactionBtn" class="btn" style="margin-top:25px" onclick="reactionClick()">START</button><h2 id="reactionResult" style="color:var(--cyan);margin-top:20px">Ready?</h2></div>`)}function reactionClick(){const b=document.getElementById("reactionBtn"),r=document.getElementById("reactionResult");if(!reactionReady){b.disabled=true;b.innerText="WAIT...";setTimeout(()=>{b.disabled=false;b.innerText="GO!";reactionStart=Date.now();reactionReady=true},Math.random()*3000+1200)}else{r.innerText="⚡ "+(Date.now()-reactionStart)+" ms";b.innerText="PLAY AGAIN";reactionReady=false}}
+
+"Accounting Equation":`
+<h3>📒 Accounting Equation — Detailed Notes</h3>
+
+<p>
+The accounting equation is one of the most important concepts in
+Class 11 Accountancy. It represents the relationship between the
+resources of a business and the claims against those resources.
+</p>
+
+<h3>1. Formula</h3>
+
+<p style="font-size:20px;color:#00eaff">
+<b>Assets = Capital + Liabilities</b>
+</p>
+
+<h3>2. Assets</h3>
+
+<p>
+Assets are economic resources owned or controlled by a business.
+They provide future economic benefits.
+</p>
+
+<ul>
+<li>Cash</li>
+<li>Bank balance</li>
+<li>Furniture</li>
+<li>Machinery</li>
+<li>Building</li>
+<li>Stock</li>
+<li>Debtors</li>
+</ul>
+
+<h3>3. Capital</h3>
+
+<p>
+Capital is the amount invested by the owner in the business.
+It represents the owner's claim over business assets.
+</p>
+
+<h3>4. Liabilities</h3>
+
+<p>
+Liabilities are amounts payable by the business to outsiders.
+Examples include creditors and bank loans.
+</p>
+
+<h3>5. Transaction Effects</h3>
+
+<ul>
+<li>Capital introduced → Assets increase and Capital increases.</li>
+<li>Loan taken → Assets increase and Liabilities increase.</li>
+<li>Asset purchased for cash → One asset increases and another decreases.</li>
+<li>Payment to creditor → Assets decrease and Liabilities decrease.</li>
+<li>Profit → Capital increases.</li>
+<li>Loss → Capital decreases.</li>
+<li>Drawings → Capital decreases.</li>
+</ul>
+
+<h3>6. Example</h3>
+
+<p>
+Owner starts business with ₹50,000 cash.
+</p>
+
+<p>
+Assets = ₹50,000<br>
+Capital = ₹50,000<br>
+Liabilities = ₹0
+</p>
+
+<p>
+Therefore:
+<br>
+₹50,000 = ₹50,000 + ₹0
+</p>
+
+<h3>⭐ Exam Points</h3>
+
+<ul>
+<li>Every transaction affects at least two elements.</li>
+<li>The equation must remain balanced.</li>
+<li>Profit increases capital.</li>
+<li>Drawings decrease capital.</li>
+</ul>
+`,
+
+"Journal":`
+<h3>📒 Journal — Detailed Notes</h3>
+
+<p>
+A journal is the book of original entry in which transactions are
+recorded chronologically. It is the first formal record of a
+financial transaction.
+</p>
+
+<h3>Journal Format</h3>
+
+<ul>
+<li>Date</li>
+<li>Particulars</li>
+<li>Ledger Folio</li>
+<li>Debit Amount</li>
+<li>Credit Amount</li>
+</ul>
+
+<h3>Rules of Debit and Credit</h3>
+
+<p>
+<b>Personal Account:</b>
+Debit the receiver, credit the giver.
+</p>
+
+<p>
+<b>Real Account:</b>
+Debit what comes in, credit what goes out.
+</p>
+
+<p>
+<b>Nominal Account:</b>
+Debit expenses and losses, credit incomes and gains.
+</p>
+
+<h3>Example 1</h3>
+
+<p>
+Cash introduced by owner ₹40,000:
+</p>
+
+<p>
+Cash A/c Dr. ₹40,000
+<br>
+&nbsp;&nbsp;&nbsp;To Capital A/c ₹40,000
+</p>
+
+<h3>Example 2</h3>
+
+<p>
+Furniture purchased for cash ₹10,000:
+</p>
+
+<p>
+Furniture A/c Dr. ₹10,000
+<br>
+&nbsp;&nbsp;&nbsp;To Cash A/c ₹10,000
+</p>
+
+<h3>Importance</h3>
+
+<ul>
+<li>Creates a chronological record.</li>
+<li>Provides explanation through narration.</li>
+<li>Helps posting into ledger.</li>
+<li>Reduces chances of omission.</li>
+<li>Provides an audit trail.</li>
+</ul>
+
+<h3>⭐ Exam Tip</h3>
+
+<p>
+Before making an entry, identify the accounts involved and classify
+them as Personal, Real or Nominal.
+</p>
+`,
+
+"Ledger":`
+<h3>📒 Ledger — Detailed Notes</h3>
+
+<p>
+A ledger is the principal book of accounts in which transactions
+related to a particular account are collected at one place.
+</p>
+
+<h3>Purpose</h3>
+
+<ul>
+<li>Classifies transactions account-wise.</li>
+<li>Shows the balance of individual accounts.</li>
+<li>Helps prepare trial balance.</li>
+<li>Helps prepare financial statements.</li>
+</ul>
+
+<h3>Posting</h3>
+
+<p>
+Posting means transferring information from the journal to the
+appropriate ledger accounts.
+</p>
+
+<h3>Basic Rule</h3>
+
+<p>
+The debit entry in the journal is posted on the debit side of the
+related ledger account, while the credit entry is posted on the
+credit side of the related account.
+</p>
+
+<h3>Balancing</h3>
+
+<p>
+At the end of a period, the difference between the two sides of an
+account is calculated to determine its balance.
+</p>
+
+<h3>⭐ Exam Tip</h3>
+
+<p>
+Always check the journal entry first before posting into the ledger.
+</p>
+`,
+
+"Depreciation":`
+<h3>📒 Depreciation — Detailed Notes</h3>
+
+<p>
+Depreciation means the gradual and permanent decrease in the value
+of a fixed asset due to use, passage of time or other causes.
+</p>
+
+<h3>Causes</h3>
+
+<ul>
+<li>Wear and tear</li>
+<li>Passage of time</li>
+<li>Obsolescence</li>
+<li>Depletion</li>
+<li>Accident or damage</li>
+</ul>
+
+<h3>Need for Depreciation</h3>
+
+<ul>
+<li>Correct calculation of profit.</li>
+<li>Correct valuation of assets.</li>
+<li>Replacement planning.</li>
+<li>Compliance with accounting principles.</li>
+</ul>
+
+<h3>Straight Line Method</h3>
+
+<p>
+Under the straight line method, equal depreciation is generally
+charged every year.
+</p>
+
+<p style="color:#00eaff">
+Annual Depreciation =
+(Cost − Scrap Value) ÷ Useful Life
+</p>
+
+<h3>Example</h3>
+
+<p>
+Cost = ₹50,000<br>
+Scrap Value = ₹5,000<br>
+Useful Life = 5 years
+</p>
+
+<p>
+Depreciation =
+(50,000 − 5,000) ÷ 5
+= ₹9,000 per year.
+</p>
+
+<h3>⭐ Exam Tip</h3>
+
+<p>
+Remember that depreciation is a non-cash expense and reduces the
+book value of the asset.
+</p>
+`,
+
+"Business Organisation":`
+<h3>💼 Forms of Business Organisation — Detailed Notes</h3>
+
+<h3>1. Sole Proprietorship</h3>
+
+<p>
+A sole proprietorship is a business owned, managed and controlled
+by one person. The owner receives profits and bears business risks.
+</p>
+
+<h4>Features</h4>
+<ul>
+<li>Single ownership</li>
+<li>Easy formation</li>
+<li>Quick decisions</li>
+<li>Unlimited liability</li>
+<li>Limited resources</li>
+</ul>
+
+<h3>2. Partnership</h3>
+
+<p>
+Partnership is an association of persons who agree to carry on
+business and share profits according to an agreement.
+</p>
+
+<h4>Features</h4>
+<ul>
+<li>Two or more partners</li>
+<li>Agreement</li>
+<li>Profit sharing</li>
+<li>Mutual agency</li>
+<li>Shared responsibility</li>
+</ul>
+
+<h3>3. Company</h3>
+
+<p>
+A company is an artificial legal person created under law and has
+a separate legal identity from its members.
+</p>
+
+<h3>4. Cooperative Society</h3>
+
+<p>
+A cooperative society is formed by people who voluntarily come
+together to achieve common economic interests.
+</p>
+
+<h3>Quick Comparison</h3>
+
+<ul>
+<li>Sole Proprietorship → One owner.</li>
+<li>Partnership → Partners share business.</li>
+<li>Company → Separate legal identity.</li>
+<li>Cooperative → Mutual benefit and service.</li>
+</ul>
+`,
+
+"Business Nature":`
+<h3>💼 Nature and Purpose of Business</h3>
+
+<p>
+Business refers to economic activities involving production,
+procurement and sale of goods or services with the objective of
+earning income while satisfying human needs.
+</p>
+
+<h3>Characteristics</h3>
+
+<ul>
+<li>Economic activity</li>
+<li>Production or procurement</li>
+<li>Sale or exchange</li>
+<li>Regular dealings</li>
+<li>Profit motive</li>
+<li>Risk and uncertainty</li>
+<li>Creation of utility</li>
+</ul>
+
+<h3>Business Objectives</h3>
+
+<ul>
+<li>Profit earning</li>
+<li>Growth</li>
+<li>Market standing</li>
+<li>Customer satisfaction</li>
+<li>Innovation</li>
+<li>Social responsibility</li>
+</ul>
+
+<h3>Business Risk</h3>
+
+<p>
+Business risk refers to the possibility of inadequate profits or
+losses due to uncertainties. Changes in demand, competition,
+technology, government policies and natural events can affect
+business performance.
+</p>
+`,
+
+"Demand":`
+<h3>📈 Demand — Detailed Notes</h3>
+
+<p>
+Demand refers to the quantity of a commodity that consumers are
+willing and able to purchase at a particular price during a given
+period.
+</p>
+
+<h3>Law of Demand</h3>
+
+<p>
+Other things remaining constant, quantity demanded generally rises
+when price falls and falls when price rises.
+</p>
+
+<h3>Demand Schedule</h3>
+
+<p>
+A demand schedule is a table showing different quantities demanded
+at different prices.
+</p>
+
+<h3>Determinants of Demand</h3>
+
+<ul>
+<li>Price of the commodity</li>
+<li>Income of consumers</li>
+<li>Prices of related goods</li>
+<li>Tastes and preferences</li>
+<li>Future expectations</li>
+<li>Number of consumers</li>
+</ul>
+
+<h3>Demand Curve</h3>
+
+<p>
+A normal demand curve generally slopes downward from left to right,
+showing an inverse relationship between price and quantity demanded.
+</p>
+
+<h3>Assumptions of Law of Demand</h3>
+
+<ul>
+<li>Consumer income remains constant.</li>
+<li>Prices of related goods remain constant.</li>
+<li>Tastes and preferences remain unchanged.</li>
+<li>No major change in expectations.</li>
+<li>Number of consumers remains constant.</li>
+</ul>
+
+<h3>⭐ Exam Tip</h3>
+
+<p>
+Always mention the assumptions when explaining the law of demand.
+</p>
+`,
+
+"Statistics":`
+<h3>📊 Statistics for Economics — Detailed Notes</h3>
+
+<p>
+Statistics provides methods for collecting, organising, presenting,
+analysing and interpreting numerical data.
+</p>
+
+<h3>Stages of Statistical Investigation</h3>
+
+<ol>
+<li>Collection of data</li>
+<li>Organisation of data</li>
+<li>Presentation of data</li>
+<li>Analysis</li>
+<li>Interpretation</li>
+</ol>
+
+<h3>Primary Data</h3>
+
+<p>
+Data collected directly by the investigator for a specific purpose
+is called primary data.
+</p>
+
+<h3>Secondary Data</h3>
+
+<p>
+Data already collected by someone else and used for another purpose
+is called secondary data.
+</p>
+
+<h3>Importance</h3>
+
+<ul>
+<li>Simplifies large data.</li>
+<li>Helps comparison.</li>
+<li>Shows trends.</li>
+<li>Supports economic analysis.</li>
+<li>Helps decision-making.</li>
+</ul>
+
+<h3>⭐ Exam Tip</h3>
+
+<p>
+Learn the difference between primary and secondary data with
+examples.
+</p>
+`,
+
+"English Writing":`
+<h3>📖 English Writing Skills — Detailed Notes</h3>
+
+<h3>Notice</h3>
+
+<p>
+A notice is a short formal announcement containing important
+information for a specific group of people.
+</p>
+
+<h4>Main Elements</h4>
+
+<ul>
+<li>Name of institution</li>
+<li>NOTICE heading</li>
+<li>Date</li>
+<li>Title</li>
+<li>Relevant details</li>
+<li>Name/designation of issuer</li>
+</ul>
+
+<h3>Speech</h3>
+
+<p>
+A speech normally contains a greeting, introduction, topic,
+arguments or ideas, examples and a conclusion.
+</p>
+
+<h3>Debate</h3>
+
+<p>
+A debate presents arguments either for or against a proposition.
+Logical reasoning, examples and persuasive language are important.
+</p>
+
+<h3>Advertisement</h3>
+
+<p>
+An advertisement should be attractive, brief and informative.
+Important details should be clearly visible.
+</p>
+
+<h3>⭐ Exam Tip</h3>
+
+<p>
+Follow the required format, word limit and tone. Avoid unnecessary
+information.
+</p>
+`,
+
+"Hindi Writing":`
+<h3>📝 रचनात्मक लेखन — विस्तृत नोट्स</h3>
+
+<p>
+रचनात्मक लेखन में विचारों को स्पष्ट, क्रमबद्ध और प्रभावशाली
+भाषा में प्रस्तुत किया जाता है।
+</p>
+
+<h3>मुख्य बातें</h3>
+
+<ul>
+<li>विषय की स्पष्ट समझ</li>
+<li>उचित शब्द चयन</li>
+<li>सरल और प्रभावी भाषा</li>
+<li>विचारों का क्रम</li>
+<li>उचित शीर्षक</li>
+<li>निष्कर्ष</li>
+</ul>
+
+<h3>लेखन की अच्छी संरचना</h3>
+
+<p>
+प्रस्तावना → मुख्य विचार → उदाहरण/तर्क → निष्कर्ष
+</p>
+
+<h3>⭐ परीक्षा टिप</h3>
+
+<p>
+शब्द-सीमा का ध्यान रखें और उत्तर को विषय से भटकने न दें।
+</p>
+`,
+
+"Physical Fitness":`
+<h3>🏃 Physical Fitness — Detailed Notes</h3>
+
+<p>
+Physical fitness is the ability to perform daily activities
+efficiently without excessive fatigue.
+</p>
+
+<h3>Components</h3>
+
+<ul>
+<li>Strength</li>
+<li>Endurance</li>
+<li>Flexibility</li>
+<li>Speed</li>
+<li>Coordination</li>
+<li>Balance</li>
+<li>Agility</li>
+</ul>
+
+<h3>Importance</h3>
+
+<ul>
+<li>Improves physical performance.</li>
+<li>Supports daily activities.</li>
+<li>Improves efficiency.</li>
+<li>Supports overall wellness.</li>
+<li>Develops discipline.</li>
+</ul>
+
+<h3>Fitness and Wellness</h3>
+
+<p>
+Fitness is related to the body's ability to perform activities,
+while wellness is a broader concept involving physical, mental
+and social well-being.
+</p>
+`,
+
+"Yoga":`
+<h3>🧘 Yoga — Detailed Notes</h3>
+
+<p>
+Yoga is a traditional practice involving physical postures,
+breathing practices, concentration and relaxation.
+</p>
+
+<h3>Importance</h3>
+
+<ul>
+<li>Improves flexibility.</li>
+<li>Supports balance and coordination.</li>
+<li>Encourages relaxation.</li>
+<li>Can improve concentration.</li>
+<li>Promotes healthy lifestyle habits.</li>
+</ul>
+
+<h3>Basic Practices</h3>
+
+<ul>
+<li>Asanas</li>
+<li>Pranayama</li>
+<li>Meditation</li>
+<li>Relaxation</li>
+</ul>
+
+<h3>⭐ Exam Tip</h3>
+
+<p>
+Learn the meaning, benefits and basic precautions associated with
+different practices included in your syllabus.
+</p>
+`
+};
+
+function showNote(name){
+ openModal("📖 "+name,notes[name]||"<p>Notes coming soon.</p>");
+}
+
+
+/* =========================
+   TOOLS
+========================= */
+
+/* CALCULATOR */
+
+function calculator(){
+
+ openModal("🧮 Calculator",`
+
+ <input
+ class="field"
+ id="calcInput"
+ placeholder="Example: 25*5+10">
+
+ <button class="btn" onclick="calculate()">
+ Calculate
+ </button>
+
+ <h3 id="calcResult"></h3>
+
+ `);
+}
+
+function calculate(){
+
+ const x=document.getElementById("calcInput").value;
+
+ if(!/^[0-9+\\-*/().%\\s]+$/.test(x)){
+  document.getElementById("calcResult").innerText="Invalid calculation";
+  return;
+ }
+
+ try{
+
+  const answer=Function(
+   '"use strict";return ('+x+')'
+  )();
+
+  document.getElementById("calcResult").innerText=
+   "Answer = "+answer;
+
+ }catch{
+
+  document.getElementById("calcResult").innerText=
+   "Invalid calculation";
+
+ }
+}
+
+
+/* PERCENTAGE */
+
+function percentage(){
+
+ openModal("📊 Percentage Calculator",`
+
+ <input
+ class="field"
+ id="obt"
+ type="number"
+ placeholder="Obtained Marks">
+
+ <input
+ class="field"
+ id="total"
+ type="number"
+ placeholder="Total Marks">
+
+ <button class="btn" onclick="doPercentage()">
+ Calculate
+ </button>
+
+ <h3 id="percentResult"></h3>
+ `);
+}
+
+function doPercentage(){
+
+ const a=Number(document.getElementById("obt").value);
+ const b=Number(document.getElementById("total").value);
+
+ document.getElementById("percentResult").innerText=
+ b>0
+ ?((a/b)*100).toFixed(2)+"%"
+ :"Enter valid marks";
+}
+
+
+/* MARKS */
+
+function marks(){
+
+ openModal("🎯 Marks Calculator",`
+
+ <input
+ class="field"
+ id="marksInput"
+ placeholder="Example: 85,78,91,88,76">
+
+ <input
+ class="field"
+ id="eachMax"
+ type="number"
+ value="100">
+
+ <button class="btn" onclick="calculateMarks()">
+ Calculate
+ </button>
+
+ <h3 id="marksResult"></h3>
+
+ `);
+}
+
+function calculateMarks(){
+
+ const arr=document
+  .getElementById("marksInput")
+  .value
+  .split(",")
+  .map(Number)
+  .filter(x=>Number.isFinite(x));
+
+ const eachMax=Number(
+  document.getElementById("eachMax").value
+ );
+
+ if(!arr.length||!eachMax){
+  document.getElementById("marksResult").innerText=
+   "Enter valid marks";
+  return;
+ }
+
+ const max=eachMax*arr.length;
+ const total=arr.reduce((a,b)=>a+b,0);
+
+ document.getElementById("marksResult").innerHTML=
+ "Total = "+total+" / "+max+
+ "<br>Percentage = "+
+ ((total/max)*100).toFixed(2)+"%";
+}
+
+
+/* POMODORO */
+
+let pomTimer=null;
+let pomSeconds=1500;
+
+function pomodoro(){
+
+ pomSeconds=1500;
+
+ openModal("⏱️ Pomodoro",`
+
+ <div style="text-align:center">
+
+ <div
+ id="pomDisplay"
+ style="font-size:65px;font-weight:900;color:var(--cyan)">
+ 25:00
+ </div>
+
+ <button
+ class="btn"
+ onclick="startPomodoro()">
+ Start
+ </button>
+
+ <button
+ class="btn dark"
+ onclick="pausePomodoro()">
+ Pause
+ </button>
+
+ <button
+ class="btn dark"
+ onclick="resetPomodoro()">
+ Reset
+ </button>
+
+ </div>
+
+ `);
+}
+
+function startPomodoro(){
+
+ clearInterval(pomTimer);
+
+ pomTimer=setInterval(()=>{
+
+  if(pomSeconds<=0){
+
+   clearInterval(pomTimer);
+
+   alert("🎉 Pomodoro complete!");
+
+   return;
+  }
+
+  pomSeconds--;
+
+  updatePom();
+
+ },1000);
+}
+
+function pausePomodoro(){
+ clearInterval(pomTimer);
+}
+
+function updatePom(){
+
+ const el=document.getElementById("pomDisplay");
+
+ if(!el)return;
+
+ const m=Math.floor(pomSeconds/60);
+ const s=pomSeconds%60;
+
+ el.innerText=
+  String(m).padStart(2,"0")+
+  ":"+
+  String(s).padStart(2,"0");
+}
+
+function resetPomodoro(){
+
+ clearInterval(pomTimer);
+
+ pomSeconds=1500;
+
+ updatePom();
+}
+
+
+/* QUICK NOTES */
+
+function quickNotes(){
+
+ openModal("📝 Quick Notes",`
+
+ <textarea
+ class="field"
+ id="quickText"
+ rows="12"
+ placeholder="Write your notes..."></textarea>
+
+ <button class="btn" onclick="saveQuick()">
+ Save
+ </button>
+
+ <button class="btn dark" onclick="loadQuick()">
+ Load
+ </button>
+
+ <button class="btn red" onclick="clearQuick()">
+ Clear
+ </button>
+
+ `);
+}
+
+function saveQuick(){
+
+ localStorage.setItem(
+  "svQuick",
+  document.getElementById("quickText").value
+ );
+
+ alert("Notes saved ✅");
+}
+
+function loadQuick(){
+
+ document.getElementById("quickText").value=
+  localStorage.getItem("svQuick")||"";
+}
+
+function clearQuick(){
+
+ localStorage.removeItem("svQuick");
+
+ document.getElementById("quickText").value="";
+}
+
+
+/* TODO */
+
+function todo(){
+
+ openModal("✅ To-Do List",`
+
+ <input
+ class="field"
+ id="taskInput"
+ placeholder="Enter study task">
+
+ <button class="btn" onclick="addTask()">
+ Add Task
+ </button>
+
+ <div id="tasks" style="margin-top:15px"></div>
+
+ `);
+
+ renderTasks();
+}
+
+function addTask(){
+
+ const x=document.getElementById("taskInput");
+
+ if(!x.value.trim())return;
+
+ const list=
+  JSON.parse(
+   localStorage.getItem("svTasks")||"[]"
+  );
+
+ list.push({
+  text:x.value.trim(),
+  done:false
+ });
+
+ localStorage.setItem(
+  "svTasks",
+  JSON.stringify(list)
+ );
+
+ x.value="";
+
+ renderTasks();
+}
+
+function renderTasks(){
+
+ const box=document.getElementById("tasks");
+
+ if(!box)return;
+
+ const list=
+  JSON.parse(
+   localStorage.getItem("svTasks")||"[]"
+  );
+
+ box.innerHTML=list.map((item,i)=>`
+
+ <div style="
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+ padding:11px;
+ margin:6px 0;
+ background:#111723;
+ border-radius:10px">
+
+ <span
+ onclick="toggleTask(${i})"
+ style="
+ cursor:pointer;
+ text-decoration:${item.done?"line-through":"none"};
+ color:${item.done?"#6e7788":"#fff"}">
+
+ ${item.done?"☑":"☐"} ${escapeHTML(item.text)}
+
+ </span>
+
+ <button
+ onclick="removeTask(${i})"
+ style="
+ background:none;
+ border:0;
+ color:#ff1593;
+ cursor:pointer;
+ font-size:20px">
+
+ ×
+
+ </button>
+
+ </div>
+
+ `).join("");
+}
+
+function toggleTask(i){
+
+ const list=
+  JSON.parse(
+   localStorage.getItem("svTasks")||"[]"
+  );
+
+ if(list[i]){
+  list[i].done=!list[i].done;
+ }
+
+ localStorage.setItem(
+  "svTasks",
+  JSON.stringify(list)
+ );
+
+ renderTasks();
+}
+
+function removeTask(i){
+
+ const list=
+  JSON.parse(
+   localStorage.getItem("svTasks")||"[]"
+  );
+
+ list.splice(i,1);
+
+ localStorage.setItem(
+  "svTasks",
+  JSON.stringify(list)
+ );
+
+ renderTasks();
+}
+
+
+/* WORD COUNTER */
+
+function wordCounter(){
+
+ openModal("🔤 Word Counter",`
+
+ <textarea
+ class="field"
+ id="wordText"
+ rows="12"
+ oninput="countWords()"
+ placeholder="Type or paste text..."></textarea>
+
+ <h3 id="wordResult">
+ Words: 0 | Characters: 0
+ </h3>
+
+ `);
+}
+
+function countWords(){
+
+ const t=document.getElementById("wordText").value;
+
+ const w=
+  t.trim()
+  ? t.trim().split(/\s+/).length
+  :0;
+
+ document.getElementById("wordResult").innerText=
+  "Words: "+w+
+  " | Characters: "+t.length;
+}
+
+
+/* FLASHCARDS */
+
+const flashData=[
+ ["Accounting","Assets = Capital + Liabilities"],
+ ["Journal","Book of original entry"],
+ ["Business","Business is an economic activity"],
+ ["Demand","Price and quantity demanded generally have an inverse relationship"],
+ ["Fitness","Strength, endurance and flexibility are fitness components"],
+ ["Notice","A notice is a short formal announcement"]
+];
+
+let flashIndex=0;
+let flashFront=true;
+
+function flashcards(){
+
+ flashIndex=0;
+ flashFront=true;
+
+ openModal("🃏 Flashcards",`
+
+ <div
+ class="flashcard"
+ onclick="flipFlash()"
+ id="flashCard">
+
+ <h2 id="flashTitle">
+ ${flashData[0][0]}
+ </h2>
+
+ <p id="flashText">
+ Click the card to reveal the answer.
+ </p>
+
+ </div>
+
+ <div style="text-align:center;margin-top:15px">
+
+ <button class="btn" onclick="prevFlash()">
+ ← Previous
+ </button>
+
+ <button class="btn" onclick="nextFlash()">
+ Next →
+ </button>
+
+ </div>
+
+ `);
+}
+
+function renderFlash(){
+
+ const title=document.getElementById("flashTitle");
+ const text=document.getElementById("flashText");
+
+ if(!title||!text)return;
+
+ if(flashFront){
+
+  title.innerText=flashData[flashIndex][0];
+
+  text.innerText=
+   "Click the card to reveal the answer.";
+
+ }else{
+
+  title.innerText="ANSWER";
+
+  text.innerText=flashData[flashIndex][1];
+
+ }
+}
+
+function flipFlash(){
+
+ flashFront=!flashFront;
+
+ renderFlash();
+}
+
+function nextFlash(){
+
+ flashIndex=
+  (flashIndex+1)%flashData.length;
+
+ flashFront=true;
+
+ renderFlash();
+}
+
+function prevFlash(){
+
+ flashIndex=
+  (flashIndex-1+flashData.length)%flashData.length;
+
+ flashFront=true;
+
+ renderFlash();
+}
+
+
+/* SAFE HTML */
+
+function escapeHTML(text){
+
+ return String(text)
+ .replace(/&/g,"&amp;")
+ .replace(/</g,"&lt;")
+ .replace(/>/g,"&gt;")
+ .replace(/"/g,"&quot;")
+ .replace(/'/g,"&#039;");
+}
+
+function formatAI(text){
+
+ return escapeHTML(text)
+ .replace(/\*\*(.*?)\*\*/g,"<b>$1</b>")
+ .replace(/\n/g,"<br>");
+}
+
+
+/* =========================
+   AI SYSTEM
+========================= */
+
+let aiBusy=false;
+
+function addUser(text){
+
+ document.getElementById("chat").innerHTML+=`
+
+ <div class="msg user">
+
+ <div class="avatar">👤</div>
+
+ <div class="bubble">
+
+ <strong>You</strong>
+
+ <p>${escapeHTML(text)}</p>
+
+ </div>
+
+ </div>
+
+ `;
+
+ scrollChat();
+}
+
+function addAI(text){
+
+ document.getElementById("chat").innerHTML+=`
+
+ <div class="msg">
+
+ <div class="avatar">🤖</div>
+
+ <div class="bubble">
+
+ <strong>StudyVerse AI</strong>
+
+ <p>${formatAI(text)}</p>
+
+ </div>
+
+ </div>
+
+ `;
+
+ scrollChat();
+}
+
+function typing(){
+
+ document.getElementById("chat").innerHTML+=`
+
+ <div class="msg" id="typing">
+
+ <div class="avatar">🤖</div>
+
+ <div class="bubble">
+
+ <strong>StudyVerse AI</strong>
+
+ <div class="dots">
+ <span></span>
+ <span></span>
+ <span></span>
+ </div>
+
+ </div>
+
+ </div>
+
+ `;
+
+ scrollChat();
+}
+
+function scrollChat(){
+
+ const c=document.getElementById("chat");
+
+ c.scrollTop=c.scrollHeight;
+}
+
+function quickAI(prompt){
+
+ const chapter=
+  document.getElementById("aiChapter").value.trim();
+
+ document.getElementById("aiInput").value=
+  prompt+
+  (chapter?" Topic: "+chapter:"");
+
+ sendAI();
+}
+
+
+/* LOCAL FALLBACK AI */
+
+function localAI(message,subject,chapter){
+
+ const m=message.toLowerCase();
+
+ if(
+  m.includes("accounting equation")||
+  (subject==="Accountancy"&&m.includes("equation"))
+ ){
+
+  return `
+**Accounting Equation**
+
+Accounting Equation:
+Assets = Capital + Liabilities.
+
+Assets are resources owned by the business.
+Capital is the owner's claim.
+Liabilities are amounts payable to outsiders.
+
+**Example:**
+
+If the owner starts a business with ₹50,000 cash:
+
+Assets = ₹50,000
+Capital = ₹50,000
+Liabilities = ₹0
+
+Therefore:
+₹50,000 = ₹50,000 + ₹0
+
+Remember: after every transaction the equation must remain balanced.
+  `;
+ }
+
+ if(
+  m.includes("journal")||
+  m.includes("debit")||
+  m.includes("credit")
+ ){
+
+  return `
+**Journal Entry Basics**
+
+First identify the accounts involved.
+
+Personal Account:
+Debit the receiver, credit the giver.
+
+Real Account:
+Debit what comes in, credit what goes out.
+
+Nominal Account:
+Debit expenses and losses, credit incomes and gains.
+
+Example:
+Cash A/c Dr. ₹10,000
+To Capital A/c ₹10,000
+
+For exams, always identify the type of account before applying the rule.
+  `;
+ }
+
+ if(
+  m.includes("demand")||
+  subject==="Economics"
+ ){
+
+  return `
+**Demand**
+
+Demand means the quantity of a commodity that a consumer is willing
+and able to buy at a particular price during a given period.
+
+According to the law of demand, other things remaining constant,
+quantity demanded generally rises when price falls and falls when
+price rises.
+
+Important determinants:
+1. Price
+2. Income
+3. Prices of related goods
+4. Tastes and preferences
+5. Expectations
+6. Number of consumers
+  `;
+ }
+
+ if(
+  m.includes("business")||
+  subject==="Business Studies"
+ ){
+
+  return `
+**Business Studies Revision**
+
+Business is an economic activity involving production or procurement
+and sale of goods and services.
+
+Important characteristics:
+• Economic activity
+• Sale or exchange
+• Regular dealings
+• Profit motive
+• Risk and uncertainty
+• Creation of utility
+
+For a long-answer question, use headings and explain each point with
+a short example.
+  `;
+ }
+
+ if(
+  m.includes("fitness")||
+  subject==="Physical Education"
+ ){
+
+  return `
+**Physical Fitness**
+
+Physical fitness is the ability to perform daily activities efficiently
+without excessive fatigue.
+
+Important components include:
+• Strength
+• Endurance
+• Flexibility
+• Speed
+• Balance
+• Agility
+• Coordination
+
+For exams, define fitness first and then explain the components.
+  `;
+ }
+
+ if(
+  m.includes("notice")||
+  m.includes("speech")||
+  subject==="English"
+ ){
+
+  return `
+**English Writing**
+
+For writing questions, focus on:
+1. Correct format
+2. Suitable heading/title
+3. Relevant information
+4. Appropriate tone
+5. Word limit
+6. Clear conclusion where required
+
+For a notice, include institution name, NOTICE, date, title,
+event details and issuing authority.
+  `;
+ }
+
+ if(subject==="Hindi"){
+
+  return `
+**हिन्दी अध्ययन**
+
+उत्तर लिखते समय विषय की स्पष्ट समझ, सरल भाषा, उचित शब्द चयन,
+विचारों का क्रम और निष्कर्ष का ध्यान रखें।
+
+पाठ आधारित प्रश्न में:
+1. प्रश्न को समझें
+2. पाठ से संबंधित मुख्य विचार लिखें
+3. उदाहरण/संदर्भ दें
+4. स्पष्ट निष्कर्ष दें
+  `;
+ }
+
+ if(
+  m.includes("plan")||
+  m.includes("study plan")
+ ){
+
+  return `
+**Class 11 Study Plan**
+
+1. 45 minutes — Accountancy
+2. 30 minutes — Business Studies
+3. 30 minutes — Economics
+4. 30 minutes — English/Hindi
+5. 20 minutes — Physical Education
+6. 20 minutes — Revision
+7. 15 minutes — Important questions
+
+Use Pomodoro sessions and take short breaks.
+  `;
+ }
+
+ if(
+  m.includes("question")||
+  m.includes("questions")
+ ){
+
+  return `
+**Important Practice Questions**
+
+1. Explain the accounting equation with an example.
+2. Explain the rules of debit and credit.
+3. Explain the characteristics of business.
+4. Distinguish between sole proprietorship and partnership.
+5. Explain the law of demand.
+6. Explain the determinants of demand.
+7. Explain the importance of physical fitness.
+8. Explain the important elements of notice writing.
+
+Tell me the subject and chapter if you want topic-specific questions.
+  `;
+ }
+
+ return `
+**StudyVerse AI**
+
+I can help you with Class 11 CBSE subjects.
+
+Current subject: ${subject}
+Current topic: ${chapter}
+
+Try asking something specific, for example:
+
+• Explain accounting equation.
+• Make notes on demand.
+• Give important questions from business studies.
+• Explain depreciation with an example.
+• Make a study plan.
+• Explain this chapter in simple language.
+
+For a fully online generative AI response, connect the /api/ai
+backend shown in your project setup.
+ `;
+}
+
+
+/* AI REQUEST */
+
+async function sendAI(){
+
+ if(aiBusy)return;
+
+ const input=document.getElementById("aiInput");
+
+ const message=input.value.trim();
+
+ if(!message)return;
+
+ const subject=
+  document.getElementById("aiSubject").value;
+
+ const chapter=
+  document.getElementById("aiChapter").value.trim()
+  ||"General";
+
+ aiBusy=true;
+
+ const button=document.getElementById("sendBtn");
+
+ button.disabled=true;
+
+ button.innerText="THINKING...";
+
+ addUser(message);
+
+ input.value="";
+
+ typing();
+
+ try{
+
+  const response=
+   await fetch("/api/ai",{
+    method:"POST",
+    headers:{
+     "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+     message,
+     subject,
+     chapter
+    })
+   });
+
+  if(!response.ok){
+   throw new Error("Backend unavailable");
+  }
+
+  const data=await response.json();
+
+  const t=document.getElementById("typing");
+
+  if(t)t.remove();
+
+  addAI(
+   data.answer||
+   "No answer received."
+  );
+
+ }catch(error){
+
+  const t=document.getElementById("typing");
+
+  if(t)t.remove();
+
+  /*
+   Local fallback means the website still responds
+   even without an AI backend.
+  */
+
+  setTimeout(()=>{
+
+   addAI(
+    localAI(message,subject,chapter)
+   );
+
+  },400);
+
+ }finally{
+
+  setTimeout(()=>{
+
+   aiBusy=false;
+
+   button.disabled=false;
+
+   button.innerText="SEND ➤";
+
+  },450);
+
+ }
+}
+
+document
+ .getElementById("aiInput")
+ .addEventListener("keydown",e=>{
+
+  if(
+   e.key==="Enter"&&
+   !e.shiftKey
+  ){
+
+   e.preventDefault();
+
+   sendAI();
+  }
+
+ });
+
+
+/* =========================
+   CAR GAME
+========================= */
+
+let carRunning=false;
+let carX=50;
+let carLoop=null;
+let carObjects=[];
+
+function carGame(){
+
+ carRunning=false;
+
+ clearInterval(carLoop);
+
+ openModal("🚗 Car Racing",`
+
+ <div class="gameScore">
+ Use ← → keys • Dodge the blocks
+ </div>
+
+ <div class="gameArea" id="carArea">
+
+ <div
+ class="car"
+ id="carPlayer">
+ 🚗
+ </div>
+
+ </div>
+
+ <div style="text-align:center;margin-top:12px">
+
+ <button
+ class="btn"
+ onclick="startCar()">
+ Start Race
+ </button>
+
+ </div>
+
+ `);
+}
+
+document.addEventListener("keydown",e=>{
+
+ if(!carRunning)return;
+
+ if(e.key==="ArrowLeft")
+  carX=Math.max(7,carX-5);
+
+ if(e.key==="ArrowRight")
+  carX=Math.min(93,carX+5);
+
+ const car=
+  document.getElementById("carPlayer");
+
+ if(car)
+  car.style.left=carX+"%";
+});
+
+function startCar(){
+
+ const area=
+  document.getElementById("carArea");
+
+ const car=
+  document.getElementById("carPlayer");
+
+ if(!area||!car)return;
+
+ carRunning=true;
+ carX=50;
+
+ car.style.left="50%";
+
+ carObjects.forEach(x=>x.remove());
+
+ carObjects=[];
+
+ let score=0;
+
+ clearInterval(carLoop);
+
+ carLoop=setInterval(()=>{
+
+  if(!carRunning)return;
+
+  const rock=
+   document.createElement("div");
+
+  rock.className="rock";
+  rock.innerText="🧱";
+
+  const lane=
+   Math.random()*86+5;
+
+  rock.style.left=lane+"%";
+  rock.style.top="-45px";
+
+  area.appendChild(rock);
+
+  carObjects.push(rock);
+
+  let top=-45;
+
+  const fall=setInterval(()=>{
+
+   if(!carRunning){
+
+    clearInterval(fall);
+
+    if(rock.parentElement)
+     rock.remove();
+
+    return;
+   }
+
+   top+=6;
+
+   rock.style.top=top+"px";
+
+   if(
+    top>325&&
+    Math.abs(lane-carX)<9
+   ){
+
+    carRunning=false;
+
+    clearInterval(fall);
+    clearInterval(carLoop);
+
+    if(rock.parentElement)
+     rock.remove();
+
+    alert(
+     "💥 Race Over!\nScore: "+score
+    );
+
+    return;
+   }
+
+   if(top>420){
+
+    clearInterval(fall);
+
+    if(rock.parentElement)
+     rock.remove();
+
+    score++;
+   }
+
+  },30);
+
+ },750);
+}
+
+
+/* =========================
+   AIRSHIP GAME
+========================= */
+
+let airRunning=false;
+let airY=180;
+
+function airGame(){
+
+ airRunning=false;
+
+ openModal("🚀 Airship",`
+
+ <div class="gameScore">
+ Use ↑ ↓ keys • Avoid clouds
+ </div>
+
+ <div class="gameArea" id="airArea">
+
+ <div
+ class="air"
+ id="airPlayer">
+ 🚀
+ </div>
+
+ </div>
+
+ <div style="text-align:center;margin-top:12px">
+
+ <button
+ class="btn"
+ onclick="startAir()">
+ Start Flight
+ </button>
+
+ </div>
+
+ `);
+}
+
+document.addEventListener("keydown",e=>{
+
+ if(!airRunning)return;
+
+ if(e.key==="ArrowUp")
+  airY=Math.max(10,airY-12);
+
+ if(e.key==="ArrowDown")
+  airY=Math.min(350,airY+12);
+
+ const a=
+  document.getElementById("airPlayer");
+
+ if(a)
+  a.style.top=airY+"px";
+});
+
+function startAir(){
+
+ const area=
+  document.getElementById("airArea");
+
+ const air=
+  document.getElementById("airPlayer");
+
+ if(!area||!air)return;
+
+ airRunning=true;
+
+ airY=180;
+
+ air.style.top=airY+"px";
+
+ let score=0;
+
+ const loop=setInterval(()=>{
+
+  if(!airRunning){
+
+   clearInterval(loop);
+
+   return;
+  }
+
+  const cloud=
+   document.createElement("div");
+
+  cloud.innerText="☁️";
+
+  cloud.style.position="absolute";
+  cloud.style.right="-50px";
+  cloud.style.top=
+   Math.random()*330+"px";
+  cloud.style.fontSize="40px";
+
+  area.appendChild(cloud);
+
+  let right=-50;
+
+  const move=setInterval(()=>{
+
+   if(!airRunning){
+
+    clearInterval(move);
+
+    if(cloud.parentElement)
+     cloud.remove();
+
+    return;
+   }
+
+   right+=6;
+
+   cloud.style.right=right+"px";
+
+   const cy=
+    parseFloat(cloud.style.top);
+
+   if(
+    right>
+    area.clientWidth-140&&
+    Math.abs(cy-airY)<45
+   ){
+
+    airRunning=false;
+
+    clearInterval(move);
+    clearInterval(loop);
+
+    if(cloud.parentElement)
+     cloud.remove();
+
+    alert(
+     "💥 Airship crashed!\nScore: "+score
+    );
+
+    return;
+   }
+
+   if(right>area.clientWidth){
+
+    clearInterval(move);
+
+    if(cloud.parentElement)
+     cloud.remove();
+
+    score++;
+   }
+
+  },30);
+
+ },900);
+}
+
+
+/* =========================
+   SHOOTING GAME
+========================= */
+
+let shootTimer=null;
+let shootEndTimer=null;
+
+function shootGame(){
+
+ clearInterval(shootTimer);
+ clearTimeout(shootEndTimer);
+
+ openModal("🎯 Shooting Game",`
+
+ <div class="gameScore">
+ Targets Hit:
+ <span id="hitScore">0</span>
+ </div>
+
+ <div
+ class="gameArea"
+ id="shootArea">
+ </div>
+
+ <div style="text-align:center;margin-top:12px">
+
+ <button
+ class="btn"
+ onclick="startShoot()">
+ Start Shooting
+ </button>
+
+ </div>
+
+ `);
+}
+
+function startShoot(){
+
+ const area=
+  document.getElementById("shootArea");
+
+ const scoreEl=
+  document.getElementById("hitScore");
+
+ if(!area)return;
+
+ clearInterval(shootTimer);
+ clearTimeout(shootEndTimer);
+
+ area.innerHTML="";
+
+ let score=0;
+
+ shootTimer=setInterval(()=>{
+
+  const target=
+   document.createElement("div");
+
+  target.className="target";
+
+  target.innerText="🎯";
+
+  target.style.left=
+   Math.random()*88+"%";
+
+  target.style.top=
+   Math.random()*82+"%";
+
+  target.onclick=()=>{
+
+   score++;
+
+   scoreEl.innerText=score;
+
+   target.remove();
+  };
+
+  area.appendChild(target);
+
+  setTimeout(()=>{
+
+   if(target.parentElement)
+    target.remove();
+
+  },1300);
+
+ },600);
+
+ shootEndTimer=setTimeout(()=>{
+
+  clearInterval(shootTimer);
+
+  alert(
+   "🎯 Time Up!\nTargets Hit: "+score
+  );
+
+ },20000);
+}
+
+
+/* =========================
+   REACTION GAME
+========================= */
+
+let reactionReady=false;
+let reactionStart=0;
+let reactionTimeout=null;
+
+function reactionGame(){
+
+ reactionReady=false;
+
+ clearTimeout(reactionTimeout);
+
+ openModal("⚡ Reaction Game",`
+
+ <div style="text-align:center">
+
+ <p>
+ Wait for GO, then click as quickly as possible.
+ </p>
+
+ <button
+ id="reactionBtn"
+ class="btn"
+ style="margin-top:25px"
+ onclick="reactionClick()">
+ START
+ </button>
+
+ <h2
+ id="reactionResult"
+ style="color:var(--cyan);margin-top:20px">
+ Ready?
+ </h2>
+
+ </div>
+
+ `);
+}
+
+function reactionClick(){
+
+ const btn=
+  document.getElementById("reactionBtn");
+
+ const result=
+  document.getElementById("reactionResult");
+
+ if(!btn||!result)return;
+
+ if(!reactionReady){
+
+  btn.disabled=true;
+  btn.innerText="WAIT...";
+
+  reactionTimeout=setTimeout(()=>{
+
+   btn.disabled=false;
+   btn.innerText="GO!";
+
+   reactionStart=Date.now();
+
+   reactionReady=true;
+
+  },Math.random()*3000+1200);
+
+ }else{
+
+  const ms=
+   Date.now()-reactionStart;
+
+  result.innerText=
+   "⚡ "+ms+" ms";
+
+  btn.innerText="PLAY AGAIN";
+
+  reactionReady=false;
+ }
+}
+
+
+/* INITIAL LOAD */
+
+console.log(
+ "StudyVerse loaded successfully ⚡"
+);
+
 </script>
+
 </body>
-</html>'''
-path="/mnt/data/index.html"
-with open(path,"w",encoding="utf-8") as f:f.write(html)
-print(path)
-
-
+</html>
