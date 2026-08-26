@@ -1,106 +1,141 @@
 from pathlib import Path
-p=Path("/mnt/data/index.html")
-p.write_text(r'''<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>StudyVerse — Student Super Hub</title>
-<style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;color:#eef3ff;background:#070b17;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:-40%;z-index:-2;background:radial-gradient(circle at 20% 20%,#285cff35,transparent 28%),radial-gradient(circle at 80% 30%,#ff2bd635,transparent 25%),radial-gradient(circle at 50% 90%,#00e5ff22,transparent 28%);animation:bg 12s linear infinite alternate}
-body:after{content:"";position:fixed;inset:0;z-index:-1;background-image:linear-gradient(#ffffff05 1px,transparent 1px),linear-gradient(90deg,#ffffff05 1px,transparent 1px);background-size:45px 45px;mask-image:linear-gradient(to bottom,#000,transparent)}
-@keyframes bg{to{transform:scale(1.08) rotate(2deg)}}button,input,textarea,select{font:inherit}button{cursor:pointer}
-.top{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:#070b17cc;border-bottom:1px solid #ffffff12;padding:12px 5%;display:flex;align-items:center;justify-content:space-between;gap:15px}.logo{font-size:22px;font-weight:900;letter-spacing:.5px}.logo b{color:#61e7ff}.nav{display:flex;gap:7px;flex-wrap:wrap}.nav button,.ghost{background:#ffffff08;color:#dce7ff;border:1px solid #ffffff14;border-radius:10px;padding:9px 12px}.nav button:hover,.ghost:hover{background:#ffffff15}
-.wrap{max-width:1200px;margin:auto;padding:25px 18px}.hero{text-align:center;padding:55px 15px 35px}.badge{display:inline-block;padding:7px 12px;border:1px solid #61e7ff55;border-radius:999px;background:#61e7ff0d;color:#73eaff;font-size:13px}.hero h1{font-size:clamp(42px,8vw,88px);margin:15px 0 5px;line-height:.95;background:linear-gradient(90deg,#fff,#72eaff,#ff65e7,#fff);background-size:300%;-webkit-background-clip:text;color:transparent;animation:shine 5s linear infinite}@keyframes shine{to{background-position:300%}}.hero p{color:#9eabc4;font-size:17px}.search{max-width:650px;margin:22px auto;display:flex}.search input{flex:1;padding:15px 18px;border-radius:14px 0 0 14px;border:1px solid #ffffff18;background:#0e1425;color:white;outline:none}.search button{border:0;border-radius:0 14px 14px 0;background:#5c6cff;color:white;padding:0 20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}.card{background:linear-gradient(145deg,#11182bde,#0b1020de);border:1px solid #ffffff12;border-radius:20px;padding:20px;box-shadow:0 15px 50px #0005;backdrop-filter:blur(12px);transition:.25s}.card:hover{transform:translateY(-4px);border-color:#61e7ff44;box-shadow:0 18px 55px #0008,0 0 30px #61e7ff0a}.card h3{margin-top:0}.muted{color:#8e9bb5}.toolicon{font-size:35px}.btn{border:0;border-radius:11px;padding:11px 15px;background:linear-gradient(90deg,#4d63ff,#a33cff);color:#fff;font-weight:800}.btn:hover{filter:brightness(1.15)}.page{display:none}.page.active{display:block}.section-title{margin:35px 0 15px;font-size:28px}.field{width:100%;padding:11px;margin:5px 0 10px;border:1px solid #ffffff18;border-radius:10px;background:#080e1c;color:#fff;outline:none}.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.out{margin-top:10px;padding:12px;border-radius:10px;background:#61e7ff0d;border:1px solid #61e7ff1c;color:#b9f5ff;min-height:42px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{padding:18px;border-radius:15px;background:#ffffff06;text-align:center}.stat b{display:block;font-size:28px;color:#7beeff}.timer{font-size:75px;text-align:center;font-variant-numeric:tabular-nums;margin:20px 0;color:#fff}.todo{display:flex;gap:10px;align-items:center;border-bottom:1px solid #ffffff0c;padding:11px 0}.todo span{flex:1}.done{text-decoration:line-through;color:#65728a}.quiz button{display:block;width:100%;text-align:left;margin:8px 0}.gamebox{text-align:center}.bigscore{font-size:55px;font-weight:900;color:#73eaff}.hidden{display:none!important}footer{text-align:center;color:#69758d;padding:45px 10px}.rgb{height:2px;background:linear-gradient(90deg,#ff2bd6,#61e7ff,#7dff7d,#ffcc55,#ff2bd6);background-size:300%;animation:shine 4s linear infinite}@media(max-width:700px){.top{align-items:flex-start;flex-direction:column}.nav{width:100%}.hero{padding-top:35px}.stats{grid-template-columns:repeat(2,1fr)}}
-</style>
-</head>
-<body>
-<div class="rgb"></div>
-<header class="top"><div class="logo">⚡ <b>Study</b>Verse</div><div class="nav">
-<button onclick="page('home')">Home</button><button onclick="page('calc')">Calculators</button><button onclick="page('study')">Study</button><button onclick="page('games')">Games</button><button onclick="page('tools')">Tools</button><button onclick="dark()">☾</button><button onclick="sound()">🔊</button>
-</div></header>
-<main class="wrap">
-<section id="home" class="page active">
-<div class="hero"><span class="badge">🚀 FREE STUDENT SUPER HUB</span><h1>Study Smarter.</h1><p>Calculators, productivity tools, quizzes and mini-games — all inside one website.</p>
-<div class="search"><input id="find" placeholder="Search a tool..." oninput="findTool()"><button>⌕</button></div></div>
-<div class="stats"><div class="stat"><b id="xp">0</b>XP</div><div class="stat"><b id="done">0</b>Tasks Done</div><div class="stat"><b id="best">0</b>Quiz Best</div><div class="stat"><b id="sessions">0</b>Focus Sessions</div></div>
-<h2 class="section-title">🔥 Quick Access</h2><div class="grid">
-<div class="card"><div class="toolicon">🧮</div><h3>Smart Calculators</h3><p class="muted">Marks, CGPA, BMI, interest, ratio and more.</p><button class="btn" onclick="page('calc')">Open →</button></div>
-<div class="card"><div class="toolicon">⏱️</div><h3>Focus Mode</h3><p class="muted">Pomodoro timer for distraction-free study.</p><button class="btn" onclick="page('study')">Focus →</button></div>
-<div class="card"><div class="toolicon">🎮</div><h3>Mini Games</h3><p class="muted">Reaction test and number challenge.</p><button class="btn" onclick="page('games')">Play →</button></div>
-<div class="card"><div class="toolicon">🛠️</div><h3>Student Tools</h3><p class="muted">Word counter, converters, tables and random tasks.</p><button class="btn" onclick="page('tools')">Explore →</button></div>
+import re
+
+p = Path("/mnt/data/index.html")
+html = p.read_text(encoding="utf-8")
+
+# Add Notes button to navigation
+old_nav = '<button onclick="page(\'home\')">Home</button><button onclick="page(\'calc\')">Calculators</button><button onclick="page(\'study\')">Study</button><button onclick="page(\'games\')">Games</button><button onclick="page(\'tools\')">Tools</button>'
+new_nav = old_nav + '<button onclick="page(\'notes\')">📚 Notes</button>'
+html = html.replace(old_nav, new_nav)
+
+# Add notes page before the Tools page
+notes_page = r'''
+<section id="notes" class="page">
+<div class="hero">
+  <span class="badge">📚 CLASS 11 COMMERCE — CBSE SHORT NOTES</span>
+  <h2>Commerce Notes Hub</h2>
+  <p>Quick revision notes for Accountancy, Business Studies, Economics and Mathematics.</p>
 </div>
+
+<div class="card" style="margin-bottom:18px">
+  <div class="row">
+    <button class="btn" onclick="showNotes('accounts')">📒 Accountancy</button>
+    <button class="btn" onclick="showNotes('bst')">🏢 Business Studies</button>
+    <button class="btn" onclick="showNotes('eco')">📈 Economics</button>
+    <button class="btn" onclick="showNotes('maths')">📐 Mathematics</button>
+  </div>
+  <input class="field" id="noteSearch" placeholder="Search chapter or topic..." oninput="filterNotes()">
+</div>
+<div id="notesArea"></div>
 </section>
+'''
+html = html.replace('<section id="tools" class="page">', notes_page + '\n<section id="tools" class="page">')
 
-<section id="calc" class="page"><div class="hero"><span class="badge">🧮 SMART CALCULATORS</span><h2>Do the maths instantly.</h2></div><div class="grid" id="calcGrid">
-<div class="card"><h3>📊 Percentage</h3><input class="field" id="a" placeholder="Obtained"><input class="field" id="b" placeholder="Total"><button class="btn" onclick="pct()">Calculate</button><div id="po" class="out"></div></div>
-<div class="card"><h3>🎓 CGPA → %</h3><input class="field" id="cg" placeholder="CGPA 0–10"><button class="btn" onclick="cg()">Convert</button><div id="cgo" class="out"></div></div>
-<div class="card"><h3>➗ Average</h3><input class="field" id="nums" placeholder="10,20,30"><button class="btn" onclick="avg()">Calculate</button><div id="avo" class="out"></div></div>
-<div class="card"><h3>📈 % Change</h3><input class="field" id="old" placeholder="Old value"><input class="field" id="nw" placeholder="New value"><button class="btn" onclick="chg()">Calculate</button><div id="cho" class="out"></div></div>
-<div class="card"><h3>💰 Simple Interest</h3><div class="row"><input class="field" id="sp" placeholder="P"><input class="field" id="sr" placeholder="Rate %"><input class="field" id="st" placeholder="Years"></div><button class="btn" onclick="si()">Calculate</button><div id="sio" class="out"></div></div>
-<div class="card"><h3>💵 Compound Interest</h3><div class="row"><input class="field" id="cp" placeholder="P"><input class="field" id="cr" placeholder="Rate %"><input class="field" id="ct" placeholder="Years"></div><button class="btn" onclick="ci()">Calculate</button><div id="cio" class="out"></div></div>
-<div class="card"><h3>⚖️ BMI</h3><input class="field" id="w" placeholder="Weight kg"><input class="field" id="h" placeholder="Height cm"><button class="btn" onclick="bmi()">Calculate</button><div id="bmio" class="out"></div></div>
-<div class="card"><h3>📐 Ratio</h3><input class="field" id="rat" placeholder="24:36"><button class="btn" onclick="ratio()">Simplify</button><div id="rato" class="out"></div></div>
-<div class="card"><h3>🔢 % of Number</h3><input class="field" id="pc" placeholder="Percent"><input class="field" id="pn" placeholder="Number"><button class="btn" onclick="ofnum()">Calculate</button><div id="pno" class="out"></div></div>
-<div class="card"><h3>🔁 Fraction → Decimal</h3><input class="field" id="fn" placeholder="Numerator"><input class="field" id="fd" placeholder="Denominator"><button class="btn" onclick="frac()">Convert</button><div id="fro" class="out"></div></div>
-</div></section>
+# Add notes data + functions just before the closing script tag
+notes_js = r'''
+const NOTES = {
+accounts: {
+  title:"📒 Accountancy — Class 11",
+  chapters:[
+    ["1. Introduction to Accounting","Accounting is the systematic process of identifying, recording, classifying, summarising and interpreting financial transactions. Main objectives: maintain records, calculate profit/loss, show financial position and provide useful information. Users include owners, managers, investors, creditors, government and employees."],
+    ["2. Basic Accounting Terms","Business transaction = an economic event measurable in money. Capital is the owner's investment; drawings are withdrawals. Assets are resources owned by the business; liabilities are obligations. Revenue is income from normal activities, expense is the cost incurred to earn revenue, and profit is excess of revenue over expenses."],
+    ["3. Theory Base of Accounting","Important concepts include business entity, money measurement, going concern, accounting period, cost concept, dual aspect, revenue recognition, matching and prudence. GAAP means generally accepted accounting principles used as a common base for accounting."],
+    ["4. Accounting Standards","Accounting standards provide common rules for recognition, measurement, presentation and disclosure. Their purpose is comparability, reliability and consistency of financial information."],
+    ["5. Accounting Equation","The basic equation is Assets = Capital + Liabilities. Every transaction has a dual effect, so the equation remains balanced. Profit increases capital; drawings and losses decrease capital."],
+    ["6. Rules of Debit and Credit","Personal Account: Debit the receiver, Credit the giver. Real Account: Debit what comes in, Credit what goes out. Nominal Account: Debit expenses/losses, Credit incomes/gains."],
+    ["7. Journal","Journal is the book of original entry. Transactions are recorded chronologically with debit and credit accounts, amount and narration. Total debit must equal total credit."],
+    ["8. Ledger","Ledger is the principal book containing separate accounts. Journal entries are posted to the respective ledger accounts. Balancing an account means finding the difference between its two sides."],
+    ["9. Cash Book","Cash Book records cash and bank transactions and also acts as a ledger for cash/bank. Common forms are single-column, double-column and triple-column cash books."],
+    ["10. Bank Reconciliation Statement","BRS reconciles the balance as per Cash Book with the balance as per Pass Book. Differences arise due to cheques issued/not presented, cheques deposited/not collected, bank charges, direct deposits/payments and errors."],
+    ["11. Trial Balance","Trial Balance is a statement of ledger balances prepared to check arithmetical accuracy. It does not detect every error, such as complete omission or compensating errors."],
+    ["12. Depreciation","Depreciation is the systematic allocation of the depreciable amount of a fixed asset over its useful life. Main methods: Straight Line Method and Written Down Value Method."],
+    ["13. Provisions and Reserves","Provision is an amount charged against profit for a known liability or expected loss whose amount/timing may be uncertain. Reserve is an appropriation of profit kept to strengthen financial position or meet future needs."],
+    ["14. Rectification of Errors","Errors are corrected through rectification entries. Examples include omission, wrong amount, wrong account, wrong side and compensating errors. Suspense Account may be used when Trial Balance does not agree."],
+    ["15. Financial Statements — Sole Proprietorship","Trading Account determines gross profit/loss. Profit and Loss Account determines net profit/loss. Balance Sheet shows assets and liabilities/owner's equity on a particular date."],
+    ["16. Adjustments in Final Accounts","Common adjustments include closing stock, outstanding expenses, prepaid expenses, accrued income, income received in advance, depreciation, bad debts, provision for doubtful debts and interest on capital/drawings."],
+    ["17. Accounts from Incomplete Records","Single Entry/Incom­plete Records do not maintain a complete double-entry system. Profit may be estimated using Statement of Affairs or conversion method when sufficient information is available."]
+  ]
+},
+bst: {
+  title:"🏢 Business Studies — Class 11",
+  chapters:[
+    ["1. Evolution and Fundamentals of Business","Business is an economic activity involving production/procurement and sale of goods or services with the objective of earning profit. Business, profession and employment differ in nature, qualification, risk and reward. Business activities include industry and commerce."],
+    ["2. Forms of Business Organisation","Major forms: sole proprietorship, partnership, Hindu Undivided Family business, cooperative society and company. Choice depends on capital, liability, control, continuity and legal requirements."],
+    ["3. Public, Private and Global Enterprises","Private enterprises are owned mainly by private persons/entities. Public enterprises are government-owned. Forms include departmental undertakings, statutory corporations and government companies. Global enterprises operate across countries and often have large resources and technology."],
+    ["4. Business Services","Business services support business operations. Key services include banking, insurance, transport, warehousing and communication. Insurance principles include utmost good faith, insurable interest, indemnity, contribution and subrogation."],
+    ["5. Emerging Modes of Business","E-business uses electronic networks for business transactions and communication. Benefits include wider reach, speed, convenience and lower transaction costs. Risks include security, privacy, fraud and technology dependence."],
+    ["6. Social Responsibility of Business and Business Ethics","Business has responsibilities toward owners, employees, consumers, government, community and environment. Business ethics means moral principles guiding business decisions. Social responsibility includes environmental protection, fair practices and consumer welfare."],
+    ["7. Sources of Business Finance","Finance may be short-term or long-term. Sources include retained earnings, trade credit, bank credit, public deposits, shares, debentures, loans and international sources. Each source differs in cost, risk, control and repayment requirements."],
+    ["8. Small Business","Small businesses contribute to employment, entrepreneurship, balanced regional development and innovation. Government support may include credit, training, technology and marketing assistance. Entrepreneurship involves identifying opportunities and taking calculated risks."],
+    ["9. Internal Trade","Internal trade occurs within a country's boundaries. It includes wholesale and retail trade. Important intermediaries include wholesalers, retailers, agents and brokers. Documents and consumer protection help make trade efficient."],
+    ["10. International Business","International business involves trade and investment across national borders. Exports bring foreign exchange while imports provide goods/services from abroad. Key institutions and procedures help facilitate international trade."],
+    ["11. International Trade Procedures","Typical export steps include enquiry, quotation, order, financial arrangements, production/procurement, inspection, shipping, customs clearance, documentation and payment. Important documents include invoice, bill of lading, insurance policy and certificate of origin."],
+    ["12. Globalisation and MNCs","Multinational companies operate in more than one country. Globalisation increases integration of markets, technology, capital and production. Benefits can include investment and technology transfer, while challenges may include intense competition and dependence."]
+  ]
+},
+eco: {
+  title:"📈 Economics — Class 11",
+  chapters:[
+    ["1. Introduction to Economics","Economics studies how scarce resources with alternative uses are allocated to satisfy unlimited wants. Microeconomics studies individual consumers, firms and markets; macroeconomics studies the economy as a whole."],
+    ["2. Statistics for Economics","Statistics helps collect, organise, present, analyse and interpret economic data. Data may be primary or secondary. Good statistical analysis supports comparison and decision-making."],
+    ["3. Collection, Organisation and Presentation of Data","Primary data is collected first-hand; secondary data comes from existing sources. Data can be organised into frequency distributions and presented through tables, bar diagrams, histograms, pie charts and other suitable diagrams."],
+    ["4. Statistical Tools and Interpretation","Measures of central tendency include mean, median and mode. Dispersion shows variability using measures such as range and standard deviation. Correlation describes the degree and direction of relationship between variables."],
+    ["5. Introduction to Microeconomics","Central problems arise because resources are scarce and wants are unlimited: what to produce, how to produce and for whom to produce. Opportunity cost is the value of the next best alternative forgone."],
+    ["6. Consumer's Equilibrium and Demand","Utility is satisfaction from consumption. Consumer equilibrium is the position where the consumer gets maximum satisfaction given income and prices. Demand generally falls when price rises, other things remaining constant. Determinants include income, tastes, prices of related goods and expectations."],
+    ["7. Elasticity of Demand","Price elasticity measures responsiveness of quantity demanded to a change in price. It may be elastic, inelastic, unitary, perfectly elastic or perfectly inelastic. It is useful for pricing and revenue decisions."],
+    ["8. Producer Behaviour and Supply","Production converts inputs into output. Fixed inputs do not change in the short run, while variable inputs can change. Costs include fixed, variable, total, average and marginal costs. Supply generally rises with price, other things equal."],
+    ["9. Forms of Market and Price Determination","Under perfect competition there are many buyers and sellers, homogeneous products, free entry/exit and good information. Market price is determined by interaction of demand and supply. A firm is a price taker under perfect competition."],
+    ["10. Market Equilibrium and Simple Applications","Equilibrium occurs where quantity demanded equals quantity supplied. A price above equilibrium may create surplus; a price below equilibrium may create shortage. Shifts in demand or supply change equilibrium price and quantity."]
+  ]
+},
+maths: {
+  title:"📐 Mathematics — Class 11",
+  chapters:[
+    ["1. Sets","A set is a well-defined collection of objects. Important ideas: empty set, finite/infinite sets, subsets, universal set, intervals, union, intersection, difference, complement and Venn diagrams."],
+    ["2. Relations and Functions","A relation is a subset of a Cartesian product. A function assigns each element of the domain exactly one element of the codomain. Domain, codomain and range are key terms."],
+    ["3. Trigonometric Functions","Angles can be measured in degrees or radians. Fundamental identity: sin²x + cos²x = 1. Learn signs in quadrants, standard values, graphs and compound-angle identities such as sin(A±B) and cos(A±B)."],
+    ["4. Complex Numbers and Quadratic Equations","i = √−1 and i² = −1. A complex number is z = a + ib. For a quadratic ax²+bx+c=0, discriminant D=b²−4ac determines the nature of roots."],
+    ["5. Linear Inequalities","Inequalities use <, >, ≤ and ≥. When multiplying/dividing an inequality by a negative number, reverse the inequality sign. Solutions can be represented on the number line."],
+    ["6. Permutations and Combinations","Permutation deals with arrangements; combination deals with selections. nPr = n!/(n−r)! and nCr = n!/[r!(n−r)!]. Use permutations when order matters."],
+    ["7. Binomial Theorem","(a+b)^n can be expanded using binomial coefficients. General term: T(r+1) = nCr a^(n−r)b^r. Pascal's triangle gives binomial coefficients."],
+    ["8. Sequences and Series","Arithmetic Progression has common difference d: an = a+(n−1)d and Sn = n/2[2a+(n−1)d]. Geometric Progression has common ratio r: an = ar^(n−1)."],
+    ["9. Straight Lines","Slope measures inclination. Forms include slope-intercept, point-slope, two-point and intercept forms. Parallel lines have equal slopes; perpendicular lines satisfy m1m2 = −1 when slopes are defined."],
+    ["10. Conic Sections","Main conics are circle, parabola, ellipse and hyperbola. Each has standard equations and characteristic geometric properties such as focus, directrix, centre and eccentricity."],
+    ["11. Introduction to Three-Dimensional Geometry","3D geometry uses coordinates (x,y,z). Distance between two points is √[(x2−x1)²+(y2−y1)²+(z2−z1)²]. Section formula and coordinate representation are important."],
+    ["12. Limits and Derivatives","A limit describes the value a function approaches. Derivative represents instantaneous rate of change/slope. Basic rules include derivative of x^n = nx^(n−1), with suitable conditions."],
+    ["13. Statistics","Statistics summarises data. Mean gives average, while variance and standard deviation measure dispersion. A lower standard deviation generally means observations are closer to the mean."],
+    ["14. Probability","Probability measures chance of an event. For equally likely outcomes, P(E)=favourable outcomes/total outcomes. Important rules include 0≤P(E)≤1, P(E')=1−P(E), and addition rules for events."]
+  ]
+}
+};
 
-<section id="study" class="page"><div class="hero"><span class="badge">📚 PRODUCTIVITY MODE</span><h2>Focus. Learn. Repeat.</h2></div>
-<div class="grid"><div class="card"><h3>⏱️ Pomodoro</h3><div class="timer" id="timer">25:00</div><div class="center"><button class="btn" onclick="start()">▶ Start</button> <button class="ghost" onclick="pause()">⏸ Pause</button> <button class="ghost" onclick="reset()">↻ Reset</button></div><input class="field" id="mins" type="number" value="25" onchange="reset()"></div>
-<div class="card"><h3>✅ To-Do List</h3><div class="row"><input class="field" id="task" placeholder="Add a task"><button class="btn" onclick="addTask()">Add</button></div><div id="tasks"></div><button class="ghost" onclick="clearDone()">Clear completed</button></div></div>
-<div class="card"><h3>📅 Study Plan</h3><div class="row"><input class="field" id="sub" placeholder="Subject"><input class="field" id="mins2" placeholder="Minutes"><button class="btn" onclick="addPlan()">Add</button></div><div id="plans"></div></div>
-</section>
+let activeNoteSubject="accounts";
+function showNotes(subject="accounts"){
+  activeNoteSubject=subject;
+  const data=NOTES[subject];
+  const area=document.getElementById("notesArea");
+  area.innerHTML=`<h2 class="section-title">${data.title}</h2><div class="grid" id="noteGrid">${
+    data.chapters.map((c,i)=>`<div class="card note-card"><span class="badge">CHAPTER ${i+1}</span><h3>${escape(c[0])}</h3><p class="muted">${escape(c[1])}</p></div>`).join("")
+  }</div>`;
+  document.getElementById("noteSearch").value="";
+  beep(620);
+}
+function filterNotes(){
+  const q=document.getElementById("noteSearch").value.toLowerCase().trim();
+  document.querySelectorAll("#noteGrid .note-card").forEach(c=>{
+    c.classList.toggle("hidden", q && !c.innerText.toLowerCase().includes(q));
+  });
+}
+showNotes("accounts");
+'''
+html = html.replace('</script>\n</body>', notes_js + '\n</script>\n</body>')
 
-<section id="games" class="page"><div class="hero"><span class="badge">🎮 MINI GAME ZONE</span><h2>Take a break & play.</h2></div><div class="grid">
-<div class="card gamebox"><h3>⚡ Reaction Test</h3><p class="muted">Press START, wait for the screen to turn green, then click FAST!</p><div id="react" class="out">Ready?</div><button id="reactBtn" class="btn" onclick="reaction()">START</button><div class="bigscore" id="reactScore">—</div></div>
-<div class="card gamebox"><h3>🔮 Number Guess</h3><p class="muted">Guess a number from 1 to 100.</p><input class="field" id="guess" type="number" placeholder="Your guess"><button class="btn" onclick="guessGame()">Guess</button><div id="guessOut" class="out">New number ready.</div><button class="ghost" onclick="newGuess()">New Game</button></div>
-</div></section>
+# Make Notes easier to find from Quick Access by adding one card
+quick_marker = '<div class="card"><div class="toolicon">🛠️</div><h3>Student Tools</h3>'
+notes_card = '<div class="card"><div class="toolicon">📚</div><h3>Class 11 Notes</h3><p class="muted">Commerce short notes for Accounts, BST, Economics and Maths.</p><button class="btn" onclick="page(\'notes\')">Open Notes →</button></div>\n'
+html = html.replace(quick_marker, notes_card + quick_marker)
 
-<section id="tools" class="page"><div class="hero"><span class="badge">🛠️ STUDENT TOOLKIT</span><h2>Small tools. Big convenience.</h2></div><div class="grid">
-<div class="card"><h3>🔤 Word Counter</h3><textarea class="field" id="text" oninput="counter()" placeholder="Paste or type text..."></textarea><div id="counto" class="out">Words: 0 | Characters: 0</div></div>
-<div class="card"><h3>🔄 Unit Converter</h3><select class="field" id="unit" onchange="convert()"><option value="km">km → miles</option><option value="mi">miles → km</option><option value="kg">kg → lb</option><option value="lb">lb → kg</option><option value="c">°C → °F</option><option value="f">°F → °C</option></select><input class="field" id="uv" type="number" oninput="convert()"><div id="uo" class="out">Enter a value.</div></div>
-<div class="card"><h3>🔢 Multiplication Table</h3><input class="field" id="tn" value="5"><button class="btn" onclick="table()">Generate</button><div id="to" class="out"></div></div>
-<div class="card"><h3>📝 Random Study Task</h3><button class="btn" onclick="promptTask()">Give me a challenge</button><div id="pro" class="out">Ready?</div></div>
-<div class="card"><h3>🎲 Random Number</h3><div class="row"><input class="field" id="min" value="1"><input class="field" id="max" value="100"></div><button class="btn" onclick="randomNum()">Generate</button><div id="rnd" class="out"></div></div>
-</div></section>
-</main>
-<footer>StudyVerse © 2026 • Built as a single HTML file • Your data stays in your browser</footer>
-<script>
-let soundOn=localStorage.getItem("svsound")!=="0",ctx,timerID,rem=1500,xp=+localStorage.getItem("svxp")||0;
-function beep(f=600,d=.08){if(!soundOn)return;try{ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=f;g.gain.value=.035;o.connect(g);g.connect(ctx.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+d);o.stop(ctx.currentTime+d)}catch(e){}}
-function sound(){soundOn=!soundOn;localStorage.setItem("svsound",soundOn?"1":"0");beep()}
-function dark(){document.body.classList.toggle("light");if(document.body.classList.contains("light"))document.body.style.filter="";else document.body.style.filter="";beep(450)}
-function page(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");scrollTo(0,0);beep(520)}
-const n=id=>Number(document.getElementById(id).value);
-function pct(){document.getElementById("po").textContent=n("b")?`Result: ${(n("a")/n("b")*100).toFixed(2)}%`:"Enter values."}
-function cg(){let x=n("cg");document.getElementById("cgo").textContent=x>=0&&x<=10?`Approx. ${ (x*9.5).toFixed(2)}%`:"Enter CGPA 0–10."}
-function avg(){let a=document.getElementById("nums").value.split(",").map(Number).filter(Number.isFinite);document.getElementById("avo").textContent=a.length?`Average: ${(a.reduce((x,y)=>x+y,0)/a.length).toFixed(2)}`:"Enter numbers."}
-function chg(){let a=n("old"),b=n("nw");document.getElementById("cho").textContent=a?`${(((b-a)/a)*100).toFixed(2)}% ${b>=a?"increase":"decrease"}`:"Old value cannot be zero."}
-function si(){let p=n("sp"),r=n("sr"),t=n("st"),i=p*r*t/100;document.getElementById("sio").textContent=`SI ₹${i.toFixed(2)} | Amount ₹${(p+i).toFixed(2)}`}
-function ci(){let p=n("cp"),r=n("cr"),t=n("ct"),a=p*Math.pow(1+r/100,t);document.getElementById("cio").textContent=`Interest ₹${(a-p).toFixed(2)} | Amount ₹${a.toFixed(2)}`}
-function bmi(){let x=n("w")/Math.pow(n("h")/100,2);document.getElementById("bmio").textContent=n("w")&&n("h")?`BMI: ${x.toFixed(1)}`:"Enter valid values."}
-function gcd(a,b){while(b)[a,b]=[b,a%b];return Math.abs(a)}function ratio(){let a=document.getElementById("rat").value.split(":").map(Number);if(a.length!==2)return document.getElementById("rato").textContent="Use 24:36";let g=gcd(a[0],a[1]);document.getElementById("rato").textContent=`${a[0]/g}:${a[1]/g}`}
-function ofnum(){document.getElementById("pno").textContent=`Result: ${(n("pc")*n("pn")/100).toFixed(2)}`}
-function frac(){document.getElementById("fro").textContent=n("fd")?`Decimal: ${(n("fn")/n("fd")).toFixed(6)}`:"Denominator cannot be zero."}
-function update(){document.getElementById("timer").textContent=`${String(Math.floor(rem/60)).padStart(2,"0")}:${String(rem%60).padStart(2,"0")}`}
-function reset(){clearInterval(timerID);timerID=null;rem=Math.max(1,n("mins")||25)*60;update()}function start(){if(timerID)return;timerID=setInterval(()=>{rem--;update();if(rem<=0){clearInterval(timerID);timerID=null;beep(1100,.15);localStorage.setItem("svsessions",(+localStorage.getItem("svsessions")||0)+1);stats();alert("🎉 Focus session complete!")}},1000);beep(750)}function pause(){clearInterval(timerID);timerID=null;beep(400)}reset();
-let tasks=JSON.parse(localStorage.getItem("svtasks")||"[]");function saveTasks(){localStorage.setItem("svtasks",JSON.stringify(tasks));renderTasks();stats()}function addTask(){let x=document.getElementById("task").value.trim();if(!x)return;tasks.push({x,done:false});document.getElementById("task").value="";saveTasks();gain(10);beep(700)}function renderTasks(){document.getElementById("tasks").innerHTML=tasks.length?tasks.map((t,i)=>`<div class="todo"><input type="checkbox" ${t.done?"checked":""} onchange="toggleTask(${i})"><span class="${t.done?"done":""}">${escape(t.x)}</span><button class="ghost" onclick="delTask(${i})">✕</button></div>`).join(""):"<p class='muted'>No tasks yet.</p>"}function toggleTask(i){tasks[i].done=!tasks[i].done;saveTasks();if(tasks[i].done)gain(20)}function delTask(i){tasks.splice(i,1);saveTasks()}function clearDone(){tasks=tasks.filter(x=>!x.done);saveTasks()}function escape(s){return s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}renderTasks();
-let plans=JSON.parse(localStorage.getItem("svplans")||"[]");function addPlan(){let s=document.getElementById("sub").value,m=n("mins2");if(!s||!m)return;plans.push({s,m});localStorage.setItem("svplans",JSON.stringify(plans));renderPlans()}function renderPlans(){document.getElementById("plans").innerHTML=plans.map((x,i)=>`<div class="todo"><span>📚 ${escape(x.s)} — ${x.m} min</span><button class="ghost" onclick="plans.splice(${i},1);localStorage.setItem('svplans',JSON.stringify(plans));renderPlans()">✕</button></div>`).join("")||"<p class='muted'>No study plan yet.</p>"}renderPlans();
-const qs=[["25% of 200?",["25","40","50","75"],2],["Red Planet?",["Earth","Mars","Jupiter","Venus"],1],["12 × 8?",["86","96","108","112"],1],["2 hours = ? minutes",["60","100","120","180"],2],["HTML stands for?",["HyperText Markup Language","HighText Machine Language","Home Tool Markup Language","Hyper Tool Link"],0]];let qi=0,score=0;
-function quizRender(){let q=qs[qi];document.getElementById("quizBox")?.remove();let c=document.createElement("div");c.id="quizBox";c.className="card";c.innerHTML=`<h3>🎯 Quiz ${qi+1}/${qs.length}</h3><h2>${q[0]}</h2>${q[1].map((x,i)=>`<button class="ghost" onclick="answer(${i})">${x}</button>`).join("")}<p class="muted">Score: ${score}</p>`;document.getElementById("games").appendChild(c)}
-function answer(i){let q=qs[qi];if(i===q[2]){score++;gain(25);beep(900)}else beep(220,.12);qi++;if(qi===qs.length){let b=Math.max(score,+localStorage.getItem("svbest")||0);localStorage.setItem("svbest",b);alert(`🏆 Quiz: ${score}/${qs.length}`);qi=0;score=0}quizRender()}
-quizRender();
-function reaction(){let b=document.getElementById("reactBtn"),r=document.getElementById("react");if(b.dataset.go==="1"){let ms=Date.now()-+b.dataset.time;r.textContent=`⚡ ${ms} ms — ${ms<250?"INSANE!":ms<400?"Great!":"Keep practicing!"}`;document.getElementById("reactScore").textContent=ms+"ms";b.dataset.go="0";gain(Math.max(5,Math.floor(500/ms*10)));beep(900);return}r.textContent="WAIT...";b.textContent="WAIT...";b.dataset.go="0";setTimeout(()=>{r.textContent="🟢 CLICK NOW!";b.textContent="CLICK!";b.dataset.go="1";b.dataset.time=Date.now();beep(1000)},1000+Math.random()*3000)}
-let secret=Math.floor(Math.random()*100)+1;function newGuess(){secret=Math.floor(Math.random()*100)+1;document.getElementById("guessOut").textContent="New number ready."}function guessGame(){let g=n("guess");if(!g)return;if(g===secret){document.getElementById("guessOut").textContent="🎉 Correct! New number generated.";gain(30);newGuess()}else document.getElementById("guessOut").textContent=g<secret?"⬆️ Too low!":"⬇️ Too high!"}
-function counter(){let t=document.getElementById("text").value;document.getElementById("counto").textContent=`Words: ${t.trim()?t.trim().split(/\\s+/).length:0} | Characters: ${t.length}`}
-function convert(){let x=n("uv"),u=document.getElementById("unit").value,m={km:[x*.621371,"miles"],mi:[x*1.609344,"km"],kg:[x*2.20462,"lb"],lb:[x*.453592,"kg"],c:[x*9/5+32,"°F"],f:[(x-32)*5/9,"°C"]}[u];document.getElementById("uo").textContent=isNaN(x)?"Enter a value.":`Result: ${m[0].toFixed(3)} ${m[1]}`}
-function table(){let x=n("tn");document.getElementById("to").innerHTML=Array.from({length:10},(_,i)=>`${x} × ${i+1} = ${x*(i+1)}`).join("<br>")}
-function promptTask(){let a=["Revise 10 definitions.","Solve 5 practice questions.","Make 10 flashcards.","Explain one difficult topic without notes.","Review yesterday's notes."];document.getElementById("pro").textContent=a[Math.floor(Math.random()*a.length)];gain(5);beep(700)}
-function randomNum(){let a=n("min"),b=n("max");if(b<a)[a,b]=[b,a];document.getElementById("rnd").textContent=Math.floor(Math.random()*(b-a+1))+a}
-function findTool(){let q=document.getElementById("find").value.toLowerCase();if(!q)return;page("calc");document.querySelectorAll("#calcGrid .card").forEach(c=>c.classList.toggle("hidden",!c.innerText.toLowerCase().includes(q)))}
-function gain(x){xp+=x;localStorage.setItem("svxp",xp);stats()}function stats(){document.getElementById("xp").textContent=xp;document.getElementById("done").textContent=tasks.filter(x=>x.done).length;document.getElementById("best").textContent=localStorage.getItem("svbest")||0;document.getElementById("sessions").textContent=localStorage.getItem("svsessions")||0}stats();
-</script>
-</body></html>''',encoding="utf-8")
-print(p)
+p.write_text(html, encoding="utf-8")
+print(f"Updated: {p}")
+print(f"Size: {p.stat().st_size:,} bytes")
