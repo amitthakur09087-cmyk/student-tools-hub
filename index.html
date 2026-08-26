@@ -2,561 +2,470 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StudyVerse | Class 11 CBSE</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>StudyVerse ⚡ | Class 11 CBSE</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 
 :root{
-    --bg:#050509;
-    --card:#0d0d15;
-    --card2:#11111c;
-    --text:#fff;
-    --muted:#9d9daa;
-    --cyan:#00eaff;
-    --purple:#9b00ff;
-    --pink:#ff008c;
-    --green:#00ff88;
+ --bg:#05050a;
+ --card:#0d0d16;
+ --card2:#11111d;
+ --text:#fff;
+ --muted:#9da0ad;
+ --cyan:#00eaff;
+ --purple:#9b00ff;
+ --pink:#ff008c;
+ --green:#00ff88;
 }
+
+html{scroll-behavior:smooth}
 
 body{
-    background:
-        radial-gradient(circle at 15% 15%,rgba(0,234,255,.10),transparent 25%),
-        radial-gradient(circle at 85% 20%,rgba(155,0,255,.12),transparent 25%),
-        radial-gradient(circle at 50% 100%,rgba(255,0,140,.08),transparent 30%),
-        var(--bg);
-    color:var(--text);
-    min-height:100vh;
-    overflow-x:hidden;
+ background:
+ radial-gradient(circle at 10% 10%,rgba(0,234,255,.09),transparent 25%),
+ radial-gradient(circle at 90% 15%,rgba(155,0,255,.1),transparent 25%),
+ var(--bg);
+ color:var(--text);
+ min-height:100vh;
+ overflow-x:hidden;
 }
 
-/* RGB SIDE LIGHTS */
+/* RGB LIGHTS */
 .rgb{
-    position:fixed;
-    top:0;
-    width:4px;
-    height:100vh;
-    z-index:999;
-    background:linear-gradient(
-        180deg,
-        #ff0000,
-        #ff00ff,
-        #0000ff,
-        #00ffff,
-        #00ff00,
-        #ffff00,
-        #ff0000
-    );
-    background-size:100% 400%;
-    animation:rgbMove 5s linear infinite;
-    box-shadow:
-        0 0 15px #00ffff,
-        0 0 35px #ff00ff;
+ position:fixed;
+ top:0;
+ width:4px;
+ height:100vh;
+ z-index:9999;
+ background:linear-gradient(
+  180deg,
+  red,magenta,blue,cyan,lime,yellow,red
+ );
+ background-size:100% 500%;
+ animation:rgb 4s linear infinite;
+ box-shadow:0 0 12px cyan,0 0 30px magenta;
 }
+.rgb.left{left:0}
+.rgb.right{right:0}
 
-.rgb.left{left:0;}
-.rgb.right{right:0;}
-
-@keyframes rgbMove{
-    0%{background-position:0 0;}
-    100%{background-position:0 400%;}
+@keyframes rgb{
+ 0%{background-position:0 0}
+ 100%{background-position:0 500%}
 }
 
 /* HEADER */
 header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    backdrop-filter:blur(18px);
-    background:rgba(5,5,9,.82);
-    border-bottom:1px solid rgba(255,255,255,.08);
+ position:sticky;
+ top:0;
+ z-index:500;
+ background:rgba(5,5,10,.82);
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-.nav{
-    max-width:1250px;
-    margin:auto;
-    min-height:72px;
-    padding:12px 25px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
+nav{
+ max-width:1250px;
+ margin:auto;
+ padding:14px 25px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:20px;
 }
 
 .logo{
-    font-size:27px;
-    font-weight:900;
-    letter-spacing:1px;
+ font-size:27px;
+ font-weight:900;
+}
+.logo span{color:var(--cyan);text-shadow:0 0 15px cyan}
+
+.navlinks{
+ display:flex;
+ flex-wrap:wrap;
+ gap:6px;
+ justify-content:center;
 }
 
-.logo span{
-    color:var(--cyan);
-    text-shadow:0 0 15px var(--cyan);
+.navlinks button{
+ border:0;
+ background:transparent;
+ color:#aaa;
+ padding:10px 13px;
+ border-radius:10px;
+ cursor:pointer;
+ font-weight:bold;
 }
-
-.nav-links{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-.nav-links button{
-    border:0;
-    background:transparent;
-    color:#bbb;
-    padding:10px 14px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-    transition:.25s;
-}
-
-.nav-links button:hover,
-.nav-links button.active{
-    color:white;
-    background:rgba(0,234,255,.10);
-    box-shadow:0 0 15px rgba(0,234,255,.15);
+.navlinks button:hover{
+ color:white;
+ background:rgba(0,234,255,.1);
 }
 
 /* HERO */
 .hero{
-    max-width:1250px;
-    margin:auto;
-    padding:70px 25px 40px;
-    display:grid;
-    grid-template-columns:1.3fr .7fr;
-    gap:30px;
-    align-items:center;
+ max-width:1250px;
+ margin:auto;
+ padding:70px 25px 40px;
+ display:grid;
+ grid-template-columns:1.3fr .7fr;
+ gap:30px;
+ align-items:center;
 }
 
 .badge{
-    display:inline-block;
-    padding:8px 13px;
-    border:1px solid rgba(0,234,255,.3);
-    border-radius:30px;
-    color:var(--cyan);
-    background:rgba(0,234,255,.06);
-    font-size:13px;
-    margin-bottom:18px;
+ display:inline-block;
+ padding:8px 14px;
+ border-radius:30px;
+ color:var(--cyan);
+ border:1px solid rgba(0,234,255,.3);
+ background:rgba(0,234,255,.05);
+ font-size:13px;
+ margin-bottom:20px;
 }
 
 .hero h1{
-    font-size:clamp(40px,6vw,75px);
-    line-height:.95;
-    margin-bottom:20px;
+ font-size:clamp(45px,6vw,76px);
+ line-height:.95;
+ margin-bottom:20px;
 }
-
 .hero h1 span{
-    background:linear-gradient(90deg,#00eaff,#9b00ff,#ff008c);
-    -webkit-background-clip:text;
-    color:transparent;
+ background:linear-gradient(90deg,cyan,#9b00ff,#ff008c);
+ -webkit-background-clip:text;
+ color:transparent;
 }
 
 .hero p{
-    color:var(--muted);
-    font-size:17px;
-    line-height:1.7;
-    max-width:650px;
+ max-width:650px;
+ color:var(--muted);
+ line-height:1.7;
+ font-size:17px;
 }
 
-.hero-buttons{
-    display:flex;
-    gap:12px;
-    margin-top:25px;
-    flex-wrap:wrap;
+.buttons{
+ display:flex;
+ flex-wrap:wrap;
+ gap:12px;
+ margin-top:25px;
 }
 
 .btn{
-    border:0;
-    padding:13px 20px;
-    border-radius:12px;
-    color:white;
-    background:linear-gradient(90deg,#00a8ff,#8b00ff);
-    cursor:pointer;
-    font-weight:bold;
-    box-shadow:0 0 20px rgba(0,168,255,.25);
-    transition:.25s;
+ border:0;
+ padding:13px 20px;
+ border-radius:12px;
+ color:white;
+ font-weight:bold;
+ cursor:pointer;
+ background:linear-gradient(90deg,#00a8ff,#8b00ff);
+ box-shadow:0 0 20px rgba(0,200,255,.2);
+ transition:.25s;
 }
-
 .btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 0 30px rgba(0,234,255,.4);
+ transform:translateY(-3px);
+ box-shadow:0 0 30px rgba(0,234,255,.35);
 }
-
 .btn.secondary{
-    background:#11111a;
-    border:1px solid rgba(255,255,255,.1);
+ background:#12121d;
+ border:1px solid rgba(255,255,255,.1);
 }
 
-/* DASHBOARD CARD */
-.dashboard-card{
-    background:linear-gradient(145deg,#10101b,#08080e);
-    border:1px solid rgba(255,255,255,.09);
-    border-radius:25px;
-    padding:25px;
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.5),
-        0 0 35px rgba(0,234,255,.08);
+/* DASHBOARD */
+.dashboard{
+ background:linear-gradient(145deg,#11111c,#08080e);
+ border:1px solid rgba(255,255,255,.09);
+ border-radius:25px;
+ padding:25px;
+ box-shadow:0 20px 60px #000;
 }
 
-.dashboard-card h3{
-    margin-bottom:20px;
-}
+.dashboard h3{margin-bottom:18px}
 
 .stat{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:15px;
-    background:rgba(255,255,255,.035);
-    border-radius:14px;
-    margin-bottom:10px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:15px;
+ margin-bottom:10px;
+ background:rgba(255,255,255,.035);
+ border-radius:13px;
 }
-
-.stat small{
-    color:var(--muted);
-}
-
-.stat strong{
-    color:var(--cyan);
-}
+.stat small{color:var(--muted)}
+.stat strong:last-child{color:var(--cyan)}
 
 /* SEARCH */
-.search-area{
-    max-width:1250px;
-    margin:10px auto 30px;
-    padding:0 25px;
+.searchbox{
+ max-width:1250px;
+ margin:auto;
+ padding:0 25px 20px;
 }
-
 .search{
-    width:100%;
-    padding:17px 20px;
-    background:#0d0d15;
-    color:white;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:15px;
-    outline:none;
-    font-size:15px;
+ width:100%;
+ padding:17px 20px;
+ border-radius:15px;
+ outline:none;
+ border:1px solid rgba(255,255,255,.1);
+ background:#0d0d16;
+ color:white;
+ font-size:15px;
 }
-
 .search:focus{
-    border-color:var(--cyan);
-    box-shadow:0 0 20px rgba(0,234,255,.12);
+ border-color:cyan;
+ box-shadow:0 0 20px rgba(0,234,255,.12);
 }
 
-/* SECTIONS */
+/* SECTION */
 .section{
-    max-width:1250px;
-    margin:auto;
-    padding:45px 25px;
+ max-width:1250px;
+ margin:auto;
+ padding:45px 25px;
 }
-
-.section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    margin-bottom:25px;
-    gap:15px;
+.title{
+ margin-bottom:25px;
 }
-
-.section-title h2{
-    font-size:30px;
-}
-
-.section-title p{
-    color:var(--muted);
-    margin-top:7px;
-}
+.title h2{font-size:31px}
+.title p{color:var(--muted);margin-top:7px}
 
 /* SUBJECTS */
-.subject-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
+.grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:17px;
+}
+
+.card{
+ background:linear-gradient(145deg,#11111c,#09090f);
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:20px;
+ padding:22px;
+ transition:.3s;
+}
+
+.card:hover{
+ transform:translateY(-5px);
+ border-color:rgba(0,234,255,.3);
+ box-shadow:0 0 30px rgba(0,234,255,.08);
 }
 
 .subject{
-    position:relative;
-    min-height:180px;
-    padding:23px;
-    border-radius:20px;
-    background:linear-gradient(145deg,#11111b,#09090f);
-    border:1px solid rgba(255,255,255,.08);
-    cursor:pointer;
-    overflow:hidden;
-    transition:.3s;
+ cursor:pointer;
+ min-height:185px;
+ position:relative;
+ overflow:hidden;
 }
-
-.subject:hover{
-    transform:translateY(-6px);
-    border-color:rgba(0,234,255,.35);
-    box-shadow:0 0 30px rgba(0,234,255,.10);
-}
-
-.subject::after{
-    content:"";
-    position:absolute;
-    width:100px;
-    height:100px;
-    border-radius:50%;
-    background:var(--glow);
-    filter:blur(55px);
-    right:-35px;
-    bottom:-35px;
-    opacity:.35;
+.subject:after{
+ content:"";
+ position:absolute;
+ width:100px;
+ height:100px;
+ border-radius:50%;
+ right:-35px;
+ bottom:-35px;
+ background:var(--glow);
+ filter:blur(45px);
+ opacity:.35;
 }
 
 .icon{
-    width:48px;
-    height:48px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:14px;
-    background:rgba(255,255,255,.06);
-    font-size:24px;
-    margin-bottom:20px;
+ width:48px;
+ height:48px;
+ border-radius:14px;
+ background:rgba(255,255,255,.06);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:23px;
+ margin-bottom:18px;
 }
 
-.subject h3{
-    margin-bottom:8px;
-}
-
-.subject p{
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.5;
-}
-
-.subject .tag{
-    position:absolute;
-    top:18px;
-    right:18px;
-    color:#aaa;
-    font-size:11px;
+.card h3{margin-bottom:9px}
+.card p{
+ color:var(--muted);
+ line-height:1.6;
+ font-size:14px;
 }
 
 /* NOTES */
-.notes-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
+.note{
+ min-height:210px;
+}
+.note button{
+ margin-top:17px;
+ border:0;
+ background:transparent;
+ color:cyan;
+ cursor:pointer;
+ font-weight:bold;
 }
 
-.note-card{
-    background:#0d0d15;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:18px;
-    padding:22px;
-    transition:.25s;
+/* TOOLS */
+.tools{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:15px;
 }
-
-.note-card:hover{
-    border-color:rgba(155,0,255,.4);
-    box-shadow:0 0 25px rgba(155,0,255,.08);
+.tool{
+ cursor:pointer;
+ text-align:center;
+ padding:25px 15px;
 }
-
-.note-card h3{
-    margin-bottom:10px;
-}
-
-.note-card p{
-    color:#aaa;
-    line-height:1.6;
-    font-size:14px;
-}
-
-.note-card button{
-    margin-top:17px;
-    border:0;
-    color:var(--cyan);
-    background:transparent;
-    cursor:pointer;
-    font-weight:bold;
+.tool .icon{
+ margin:auto auto 15px;
 }
 
 /* QUESTIONS */
 .questions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:15px;
 }
-
-.question{
-    background:#0d0d15;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:17px;
-    padding:20px;
-}
-
 .question span{
-    color:var(--cyan);
-    font-size:12px;
-    font-weight:bold;
+ color:cyan;
+ font-size:11px;
+ font-weight:bold;
 }
-
 .question h3{
-    margin-top:9px;
-    line-height:1.5;
-    font-size:16px;
+ margin-top:9px;
+ line-height:1.5;
+ font-size:16px;
 }
 
-.question p{
-    color:#999;
-    margin-top:8px;
-    font-size:13px;
+/* GAMES */
+.games{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:15px;
 }
-
-/* GAME */
-.game-box{
-    min-height:230px;
-    border-radius:24px;
-    background:
-        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
-        #090910;
-    background-size:30px 30px;
-    border:1px solid rgba(0,234,255,.15);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:30px;
+.game{
+ text-align:center;
+ cursor:pointer;
 }
-
-.game-box h2{
-    margin-bottom:10px;
+.game .gameicon{
+ font-size:45px;
+ margin-bottom:15px;
 }
-
-.game-box p{
-    color:#999;
-    margin-bottom:20px;
+.game:hover .gameicon{
+ animation:bounce .5s;
 }
-
-/* FOOTER */
-footer{
-    margin-top:40px;
-    padding:35px 20px;
-    text-align:center;
-    border-top:1px solid rgba(255,255,255,.08);
-    color:#777;
-}
-
-footer strong{
-    color:var(--cyan);
+@keyframes bounce{
+ 50%{transform:scale(1.2) rotate(5deg)}
 }
 
 /* MODAL */
 .modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.78);
-    backdrop-filter:blur(8px);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:500;
-    padding:20px;
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.8);
+ backdrop-filter:blur(8px);
+ display:none;
+ align-items:center;
+ justify-content:center;
+ z-index:8000;
+ padding:20px;
+}
+.modal.show{display:flex}
+
+.modalbox{
+ width:min(850px,100%);
+ max-height:88vh;
+ overflow:auto;
+ background:#0b0b13;
+ border:1px solid rgba(0,234,255,.25);
+ border-radius:22px;
+ padding:28px;
+ box-shadow:0 0 60px rgba(0,234,255,.1);
 }
 
-.modal.show{
-    display:flex;
+.modalhead{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:20px;
 }
-
-.modal-content{
-    width:min(800px,100%);
-    max-height:85vh;
-    overflow:auto;
-    background:#0c0c14;
-    border:1px solid rgba(0,234,255,.25);
-    border-radius:22px;
-    padding:28px;
-    box-shadow:0 0 60px rgba(0,234,255,.12);
-}
-
-.modal-header{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    align-items:center;
-    margin-bottom:20px;
-}
-
 .close{
-    border:0;
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    color:white;
-    background:#181824;
-    cursor:pointer;
-    font-size:20px;
+ width:38px;
+ height:38px;
+ border:0;
+ border-radius:50%;
+ background:#191923;
+ color:white;
+ font-size:22px;
+ cursor:pointer;
 }
 
-.modal-content h3{
-    color:var(--cyan);
-    margin:20px 0 8px;
+.modalbox h3{
+ color:cyan;
+ margin:20px 0 10px;
+}
+.modalbox p,.modalbox li{
+ color:#bbb;
+ line-height:1.75;
+}
+.modalbox ul{padding-left:22px}
+
+/* INPUTS */
+.input{
+ width:100%;
+ padding:13px;
+ margin:7px 0;
+ border-radius:10px;
+ border:1px solid rgba(255,255,255,.1);
+ background:#11111a;
+ color:white;
+ outline:none;
 }
 
-.modal-content p,
-.modal-content li{
-    color:#bbb;
-    line-height:1.7;
+/* GAME AREA */
+.gamearea{
+ height:400px;
+ border-radius:15px;
+ position:relative;
+ overflow:hidden;
+ background:#050509;
+ border:1px solid rgba(0,234,255,.2);
 }
 
-.modal-content ul{
-    padding-left:22px;
+.car{
+ position:absolute;
+ bottom:20px;
+ left:50%;
+ transform:translateX(-50%);
+ font-size:45px;
 }
+
+.obstacle{
+ position:absolute;
+ font-size:35px;
+}
+
+.score{
+ text-align:center;
+ color:cyan;
+ font-size:20px;
+ margin-bottom:10px;
+}
+
+/* FOOTER */
+footer{
+ margin-top:40px;
+ padding:35px;
+ text-align:center;
+ color:#777;
+ border-top:1px solid rgba(255,255,255,.08);
+}
+footer strong{color:cyan}
 
 /* RESPONSIVE */
 @media(max-width:1000px){
-    .subject-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .hero{
-        grid-template-columns:1fr;
-    }
-
-    .notes-grid{
-        grid-template-columns:1fr 1fr;
-    }
+ .hero{grid-template-columns:1fr}
+ .grid{grid-template-columns:1fr 1fr}
+ .tools{grid-template-columns:1fr 1fr}
+ .games{grid-template-columns:1fr 1fr}
 }
 
 @media(max-width:650px){
-    .nav{
-        flex-direction:column;
-    }
-
-    .nav-links{
-        width:100%;
-    }
-
-    .subject-grid,
-    .notes-grid,
-    .questions{
-        grid-template-columns:1fr;
-    }
-
-    .hero{
-        padding-top:40px;
-    }
-
-    .hero h1{
-        font-size:48px;
-    }
-
-    .section-title{
-        flex-direction:column;
-        align-items:flex-start;
-    }
+ nav{flex-direction:column}
+ .grid,.tools,.games,.questions{grid-template-columns:1fr}
+ .hero{padding-top:40px}
 }
 </style>
 </head>
@@ -567,21 +476,18 @@ footer strong{
 <div class="rgb right"></div>
 
 <header>
-<div class="nav">
+<nav>
+<div class="logo">Study<span>Verse</span> ⚡</div>
 
-<div class="logo">
-Study<span>Verse</span> ⚡
+<div class="navlinks">
+<button onclick="go('home')">Home</button>
+<button onclick="go('subjects')">Subjects</button>
+<button onclick="go('notes')">Notes</button>
+<button onclick="go('tools')">Tools</button>
+<button onclick="go('questions')">Questions</button>
+<button onclick="go('games')">Games</button>
 </div>
-
-<div class="nav-links">
-<button class="active" onclick="scrollToId('home')">Home</button>
-<button onclick="scrollToId('subjects')">Subjects</button>
-<button onclick="scrollToId('notes')">Notes</button>
-<button onclick="scrollToId('questions')">Questions</button>
-<button onclick="scrollToId('games')">Games</button>
-</div>
-
-</div>
+</nav>
 </header>
 
 <main id="home">
@@ -592,289 +498,319 @@ Study<span>Verse</span> ⚡
 <div class="badge">CLASS 11 • CBSE • STUDY HUB</div>
 
 <h1>
-Study smarter.<br>
-Build your <span>future.</span>
+Learn.<br>
+Practice.<br>
+<span>Level Up.</span>
 </h1>
 
 <p>
-Welcome to StudyVerse — your all-in-one Class 11 CBSE study space.
-Access subjects, chapter notes, important questions and a little gaming
-break from one futuristic dashboard.
+StudyVerse is your futuristic Class 11 CBSE study dashboard.
+Read detailed notes, revise important questions, use smart tools
+and take a short gaming break whenever you need one.
 </p>
 
-<div class="hero-buttons">
-<button class="btn" onclick="scrollToId('subjects')">
-Explore Subjects →
-</button>
-
-<button class="btn secondary" onclick="scrollToId('notes')">
-Open Notes
-</button>
+<div class="buttons">
+<button class="btn" onclick="go('subjects')">Explore Subjects →</button>
+<button class="btn secondary" onclick="go('tools')">Open Tools</button>
 </div>
 </div>
 
-<div class="dashboard-card">
-
+<div class="dashboard">
 <h3>📊 Study Dashboard</h3>
 
 <div class="stat">
-<div>
-<strong>Subjects</strong><br>
-<small>CBSE Class 11</small>
-</div>
+<div><strong>Subjects</strong><br><small>Class 11 CBSE</small></div>
 <strong>06</strong>
 </div>
 
 <div class="stat">
-<div>
-<strong>Notes</strong><br>
-<small>Quick revision</small>
-</div>
+<div><strong>Notes</strong><br><small>Chapter revision</small></div>
 <strong>∞</strong>
 </div>
 
 <div class="stat">
-<div>
-<strong>Questions</strong><br>
-<small>Exam focused</small>
-</div>
-<strong>⭐</strong>
+<div><strong>Tools</strong><br><small>Study utilities</small></div>
+<strong>08+</strong>
 </div>
 
 <div class="stat">
-<div>
-<strong>Mode</strong><br>
-<small>Dark Study UI</small>
+<div><strong>Games</strong><br><small>Study break</small></div>
+<strong>04</strong>
 </div>
-<strong>ON</strong>
-</div>
-
 </div>
 
 </section>
 
-<div class="search-area">
-<input
-class="search"
-id="search"
-type="text"
-placeholder="🔎 Search subjects, notes or questions..."
-oninput="searchEverything()">
+<div class="searchbox">
+<input class="search" id="search"
+placeholder="🔎 Search subjects, notes, questions..."
+oninput="searchAll()">
 </div>
+
+
+<!-- SUBJECTS -->
 
 <section class="section" id="subjects">
 
-<div class="section-title">
-<div>
+<div class="title">
 <h2>📚 Subjects</h2>
-<p>Select a subject and start studying.</p>
-</div>
+<p>Choose a subject to explore chapters and study material.</p>
 </div>
 
-<div class="subject-grid" id="subjectGrid">
+<div class="grid">
 
-<div class="subject" style="--glow:#00eaff"
-onclick="openSubject('Accountancy')">
-<div class="tag">01</div>
+<div class="card subject searchable" style="--glow:cyan"
+onclick="subject('Accountancy')">
 <div class="icon">📒</div>
 <h3>Accountancy</h3>
-<p>Journal, ledger, accounting equation, trial balance and more.</p>
+<p>Accounting concepts, equations, journal, ledger, trial balance and more.</p>
 </div>
 
-<div class="subject" style="--glow:#00ff88"
-onclick="openSubject('Business Studies')">
-<div class="tag">02</div>
+<div class="card subject searchable" style="--glow:#00ff88"
+onclick="subject('Business Studies')">
 <div class="icon">💼</div>
 <h3>Business Studies</h3>
-<p>Business concepts, forms of organisation, management and trade.</p>
+<p>Business organisation, finance, trade, management and entrepreneurship.</p>
 </div>
 
-<div class="subject" style="--glow:#9b00ff"
-onclick="openSubject('Economics')">
-<div class="tag">03</div>
+<div class="card subject searchable" style="--glow:#9b00ff"
+onclick="subject('Economics')">
 <div class="icon">📈</div>
 <h3>Economics</h3>
-<p>Statistics, microeconomics, demand, supply and basic concepts.</p>
+<p>Statistics, demand, supply, consumer behaviour and economics basics.</p>
 </div>
 
-<div class="subject" style="--glow:#ff008c"
-onclick="openSubject('English')">
-<div class="tag">04</div>
+<div class="card subject searchable" style="--glow:#ff008c"
+onclick="subject('English')">
 <div class="icon">📖</div>
 <h3>English</h3>
-<p>Literature, writing skills, grammar and important chapters.</p>
+<p>Hornbill, Snapshots, reading and writing skills.</p>
 </div>
 
-<div class="subject" style="--glow:#ff5500"
-onclick="openSubject('Hindi')">
-<div class="tag">05</div>
+<div class="card subject searchable" style="--glow:#ff5500"
+onclick="subject('Hindi')">
 <div class="icon">📝</div>
 <h3>Hindi</h3>
-<p>आरोह, वितान, लेखन कौशल और महत्वपूर्ण प्रश्न।</p>
+<p>आरोह, वितान, लेखन कौशल और पाठ आधारित तैयारी।</p>
 </div>
 
-<div class="subject" style="--glow:#00a8ff"
-onclick="openSubject('Physical Education')">
-<div class="tag">06</div>
+<div class="card subject searchable" style="--glow:#00a8ff"
+onclick="subject('Physical Education')">
 <div class="icon">🏃</div>
 <h3>Physical Education</h3>
-<p>Sports, fitness, yoga, physiology and health education.</p>
+<p>Fitness, yoga, sports, health, physiology and nutrition.</p>
 </div>
 
 </div>
 </section>
+
+
+<!-- NOTES -->
 
 <section class="section" id="notes">
 
-<div class="section-title">
-<div>
-<h2>🧠 Detailed Notes</h2>
-<p>Quick revision material for important Class 11 topics.</p>
-</div>
+<div class="title">
+<h2>📖 Detailed Notes</h2>
+<p>Chapter-wise study material.</p>
 </div>
 
-<div class="notes-grid">
+<div class="grid">
 
-<div class="note-card searchable">
+<div class="card note searchable">
 <h3>📒 Accounting Equation</h3>
 <p>
-Assets = Capital + Liabilities. The equation explains the basic
-relationship between resources of a business and their sources.
+Assets = Capital + Liabilities. Learn the concept, rules,
+effects of transactions and examples.
 </p>
-<button onclick="openNote('Accounting Equation')">
-Read Detailed Note →
-</button>
+<button onclick="note('Accounting Equation')">Read Notes →</button>
 </div>
 
-<div class="note-card searchable">
-<h3>💼 Business Organisation</h3>
+<div class="card note searchable">
+<h3>💼 Forms of Business Organisation</h3>
 <p>
-Understand sole proprietorship, partnership, company and cooperative
-society with their important features.
+Sole proprietorship, partnership, company and cooperative society
+with features and comparisons.
 </p>
-<button onclick="openNote('Business Organisation')">
-Read Detailed Note →
-</button>
+<button onclick="note('Business Organisation')">Read Notes →</button>
 </div>
 
-<div class="note-card searchable">
+<div class="card note searchable">
 <h3>📈 Demand</h3>
 <p>
-Demand means the quantity of a commodity that consumers are willing
-and able to purchase at different prices.
+Meaning, law of demand, determinants, demand schedule and demand curve.
 </p>
-<button onclick="openNote('Demand')">
-Read Detailed Note →
-</button>
+<button onclick="note('Demand')">Read Notes →</button>
 </div>
 
-<div class="note-card searchable">
+<div class="card note searchable">
 <h3>📊 Statistics</h3>
 <p>
-Learn collection, organisation, presentation and interpretation of
-economic data.
+Collection, organisation, presentation and interpretation of economic data.
 </p>
-<button onclick="openNote('Statistics')">
-Read Detailed Note →
-</button>
+<button onclick="note('Statistics')">Read Notes →</button>
 </div>
 
-<div class="note-card searchable">
+<div class="card note searchable">
 <h3>📖 English Writing Skills</h3>
 <p>
-Important formats for notices, advertisements, speech, debate and
-other Class 11 writing tasks.
+Notice, advertisement, speech, debate and other writing formats.
 </p>
-<button onclick="openNote('English Writing Skills')">
-Read Detailed Note →
-</button>
+<button onclick="note('English')">Read Notes →</button>
 </div>
 
-<div class="note-card searchable">
-<h3>🏃 Physical Education</h3>
+<div class="card note searchable">
+<h3>🏃 Physical Fitness</h3>
 <p>
-Important concepts related to physical fitness, wellness, yoga,
-sports and healthy lifestyle.
+Fitness components, wellness, exercise and healthy lifestyle concepts.
 </p>
-<button onclick="openNote('Physical Education')">
-Read Detailed Note →
-</button>
+<button onclick="note('Physical Education')">Read Notes →</button>
 </div>
 
 </div>
 </section>
 
+
+<!-- TOOLS -->
+
+<section class="section" id="tools">
+
+<div class="title">
+<h2>🛠️ Study Tools</h2>
+<p>Useful tools for daily study.</p>
+</div>
+
+<div class="tools">
+
+<div class="card tool" onclick="calculator()">
+<div class="icon">🧮</div>
+<h3>Calculator</h3>
+<p>Quick calculations</p>
+</div>
+
+<div class="card tool" onclick="percentage()">
+<div class="icon">📊</div>
+<h3>Percentage</h3>
+<p>Calculate percentages</p>
+</div>
+
+<div class="card tool" onclick="marks()">
+<div class="icon">🎯</div>
+<h3>Marks Calculator</h3>
+<p>Total and percentage</p>
+</div>
+
+<div class="card tool" onclick="timer()">
+<div class="icon">⏱️</div>
+<h3>Pomodoro</h3>
+<p>Focus timer</p>
+</div>
+
+<div class="card tool" onclick="quickNotes()">
+<div class="icon">📝</div>
+<h3>Quick Notes</h3>
+<p>Save your notes</p>
+</div>
+
+<div class="card tool" onclick="todo()">
+<div class="icon">✅</div>
+<h3>To-Do List</h3>
+<p>Track tasks</p>
+</div>
+
+<div class="card tool" onclick="wordCounter()">
+<div class="icon">🔤</div>
+<h3>Word Counter</h3>
+<p>Count words</p>
+</div>
+
+<div class="card tool" onclick="focusMode()">
+<div class="icon">🎯</div>
+<h3>Focus Mode</h3>
+<p>Remove distractions</p>
+</div>
+
+</div>
+</section>
+
+
+<!-- QUESTIONS -->
+
 <section class="section" id="questions">
 
-<div class="section-title">
-<div>
+<div class="title">
 <h2>🔥 Important Questions</h2>
-<p>Focus on these topics during revision.</p>
-</div>
+<p>Useful questions for exam preparation.</p>
 </div>
 
 <div class="questions">
 
-<div class="question searchable">
+<div class="card question searchable">
 <span>ACCOUNTANCY</span>
 <h3>What is an accounting equation? Explain with an example.</h3>
-<p>Important conceptual question.</p>
 </div>
 
-<div class="question searchable">
+<div class="card question searchable">
 <span>BUSINESS STUDIES</span>
 <h3>Explain the main characteristics of business.</h3>
-<p>Frequently useful for theory revision.</p>
 </div>
 
-<div class="question searchable">
+<div class="card question searchable">
 <span>ECONOMICS</span>
-<h3>What is the difference between microeconomics and macroeconomics?</h3>
-<p>Important basic concept.</p>
+<h3>Explain the law of demand.</h3>
 </div>
 
-<div class="question searchable">
+<div class="card question searchable">
 <span>ENGLISH</span>
-<h3>How should a formal notice be written?</h3>
-<p>Practice format and important points.</p>
+<h3>What are the important points of notice writing?</h3>
 </div>
 
-<div class="question searchable">
+<div class="card question searchable">
 <span>HINDI</span>
-<h3>पाठ के आधार पर लेखक के विचारों को स्पष्ट कीजिए।</h3>
-<p>उत्तर लेखन के लिए महत्वपूर्ण।</p>
+<h3>पाठ के आधार पर लेखक के विचार स्पष्ट कीजिए।</h3>
 </div>
 
-<div class="question searchable">
+<div class="card question searchable">
 <span>PHYSICAL EDUCATION</span>
 <h3>Explain the importance of physical fitness.</h3>
-<p>Short and long answer preparation.</p>
 </div>
 
 </div>
 </section>
 
+
+<!-- GAMES -->
+
 <section class="section" id="games">
 
-<div class="section-title">
-<div>
-<h2>🎮 Study Break</h2>
-<p>Thoda padhai, thoda gaming 😎</p>
-</div>
+<div class="title">
+<h2>🎮 Game Zone</h2>
+<p>Take a short study break.</p>
 </div>
 
-<div class="game-box">
+<div class="games">
 
-<div>
-<h2>🚗 Mini Game Zone</h2>
-<p>
-Take a short break before getting back to your studies.
-</p>
+<div class="card game" onclick="carGame()">
+<div class="gameicon">🚗</div>
+<h3>Car Racing</h3>
+<p>Dodge the obstacles.</p>
+</div>
 
-<button class="btn" onclick="startGame()">
-Start Mini Game
-</button>
+<div class="card game" onclick="airshipGame()">
+<div class="gameicon">🚀</div>
+<h3>Airship</h3>
+<p>Fly and survive.</p>
+</div>
 
+<div class="card game" onclick="shootingGame()">
+<div class="gameicon">🔫</div>
+<h3>Shooting</h3>
+<p>Hit the targets.</p>
+</div>
+
+<div class="card game" onclick="reactionGame()">
+<div class="gameicon">⚡</div>
+<h3>Reaction</h3>
+<p>Test your speed.</p>
 </div>
 
 </div>
@@ -883,62 +819,69 @@ Start Mini Game
 </main>
 
 <footer>
-<p>
-Made for students with ❤️ •
-<strong>StudyVerse</strong>
-</p>
-<p style="margin-top:8px;">
-Class 11 CBSE Study Dashboard
-</p>
+<p>Made for students ❤️ • <strong>StudyVerse ⚡</strong></p>
+<p style="margin-top:8px">Class 11 CBSE Study Dashboard</p>
 </footer>
+
 
 <!-- MODAL -->
 
 <div class="modal" id="modal">
+<div class="modalbox">
 
-<div class="modal-content">
-
-<div class="modal-header">
+<div class="modalhead">
 <h2 id="modalTitle">StudyVerse</h2>
-
 <button class="close" onclick="closeModal()">×</button>
 </div>
 
 <div id="modalBody"></div>
 
 </div>
-
 </div>
+
 
 <script>
 
-/* SMOOTH SCROLL */
+/* BASIC */
 
-function scrollToId(id){
-    document.getElementById(id).scrollIntoView({
-        behavior:"smooth"
-    });
+function go(id){
+ document.getElementById(id).scrollIntoView({
+  behavior:"smooth"
+ });
 }
 
+function openModal(title,body){
+ document.getElementById("modalTitle").innerText=title;
+ document.getElementById("modalBody").innerHTML=body;
+ document.getElementById("modal").classList.add("show");
+}
 
-/* SUBJECT DETAILS */
+function closeModal(){
+ document.getElementById("modal").classList.remove("show");
+}
 
-const subjects = {
+document.getElementById("modal").onclick=e=>{
+ if(e.target.id==="modal")closeModal();
+};
+
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape")closeModal();
+});
+
+
+/* SUBJECT DATA */
+
+const subjectData={
 
 "Accountancy":`
 <h3>📒 Accountancy</h3>
+<p>Accountancy deals with recording, classifying, summarising and interpreting financial transactions.</p>
 
-<p>
-Accountancy is the process of recording, classifying, summarising and
-interpreting financial transactions of a business.
-</p>
-
-<h3>Important Class 11 Topics</h3>
-
+<h3>Important Chapters</h3>
 <ul>
 <li>Introduction to Accounting</li>
 <li>Basic Accounting Terms</li>
-<li>Accounting Principles</li>
+<li>Theory Base of Accounting</li>
 <li>Accounting Equation</li>
 <li>Journal</li>
 <li>Ledger</li>
@@ -948,23 +891,15 @@ interpreting financial transactions of a business.
 <li>Depreciation</li>
 </ul>
 
-<h3>⭐ Exam Tip</h3>
-<p>
-Practice numerical questions regularly. In Accountancy, understanding
-the concept is more important than memorising the answer.
-</p>
+<h3>⭐ Study Tip</h3>
+<p>Practice numerical questions regularly and understand the reason behind every debit and credit.</p>
 `,
 
 "Business Studies":`
 <h3>💼 Business Studies</h3>
+<p>Business Studies explains business activities, organisations, finance, trade and entrepreneurship.</p>
 
-<p>
-Business Studies explains business activities, forms of organisation,
-trade, commerce and management-related concepts.
-</p>
-
-<h3>Important Topics</h3>
-
+<h3>Important Chapters</h3>
 <ul>
 <li>Nature and Purpose of Business</li>
 <li>Forms of Business Organisation</li>
@@ -981,178 +916,171 @@ trade, commerce and management-related concepts.
 
 "Economics":`
 <h3>📈 Economics</h3>
+<p>Economics studies how scarce resources are used to satisfy unlimited wants.</p>
 
-<p>
-Economics studies how individuals and society use limited resources
-to satisfy unlimited wants.
-</p>
-
-<h3>Important Topics</h3>
-
+<h3>Important Areas</h3>
 <ul>
-<li>Introduction to Economics</li>
 <li>Statistics for Economics</li>
-<li>Collection of Data</li>
-<li>Organisation of Data</li>
+<li>Collection and Organisation of Data</li>
 <li>Presentation of Data</li>
 <li>Measures of Central Tendency</li>
 <li>Introduction to Microeconomics</li>
 <li>Consumer Behaviour</li>
 <li>Demand</li>
 <li>Producer Behaviour</li>
+<li>Market</li>
 </ul>
 `,
 
 "English":`
 <h3>📖 English</h3>
-
-<p>
-English preparation should focus on literature, comprehension,
-writing skills and grammar.
-</p>
-
-<h3>Important Areas</h3>
-
 <ul>
 <li>Reading Comprehension</li>
 <li>Notice Writing</li>
-<li>Advertisements</li>
+<li>Advertisement</li>
 <li>Speech</li>
 <li>Debate</li>
 <li>Hornbill</li>
 <li>Snapshots</li>
-<li>Character and theme based questions</li>
 </ul>
 `,
 
 "Hindi":`
 <h3>📝 हिन्दी</h3>
-
-<p>
-हिन्दी में साहित्य, गद्य, काव्य और लेखन कौशल पर विशेष ध्यान देना
-चाहिए।
-</p>
-
-<h3>महत्वपूर्ण भाग</h3>
+<p>हिन्दी में साहित्य, गद्य, काव्य और रचनात्मक लेखन पर ध्यान दें।</p>
 
 <ul>
 <li>आरोह</li>
 <li>वितान</li>
 <li>अपठित बोध</li>
 <li>रचनात्मक लेखन</li>
-<li>पाठ आधारित प्रश्न</li>
 <li>काव्य व्याख्या</li>
 </ul>
 `,
 
 "Physical Education":`
 <h3>🏃 Physical Education</h3>
-
-<p>
-Physical Education focuses on physical fitness, health, sports,
-wellness and a healthy lifestyle.
-</p>
-
-<h3>Important Topics</h3>
-
 <ul>
 <li>Changing Trends in Physical Education</li>
 <li>Olympic Movement</li>
 <li>Physical Fitness</li>
 <li>Yoga</li>
-<li>Physical Activity and Leadership</li>
 <li>Sports and Nutrition</li>
 <li>Anatomy and Physiology</li>
-<li>Kinesiology and Sports</li>
+<li>Kinesiology</li>
 </ul>
 `
-
 };
+
+function subject(name){
+ openModal(name,subjectData[name]);
+}
 
 
 /* NOTES */
 
-const notes = {
+const noteData={
 
 "Accounting Equation":`
 <h3>Accounting Equation</h3>
 
 <p>
-The accounting equation shows the relationship between Assets,
-Liabilities and Capital.
+The accounting equation represents the relationship between assets,
+capital and liabilities of a business.
 </p>
 
 <h3>Formula</h3>
-
 <p><strong>Assets = Capital + Liabilities</strong></p>
 
-<h3>Example</h3>
-
+<h3>Assets</h3>
 <p>
-Suppose the owner starts a business with ₹50,000 cash.
+Assets are resources owned by a business. Examples include cash,
+machinery, furniture, building, stock and debtors.
 </p>
 
+<h3>Capital</h3>
+<p>
+Capital is the amount invested by the owner in the business.
+</p>
+
+<h3>Liabilities</h3>
+<p>
+Liabilities are amounts payable by the business to outsiders, such
+as creditors and loans.
+</p>
+
+<h3>Example</h3>
+<p>
+Owner starts business with ₹50,000 cash.
+</p>
 <p>
 Assets = ₹50,000<br>
 Capital = ₹50,000<br>
 Liabilities = ₹0
 </p>
 
+<h3>Exam Point ⭐</h3>
 <p>
-Therefore:
-<br>
-₹50,000 = ₹50,000 + ₹0
-</p>
-
-<h3>Remember</h3>
-<p>
-Every business transaction affects at least two accounting elements
-and keeps the accounting equation balanced.
+Every transaction affects the accounting equation but the equation
+always remains balanced.
 </p>
 `,
 
 "Business Organisation":`
 <h3>Forms of Business Organisation</h3>
 
+<h3>Sole Proprietorship</h3>
 <p>
-A business can be organised in different forms depending upon its
-size, ownership, capital and liability.
+A business owned and controlled by one person. The owner receives
+profits and bears the business risk.
 </p>
 
-<h3>Main Forms</h3>
+<h3>Partnership</h3>
+<p>
+A partnership is formed when two or more persons agree to carry on
+business and share its profits.
+</p>
 
-<ul>
-<li><strong>Sole Proprietorship:</strong> Owned and controlled by one person.</li>
-<li><strong>Partnership:</strong> Two or more persons agree to carry on business and share profits.</li>
-<li><strong>Company:</strong> A separate legal entity formed under law.</li>
-<li><strong>Cooperative Society:</strong> Formed by people with a common interest.</li>
-</ul>
+<h3>Company</h3>
+<p>
+A company is an artificial legal person formed according to law.
+It has a separate legal identity.
+</p>
+
+<h3>Cooperative Society</h3>
+<p>
+A cooperative is a voluntary association of people who come together
+to achieve a common economic objective.
+</p>
 `,
 
 "Demand":`
 <h3>Demand</h3>
 
 <p>
-Demand refers to the quantity of a commodity that a consumer is
-willing and able to purchase at a given price during a given period.
+Demand refers to the quantity of a commodity that consumers are
+willing and able to buy at a given price during a particular period.
+</p>
+
+<h3>Law of Demand</h3>
+<p>
+Other things remaining constant, quantity demanded generally increases
+when price falls and decreases when price rises.
 </p>
 
 <h3>Factors Affecting Demand</h3>
-
 <ul>
-<li>Price of the commodity</li>
-<li>Income of consumers</li>
-<li>Price of related goods</li>
+<li>Price</li>
+<li>Income</li>
+<li>Prices of related goods</li>
 <li>Tastes and preferences</li>
-<li>Expectations about future prices</li>
+<li>Future expectations</li>
 <li>Number of consumers</li>
 </ul>
 
-<h3>Law of Demand</h3>
-
+<h3>Demand Curve</h3>
 <p>
-Other things remaining constant, quantity demanded generally falls
-when price rises and rises when price falls.
+A normal demand curve generally slopes downward from left to right.
 </p>
 `,
 
@@ -1160,43 +1088,39 @@ when price rises and rises when price falls.
 <h3>Statistics for Economics</h3>
 
 <p>
-Statistics helps economists collect, organise, present, analyse and
-interpret numerical information.
+Statistics provides methods for collecting, organising, presenting,
+analysing and interpreting numerical information.
 </p>
 
 <h3>Main Steps</h3>
-
 <ul>
 <li>Collection of Data</li>
 <li>Organisation of Data</li>
 <li>Presentation of Data</li>
-<li>Analysis of Data</li>
-<li>Interpretation of Data</li>
+<li>Analysis</li>
+<li>Interpretation</li>
 </ul>
 `,
 
-"English Writing Skills":`
+"English":`
 <h3>English Writing Skills</h3>
 
+<h3>Notice</h3>
 <p>
-Writing questions require correct format, clear expression and
-relevant content.
+A notice should contain a heading, date, relevant information,
+authority/name and should follow the prescribed word limit.
 </p>
 
-<h3>Important Formats</h3>
-
-<ul>
-<li>Notice</li>
-<li>Advertisement</li>
-<li>Speech</li>
-<li>Debate</li>
-<li>Poster</li>
-</ul>
-
-<h3>Tip</h3>
+<h3>Speech</h3>
 <p>
-Always follow the required format and stay within the prescribed word
-limit.
+A speech generally begins with an appropriate greeting and introduction,
+followed by the main points and a suitable conclusion.
+</p>
+
+<h3>Debate</h3>
+<p>
+A debate presents arguments either for or against a given topic.
+Logical points and persuasive language are important.
 </p>
 `,
 
@@ -1204,12 +1128,11 @@ limit.
 <h3>Physical Fitness</h3>
 
 <p>
-Physical fitness is the ability of a person to perform daily
-activities efficiently without excessive fatigue.
+Physical fitness is the ability to perform daily activities efficiently
+without undue fatigue.
 </p>
 
 <h3>Components</h3>
-
 <ul>
 <li>Strength</li>
 <li>Endurance</li>
@@ -1218,181 +1141,613 @@ activities efficiently without excessive fatigue.
 <li>Coordination</li>
 <li>Balance</li>
 </ul>
-`
 
+<h3>Importance</h3>
+<p>
+Regular physical activity supports fitness, performance and overall
+well-being.
+</p>
+`
 };
 
-
-/* OPEN SUBJECT */
-
-function openSubject(name){
-
-    document.getElementById("modalTitle").innerText = name;
-
-    document.getElementById("modalBody").innerHTML =
-        subjects[name] || "<p>Notes coming soon...</p>";
-
-    document.getElementById("modal").classList.add("show");
+function note(name){
+ openModal("📖 "+name,noteData[name]);
 }
-
-
-/* OPEN NOTE */
-
-function openNote(name){
-
-    document.getElementById("modalTitle").innerText =
-        "📚 " + name;
-
-    document.getElementById("modalBody").innerHTML =
-        notes[name] || "<p>Detailed note coming soon...</p>";
-
-    document.getElementById("modal").classList.add("show");
-}
-
-
-/* CLOSE */
-
-function closeModal(){
-    document.getElementById("modal").classList.remove("show");
-}
-
-document.getElementById("modal").addEventListener("click",function(e){
-
-    if(e.target === this){
-        closeModal();
-    }
-
-});
 
 
 /* SEARCH */
 
-function searchEverything(){
+function searchAll(){
 
-    const value =
-        document.getElementById("search")
-        .value
-        .toLowerCase()
-        .trim();
+ let q=document.getElementById("search").value.toLowerCase();
 
-    const items =
-        document.querySelectorAll(".subject,.note-card,.question");
-
-    items.forEach(item => {
-
-        const text =
-            item.innerText.toLowerCase();
-
-        item.style.display =
-            text.includes(value) ? "" : "none";
-
-    });
-
+ document.querySelectorAll(".searchable").forEach(x=>{
+  x.style.display=x.innerText.toLowerCase().includes(q)?"":"none";
+ });
 }
 
 
-/* MINI GAME */
+/* CALCULATOR */
 
-function startGame(){
+function calculator(){
 
-    document.getElementById("modalTitle").innerText =
-        "🎮 Study Break Game";
+ openModal("🧮 Calculator",`
+ <input class="input" id="calc" placeholder="Example: 25*5+10">
+ <button class="btn" onclick="calculate()">Calculate</button>
+ <h3 id="calcResult"></h3>
+ `);
+}
 
-    document.getElementById("modalBody").innerHTML = `
+function calculate(){
+ let value=document.getElementById("calc").value;
 
-    <div style="text-align:center">
+ try{
+  let result=Function('"use strict";return ('+value+')')();
+  document.getElementById("calcResult").innerText="Answer = "+result;
+ }catch{
+  document.getElementById("calcResult").innerText="Invalid calculation";
+ }
+}
 
-        <h3>⚡ Reaction Challenge</h3>
 
-        <p>
-        Wait for the button to turn green, then click it as quickly
-        as possible!
-        </p>
+/* PERCENTAGE */
 
-        <button
-        id="reactionBtn"
-        class="btn"
-        style="margin-top:20px"
-        onclick="reactionGame()">
-        Start
-        </button>
+function percentage(){
 
-        <h2 id="score"
-        style="margin-top:25px;color:#00eaff">
-        Ready?
-        </h2>
+ openModal("📊 Percentage Calculator",`
+ <input class="input" id="p1" type="number" placeholder="Obtained">
+ <input class="input" id="p2" type="number" placeholder="Total">
+ <button class="btn" onclick="calcPercent()">Calculate</button>
+ <h3 id="presult"></h3>
+ `);
+}
 
-    </div>
+function calcPercent(){
 
-    `;
+ let a=Number(document.getElementById("p1").value);
+ let b=Number(document.getElementById("p2").value);
 
-    document.getElementById("modal").classList.add("show");
+ document.getElementById("presult").innerText=
+ b?((a/b)*100).toFixed(2)+"%":"Enter valid values";
+}
+
+
+/* MARKS */
+
+function marks(){
+
+ openModal("🎯 Marks Calculator",`
+ <p>Enter marks separated by commas.</p>
+ <input class="input" id="marks" placeholder="78,85,91,76,88">
+ <input class="input" id="maxmarks" value="100" type="number">
+ <button class="btn" onclick="calcMarks()">Calculate</button>
+ <h3 id="mresult"></h3>
+ `);
+}
+
+function calcMarks(){
+
+ let arr=document.getElementById("marks").value
+ .split(",")
+ .map(Number)
+ .filter(x=>!isNaN(x));
+
+ let max=Number(document.getElementById("maxmarks").value)*arr.length;
+ let total=arr.reduce((a,b)=>a+b,0);
+
+ document.getElementById("mresult").innerHTML=
+ "Total: "+total+"<br>Percentage: "+((total/max)*100).toFixed(2)+"%";
+}
+
+
+/* POMODORO */
+
+let timerInterval;
+
+function timer(){
+
+ openModal("⏱️ Pomodoro Timer",`
+ <div style="text-align:center">
+ <h1 id="timeDisplay" style="font-size:55px;color:cyan">25:00</h1>
+ <button class="btn" onclick="startTimer()">Start</button>
+ <button class="btn secondary" onclick="resetTimer()">Reset</button>
+ </div>
+ `);
+}
+
+let seconds=1500;
+
+function startTimer(){
+
+ clearInterval(timerInterval);
+
+ timerInterval=setInterval(()=>{
+
+  if(seconds<=0){
+   clearInterval(timerInterval);
+   alert("🎉 Pomodoro complete!");
+   return;
+  }
+
+  seconds--;
+
+  let m=Math.floor(seconds/60);
+  let s=seconds%60;
+
+  let el=document.getElementById("timeDisplay");
+
+  if(el)
+   el.innerText=
+   String(m).padStart(2,"0")+":"+
+   String(s).padStart(2,"0");
+
+ },1000);
+}
+
+function resetTimer(){
+
+ clearInterval(timerInterval);
+ seconds=1500;
+
+ let el=document.getElementById("timeDisplay");
+
+ if(el)el.innerText="25:00";
+}
+
+
+/* QUICK NOTES */
+
+function quickNotes(){
+
+ openModal("📝 Quick Notes",`
+ <textarea class="input" id="quick"
+ rows="12"
+ placeholder="Write your study notes here..."></textarea>
+
+ <button class="btn" onclick="saveQuick()">Save</button>
+ <button class="btn secondary" onclick="loadQuick()">Load</button>
+ `);
+}
+
+function saveQuick(){
+ localStorage.setItem(
+  "studyverseNotes",
+  document.getElementById("quick").value
+ );
+ alert("Notes saved!");
+}
+
+function loadQuick(){
+ document.getElementById("quick").value=
+ localStorage.getItem("studyverseNotes")||"";
+}
+
+
+/* TODO */
+
+function todo(){
+
+ openModal("✅ To-Do List",`
+ <input class="input" id="task" placeholder="Enter task">
+ <button class="btn" onclick="addTask()">Add Task</button>
+ <div id="taskList" style="margin-top:20px"></div>
+ `);
+
+ loadTasks();
+}
+
+function addTask(){
+
+ let input=document.getElementById("task");
+
+ if(!input.value.trim())return;
+
+ let tasks=
+ JSON.parse(localStorage.getItem("studyTasks")||"[]");
+
+ tasks.push(input.value);
+
+ localStorage.setItem("studyTasks",JSON.stringify(tasks));
+
+ input.value="";
+ loadTasks();
+}
+
+function loadTasks(){
+
+ let box=document.getElementById("taskList");
+ if(!box)return;
+
+ let tasks=
+ JSON.parse(localStorage.getItem("studyTasks")||"[]");
+
+ box.innerHTML=tasks.map((t,i)=>`
+ <div style="
+ padding:12px;
+ margin:7px 0;
+ background:#151520;
+ border-radius:10px;
+ display:flex;
+ justify-content:space-between">
+ <span>☐ ${t}</span>
+ <button
+ onclick="deleteTask(${i})"
+ style="background:none;border:0;color:#ff008c;cursor:pointer">
+ ×
+ </button>
+ </div>
+ `).join("");
+}
+
+function deleteTask(i){
+
+ let tasks=
+ JSON.parse(localStorage.getItem("studyTasks")||"[]");
+
+ tasks.splice(i,1);
+
+ localStorage.setItem("studyTasks",JSON.stringify(tasks));
+
+ loadTasks();
+}
+
+
+/* WORD COUNTER */
+
+function wordCounter(){
+
+ openModal("🔤 Word Counter",`
+ <textarea
+ class="input"
+ id="words"
+ rows="12"
+ placeholder="Paste or type your text..."
+ oninput="countWords()"></textarea>
+
+ <h3 id="wordResult">Words: 0 | Characters: 0</h3>
+ `);
+}
+
+function countWords(){
+
+ let text=document.getElementById("words").value;
+
+ let words=text.trim()?
+ text.trim().split(/\\s+/).length:0;
+
+ document.getElementById("wordResult").innerText=
+ "Words: "+words+" | Characters: "+text.length;
+}
+
+
+/* FOCUS MODE */
+
+function focusMode(){
+
+ document.body.style.background="#000";
+
+ openModal("🎯 Focus Mode",`
+ <div style="text-align:center">
+ <h3>FOCUS MODE ACTIVATED</h3>
+ <p>Close distractions and concentrate on your study session.</p>
+ <button class="btn" onclick="closeModal()">Start Studying</button>
+ </div>
+ `);
 }
 
 
 /* REACTION GAME */
 
-let gameStarted=false;
-let startTime=0;
-
 function reactionGame(){
 
-    const btn =
-        document.getElementById("reactionBtn");
+ openModal("⚡ Reaction Game",`
+ <div style="text-align:center">
+ <p>Wait until the button changes, then click as fast as possible.</p>
+ <button id="reactionBtn"
+ class="btn"
+ style="margin-top:25px"
+ onclick="reactionClick()">START</button>
 
-    const score =
-        document.getElementById("score");
+ <h2 id="reactionScore" style="margin-top:25px;color:cyan">
+ Ready?
+ </h2>
+ </div>
+ `);
+}
 
-    if(!gameStarted){
+let reactionStart=0;
+let reactionWaiting=false;
 
-        gameStarted=true;
+function reactionClick(){
 
-        btn.innerText="WAIT...";
+ let btn=document.getElementById("reactionBtn");
 
-        btn.disabled=true;
+ if(!reactionWaiting){
 
-        const delay =
-            Math.floor(Math.random()*3000)+1500;
+  btn.innerText="WAIT...";
+  btn.disabled=true;
 
-        setTimeout(()=>{
+  setTimeout(()=>{
 
-            btn.disabled=false;
-            btn.innerText="CLICK!";
-            btn.style.background=
-                "linear-gradient(90deg,#00ff88,#00c8ff)";
+   btn.disabled=false;
+   btn.innerText="CLICK!";
+   reactionStart=Date.now();
+   reactionWaiting=true;
 
-            startTime=Date.now();
+  },Math.random()*3000+1000);
 
-        },delay);
+ }else{
 
-    }else{
+  let score=Date.now()-reactionStart;
 
-        const reaction =
-            Date.now()-startTime;
+  document.getElementById("reactionScore").innerText=
+  "⚡ Reaction Time: "+score+" ms";
 
-        score.innerText =
-            "⚡ " + reaction + " ms";
-
-        btn.innerText="PLAY AGAIN";
-        btn.style.background=
-            "linear-gradient(90deg,#00a8ff,#8b00ff)";
-
-        gameStarted=false;
-
-    }
-
+  btn.innerText="PLAY AGAIN";
+  reactionWaiting=false;
+ }
 }
 
 
-/* ESC CLOSE */
+/* CAR GAME */
 
-document.addEventListener("keydown",function(e){
+function carGame(){
 
-    if(e.key==="Escape"){
-        closeModal();
-    }
+ openModal("🚗 Car Racing",`
+ <div class="score">Use ← → keys</div>
 
+ <div class="gamearea" id="carArea">
+ <div class="car" id="car">🚗</div>
+ </div>
+
+ <div style="text-align:center;margin-top:15px">
+ <button class="btn" onclick="startCar()">Start Race</button>
+ </div>
+ `);
+}
+
+let carPos=50;
+let carRunning=false;
+
+document.addEventListener("keydown",e=>{
+
+ if(!carRunning)return;
+
+ if(e.key==="ArrowLeft")
+  carPos=Math.max(8,carPos-5);
+
+ if(e.key==="ArrowRight")
+  carPos=Math.min(92,carPos+5);
+
+ let car=document.getElementById("car");
+
+ if(car)car.style.left=carPos+"%";
 });
+
+function startCar(){
+
+ let area=document.getElementById("carArea");
+ let car=document.getElementById("car");
+
+ if(!area||!car)return;
+
+ carRunning=true;
+ carPos=50;
+ car.style.left="50%";
+
+ let score=0;
+
+ let interval=setInterval(()=>{
+
+  if(!carRunning){
+   clearInterval(interval);
+   return;
+  }
+
+  let obs=document.createElement("div");
+
+  obs.className="obstacle";
+  obs.innerText="🧱";
+  obs.style.left=Math.random()*90+"%";
+  obs.style.top="-40px";
+
+  area.appendChild(obs);
+
+  let fall=setInterval(()=>{
+
+   let top=parseInt(obs.style.top||"-40");
+   top+=5;
+   obs.style.top=top+"px";
+
+   let obsLeft=parseFloat(obs.style.left);
+   let carLeft=carPos;
+
+   if(top>330 &&
+      Math.abs(obsLeft-carLeft)<10){
+
+    carRunning=false;
+    clearInterval(fall);
+    obs.remove();
+
+    alert("💥 Game Over! Score: "+score);
+   }
+
+   if(top>420){
+
+    clearInterval(fall);
+    obs.remove();
+    score++;
+   }
+
+  },30);
+
+ },900);
+}
+
+
+/* AIRSHIP GAME */
+
+function airshipGame(){
+
+ openModal("🚀 Airship Game",`
+ <div class="score">Use ↑ ↓ keys</div>
+
+ <div class="gamearea" id="airArea">
+ <div id="airship"
+ style="position:absolute;left:70px;top:180px;font-size:40px">
+ 🚀
+ </div>
+ </div>
+
+ <div style="text-align:center;margin-top:15px">
+ <button class="btn" onclick="startAir()">Start Flight</button>
+ </div>
+ `);
+}
+
+let airRunning=false;
+let airY=180;
+
+document.addEventListener("keydown",e=>{
+
+ if(!airRunning)return;
+
+ if(e.key==="ArrowUp")
+  airY=Math.max(10,airY-12);
+
+ if(e.key==="ArrowDown")
+  airY=Math.min(350,airY+12);
+
+ let air=document.getElementById("airship");
+
+ if(air)air.style.top=airY+"px";
+});
+
+function startAir(){
+
+ let area=document.getElementById("airArea");
+ let air=document.getElementById("airship");
+
+ if(!area||!air)return;
+
+ airRunning=true;
+ airY=180;
+
+ let score=0;
+
+ let interval=setInterval(()=>{
+
+  if(!airRunning){
+   clearInterval(interval);
+   return;
+  }
+
+  let obs=document.createElement("div");
+
+  obs.innerText="☁️";
+  obs.style.position="absolute";
+  obs.style.right="-50px";
+  obs.style.top=Math.random()*330+"px";
+  obs.style.fontSize="40px";
+
+  area.appendChild(obs);
+
+  let move=setInterval(()=>{
+
+   let right=parseInt(obs.style.right||"-50");
+   right+=5;
+   obs.style.right=right+"px";
+
+   let obstacleY=parseInt(obs.style.top);
+
+   if(right>area.clientWidth-130 &&
+      Math.abs(obstacleY-airY)<45){
+
+    airRunning=false;
+    clearInterval(move);
+    obs.remove();
+
+    alert("💥 Airship crashed! Score: "+score);
+   }
+
+   if(right>area.clientWidth){
+
+    clearInterval(move);
+    obs.remove();
+    score++;
+   }
+
+  },30);
+
+ },1000);
+}
+
+
+/* SHOOTING GAME */
+
+function shootingGame(){
+
+ openModal("🔫 Shooting Game",`
+ <div class="score">
+ Targets Hit: <span id="hits">0</span>
+ </div>
+
+ <div class="gamearea" id="shootArea"
+ style="cursor:crosshair">
+ </div>
+
+ <div style="text-align:center;margin-top:15px">
+ <button class="btn" onclick="startShooting()">Start Shooting</button>
+ </div>
+ `);
+}
+
+let shootInterval;
+
+function startShooting(){
+
+ clearInterval(shootInterval);
+
+ let area=document.getElementById("shootArea");
+ let hits=document.getElementById("hits");
+
+ if(!area)return;
+
+ let score=0;
+
+ area.innerHTML="";
+
+ shootInterval=setInterval(()=>{
+
+  let target=document.createElement("div");
+
+  target.innerText="🎯";
+  target.style.position="absolute";
+  target.style.fontSize="38px";
+  target.style.left=Math.random()*85+"%";
+  target.style.top=Math.random()*80+"%";
+  target.style.cursor="pointer";
+
+  target.onclick=()=>{
+
+   score++;
+   hits.innerText=score;
+   target.remove();
+  };
+
+  area.appendChild(target);
+
+  setTimeout(()=>{
+   if(target.parentElement)target.remove();
+  },1200);
+
+ },700);
+
+ setTimeout(()=>{
+  clearInterval(shootInterval);
+  alert("🎯 Game Over! Targets Hit: "+score);
+ },20000);
+}
 
 </script>
 
