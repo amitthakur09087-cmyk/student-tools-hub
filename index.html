@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Student Tools Hub — Free Student Calculators</title>
+<meta name="description" content="Free online calculators and study tools for students: percentage, CGPA, age, simple interest, study time and more.">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#182033}
+header{background:#182033;color:white;padding:28px 18px;text-align:center}
+header h1{margin:0 0 8px;font-size:32px}header p{margin:0;color:#cbd3e3}
+nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px;background:white;position:sticky;top:0;z-index:5;box-shadow:0 2px 10px #00000010}
+nav button{border:0;background:#eef2f8;padding:9px 14px;border-radius:20px;cursor:pointer}
+.container{max-width:1050px;margin:auto;padding:22px 16px}
+.hero{background:white;border-radius:18px;padding:28px;margin-bottom:20px;box-shadow:0 5px 20px #00000008}
+.hero h2{margin-top:0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:white;border-radius:16px;padding:20px;box-shadow:0 5px 20px #00000008}
+.card h3{margin-top:0}.card p{color:#657084}.card button,.primary{border:0;background:#315efb;color:white;padding:11px 16px;border-radius:10px;cursor:pointer}
+.tool{display:none;margin-top:20px}.tool.active{display:block}
+label{display:block;font-weight:bold;margin:12px 0 6px}input{width:100%;padding:11px;border:1px solid #ccd3df;border-radius:9px;font-size:16px}
+.result{margin-top:14px;padding:14px;background:#eef7ee;border-radius:10px;font-weight:bold}
+.note{color:#667085;font-size:14px}.formula{background:#f0f3f8;padding:12px;border-radius:9px;margin-top:10px}
+footer{text-align:center;padding:30px;color:#667085}
+</style>
+</head>
+<body>
+<header>
+<h1>Student Tools Hub</h1>
+<p>Free calculators and simple study tools for students</p>
+</header>
+
+<nav>
+<button onclick="showTool('home')">Home</button>
+<button onclick="showTool('percentage')">Percentage</button>
+<button onclick="showTool('cgpa')">CGPA</button>
+<button onclick="showTool('age')">Age</button>
+<button onclick="showTool('interest')">Simple Interest</button>
+<button onclick="showTool('study')">Study Time</button>
+</nav>
+
+<main class="container">
+<section id="home" class="tool active">
+<div class="hero">
+<h2>Free Student Calculators</h2>
+<p>Quick, simple and mobile-friendly tools for everyday student calculations.</p>
+</div>
+<div class="grid">
+<div class="card"><h3>📊 Percentage Calculator</h3><p>Find percentage from obtained and total marks.</p><button onclick="showTool('percentage')">Open Tool</button></div>
+<div class="card"><h3>🎓 CGPA Calculator</h3><p>Convert CGPA into an approximate percentage.</p><button onclick="showTool('cgpa')">Open Tool</button></div>
+<div class="card"><h3>🎂 Age Calculator</h3><p>Calculate your age from your date of birth.</p><button onclick="showTool('age')">Open Tool</button></div>
+<div class="card"><h3>💰 Simple Interest</h3><p>Calculate simple interest and total amount.</p><button onclick="showTool('interest')">Open Tool</button></div>
+<div class="card"><h3>⏱️ Study Time Calculator</h3><p>Split your available time into study sessions.</p><button onclick="showTool('study')">Open Tool</button></div>
+</div>
+</section>
+
+<section id="percentage" class="tool card">
+<h2>📊 Percentage Calculator</h2>
+<label>Obtained Marks</label><input id="obtained" type="number" min="0">
+<label>Total Marks</label><input id="total" type="number" min="1">
+<button class="primary" onclick="percentage()">Calculate</button>
+<div id="percentageResult" class="result"></div>
+<div class="formula">Percentage = (Obtained Marks ÷ Total Marks) × 100</div>
+</section>
+
+<section id="cgpa" class="tool card">
+<h2>🎓 CGPA Calculator</h2>
+<label>CGPA</label><input id="cgpaInput" type="number" min="0" max="10" step="0.01">
+<button class="primary" onclick="cgpa()">Calculate</button>
+<div id="cgpaResult" class="result"></div>
+<p class="note">This uses the common approximate formula CGPA × 9.5. Check your board/school's official conversion rules where applicable.</p>
+</section>
+
+<section id="age" class="tool card">
+<h2>🎂 Age Calculator</h2>
+<label>Date of Birth</label><input id="dob" type="date">
+<button class="primary" onclick="age()">Calculate</button>
+<div id="ageResult" class="result"></div>
+</section>
+
+<section id="interest" class="tool card">
+<h2>💰 Simple Interest Calculator</h2>
+<label>Principal (₹)</label><input id="principal" type="number" min="0">
+<label>Rate (% per year)</label><input id="rate" type="number" min="0" step="0.01">
+<label>Time (years)</label><input id="years" type="number" min="0" step="0.01">
+<button class="primary" onclick="interest()">Calculate</button>
+<div id="interestResult" class="result"></div>
+<div class="formula">SI = (P × R × T) ÷ 100</div>
+</section>
+
+<section id="study" class="tool card">
+<h2>⏱️ Study Time Calculator</h2>
+<label>Total available study time (minutes)</label><input id="studyMinutes" type="number" min="1">
+<label>Number of sessions</label><input id="sessions" type="number" min="1">
+<button class="primary" onclick="study()">Calculate</button>
+<div id="studyResult" class="result"></div>
+<p class="note">This is a simple equal-split planner. Add breaks separately according to your routine.</p>
+</section>
+</main>
+
+<footer>Student Tools Hub • Free student tools</footer>
+
+<script>
+function showTool(id){
+ document.querySelectorAll('.tool').forEach(x=>x.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function percentage(){
+ const a=+document.getElementById('obtained').value,b=+document.getElementById('total').value;
+ document.getElementById('percentageResult').textContent=b>0 ? `Percentage = ${(a/b*100).toFixed(2)}%` : 'Enter valid marks.';
+}
+function cgpa(){
+ const c=+document.getElementById('cgpaInput').value;
+ document.getElementById('cgpaResult').textContent=(c>=0&&c<=10)?`Approx. Percentage = ${(c*9.5).toFixed(2)}%`:'Enter CGPA from 0 to 10.';
+}
+function age(){
+ const d=new Date(document.getElementById('dob').value), now=new Date();
+ if(isNaN(d)){document.getElementById('ageResult').textContent='Enter your date of birth.';return}
+ let y=now.getFullYear()-d.getFullYear(),m=now.getMonth()-d.getMonth(),day=now.getDate()-d.getDate();
+ if(day<0){m--;day+=new Date(now.getFullYear(),now.getMonth(),0).getDate()}
+ if(m<0){y--;m+=12}
+ document.getElementById('ageResult').textContent=`Age = ${y} years, ${m} months, ${day} days`;
+}
+function interest(){
+ const p=+document.getElementById('principal').value,r=+document.getElementById('rate').value,t=+document.getElementById('years').value;
+ const si=p*r*t/100;
+ document.getElementById('interestResult').textContent=`Simple Interest = ₹${si.toFixed(2)} | Total Amount = ₹${(p+si).toFixed(2)}`;
+}
+function study(){
+ const m=+document.getElementById('studyMinutes').value,s=+document.getElementById('sessions').value;
+ document.getElementById('studyResult').textContent=s>0&&m>0?`Each session = ${(m/s).toFixed(0)} minutes`:'Enter valid values.';
+}
+</script>
+</body>
+</html>
