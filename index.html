@@ -6,331 +6,553 @@
 <title>StudyVerse ⚡ | Class 11 CBSE</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
- --bg:#05050a;
- --card:#0d0d16;
- --card2:#11111d;
- --text:#fff;
- --muted:#9da0ad;
+ --bg:#04050a;
+ --panel:#0b0e17;
+ --panel2:#101522;
+ --text:#f7f9ff;
+ --muted:#9299aa;
  --cyan:#00eaff;
- --purple:#9b00ff;
- --pink:#ff008c;
- --green:#00ff88;
+ --purple:#8b5cff;
+ --pink:#ff1593;
+ --green:#00ff91;
+ --orange:#ff9d00;
+ --line:rgba(255,255,255,.09);
 }
-
 html{scroll-behavior:smooth}
-
 body{
  background:
- radial-gradient(circle at 10% 10%,rgba(0,234,255,.09),transparent 25%),
- radial-gradient(circle at 90% 15%,rgba(155,0,255,.1),transparent 25%),
+ radial-gradient(circle at 8% 10%,rgba(0,234,255,.08),transparent 25%),
+ radial-gradient(circle at 92% 18%,rgba(139,92,255,.09),transparent 27%),
+ radial-gradient(circle at 50% 90%,rgba(255,21,147,.05),transparent 25%),
  var(--bg);
  color:var(--text);
+ font-family:Inter,Segoe UI,Arial,sans-serif;
  min-height:100vh;
  overflow-x:hidden;
 }
+button,input,textarea,select{font:inherit}
 
-/* RGB LIGHTS */
+/* RGB EDGE */
 .rgb{
  position:fixed;
  top:0;
+ bottom:0;
  width:4px;
- height:100vh;
  z-index:9999;
- background:linear-gradient(
-  180deg,
-  red,magenta,blue,cyan,lime,yellow,red
- );
- background-size:100% 500%;
- animation:rgb 4s linear infinite;
- box-shadow:0 0 12px cyan,0 0 30px magenta;
+ background:linear-gradient(180deg,#00eaff,#8b5cff,#ff1593,#00ff91,#00eaff);
+ background-size:100% 300%;
+ animation:rgbMove 4s linear infinite;
+ box-shadow:0 0 12px #00eaff,0 0 28px #8b5cff;
 }
-.rgb.left{left:0}
-.rgb.right{right:0}
-
-@keyframes rgb{
+.rgb.left{left:0}.rgb.right{right:0}
+@keyframes rgbMove{
  0%{background-position:0 0}
- 100%{background-position:0 500%}
+ 100%{background-position:0 300%}
 }
 
-/* HEADER */
+/* NAV */
 header{
  position:sticky;
  top:0;
- z-index:500;
- background:rgba(5,5,10,.82);
+ z-index:2000;
+ background:rgba(4,5,10,.78);
  backdrop-filter:blur(18px);
- border-bottom:1px solid rgba(255,255,255,.08);
+ border-bottom:1px solid var(--line);
 }
-
 nav{
- max-width:1250px;
+ max-width:1350px;
  margin:auto;
- padding:14px 25px;
+ min-height:72px;
+ padding:12px 25px;
  display:flex;
  align-items:center;
  justify-content:space-between;
- gap:20px;
+ gap:18px;
 }
-
 .logo{
- font-size:27px;
+ font-size:25px;
  font-weight:900;
+ white-space:nowrap;
 }
-.logo span{color:var(--cyan);text-shadow:0 0 15px cyan}
-
-.navlinks{
+.logo b{
+ color:var(--cyan);
+ text-shadow:0 0 18px rgba(0,234,255,.8);
+}
+.nav{
  display:flex;
  flex-wrap:wrap;
- gap:6px;
- justify-content:center;
+ gap:5px;
+ justify-content:flex-end;
 }
-
-.navlinks button{
- border:0;
+.nav button{
  background:transparent;
- color:#aaa;
- padding:10px 13px;
- border-radius:10px;
+ color:#9da3b2;
+ border:0;
+ padding:9px 11px;
+ border-radius:9px;
  cursor:pointer;
- font-weight:bold;
+ font-weight:700;
 }
-.navlinks button:hover{
- color:white;
- background:rgba(0,234,255,.1);
+.nav button:hover{
+ color:#fff;
+ background:rgba(0,234,255,.08);
 }
 
 /* HERO */
 .hero{
- max-width:1250px;
+ max-width:1350px;
  margin:auto;
- padding:70px 25px 40px;
+ min-height:620px;
+ padding:75px 25px 55px;
  display:grid;
- grid-template-columns:1.3fr .7fr;
- gap:30px;
+ grid-template-columns:1.25fr .75fr;
+ gap:40px;
  align-items:center;
 }
-
-.badge{
- display:inline-block;
- padding:8px 14px;
+.pill{
+ display:inline-flex;
+ padding:8px 13px;
+ border:1px solid rgba(0,234,255,.25);
  border-radius:30px;
- color:var(--cyan);
- border:1px solid rgba(0,234,255,.3);
  background:rgba(0,234,255,.05);
- font-size:13px;
+ color:var(--cyan);
+ font-size:12px;
+ font-weight:800;
+ letter-spacing:.6px;
  margin-bottom:20px;
 }
-
 .hero h1{
- font-size:clamp(45px,6vw,76px);
- line-height:.95;
- margin-bottom:20px;
+ font-size:clamp(48px,7vw,88px);
+ line-height:.9;
+ letter-spacing:-4px;
 }
 .hero h1 span{
- background:linear-gradient(90deg,cyan,#9b00ff,#ff008c);
+ background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
  -webkit-background-clip:text;
  color:transparent;
 }
-
 .hero p{
- max-width:650px;
  color:var(--muted);
- line-height:1.7;
+ max-width:680px;
  font-size:17px;
-}
-
-.buttons{
- display:flex;
- flex-wrap:wrap;
- gap:12px;
+ line-height:1.75;
  margin-top:25px;
 }
-
+.actions{
+ display:flex;
+ gap:12px;
+ flex-wrap:wrap;
+ margin-top:28px;
+}
 .btn{
  border:0;
- padding:13px 20px;
  border-radius:12px;
- color:white;
- font-weight:bold;
+ padding:13px 19px;
+ color:#fff;
+ background:linear-gradient(90deg,#009dff,#7c42ff);
+ font-weight:800;
  cursor:pointer;
- background:linear-gradient(90deg,#00a8ff,#8b00ff);
- box-shadow:0 0 20px rgba(0,200,255,.2);
- transition:.25s;
+ transition:.2s;
 }
 .btn:hover{
  transform:translateY(-3px);
- box-shadow:0 0 30px rgba(0,234,255,.35);
+ box-shadow:0 0 25px rgba(0,234,255,.2);
 }
-.btn.secondary{
- background:#12121d;
- border:1px solid rgba(255,255,255,.1);
+.btn.dark{
+ background:#111621;
+ border:1px solid var(--line);
+}
+.btn.green{
+ background:linear-gradient(90deg,#00aa70,#00d8b5);
 }
 
 /* DASHBOARD */
 .dashboard{
- background:linear-gradient(145deg,#11111c,#08080e);
- border:1px solid rgba(255,255,255,.09);
- border-radius:25px;
- padding:25px;
- box-shadow:0 20px 60px #000;
+ background:
+ linear-gradient(145deg,rgba(16,21,34,.95),rgba(7,9,15,.95));
+ border:1px solid var(--line);
+ border-radius:26px;
+ padding:22px;
+ box-shadow:0 30px 80px rgba(0,0,0,.45);
 }
-
-.dashboard h3{margin-bottom:18px}
-
-.stat{
+.dashTop{
  display:flex;
  justify-content:space-between;
  align-items:center;
- padding:15px;
- margin-bottom:10px;
+ margin-bottom:18px;
+}
+.live{
+ color:var(--green);
+ font-size:11px;
+ font-weight:900;
+}
+.live i{
+ display:inline-block;
+ width:7px;
+ height:7px;
+ border-radius:50%;
+ background:var(--green);
+ box-shadow:0 0 12px var(--green);
+ margin-right:5px;
+}
+.stats{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+}
+.stat{
+ padding:18px;
  background:rgba(255,255,255,.035);
- border-radius:13px;
+ border:1px solid rgba(255,255,255,.05);
+ border-radius:15px;
+}
+.stat strong{
+ display:block;
+ font-size:25px;
+ color:var(--cyan);
 }
 .stat small{color:var(--muted)}
-.stat strong:last-child{color:var(--cyan)}
+.progress{
+ margin-top:15px;
+}
+.progressLine{
+ height:9px;
+ background:#171c27;
+ border-radius:10px;
+ overflow:hidden;
+}
+.progressLine span{
+ display:block;
+ width:68%;
+ height:100%;
+ background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+ box-shadow:0 0 15px rgba(0,234,255,.35);
+}
 
 /* SEARCH */
-.searchbox{
- max-width:1250px;
+.searchWrap{
+ max-width:1350px;
+ padding:0 25px;
  margin:auto;
- padding:0 25px 20px;
 }
 .search{
  width:100%;
- padding:17px 20px;
+ padding:16px 18px;
  border-radius:15px;
+ border:1px solid var(--line);
+ background:#0a0d15;
+ color:#fff;
  outline:none;
- border:1px solid rgba(255,255,255,.1);
- background:#0d0d16;
- color:white;
- font-size:15px;
 }
 .search:focus{
- border-color:cyan;
- box-shadow:0 0 20px rgba(0,234,255,.12);
+ border-color:rgba(0,234,255,.5);
+ box-shadow:0 0 20px rgba(0,234,255,.08);
 }
 
-/* SECTION */
+/* SECTIONS */
 .section{
- max-width:1250px;
+ max-width:1350px;
  margin:auto;
- padding:45px 25px;
+ padding:55px 25px;
 }
-.title{
+.sectionTitle{
  margin-bottom:25px;
 }
-.title h2{font-size:31px}
-.title p{color:var(--muted);margin-top:7px}
+.sectionTitle h2{
+ font-size:32px;
+}
+.sectionTitle p{
+ color:var(--muted);
+ margin-top:7px;
+}
 
-/* SUBJECTS */
+/* CARDS */
 .grid{
  display:grid;
  grid-template-columns:repeat(3,1fr);
- gap:17px;
+ gap:16px;
 }
-
 .card{
- background:linear-gradient(145deg,#11111c,#09090f);
- border:1px solid rgba(255,255,255,.08);
+ background:linear-gradient(145deg,#0e121d,#090c13);
+ border:1px solid var(--line);
  border-radius:20px;
- padding:22px;
- transition:.3s;
+ padding:21px;
+ transition:.25s;
 }
-
 .card:hover{
  transform:translateY(-5px);
- border-color:rgba(0,234,255,.3);
- box-shadow:0 0 30px rgba(0,234,255,.08);
+ border-color:rgba(0,234,255,.25);
+ box-shadow:0 15px 45px rgba(0,0,0,.25);
 }
-
 .subject{
+ min-height:195px;
  cursor:pointer;
- min-height:185px;
  position:relative;
  overflow:hidden;
 }
 .subject:after{
  content:"";
  position:absolute;
- width:100px;
- height:100px;
+ width:120px;
+ height:120px;
+ right:-50px;
+ bottom:-50px;
  border-radius:50%;
- right:-35px;
- bottom:-35px;
  background:var(--glow);
  filter:blur(45px);
  opacity:.35;
 }
-
 .icon{
  width:48px;
  height:48px;
- border-radius:14px;
- background:rgba(255,255,255,.06);
  display:flex;
  align-items:center;
  justify-content:center;
+ border-radius:14px;
+ background:rgba(255,255,255,.055);
  font-size:23px;
- margin-bottom:18px;
+ margin-bottom:17px;
 }
-
-.card h3{margin-bottom:9px}
+.card h3{margin-bottom:8px}
 .card p{
  color:var(--muted);
- line-height:1.6;
+ line-height:1.65;
  font-size:14px;
 }
 
-/* NOTES */
-.note{
- min-height:210px;
+/* CHAPTERS */
+.chapterGrid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:14px;
 }
-.note button{
- margin-top:17px;
- border:0;
- background:transparent;
- color:cyan;
+.chapter{
  cursor:pointer;
- font-weight:bold;
+ min-height:150px;
+}
+.tag{
+ display:inline-block;
+ font-size:10px;
+ color:var(--cyan);
+ border:1px solid rgba(0,234,255,.2);
+ padding:5px 8px;
+ border-radius:20px;
+ margin-bottom:12px;
+}
+.read{
+ display:inline-block;
+ color:var(--cyan);
+ margin-top:14px;
+ font-size:12px;
+ font-weight:800;
 }
 
 /* TOOLS */
-.tools{
+.toolGrid{
  display:grid;
  grid-template-columns:repeat(4,1fr);
  gap:15px;
 }
 .tool{
- cursor:pointer;
  text-align:center;
+ cursor:pointer;
  padding:25px 15px;
 }
-.tool .icon{
- margin:auto auto 15px;
-}
+.tool .icon{margin:0 auto 14px}
 
 /* QUESTIONS */
-.questions{
+.questionGrid{
  display:grid;
  grid-template-columns:1fr 1fr;
  gap:15px;
 }
 .question span{
- color:cyan;
- font-size:11px;
- font-weight:bold;
+ color:var(--cyan);
+ font-size:10px;
+ font-weight:900;
 }
 .question h3{
  margin-top:9px;
- line-height:1.5;
  font-size:16px;
+ line-height:1.5;
+}
+
+/* AI */
+.ai{
+ border:1px solid rgba(0,234,255,.18);
+ border-radius:25px;
+ padding:20px;
+ background:
+ radial-gradient(circle at 15% 15%,rgba(0,234,255,.07),transparent 25%),
+ radial-gradient(circle at 85% 80%,rgba(139,92,255,.08),transparent 30%),
+ #080b12;
+ box-shadow:0 20px 70px rgba(0,0,0,.35);
+}
+.aiHeader{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:15px;
+ padding-bottom:18px;
+ border-bottom:1px solid var(--line);
+}
+.aiBrand{
+ display:flex;
+ gap:13px;
+ align-items:center;
+}
+.aiLogo{
+ width:52px;
+ height:52px;
+ border-radius:16px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:27px;
+ background:#101827;
+ border:1px solid rgba(0,234,255,.3);
+ box-shadow:0 0 25px rgba(0,234,255,.1);
+}
+.aiBrand p{
+ color:var(--muted);
+ font-size:13px;
+ margin-top:3px;
+}
+.online{
+ color:var(--green);
+ font-size:11px;
+ font-weight:900;
+}
+.online:before{
+ content:"";
+ display:inline-block;
+ width:7px;
+ height:7px;
+ border-radius:50%;
+ background:var(--green);
+ box-shadow:0 0 10px var(--green);
+ margin-right:6px;
+}
+.aiControls{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+ margin:16px 0 10px;
+}
+.aiControls input,.aiControls select{
+ width:100%;
+ padding:13px;
+ background:#0f1420;
+ color:#fff;
+ border:1px solid var(--line);
+ border-radius:11px;
+ outline:none;
+}
+.prompts{
+ display:flex;
+ flex-wrap:wrap;
+ gap:7px;
+ margin-bottom:14px;
+}
+.prompts button{
+ background:#101521;
+ color:#aeb5c4;
+ border:1px solid var(--line);
+ padding:8px 11px;
+ border-radius:10px;
+ cursor:pointer;
+}
+.prompts button:hover{
+ color:#fff;
+ border-color:rgba(0,234,255,.3);
+}
+.chat{
+ height:440px;
+ overflow-y:auto;
+ padding:17px;
+ background:#04060a;
+ border-radius:18px;
+ border:1px solid rgba(255,255,255,.05);
+}
+.msg{
+ display:flex;
+ gap:9px;
+ margin-bottom:17px;
+}
+.msg.user{flex-direction:row-reverse}
+.avatar{
+ min-width:35px;
+ width:35px;
+ height:35px;
+ border-radius:11px;
+ background:#121824;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+.bubble{
+ max-width:82%;
+ padding:12px 14px;
+ background:#101520;
+ border:1px solid rgba(255,255,255,.06);
+ border-radius:14px;
+ line-height:1.65;
+}
+.msg.user .bubble{
+ background:#111b29;
+}
+.bubble strong{
+ display:block;
+ color:var(--cyan);
+ margin-bottom:4px;
+}
+.bubble p{color:#c4c9d4}
+.aiInput{
+ display:flex;
+ gap:10px;
+ margin-top:13px;
+}
+.aiInput textarea{
+ flex:1;
+ resize:none;
+ background:#0e131e;
+ color:#fff;
+ border:1px solid var(--line);
+ border-radius:14px;
+ padding:14px;
+ outline:none;
+}
+.aiInput textarea:focus{border-color:rgba(0,234,255,.4)}
+.send{
+ width:115px;
+ border:0;
+ border-radius:14px;
+ background:linear-gradient(90deg,#00a8ff,#8149ff);
+ color:#fff;
+ font-weight:900;
+ cursor:pointer;
+}
+.send:disabled{opacity:.5}
+.dots span{
+ display:inline-block;
+ width:6px;
+ height:6px;
+ border-radius:50%;
+ background:var(--cyan);
+ margin:0 2px;
+ animation:dots 1s infinite;
+}
+.dots span:nth-child(2){animation-delay:.15s}
+.dots span:nth-child(3){animation-delay:.3s}
+@keyframes dots{
+ 0%,100%{opacity:.25;transform:translateY(0)}
+ 50%{opacity:1;transform:translateY(-4px)}
 }
 
 /* GAMES */
-.games{
+.gameGrid{
  display:grid;
  grid-template-columns:repeat(4,1fr);
  gap:15px;
@@ -338,134 +560,147 @@ nav{
 .game{
  text-align:center;
  cursor:pointer;
+ min-height:190px;
 }
-.game .gameicon{
- font-size:45px;
- margin-bottom:15px;
+.gameIcon{
+ font-size:50px;
+ margin:10px 0 16px;
+ transition:.2s;
 }
-.game:hover .gameicon{
- animation:bounce .5s;
-}
-@keyframes bounce{
- 50%{transform:scale(1.2) rotate(5deg)}
+.game:hover .gameIcon{
+ transform:scale(1.15) rotate(-4deg);
 }
 
 /* MODAL */
 .modal{
  position:fixed;
  inset:0;
- background:rgba(0,0,0,.8);
- backdrop-filter:blur(8px);
+ background:rgba(0,0,0,.78);
+ backdrop-filter:blur(9px);
+ z-index:5000;
  display:none;
  align-items:center;
  justify-content:center;
- z-index:8000;
- padding:20px;
+ padding:18px;
 }
 .modal.show{display:flex}
-
-.modalbox{
- width:min(850px,100%);
- max-height:88vh;
+.modalBox{
+ width:min(900px,100%);
+ max-height:90vh;
  overflow:auto;
- background:#0b0b13;
- border:1px solid rgba(0,234,255,.25);
- border-radius:22px;
- padding:28px;
- box-shadow:0 0 60px rgba(0,234,255,.1);
+ background:#090c14;
+ border:1px solid rgba(0,234,255,.22);
+ border-radius:23px;
+ padding:25px;
+ box-shadow:0 0 80px rgba(0,234,255,.08);
 }
-
-.modalhead{
+.modalHead{
  display:flex;
- justify-content:space-between;
  align-items:center;
- margin-bottom:20px;
+ justify-content:space-between;
+ margin-bottom:18px;
 }
 .close{
  width:38px;
  height:38px;
  border:0;
  border-radius:50%;
- background:#191923;
- color:white;
- font-size:22px;
+ background:#151a25;
+ color:#fff;
+ font-size:23px;
  cursor:pointer;
 }
-
-.modalbox h3{
- color:cyan;
- margin:20px 0 10px;
+.modalBox h3{
+ color:var(--cyan);
+ margin:20px 0 9px;
 }
-.modalbox p,.modalbox li{
- color:#bbb;
+.modalBox p,.modalBox li{
+ color:#b8beca;
  line-height:1.75;
 }
-.modalbox ul{padding-left:22px}
-
-/* INPUTS */
-.input{
+.modalBox ul{padding-left:21px}
+.field{
  width:100%;
  padding:13px;
  margin:7px 0;
- border-radius:10px;
- border:1px solid rgba(255,255,255,.1);
- background:#11111a;
- color:white;
+ border-radius:11px;
+ background:#101521;
+ color:#fff;
+ border:1px solid var(--line);
  outline:none;
 }
+textarea.field{resize:vertical}
 
 /* GAME AREA */
-.gamearea{
+.gameArea{
  height:400px;
- border-radius:15px;
+ background:
+ linear-gradient(rgba(0,234,255,.03) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(0,234,255,.03) 1px,transparent 1px),
+ #030508;
+ background-size:30px 30px;
+ border:1px solid rgba(0,234,255,.12);
+ border-radius:16px;
  position:relative;
  overflow:hidden;
- background:#050509;
- border:1px solid rgba(0,234,255,.2);
 }
-
+.gameScore{
+ text-align:center;
+ color:var(--cyan);
+ font-weight:900;
+ margin-bottom:10px;
+}
 .car{
  position:absolute;
  bottom:20px;
  left:50%;
  transform:translateX(-50%);
- font-size:45px;
+ font-size:43px;
 }
-
-.obstacle{
+.rock{
  position:absolute;
  font-size:35px;
 }
-
-.score{
- text-align:center;
- color:cyan;
- font-size:20px;
- margin-bottom:10px;
+.target{
+ position:absolute;
+ font-size:38px;
+ cursor:pointer;
+}
+.air{
+ position:absolute;
+ font-size:40px;
+ left:70px;
+ top:180px;
 }
 
 /* FOOTER */
 footer{
- margin-top:40px;
- padding:35px;
  text-align:center;
- color:#777;
- border-top:1px solid rgba(255,255,255,.08);
+ padding:40px 20px;
+ border-top:1px solid var(--line);
+ color:#707887;
 }
-footer strong{color:cyan}
+footer b{color:var(--cyan)}
 
-/* RESPONSIVE */
-@media(max-width:1000px){
+/* MOBILE */
+@media(max-width:1050px){
  .hero{grid-template-columns:1fr}
  .grid{grid-template-columns:1fr 1fr}
- .tools{grid-template-columns:1fr 1fr}
- .games{grid-template-columns:1fr 1fr}
+ .chapterGrid{grid-template-columns:1fr 1fr}
+ .toolGrid{grid-template-columns:1fr 1fr}
+ .gameGrid{grid-template-columns:1fr 1fr}
 }
-
 @media(max-width:650px){
- nav{flex-direction:column}
- .grid,.tools,.games,.questions{grid-template-columns:1fr}
- .hero{padding-top:40px}
+ nav{align-items:flex-start;flex-direction:column}
+ .nav{justify-content:flex-start}
+ .grid,.chapterGrid,.toolGrid,.gameGrid,.questionGrid{grid-template-columns:1fr}
+ .hero{padding-top:45px}
+ .hero h1{letter-spacing:-2px}
+ .stats{grid-template-columns:1fr}
+ .aiControls{grid-template-columns:1fr}
+ .aiInput{flex-direction:column}
+ .send{height:48px;width:100%}
+ .bubble{max-width:90%}
 }
 </style>
 </head>
@@ -477,12 +712,13 @@ footer strong{color:cyan}
 
 <header>
 <nav>
-<div class="logo">Study<span>Verse</span> ⚡</div>
+<div class="logo">Study<b>Verse</b> ⚡</div>
 
-<div class="navlinks">
+<div class="nav">
 <button onclick="go('home')">Home</button>
 <button onclick="go('subjects')">Subjects</button>
-<button onclick="go('notes')">Notes</button>
+<button onclick="go('chapters')">Notes</button>
+<button onclick="go('ai')">AI</button>
 <button onclick="go('tools')">Tools</button>
 <button onclick="go('questions')">Questions</button>
 <button onclick="go('games')">Games</button>
@@ -490,180 +726,282 @@ footer strong{color:cyan}
 </nav>
 </header>
 
+
 <main id="home">
 
 <section class="hero">
 
 <div>
-<div class="badge">CLASS 11 • CBSE • STUDY HUB</div>
+<div class="pill">CLASS 11 • CBSE • ALL-IN-ONE STUDY HUB</div>
 
 <h1>
-Learn.<br>
-Practice.<br>
+Study<br>
+Smarter.<br>
 <span>Level Up.</span>
 </h1>
 
 <p>
-StudyVerse is your futuristic Class 11 CBSE study dashboard.
-Read detailed notes, revise important questions, use smart tools
-and take a short gaming break whenever you need one.
+Welcome to StudyVerse — a futuristic Class 11 study dashboard
+with chapter notes, important questions, smart tools, games and
+your own AI study assistant.
 </p>
 
-<div class="buttons">
+<div class="actions">
 <button class="btn" onclick="go('subjects')">Explore Subjects →</button>
-<button class="btn secondary" onclick="go('tools')">Open Tools</button>
+<button class="btn dark" onclick="go('ai')">🤖 Ask AI</button>
 </div>
 </div>
+
 
 <div class="dashboard">
-<h3>📊 Study Dashboard</h3>
+
+<div class="dashTop">
+<h3>⚡ Study Dashboard</h3>
+<div class="live"><i></i>READY</div>
+</div>
+
+<div class="stats">
 
 <div class="stat">
-<div><strong>Subjects</strong><br><small>Class 11 CBSE</small></div>
+<small>Subjects</small>
 <strong>06</strong>
 </div>
 
 <div class="stat">
-<div><strong>Notes</strong><br><small>Chapter revision</small></div>
-<strong>∞</strong>
+<small>AI Assistant</small>
+<strong>ON</strong>
 </div>
 
 <div class="stat">
-<div><strong>Tools</strong><br><small>Study utilities</small></div>
+<small>Study Tools</small>
 <strong>08+</strong>
 </div>
 
 <div class="stat">
-<div><strong>Games</strong><br><small>Study break</small></div>
+<small>Games</small>
 <strong>04</strong>
 </div>
+
+</div>
+
+<div class="progress">
+<small style="color:var(--muted)">Daily Study Progress</small>
+<div class="progressLine"><span></span></div>
+</div>
+
 </div>
 
 </section>
 
-<div class="searchbox">
-<input class="search" id="search"
-placeholder="🔎 Search subjects, notes, questions..."
-oninput="searchAll()">
+
+<div class="searchWrap">
+<input
+ id="search"
+ class="search"
+ placeholder="🔎 Search subjects, chapters, notes and questions..."
+ oninput="searchSite()">
 </div>
 
 
 <!-- SUBJECTS -->
-
 <section class="section" id="subjects">
 
-<div class="title">
+<div class="sectionTitle">
 <h2>📚 Subjects</h2>
-<p>Choose a subject to explore chapters and study material.</p>
+<p>Complete Class 11 CBSE study sections.</p>
 </div>
 
 <div class="grid">
 
-<div class="card subject searchable" style="--glow:cyan"
-onclick="subject('Accountancy')">
+<div class="card subject searchable" style="--glow:#00eaff" onclick="showSubject('Accountancy')">
 <div class="icon">📒</div>
 <h3>Accountancy</h3>
-<p>Accounting concepts, equations, journal, ledger, trial balance and more.</p>
+<p>Accounting concepts, journal, ledger, trial balance, cash book, depreciation and more.</p>
 </div>
 
-<div class="card subject searchable" style="--glow:#00ff88"
-onclick="subject('Business Studies')">
+<div class="card subject searchable" style="--glow:#00ff91" onclick="showSubject('Business Studies')">
 <div class="icon">💼</div>
 <h3>Business Studies</h3>
-<p>Business organisation, finance, trade, management and entrepreneurship.</p>
+<p>Business organisation, finance, trade, services, entrepreneurship and management basics.</p>
 </div>
 
-<div class="card subject searchable" style="--glow:#9b00ff"
-onclick="subject('Economics')">
+<div class="card subject searchable" style="--glow:#8b5cff" onclick="showSubject('Economics')">
 <div class="icon">📈</div>
 <h3>Economics</h3>
-<p>Statistics, demand, supply, consumer behaviour and economics basics.</p>
+<p>Statistics and introductory microeconomics concepts, demand, supply and markets.</p>
 </div>
 
-<div class="card subject searchable" style="--glow:#ff008c"
-onclick="subject('English')">
+<div class="card subject searchable" style="--glow:#ff1593" onclick="showSubject('English')">
 <div class="icon">📖</div>
 <h3>English</h3>
-<p>Hornbill, Snapshots, reading and writing skills.</p>
+<p>Hornbill, Snapshots, reading comprehension and writing skills.</p>
 </div>
 
-<div class="card subject searchable" style="--glow:#ff5500"
-onclick="subject('Hindi')">
+<div class="card subject searchable" style="--glow:#ff9d00" onclick="showSubject('Hindi')">
 <div class="icon">📝</div>
 <h3>Hindi</h3>
-<p>आरोह, वितान, लेखन कौशल और पाठ आधारित तैयारी।</p>
+<p>आरोह, वितान, काव्य, गद्य, अपठित बोध और रचनात्मक लेखन।</p>
 </div>
 
-<div class="card subject searchable" style="--glow:#00a8ff"
-onclick="subject('Physical Education')">
+<div class="card subject searchable" style="--glow:#00a8ff" onclick="showSubject('Physical Education')">
 <div class="icon">🏃</div>
 <h3>Physical Education</h3>
-<p>Fitness, yoga, sports, health, physiology and nutrition.</p>
+<p>Fitness, yoga, sports, nutrition, physiology and physical education theory.</p>
 </div>
 
 </div>
 </section>
 
 
-<!-- NOTES -->
+<!-- CHAPTER NOTES -->
+<section class="section" id="chapters">
 
-<section class="section" id="notes">
-
-<div class="title">
-<h2>📖 Detailed Notes</h2>
-<p>Chapter-wise study material.</p>
+<div class="sectionTitle">
+<h2>📖 Detailed Chapter Notes</h2>
+<p>Open a chapter for structured revision notes.</p>
 </div>
 
-<div class="grid">
+<div class="chapterGrid">
 
-<div class="card note searchable">
-<h3>📒 Accounting Equation</h3>
-<p>
-Assets = Capital + Liabilities. Learn the concept, rules,
-effects of transactions and examples.
-</p>
-<button onclick="note('Accounting Equation')">Read Notes →</button>
+<div class="card chapter searchable" onclick="showNote('Accounting Equation')">
+<span class="tag">ACCOUNTANCY</span>
+<h3>Accounting Equation</h3>
+<p>Assets, capital, liabilities and transaction effects.</p>
+<span class="read">Read Notes →</span>
 </div>
 
-<div class="card note searchable">
-<h3>💼 Forms of Business Organisation</h3>
-<p>
-Sole proprietorship, partnership, company and cooperative society
-with features and comparisons.
-</p>
-<button onclick="note('Business Organisation')">Read Notes →</button>
+<div class="card chapter searchable" onclick="showNote('Journal')">
+<span class="tag">ACCOUNTANCY</span>
+<h3>Journal</h3>
+<p>Debit-credit rules, journal entries and narration.</p>
+<span class="read">Read Notes →</span>
 </div>
 
-<div class="card note searchable">
-<h3>📈 Demand</h3>
-<p>
-Meaning, law of demand, determinants, demand schedule and demand curve.
-</p>
-<button onclick="note('Demand')">Read Notes →</button>
+<div class="card chapter searchable" onclick="showNote('Business Organisation')">
+<span class="tag">BUSINESS STUDIES</span>
+<h3>Forms of Business Organisation</h3>
+<p>Sole proprietorship, partnership, company and cooperative.</p>
+<span class="read">Read Notes →</span>
 </div>
 
-<div class="card note searchable">
-<h3>📊 Statistics</h3>
-<p>
-Collection, organisation, presentation and interpretation of economic data.
-</p>
-<button onclick="note('Statistics')">Read Notes →</button>
+<div class="card chapter searchable" onclick="showNote('Business Nature')">
+<span class="tag">BUSINESS STUDIES</span>
+<h3>Nature and Purpose of Business</h3>
+<p>Business meaning, characteristics and objectives.</p>
+<span class="read">Read Notes →</span>
 </div>
 
-<div class="card note searchable">
-<h3>📖 English Writing Skills</h3>
-<p>
-Notice, advertisement, speech, debate and other writing formats.
-</p>
-<button onclick="note('English')">Read Notes →</button>
+<div class="card chapter searchable" onclick="showNote('Demand')">
+<span class="tag">ECONOMICS</span>
+<h3>Demand</h3>
+<p>Law of demand, determinants and demand curve.</p>
+<span class="read">Read Notes →</span>
 </div>
 
-<div class="card note searchable">
-<h3>🏃 Physical Fitness</h3>
+<div class="card chapter searchable" onclick="showNote('Statistics')">
+<span class="tag">ECONOMICS</span>
+<h3>Statistics for Economics</h3>
+<p>Data collection, organisation and presentation.</p>
+<span class="read">Read Notes →</span>
+</div>
+
+<div class="card chapter searchable" onclick="showNote('English Writing')">
+<span class="tag">ENGLISH</span>
+<h3>Writing Skills</h3>
+<p>Notice, speech, debate, advertisement and formats.</p>
+<span class="read">Read Notes →</span>
+</div>
+
+<div class="card chapter searchable" onclick="showNote('Hindi Writing')">
+<span class="tag">HINDI</span>
+<h3>रचनात्मक लेखन</h3>
+<p>लेखन की संरचना, भाषा और परीक्षा तैयारी।</p>
+<span class="read">पढ़ें →</span>
+</div>
+
+<div class="card chapter searchable" onclick="showNote('Physical Fitness')">
+<span class="tag">PHYSICAL EDUCATION</span>
+<h3>Physical Fitness</h3>
+<p>Fitness components, wellness and exercise.</p>
+<span class="read">Read Notes →</span>
+</div>
+
+</div>
+</section>
+
+
+<!-- AI -->
+<section class="section" id="ai">
+
+<div class="sectionTitle">
+<h2>🤖 StudyVerse AI</h2>
+<p>Your personal AI study assistant.</p>
+</div>
+
+<div class="ai">
+
+<div class="aiHeader">
+
+<div class="aiBrand">
+<div class="aiLogo">🤖</div>
+<div>
+<h2>StudyVerse AI</h2>
+<p>Explain • Solve • Revise • Practice</p>
+</div>
+</div>
+
+<div class="online">AI READY</div>
+
+</div>
+
+<div class="aiControls">
+
+<select id="aiSubject">
+<option>General</option>
+<option>Accountancy</option>
+<option>Business Studies</option>
+<option>Economics</option>
+<option>English</option>
+<option>Hindi</option>
+<option>Physical Education</option>
+</select>
+
+<input id="aiChapter" placeholder="Chapter / Topic">
+
+</div>
+
+<div class="prompts">
+<button onclick="quickAI('Explain this topic in very simple language.')">🧠 Explain</button>
+<button onclick="quickAI('Make detailed revision notes for this topic.')">📝 Notes</button>
+<button onclick="quickAI('Give me important exam questions from this topic.')">❓ Questions</button>
+<button onclick="quickAI('Create a study plan for this topic.')">🎯 Study Plan</button>
+<button onclick="quickAI('Give me a Class 11 level example and explain it step by step.')">💡 Example</button>
+</div>
+
+<div class="chat" id="chat">
+
+<div class="msg">
+<div class="avatar">🤖</div>
+<div class="bubble">
+<strong>StudyVerse AI</strong>
 <p>
-Fitness components, wellness, exercise and healthy lifestyle concepts.
+Hey! 👋 Ask me your Class 11 doubt.<br><br>
+Example: <b>“Accounting equation simple language mein samjha do.”</b>
 </p>
-<button onclick="note('Physical Education')">Read Notes →</button>
+</div>
+</div>
+
+</div>
+
+<div class="aiInput">
+
+<textarea
+ id="aiInput"
+ rows="2"
+ placeholder="Ask your doubt..."></textarea>
+
+<button class="send" id="sendBtn" onclick="sendAI()">SEND ➤</button>
+
 </div>
 
 </div>
@@ -671,15 +1009,14 @@ Fitness components, wellness, exercise and healthy lifestyle concepts.
 
 
 <!-- TOOLS -->
-
 <section class="section" id="tools">
 
-<div class="title">
+<div class="sectionTitle">
 <h2>🛠️ Study Tools</h2>
-<p>Useful tools for daily study.</p>
+<p>Everything you need for daily study.</p>
 </div>
 
-<div class="tools">
+<div class="toolGrid">
 
 <div class="card tool" onclick="calculator()">
 <div class="icon">🧮</div>
@@ -690,16 +1027,16 @@ Fitness components, wellness, exercise and healthy lifestyle concepts.
 <div class="card tool" onclick="percentage()">
 <div class="icon">📊</div>
 <h3>Percentage</h3>
-<p>Calculate percentages</p>
+<p>Calculate percentage</p>
 </div>
 
 <div class="card tool" onclick="marks()">
 <div class="icon">🎯</div>
 <h3>Marks Calculator</h3>
-<p>Total and percentage</p>
+<p>Total & percentage</p>
 </div>
 
-<div class="card tool" onclick="timer()">
+<div class="card tool" onclick="pomodoro()">
 <div class="icon">⏱️</div>
 <h3>Pomodoro</h3>
 <p>Focus timer</p>
@@ -708,7 +1045,7 @@ Fitness components, wellness, exercise and healthy lifestyle concepts.
 <div class="card tool" onclick="quickNotes()">
 <div class="icon">📝</div>
 <h3>Quick Notes</h3>
-<p>Save your notes</p>
+<p>Save notes locally</p>
 </div>
 
 <div class="card tool" onclick="todo()">
@@ -726,7 +1063,7 @@ Fitness components, wellness, exercise and healthy lifestyle concepts.
 <div class="card tool" onclick="focusMode()">
 <div class="icon">🎯</div>
 <h3>Focus Mode</h3>
-<p>Remove distractions</p>
+<p>Distraction-free mode</p>
 </div>
 
 </div>
@@ -734,34 +1071,48 @@ Fitness components, wellness, exercise and healthy lifestyle concepts.
 
 
 <!-- QUESTIONS -->
-
 <section class="section" id="questions">
 
-<div class="title">
-<h2>🔥 Important Questions</h2>
-<p>Useful questions for exam preparation.</p>
+<div class="sectionTitle">
+<h2>⭐ Important Questions</h2>
+<p>Practice these before exams.</p>
 </div>
 
-<div class="questions">
+<div class="questionGrid">
 
 <div class="card question searchable">
 <span>ACCOUNTANCY</span>
-<h3>What is an accounting equation? Explain with an example.</h3>
+<h3>What is an accounting equation? Explain with a suitable example.</h3>
+</div>
+
+<div class="card question searchable">
+<span>ACCOUNTANCY</span>
+<h3>Explain the rules of debit and credit.</h3>
 </div>
 
 <div class="card question searchable">
 <span>BUSINESS STUDIES</span>
-<h3>Explain the main characteristics of business.</h3>
+<h3>Explain the characteristics of business.</h3>
+</div>
+
+<div class="card question searchable">
+<span>BUSINESS STUDIES</span>
+<h3>Distinguish between sole proprietorship and partnership.</h3>
 </div>
 
 <div class="card question searchable">
 <span>ECONOMICS</span>
-<h3>Explain the law of demand.</h3>
+<h3>Explain the law of demand with assumptions.</h3>
+</div>
+
+<div class="card question searchable">
+<span>ECONOMICS</span>
+<h3>Explain different determinants of demand.</h3>
 </div>
 
 <div class="card question searchable">
 <span>ENGLISH</span>
-<h3>What are the important points of notice writing?</h3>
+<h3>What are the essential features of a good notice?</h3>
 </div>
 
 <div class="card question searchable">
@@ -771,7 +1122,7 @@ Fitness components, wellness, exercise and healthy lifestyle concepts.
 
 <div class="card question searchable">
 <span>PHYSICAL EDUCATION</span>
-<h3>Explain the importance of physical fitness.</h3>
+<h3>Explain the importance and components of physical fitness.</h3>
 </div>
 
 </div>
@@ -779,38 +1130,37 @@ Fitness components, wellness, exercise and healthy lifestyle concepts.
 
 
 <!-- GAMES -->
-
 <section class="section" id="games">
 
-<div class="title">
+<div class="sectionTitle">
 <h2>🎮 Game Zone</h2>
-<p>Take a short study break.</p>
+<p>Take a short break after studying.</p>
 </div>
 
-<div class="games">
+<div class="gameGrid">
 
 <div class="card game" onclick="carGame()">
-<div class="gameicon">🚗</div>
+<div class="gameIcon">🚗</div>
 <h3>Car Racing</h3>
-<p>Dodge the obstacles.</p>
+<p>Dodge obstacles and survive.</p>
 </div>
 
-<div class="card game" onclick="airshipGame()">
-<div class="gameicon">🚀</div>
+<div class="card game" onclick="airGame()">
+<div class="gameIcon">🚀</div>
 <h3>Airship</h3>
-<p>Fly and survive.</p>
+<p>Fly through obstacles.</p>
 </div>
 
-<div class="card game" onclick="shootingGame()">
-<div class="gameicon">🔫</div>
+<div class="card game" onclick="shootGame()">
+<div class="gameIcon">🎯</div>
 <h3>Shooting</h3>
-<p>Hit the targets.</p>
+<p>Hit as many targets as possible.</p>
 </div>
 
 <div class="card game" onclick="reactionGame()">
-<div class="gameicon">⚡</div>
+<div class="gameIcon">⚡</div>
 <h3>Reaction</h3>
-<p>Test your speed.</p>
+<p>Test your reaction speed.</p>
 </div>
 
 </div>
@@ -818,18 +1168,19 @@ Fitness components, wellness, exercise and healthy lifestyle concepts.
 
 </main>
 
+
 <footer>
-<p>Made for students ❤️ • <strong>StudyVerse ⚡</strong></p>
-<p style="margin-top:8px">Class 11 CBSE Study Dashboard</p>
+<p>Built for students ❤️ • <b>StudyVerse ⚡</b></p>
+<p style="margin-top:7px">Class 11 CBSE • Learn • Practice • Level Up</p>
 </footer>
 
 
 <!-- MODAL -->
-
 <div class="modal" id="modal">
-<div class="modalbox">
 
-<div class="modalhead">
+<div class="modalBox">
+
+<div class="modalHead">
 <h2 id="modalTitle">StudyVerse</h2>
 <button class="close" onclick="closeModal()">×</button>
 </div>
@@ -837,22 +1188,22 @@ Fitness components, wellness, exercise and healthy lifestyle concepts.
 <div id="modalBody"></div>
 
 </div>
+
 </div>
 
 
 <script>
 
-/* BASIC */
-
+/* NAVIGATION */
 function go(id){
- document.getElementById(id).scrollIntoView({
-  behavior:"smooth"
- });
+ document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-function openModal(title,body){
+
+/* MODAL */
+function openModal(title,html){
  document.getElementById("modalTitle").innerText=title;
- document.getElementById("modalBody").innerHTML=body;
+ document.getElementById("modalBody").innerHTML=html;
  document.getElementById("modal").classList.add("show");
 }
 
@@ -860,24 +1211,38 @@ function closeModal(){
  document.getElementById("modal").classList.remove("show");
 }
 
-document.getElementById("modal").onclick=e=>{
+document.getElementById("modal").addEventListener("click",e=>{
  if(e.target.id==="modal")closeModal();
-};
+});
 
 document.addEventListener("keydown",e=>{
  if(e.key==="Escape")closeModal();
 });
 
 
-/* SUBJECT DATA */
+/* SEARCH */
+function searchSite(){
 
-const subjectData={
+ const q=document.getElementById("search").value.toLowerCase();
+
+ document.querySelectorAll(".searchable").forEach(el=>{
+  el.style.display=
+   el.innerText.toLowerCase().includes(q)
+   ?"":"none";
+ });
+}
+
+
+/* SUBJECTS */
+const subjects={
 
 "Accountancy":`
 <h3>📒 Accountancy</h3>
-<p>Accountancy deals with recording, classifying, summarising and interpreting financial transactions.</p>
-
-<h3>Important Chapters</h3>
+<p>
+Accountancy is the systematic process of identifying, recording,
+classifying, summarising and communicating financial information.
+</p>
+<h3>Major Areas</h3>
 <ul>
 <li>Introduction to Accounting</li>
 <li>Basic Accounting Terms</li>
@@ -890,23 +1255,27 @@ const subjectData={
 <li>Bank Reconciliation Statement</li>
 <li>Depreciation</li>
 </ul>
-
-<h3>⭐ Study Tip</h3>
-<p>Practice numerical questions regularly and understand the reason behind every debit and credit.</p>
+<h3>⭐ Exam Tip</h3>
+<p>
+Understand debit and credit rules first. Then practice numerical
+questions regularly.
+</p>
 `,
 
 "Business Studies":`
 <h3>💼 Business Studies</h3>
-<p>Business Studies explains business activities, organisations, finance, trade and entrepreneurship.</p>
-
-<h3>Important Chapters</h3>
+<p>
+Business Studies explains how organisations perform economic activities
+and how business decisions are made.
+</p>
+<h3>Major Areas</h3>
 <ul>
 <li>Nature and Purpose of Business</li>
 <li>Forms of Business Organisation</li>
 <li>Private, Public and Global Enterprises</li>
 <li>Business Services</li>
 <li>Emerging Modes of Business</li>
-<li>Social Responsibility of Business</li>
+<li>Social Responsibility</li>
 <li>Sources of Business Finance</li>
 <li>Small Business</li>
 <li>Internal Trade</li>
@@ -916,9 +1285,11 @@ const subjectData={
 
 "Economics":`
 <h3>📈 Economics</h3>
-<p>Economics studies how scarce resources are used to satisfy unlimited wants.</p>
-
-<h3>Important Areas</h3>
+<p>
+Economics studies the allocation of scarce resources to satisfy
+unlimited human wants.
+</p>
+<h3>Major Areas</h3>
 <ul>
 <li>Statistics for Economics</li>
 <li>Collection and Organisation of Data</li>
@@ -936,19 +1307,22 @@ const subjectData={
 <h3>📖 English</h3>
 <ul>
 <li>Reading Comprehension</li>
-<li>Notice Writing</li>
-<li>Advertisement</li>
-<li>Speech</li>
-<li>Debate</li>
+<li>Writing Skills</li>
 <li>Hornbill</li>
 <li>Snapshots</li>
+<li>Notice</li>
+<li>Speech</li>
+<li>Debate</li>
+<li>Advertisement</li>
 </ul>
 `,
 
 "Hindi":`
 <h3>📝 हिन्दी</h3>
-<p>हिन्दी में साहित्य, गद्य, काव्य और रचनात्मक लेखन पर ध्यान दें।</p>
-
+<p>
+हिन्दी में गद्य, काव्य, साहित्यिक समझ, अपठित बोध और रचनात्मक लेखन
+पर ध्यान देना चाहिए।
+</p>
 <ul>
 <li>आरोह</li>
 <li>वितान</li>
@@ -972,46 +1346,48 @@ const subjectData={
 `
 };
 
-function subject(name){
- openModal(name,subjectData[name]);
+function showSubject(name){
+ openModal(name,subjects[name]);
 }
 
 
 /* NOTES */
-
-const noteData={
+const notes={
 
 "Accounting Equation":`
-<h3>Accounting Equation</h3>
+<h3>Accounting Equation — Detailed Notes</h3>
 
 <p>
-The accounting equation represents the relationship between assets,
-capital and liabilities of a business.
+The accounting equation is the foundation of the double-entry system.
+It explains the relationship between the resources of a business and
+the claims against those resources.
 </p>
 
 <h3>Formula</h3>
-<p><strong>Assets = Capital + Liabilities</strong></p>
+<p><b>Assets = Capital + Liabilities</b></p>
 
 <h3>Assets</h3>
 <p>
-Assets are resources owned by a business. Examples include cash,
-machinery, furniture, building, stock and debtors.
+Assets are economic resources controlled or owned by a business.
+Examples include cash, furniture, machinery, building, stock,
+bank balance and debtors.
 </p>
 
 <h3>Capital</h3>
 <p>
-Capital is the amount invested by the owner in the business.
+Capital represents the owner's claim on the assets of the business.
+It is the amount invested by the owner.
 </p>
 
 <h3>Liabilities</h3>
 <p>
-Liabilities are amounts payable by the business to outsiders, such
-as creditors and loans.
+Liabilities are obligations payable to outsiders. Examples include
+creditors, bank loans and other amounts payable.
 </p>
 
 <h3>Example</h3>
 <p>
-Owner starts business with ₹50,000 cash.
+Suppose the owner starts a business with ₹50,000 cash.
 </p>
 <p>
 Assets = ₹50,000<br>
@@ -1019,11 +1395,66 @@ Capital = ₹50,000<br>
 Liabilities = ₹0
 </p>
 
-<h3>Exam Point ⭐</h3>
+<h3>Effect of Transactions</h3>
+<ul>
+<li>Capital introduced increases assets and capital.</li>
+<li>Loan taken increases assets and liabilities.</li>
+<li>Purchase of an asset for cash changes the form of assets.</li>
+<li>Payment to creditors decreases assets and liabilities.</li>
+<li>Profit generally increases capital.</li>
+<li>Drawings reduce capital.</li>
+</ul>
+
+<h3>⭐ Exam Point</h3>
 <p>
-Every transaction affects the accounting equation but the equation
-always remains balanced.
+After every transaction, the accounting equation must remain balanced.
 </p>
+`,
+
+"Journal":`
+<h3>Journal — Detailed Notes</h3>
+
+<p>
+A journal is the book of original entry in which business transactions
+are recorded chronologically.
+</p>
+
+<h3>Basic Format</h3>
+<ul>
+<li>Date</li>
+<li>Particulars</li>
+<li>Ledger Folio</li>
+<li>Debit Amount</li>
+<li>Credit Amount</li>
+</ul>
+
+<h3>Debit and Credit</h3>
+<p>
+Personal Account: Debit the receiver, credit the giver.
+</p>
+<p>
+Real Account: Debit what comes in, credit what goes out.
+</p>
+<p>
+Nominal Account: Debit expenses and losses, credit incomes and gains.
+</p>
+
+<h3>Example</h3>
+<p>
+Cash introduced by owner ₹40,000:
+</p>
+<p>
+Cash A/c Dr. ₹40,000<br>
+&nbsp;&nbsp;To Capital A/c ₹40,000
+</p>
+
+<h3>Importance</h3>
+<ul>
+<li>Provides a chronological record.</li>
+<li>Helps in preparing ledger accounts.</li>
+<li>Provides an explanation of transactions.</li>
+<li>Reduces the chance of missing transactions.</li>
+</ul>
 `,
 
 "Business Organisation":`
@@ -1031,56 +1462,102 @@ always remains balanced.
 
 <h3>Sole Proprietorship</h3>
 <p>
-A business owned and controlled by one person. The owner receives
-profits and bears the business risk.
+A business owned, managed and controlled by one person. The owner
+receives profits and bears the risks.
 </p>
 
 <h3>Partnership</h3>
 <p>
-A partnership is formed when two or more persons agree to carry on
-business and share its profits.
+Partnership is an association of persons who agree to carry on a
+business and share its profits according to an agreement.
 </p>
 
 <h3>Company</h3>
 <p>
-A company is an artificial legal person formed according to law.
-It has a separate legal identity.
+A company is an artificial legal person with a separate legal identity.
+It is formed under law.
 </p>
 
 <h3>Cooperative Society</h3>
 <p>
-A cooperative is a voluntary association of people who come together
-to achieve a common economic objective.
+A cooperative is a voluntary association formed to achieve common
+economic interests of its members.
 </p>
+
+<h3>Quick Comparison</h3>
+<ul>
+<li>Sole proprietorship: one owner.</li>
+<li>Partnership: two or more partners.</li>
+<li>Company: separate legal entity.</li>
+<li>Cooperative: mutual benefit and service orientation.</li>
+</ul>
+`,
+
+"Business Nature":`
+<h3>Nature and Purpose of Business</h3>
+
+<p>
+Business refers to economic activities undertaken with the objective
+of producing or providing goods and services for satisfying human
+needs and earning income.
+</p>
+
+<h3>Characteristics</h3>
+<ul>
+<li>Economic activity</li>
+<li>Production or procurement of goods and services</li>
+<li>Sale or exchange</li>
+<li>Regular dealings</li>
+<li>Profit motive</li>
+<li>Risk and uncertainty</li>
+<li>Creation of utility</li>
+</ul>
+
+<h3>Business Objectives</h3>
+<ul>
+<li>Profit earning</li>
+<li>Growth</li>
+<li>Market standing</li>
+<li>Customer satisfaction</li>
+<li>Innovation</li>
+<li>Social responsibility</li>
+</ul>
 `,
 
 "Demand":`
-<h3>Demand</h3>
+<h3>Demand — Detailed Notes</h3>
 
 <p>
 Demand refers to the quantity of a commodity that consumers are
-willing and able to buy at a given price during a particular period.
+willing and able to purchase at a particular price during a given
+period.
 </p>
 
 <h3>Law of Demand</h3>
 <p>
-Other things remaining constant, quantity demanded generally increases
-when price falls and decreases when price rises.
+Other things remaining constant, quantity demanded generally rises
+when price falls and falls when price rises.
 </p>
 
-<h3>Factors Affecting Demand</h3>
+<h3>Determinants</h3>
 <ul>
-<li>Price</li>
-<li>Income</li>
+<li>Price of the commodity</li>
+<li>Income of consumer</li>
 <li>Prices of related goods</li>
 <li>Tastes and preferences</li>
-<li>Future expectations</li>
+<li>Expectations</li>
 <li>Number of consumers</li>
 </ul>
 
 <h3>Demand Curve</h3>
 <p>
-A normal demand curve generally slopes downward from left to right.
+A normal demand curve generally slopes downward from left to right,
+showing an inverse relationship between price and quantity demanded.
+</p>
+
+<h3>⭐ Exam Tip</h3>
+<p>
+Always mention the assumptions when explaining the law of demand.
 </p>
 `,
 
@@ -1089,47 +1566,76 @@ A normal demand curve generally slopes downward from left to right.
 
 <p>
 Statistics provides methods for collecting, organising, presenting,
-analysing and interpreting numerical information.
+analysing and interpreting numerical data.
 </p>
 
-<h3>Main Steps</h3>
+<h3>Stages</h3>
 <ul>
-<li>Collection of Data</li>
-<li>Organisation of Data</li>
-<li>Presentation of Data</li>
+<li>Collection of data</li>
+<li>Organisation</li>
+<li>Presentation</li>
 <li>Analysis</li>
 <li>Interpretation</li>
 </ul>
+
+<h3>Importance</h3>
+<p>
+Statistics helps economists understand large amounts of information,
+compare situations and identify trends and relationships.
+</p>
 `,
 
-"English":`
+"English Writing":`
 <h3>English Writing Skills</h3>
 
 <h3>Notice</h3>
 <p>
-A notice should contain a heading, date, relevant information,
-authority/name and should follow the prescribed word limit.
+A notice communicates important information briefly. It should have
+a suitable heading, date, relevant details and the issuing authority.
 </p>
 
 <h3>Speech</h3>
 <p>
-A speech generally begins with an appropriate greeting and introduction,
-followed by the main points and a suitable conclusion.
+A speech usually includes a greeting, introduction, arguments or
+ideas and a suitable conclusion.
 </p>
 
 <h3>Debate</h3>
 <p>
-A debate presents arguments either for or against a given topic.
-Logical points and persuasive language are important.
+A debate presents arguments for or against a proposition. Clear
+reasoning, examples and persuasive language are useful.
+</p>
+
+<h3>Exam Tip</h3>
+<p>
+Follow the required format and word limit carefully.
 </p>
 `,
 
-"Physical Education":`
+"Hindi Writing":`
+<h3>रचनात्मक लेखन</h3>
+
+<p>
+रचनात्मक लेखन में विचारों को स्पष्ट, क्रमबद्ध और प्रभावशाली भाषा
+में प्रस्तुत किया जाता है।
+</p>
+
+<h3>महत्वपूर्ण बातें</h3>
+<ul>
+<li>विषय की स्पष्ट समझ</li>
+<li>उचित भाषा और शब्द चयन</li>
+<li>विचारों का क्रम</li>
+<li>उचित शीर्षक</li>
+<li>निष्कर्ष</li>
+</ul>
+`,
+
+"Physical Fitness":`
 <h3>Physical Fitness</h3>
 
 <p>
-Physical fitness is the ability to perform daily activities efficiently
-without undue fatigue.
+Physical fitness is the ability to perform daily activities effectively
+without excessive fatigue.
 </p>
 
 <h3>Components</h3>
@@ -1140,50 +1646,35 @@ without undue fatigue.
 <li>Speed</li>
 <li>Coordination</li>
 <li>Balance</li>
+<li>Agility</li>
 </ul>
 
 <h3>Importance</h3>
 <p>
-Regular physical activity supports fitness, performance and overall
-well-being.
+Fitness supports physical performance and helps a person perform
+routine activities efficiently.
 </p>
 `
 };
 
-function note(name){
- openModal("📖 "+name,noteData[name]);
-}
-
-
-/* SEARCH */
-
-function searchAll(){
-
- let q=document.getElementById("search").value.toLowerCase();
-
- document.querySelectorAll(".searchable").forEach(x=>{
-  x.style.display=x.innerText.toLowerCase().includes(q)?"":"none";
- });
+function showNote(name){
+ openModal("📖 "+name,notes[name]);
 }
 
 
 /* CALCULATOR */
-
 function calculator(){
-
  openModal("🧮 Calculator",`
- <input class="input" id="calc" placeholder="Example: 25*5+10">
+ <input class="field" id="calcInput" placeholder="Example: 25*5+10">
  <button class="btn" onclick="calculate()">Calculate</button>
  <h3 id="calcResult"></h3>
  `);
 }
-
 function calculate(){
- let value=document.getElementById("calc").value;
-
+ const x=document.getElementById("calcInput").value;
  try{
-  let result=Function('"use strict";return ('+value+')')();
-  document.getElementById("calcResult").innerText="Answer = "+result;
+  const answer=Function('"use strict";return ('+x+')')();
+  document.getElementById("calcResult").innerText="Answer = "+answer;
  }catch{
   document.getElementById("calcResult").innerText="Invalid calculation";
  }
@@ -1191,391 +1682,462 @@ function calculate(){
 
 
 /* PERCENTAGE */
-
 function percentage(){
-
  openModal("📊 Percentage Calculator",`
- <input class="input" id="p1" type="number" placeholder="Obtained">
- <input class="input" id="p2" type="number" placeholder="Total">
- <button class="btn" onclick="calcPercent()">Calculate</button>
- <h3 id="presult"></h3>
+ <input class="field" id="obt" type="number" placeholder="Obtained Marks">
+ <input class="field" id="total" type="number" placeholder="Total Marks">
+ <button class="btn" onclick="doPercentage()">Calculate</button>
+ <h3 id="percentResult"></h3>
  `);
 }
-
-function calcPercent(){
-
- let a=Number(document.getElementById("p1").value);
- let b=Number(document.getElementById("p2").value);
-
- document.getElementById("presult").innerText=
- b?((a/b)*100).toFixed(2)+"%":"Enter valid values";
+function doPercentage(){
+ const a=Number(document.getElementById("obt").value);
+ const b=Number(document.getElementById("total").value);
+ document.getElementById("percentResult").innerText=
+ b?((a/b)*100).toFixed(2)+"%":"Enter valid marks";
 }
 
 
 /* MARKS */
-
 function marks(){
-
  openModal("🎯 Marks Calculator",`
- <p>Enter marks separated by commas.</p>
- <input class="input" id="marks" placeholder="78,85,91,76,88">
- <input class="input" id="maxmarks" value="100" type="number">
- <button class="btn" onclick="calcMarks()">Calculate</button>
- <h3 id="mresult"></h3>
+ <input class="field" id="marksInput" placeholder="Example: 85,78,91,88,76">
+ <input class="field" id="eachMax" type="number" value="100">
+ <button class="btn" onclick="calculateMarks()">Calculate</button>
+ <h3 id="marksResult"></h3>
  `);
 }
-
-function calcMarks(){
-
- let arr=document.getElementById("marks").value
- .split(",")
- .map(Number)
- .filter(x=>!isNaN(x));
-
- let max=Number(document.getElementById("maxmarks").value)*arr.length;
- let total=arr.reduce((a,b)=>a+b,0);
-
- document.getElementById("mresult").innerHTML=
- "Total: "+total+"<br>Percentage: "+((total/max)*100).toFixed(2)+"%";
+function calculateMarks(){
+ const arr=document.getElementById("marksInput").value
+ .split(",").map(Number).filter(x=>Number.isFinite(x));
+ const max=Number(document.getElementById("eachMax").value)*arr.length;
+ const total=arr.reduce((a,b)=>a+b,0);
+ document.getElementById("marksResult").innerHTML=
+ "Total = "+total+" / "+max+
+ "<br>Percentage = "+(max?((total/max)*100).toFixed(2):0)+"%";
 }
 
 
 /* POMODORO */
+let pomTimer;
+let pomSeconds=1500;
 
-let timerInterval;
-
-function timer(){
-
- openModal("⏱️ Pomodoro Timer",`
+function pomodoro(){
+ openModal("⏱️ Pomodoro",`
  <div style="text-align:center">
- <h1 id="timeDisplay" style="font-size:55px;color:cyan">25:00</h1>
- <button class="btn" onclick="startTimer()">Start</button>
- <button class="btn secondary" onclick="resetTimer()">Reset</button>
+ <div id="pomDisplay" style="font-size:65px;font-weight:900;color:var(--cyan)">25:00</div>
+ <button class="btn" onclick="startPomodoro()">Start</button>
+ <button class="btn dark" onclick="resetPomodoro()">Reset</button>
  </div>
  `);
 }
-
-let seconds=1500;
-
-function startTimer(){
-
- clearInterval(timerInterval);
-
- timerInterval=setInterval(()=>{
-
-  if(seconds<=0){
-   clearInterval(timerInterval);
+function startPomodoro(){
+ clearInterval(pomTimer);
+ pomTimer=setInterval(()=>{
+  if(pomSeconds<=0){
+   clearInterval(pomTimer);
    alert("🎉 Pomodoro complete!");
    return;
   }
-
-  seconds--;
-
-  let m=Math.floor(seconds/60);
-  let s=seconds%60;
-
-  let el=document.getElementById("timeDisplay");
-
-  if(el)
-   el.innerText=
-   String(m).padStart(2,"0")+":"+
-   String(s).padStart(2,"0");
-
+  pomSeconds--;
+  updatePom();
  },1000);
 }
-
-function resetTimer(){
-
- clearInterval(timerInterval);
- seconds=1500;
-
- let el=document.getElementById("timeDisplay");
-
- if(el)el.innerText="25:00";
+function updatePom(){
+ const el=document.getElementById("pomDisplay");
+ if(!el)return;
+ const m=Math.floor(pomSeconds/60);
+ const s=pomSeconds%60;
+ el.innerText=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+function resetPomodoro(){
+ clearInterval(pomTimer);
+ pomSeconds=1500;
+ updatePom();
 }
 
 
 /* QUICK NOTES */
-
 function quickNotes(){
-
  openModal("📝 Quick Notes",`
- <textarea class="input" id="quick"
- rows="12"
- placeholder="Write your study notes here..."></textarea>
-
+ <textarea class="field" id="quickText" rows="12" placeholder="Write your notes..."></textarea>
  <button class="btn" onclick="saveQuick()">Save</button>
- <button class="btn secondary" onclick="loadQuick()">Load</button>
+ <button class="btn dark" onclick="loadQuick()">Load</button>
  `);
 }
-
 function saveQuick(){
- localStorage.setItem(
-  "studyverseNotes",
-  document.getElementById("quick").value
- );
- alert("Notes saved!");
+ localStorage.setItem("svQuick",document.getElementById("quickText").value);
+ alert("Saved ✅");
 }
-
 function loadQuick(){
- document.getElementById("quick").value=
- localStorage.getItem("studyverseNotes")||"";
+ document.getElementById("quickText").value=localStorage.getItem("svQuick")||"";
 }
 
 
 /* TODO */
-
 function todo(){
-
  openModal("✅ To-Do List",`
- <input class="input" id="task" placeholder="Enter task">
+ <input class="field" id="taskInput" placeholder="Enter study task">
  <button class="btn" onclick="addTask()">Add Task</button>
- <div id="taskList" style="margin-top:20px"></div>
+ <div id="tasks" style="margin-top:15px"></div>
  `);
-
- loadTasks();
+ renderTasks();
 }
-
 function addTask(){
-
- let input=document.getElementById("task");
-
- if(!input.value.trim())return;
-
- let tasks=
- JSON.parse(localStorage.getItem("studyTasks")||"[]");
-
- tasks.push(input.value);
-
- localStorage.setItem("studyTasks",JSON.stringify(tasks));
-
- input.value="";
- loadTasks();
+ const x=document.getElementById("taskInput");
+ if(!x.value.trim())return;
+ const list=JSON.parse(localStorage.getItem("svTasks")||"[]");
+ list.push(x.value.trim());
+ localStorage.setItem("svTasks",JSON.stringify(list));
+ x.value="";
+ renderTasks();
 }
-
-function loadTasks(){
-
- let box=document.getElementById("taskList");
+function renderTasks(){
+ const box=document.getElementById("tasks");
  if(!box)return;
-
- let tasks=
- JSON.parse(localStorage.getItem("studyTasks")||"[]");
-
- box.innerHTML=tasks.map((t,i)=>`
- <div style="
- padding:12px;
- margin:7px 0;
- background:#151520;
- border-radius:10px;
- display:flex;
- justify-content:space-between">
- <span>☐ ${t}</span>
- <button
- onclick="deleteTask(${i})"
- style="background:none;border:0;color:#ff008c;cursor:pointer">
- ×
- </button>
+ const list=JSON.parse(localStorage.getItem("svTasks")||"[]");
+ box.innerHTML=list.map((x,i)=>`
+ <div style="display:flex;justify-content:space-between;padding:11px;margin:6px 0;background:#111723;border-radius:10px">
+ <span>☐ ${escapeHTML(x)}</span>
+ <button onclick="removeTask(${i})" style="background:none;border:0;color:#ff1593;cursor:pointer">×</button>
  </div>
  `).join("");
 }
-
-function deleteTask(i){
-
- let tasks=
- JSON.parse(localStorage.getItem("studyTasks")||"[]");
-
- tasks.splice(i,1);
-
- localStorage.setItem("studyTasks",JSON.stringify(tasks));
-
- loadTasks();
+function removeTask(i){
+ const list=JSON.parse(localStorage.getItem("svTasks")||"[]");
+ list.splice(i,1);
+ localStorage.setItem("svTasks",JSON.stringify(list));
+ renderTasks();
 }
 
 
 /* WORD COUNTER */
-
 function wordCounter(){
-
  openModal("🔤 Word Counter",`
- <textarea
- class="input"
- id="words"
- rows="12"
- placeholder="Paste or type your text..."
- oninput="countWords()"></textarea>
-
+ <textarea class="field" id="wordText" rows="12" oninput="countWords()" placeholder="Type or paste text..."></textarea>
  <h3 id="wordResult">Words: 0 | Characters: 0</h3>
  `);
 }
-
 function countWords(){
-
- let text=document.getElementById("words").value;
-
- let words=text.trim()?
- text.trim().split(/\\s+/).length:0;
-
+ const t=document.getElementById("wordText").value;
+ const w=t.trim()?t.trim().split(/\s+/).length:0;
  document.getElementById("wordResult").innerText=
- "Words: "+words+" | Characters: "+text.length;
+ "Words: "+w+" | Characters: "+t.length;
 }
 
 
 /* FOCUS MODE */
-
 function focusMode(){
-
- document.body.style.background="#000";
-
+ document.body.dataset.focus="1";
  openModal("🎯 Focus Mode",`
  <div style="text-align:center">
- <h3>FOCUS MODE ACTIVATED</h3>
- <p>Close distractions and concentrate on your study session.</p>
- <button class="btn" onclick="closeModal()">Start Studying</button>
+ <h3>FOCUS MODE</h3>
+ <p>Close the modal and concentrate on your current study session.</p>
+ <button class="btn green" onclick="closeModal()">Start Studying</button>
  </div>
  `);
 }
 
 
-/* REACTION GAME */
-
-function reactionGame(){
-
- openModal("⚡ Reaction Game",`
- <div style="text-align:center">
- <p>Wait until the button changes, then click as fast as possible.</p>
- <button id="reactionBtn"
- class="btn"
- style="margin-top:25px"
- onclick="reactionClick()">START</button>
-
- <h2 id="reactionScore" style="margin-top:25px;color:cyan">
- Ready?
- </h2>
- </div>
- `);
+/* SAFE HTML */
+function escapeHTML(text){
+ return String(text)
+ .replace(/&/g,"&amp;")
+ .replace(/</g,"&lt;")
+ .replace(/>/g,"&gt;")
+ .replace(/"/g,"&quot;")
+ .replace(/'/g,"&#039;");
 }
 
-let reactionStart=0;
-let reactionWaiting=false;
+function formatAI(text){
+ return escapeHTML(text)
+ .replace(/\*\*(.*?)\*\*/g,"<b>$1</b>")
+ .replace(/\n/g,"<br>");
+}
 
-function reactionClick(){
 
- let btn=document.getElementById("reactionBtn");
+/* AI */
+let aiBusy=false;
 
- if(!reactionWaiting){
+function addUser(text){
+ document.getElementById("chat").innerHTML+=`
+ <div class="msg user">
+ <div class="avatar">👤</div>
+ <div class="bubble">
+ <strong>You</strong>
+ <p>${escapeHTML(text)}</p>
+ </div>
+ </div>`;
+ scrollChat();
+}
 
-  btn.innerText="WAIT...";
-  btn.disabled=true;
+function addAI(text){
+ document.getElementById("chat").innerHTML+=`
+ <div class="msg">
+ <div class="avatar">🤖</div>
+ <div class="bubble">
+ <strong>StudyVerse AI</strong>
+ <p>${formatAI(text)}</p>
+ </div>
+ </div>`;
+ scrollChat();
+}
 
-  setTimeout(()=>{
+function typing(){
+ document.getElementById("chat").innerHTML+=`
+ <div class="msg" id="typing">
+ <div class="avatar">🤖</div>
+ <div class="bubble">
+ <strong>StudyVerse AI</strong>
+ <div class="dots"><span></span><span></span><span></span></div>
+ </div>
+ </div>`;
+ scrollChat();
+}
 
-   btn.disabled=false;
-   btn.innerText="CLICK!";
-   reactionStart=Date.now();
-   reactionWaiting=true;
+function scrollChat(){
+ const c=document.getElementById("chat");
+ c.scrollTop=c.scrollHeight;
+}
 
-  },Math.random()*3000+1000);
+function quickAI(prompt){
+ const chapter=document.getElementById("aiChapter").value.trim();
+ document.getElementById("aiInput").value=
+ prompt+(chapter?" Topic: "+chapter:"");
+ sendAI();
+}
 
- }else{
+async function sendAI(){
 
-  let score=Date.now()-reactionStart;
+ if(aiBusy)return;
 
-  document.getElementById("reactionScore").innerText=
-  "⚡ Reaction Time: "+score+" ms";
+ const input=document.getElementById("aiInput");
+ const message=input.value.trim();
 
-  btn.innerText="PLAY AGAIN";
-  reactionWaiting=false;
+ if(!message)return;
+
+ const subject=document.getElementById("aiSubject").value;
+ const chapter=document.getElementById("aiChapter").value.trim()||"General";
+
+ aiBusy=true;
+
+ const button=document.getElementById("sendBtn");
+ button.disabled=true;
+ button.innerText="THINKING...";
+
+ addUser(message);
+ input.value="";
+ typing();
+
+ try{
+
+  const response=await fetch("/api/ai",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({
+    message,
+    subject,
+    chapter
+   })
+  });
+
+  const data=await response.json();
+
+  const t=document.getElementById("typing");
+  if(t)t.remove();
+
+  if(!response.ok){
+   addAI(data.error||"AI request failed.");
+  }else{
+   addAI(data.answer||"No answer received.");
+  }
+
+ }catch(error){
+
+  const t=document.getElementById("typing");
+  if(t)t.remove();
+
+  addAI(
+   "⚠️ AI server se connection nahi ho paaya. " +
+   "Agar website static HTML ke roop mein open ki hai, " +
+   "to /api/ai backend run karna hoga."
+  );
+
+ }finally{
+
+  aiBusy=false;
+  button.disabled=false;
+  button.innerText="SEND ➤";
  }
 }
 
+document.getElementById("aiInput").addEventListener("keydown",e=>{
+ if(e.key==="Enter"&&!e.shiftKey){
+  e.preventDefault();
+  sendAI();
+ }
+});
+
 
 /* CAR GAME */
+let carRunning=false;
+let carX=50;
+let carLoop;
 
 function carGame(){
 
  openModal("🚗 Car Racing",`
- <div class="score">Use ← → keys</div>
-
- <div class="gamearea" id="carArea">
- <div class="car" id="car">🚗</div>
+ <div class="gameScore">Use ← → keys</div>
+ <div class="gameArea" id="carArea">
+ <div class="car" id="carPlayer">🚗</div>
  </div>
-
- <div style="text-align:center;margin-top:15px">
+ <div style="text-align:center;margin-top:12px">
  <button class="btn" onclick="startCar()">Start Race</button>
  </div>
  `);
 }
 
-let carPos=50;
-let carRunning=false;
-
 document.addEventListener("keydown",e=>{
-
  if(!carRunning)return;
-
- if(e.key==="ArrowLeft")
-  carPos=Math.max(8,carPos-5);
-
- if(e.key==="ArrowRight")
-  carPos=Math.min(92,carPos+5);
-
- let car=document.getElementById("car");
-
- if(car)car.style.left=carPos+"%";
+ if(e.key==="ArrowLeft")carX=Math.max(7,carX-5);
+ if(e.key==="ArrowRight")carX=Math.min(93,carX+5);
+ const car=document.getElementById("carPlayer");
+ if(car)car.style.left=carX+"%";
 });
 
 function startCar(){
 
- let area=document.getElementById("carArea");
- let car=document.getElementById("car");
-
+ const area=document.getElementById("carArea");
+ const car=document.getElementById("carPlayer");
  if(!area||!car)return;
 
  carRunning=true;
- carPos=50;
+ carX=50;
  car.style.left="50%";
 
  let score=0;
 
- let interval=setInterval(()=>{
+ clearInterval(carLoop);
 
-  if(!carRunning){
-   clearInterval(interval);
-   return;
-  }
+ carLoop=setInterval(()=>{
 
-  let obs=document.createElement("div");
+  if(!carRunning)return;
 
-  obs.className="obstacle";
-  obs.innerText="🧱";
-  obs.style.left=Math.random()*90+"%";
-  obs.style.top="-40px";
+  const rock=document.createElement("div");
+  rock.className="rock";
+  rock.innerText="🧱";
+  rock.style.left=(Math.random()*86+5)+"%";
+  rock.style.top="-45px";
+  area.appendChild(rock);
 
-  area.appendChild(obs);
+  let top=-45;
 
-  let fall=setInterval(()=>{
+  const fall=setInterval(()=>{
 
-   let top=parseInt(obs.style.top||"-40");
-   top+=5;
-   obs.style.top=top+"px";
+   if(!carRunning){
+    clearInterval(fall);
+    return;
+   }
 
-   let obsLeft=parseFloat(obs.style.left);
-   let carLeft=carPos;
+   top+=6;
+   rock.style.top=top+"px";
 
-   if(top>330 &&
-      Math.abs(obsLeft-carLeft)<10){
+   const rx=parseFloat(rock.style.left);
 
+   if(top>330&&Math.abs(rx-carX)<9){
     carRunning=false;
     clearInterval(fall);
-    obs.remove();
-
-    alert("💥 Game Over! Score: "+score);
+    rock.remove();
+    alert("💥 Race Over! Score: "+score);
    }
 
    if(top>420){
-
     clearInterval(fall);
-    obs.remove();
+    rock.remove();
+    score++;
+   }
+
+  },30);
+
+ },800);
+}
+
+
+/* AIRSHIP GAME */
+let airRunning=false;
+let airY=180;
+
+function airGame(){
+
+ openModal("🚀 Airship",`
+ <div class="gameScore">Use ↑ ↓ keys</div>
+ <div class="gameArea" id="airArea">
+ <div class="air" id="airPlayer">🚀</div>
+ </div>
+ <div style="text-align:center;margin-top:12px">
+ <button class="btn" onclick="startAir()">Start Flight</button>
+ </div>
+ `);
+}
+
+document.addEventListener("keydown",e=>{
+ if(!airRunning)return;
+ if(e.key==="ArrowUp")airY=Math.max(10,airY-12);
+ if(e.key==="ArrowDown")airY=Math.min(350,airY+12);
+ const a=document.getElementById("airPlayer");
+ if(a)a.style.top=airY+"px";
+});
+
+function startAir(){
+
+ const area=document.getElementById("airArea");
+ const air=document.getElementById("airPlayer");
+ if(!area||!air)return;
+
+ airRunning=true;
+ airY=180;
+
+ let score=0;
+
+ const loop=setInterval(()=>{
+
+  if(!airRunning){
+   clearInterval(loop);
+   return;
+  }
+
+  const cloud=document.createElement("div");
+  cloud.innerText="☁️";
+  cloud.style.position="absolute";
+  cloud.style.right="-50px";
+  cloud.style.top=Math.random()*330+"px";
+  cloud.style.fontSize="40px";
+  area.appendChild(cloud);
+
+  let right=-50;
+
+  const move=setInterval(()=>{
+
+   if(!airRunning){
+    clearInterval(move);
+    return;
+   }
+
+   right+=6;
+   cloud.style.right=right+"px";
+
+   const cy=parseFloat(cloud.style.top);
+
+   if(right>area.clientWidth-140&&Math.abs(cy-airY)<45){
+    airRunning=false;
+    clearInterval(move);
+    cloud.remove();
+    alert("💥 Airship crashed! Score: "+score);
+   }
+
+   if(right>area.clientWidth){
+    clearInterval(move);
+    cloud.remove();
     score++;
    }
 
@@ -1585,153 +2147,42 @@ function startCar(){
 }
 
 
-/* AIRSHIP GAME */
+/* SHOOTING */
+let shootTimer;
 
-function airshipGame(){
+function shootGame(){
 
- openModal("🚀 Airship Game",`
- <div class="score">Use ↑ ↓ keys</div>
-
- <div class="gamearea" id="airArea">
- <div id="airship"
- style="position:absolute;left:70px;top:180px;font-size:40px">
- 🚀
- </div>
- </div>
-
- <div style="text-align:center;margin-top:15px">
- <button class="btn" onclick="startAir()">Start Flight</button>
+ openModal("🎯 Shooting Game",`
+ <div class="gameScore">Targets Hit: <span id="hitScore">0</span></div>
+ <div class="gameArea" id="shootArea"></div>
+ <div style="text-align:center;margin-top:12px">
+ <button class="btn" onclick="startShoot()">Start Shooting</button>
  </div>
  `);
 }
 
-let airRunning=false;
-let airY=180;
+function startShoot(){
 
-document.addEventListener("keydown",e=>{
-
- if(!airRunning)return;
-
- if(e.key==="ArrowUp")
-  airY=Math.max(10,airY-12);
-
- if(e.key==="ArrowDown")
-  airY=Math.min(350,airY+12);
-
- let air=document.getElementById("airship");
-
- if(air)air.style.top=airY+"px";
-});
-
-function startAir(){
-
- let area=document.getElementById("airArea");
- let air=document.getElementById("airship");
-
- if(!area||!air)return;
-
- airRunning=true;
- airY=180;
-
- let score=0;
-
- let interval=setInterval(()=>{
-
-  if(!airRunning){
-   clearInterval(interval);
-   return;
-  }
-
-  let obs=document.createElement("div");
-
-  obs.innerText="☁️";
-  obs.style.position="absolute";
-  obs.style.right="-50px";
-  obs.style.top=Math.random()*330+"px";
-  obs.style.fontSize="40px";
-
-  area.appendChild(obs);
-
-  let move=setInterval(()=>{
-
-   let right=parseInt(obs.style.right||"-50");
-   right+=5;
-   obs.style.right=right+"px";
-
-   let obstacleY=parseInt(obs.style.top);
-
-   if(right>area.clientWidth-130 &&
-      Math.abs(obstacleY-airY)<45){
-
-    airRunning=false;
-    clearInterval(move);
-    obs.remove();
-
-    alert("💥 Airship crashed! Score: "+score);
-   }
-
-   if(right>area.clientWidth){
-
-    clearInterval(move);
-    obs.remove();
-    score++;
-   }
-
-  },30);
-
- },1000);
-}
-
-
-/* SHOOTING GAME */
-
-function shootingGame(){
-
- openModal("🔫 Shooting Game",`
- <div class="score">
- Targets Hit: <span id="hits">0</span>
- </div>
-
- <div class="gamearea" id="shootArea"
- style="cursor:crosshair">
- </div>
-
- <div style="text-align:center;margin-top:15px">
- <button class="btn" onclick="startShooting()">Start Shooting</button>
- </div>
- `);
-}
-
-let shootInterval;
-
-function startShooting(){
-
- clearInterval(shootInterval);
-
- let area=document.getElementById("shootArea");
- let hits=document.getElementById("hits");
-
+ const area=document.getElementById("shootArea");
+ const scoreEl=document.getElementById("hitScore");
  if(!area)return;
 
- let score=0;
-
+ clearInterval(shootTimer);
  area.innerHTML="";
 
- shootInterval=setInterval(()=>{
+ let score=0;
 
-  let target=document.createElement("div");
+ shootTimer=setInterval(()=>{
 
+  const target=document.createElement("div");
+  target.className="target";
   target.innerText="🎯";
-  target.style.position="absolute";
-  target.style.fontSize="38px";
-  target.style.left=Math.random()*85+"%";
-  target.style.top=Math.random()*80+"%";
-  target.style.cursor="pointer";
+  target.style.left=Math.random()*88+"%";
+  target.style.top=Math.random()*82+"%";
 
   target.onclick=()=>{
-
    score++;
-   hits.innerText=score;
+   scoreEl.innerText=score;
    target.remove();
   };
 
@@ -1739,14 +2190,64 @@ function startShooting(){
 
   setTimeout(()=>{
    if(target.parentElement)target.remove();
-  },1200);
+  },1300);
 
- },700);
+ },650);
 
  setTimeout(()=>{
-  clearInterval(shootInterval);
-  alert("🎯 Game Over! Targets Hit: "+score);
+  clearInterval(shootTimer);
+  alert("🎯 Time Up! Targets Hit: "+score);
  },20000);
+}
+
+
+/* REACTION */
+let reactionReady=false;
+let reactionStart=0;
+
+function reactionGame(){
+
+ openModal("⚡ Reaction Game",`
+ <div style="text-align:center">
+ <p>Wait for GO, then click as quickly as possible.</p>
+ <button
+ id="reactionBtn"
+ class="btn"
+ style="margin-top:25px"
+ onclick="reactionClick()">START</button>
+ <h2 id="reactionResult" style="color:var(--cyan);margin-top:20px">
+ Ready?
+ </h2>
+ </div>
+ `);
+}
+
+function reactionClick(){
+
+ const btn=document.getElementById("reactionBtn");
+ const result=document.getElementById("reactionResult");
+
+ if(!reactionReady){
+
+  btn.disabled=true;
+  btn.innerText="WAIT...";
+
+  setTimeout(()=>{
+   btn.disabled=false;
+   btn.innerText="GO!";
+   reactionStart=Date.now();
+   reactionReady=true;
+  },Math.random()*3000+1200);
+
+ }else{
+
+  const ms=Date.now()-reactionStart;
+
+  result.innerText="⚡ "+ms+" ms";
+
+  btn.innerText="PLAY AGAIN";
+  reactionReady=false;
+ }
 }
 
 </script>
