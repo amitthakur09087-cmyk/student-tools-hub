@@ -1,127 +1,106 @@
 from pathlib import Path
-import zipfile
-
-root = Path("/mnt/data/student_super_hub")
-root.mkdir(exist_ok=True)
-
-html = '''<!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Student Super Hub - free calculators, study tools, planner and quizzes.">
-<title>Student Super Hub</title>
-<link rel="stylesheet" href="style.css">
-</head><body>
-<header><h1>🎓 Student Super Hub</h1><p>Free calculators • study tools • planner • quiz • productivity</p>
-<button class="headbtn" onclick="toggleDark()">🌙 Dark Mode</button>
-<button class="headbtn" onclick="toggleSound()">🔊 <span id="soundText">Sound ON</span></button></header>
-<nav>
-<button onclick="showPage('home')">🏠 Home</button><button onclick="showPage('calc')">🧮 Calculators</button>
-<button onclick="showPage('study')">📚 Study</button><button onclick="showPage('planner')">📅 Planner</button>
-<button onclick="showPage('quiz')">🎯 Quiz</button><button onclick="showPage('tools')">🛠️ Tools</button>
-</nav>
+p=Path("/mnt/data/index.html")
+p.write_text(r'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>StudyVerse — Student Super Hub</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;color:#eef3ff;background:#070b17;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:-40%;z-index:-2;background:radial-gradient(circle at 20% 20%,#285cff35,transparent 28%),radial-gradient(circle at 80% 30%,#ff2bd635,transparent 25%),radial-gradient(circle at 50% 90%,#00e5ff22,transparent 28%);animation:bg 12s linear infinite alternate}
+body:after{content:"";position:fixed;inset:0;z-index:-1;background-image:linear-gradient(#ffffff05 1px,transparent 1px),linear-gradient(90deg,#ffffff05 1px,transparent 1px);background-size:45px 45px;mask-image:linear-gradient(to bottom,#000,transparent)}
+@keyframes bg{to{transform:scale(1.08) rotate(2deg)}}button,input,textarea,select{font:inherit}button{cursor:pointer}
+.top{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:#070b17cc;border-bottom:1px solid #ffffff12;padding:12px 5%;display:flex;align-items:center;justify-content:space-between;gap:15px}.logo{font-size:22px;font-weight:900;letter-spacing:.5px}.logo b{color:#61e7ff}.nav{display:flex;gap:7px;flex-wrap:wrap}.nav button,.ghost{background:#ffffff08;color:#dce7ff;border:1px solid #ffffff14;border-radius:10px;padding:9px 12px}.nav button:hover,.ghost:hover{background:#ffffff15}
+.wrap{max-width:1200px;margin:auto;padding:25px 18px}.hero{text-align:center;padding:55px 15px 35px}.badge{display:inline-block;padding:7px 12px;border:1px solid #61e7ff55;border-radius:999px;background:#61e7ff0d;color:#73eaff;font-size:13px}.hero h1{font-size:clamp(42px,8vw,88px);margin:15px 0 5px;line-height:.95;background:linear-gradient(90deg,#fff,#72eaff,#ff65e7,#fff);background-size:300%;-webkit-background-clip:text;color:transparent;animation:shine 5s linear infinite}@keyframes shine{to{background-position:300%}}.hero p{color:#9eabc4;font-size:17px}.search{max-width:650px;margin:22px auto;display:flex}.search input{flex:1;padding:15px 18px;border-radius:14px 0 0 14px;border:1px solid #ffffff18;background:#0e1425;color:white;outline:none}.search button{border:0;border-radius:0 14px 14px 0;background:#5c6cff;color:white;padding:0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}.card{background:linear-gradient(145deg,#11182bde,#0b1020de);border:1px solid #ffffff12;border-radius:20px;padding:20px;box-shadow:0 15px 50px #0005;backdrop-filter:blur(12px);transition:.25s}.card:hover{transform:translateY(-4px);border-color:#61e7ff44;box-shadow:0 18px 55px #0008,0 0 30px #61e7ff0a}.card h3{margin-top:0}.muted{color:#8e9bb5}.toolicon{font-size:35px}.btn{border:0;border-radius:11px;padding:11px 15px;background:linear-gradient(90deg,#4d63ff,#a33cff);color:#fff;font-weight:800}.btn:hover{filter:brightness(1.15)}.page{display:none}.page.active{display:block}.section-title{margin:35px 0 15px;font-size:28px}.field{width:100%;padding:11px;margin:5px 0 10px;border:1px solid #ffffff18;border-radius:10px;background:#080e1c;color:#fff;outline:none}.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.out{margin-top:10px;padding:12px;border-radius:10px;background:#61e7ff0d;border:1px solid #61e7ff1c;color:#b9f5ff;min-height:42px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{padding:18px;border-radius:15px;background:#ffffff06;text-align:center}.stat b{display:block;font-size:28px;color:#7beeff}.timer{font-size:75px;text-align:center;font-variant-numeric:tabular-nums;margin:20px 0;color:#fff}.todo{display:flex;gap:10px;align-items:center;border-bottom:1px solid #ffffff0c;padding:11px 0}.todo span{flex:1}.done{text-decoration:line-through;color:#65728a}.quiz button{display:block;width:100%;text-align:left;margin:8px 0}.gamebox{text-align:center}.bigscore{font-size:55px;font-weight:900;color:#73eaff}.hidden{display:none!important}footer{text-align:center;color:#69758d;padding:45px 10px}.rgb{height:2px;background:linear-gradient(90deg,#ff2bd6,#61e7ff,#7dff7d,#ffcc55,#ff2bd6);background-size:300%;animation:shine 4s linear infinite}@media(max-width:700px){.top{align-items:flex-start;flex-direction:column}.nav{width:100%}.hero{padding-top:35px}.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="rgb"></div>
+<header class="top"><div class="logo">⚡ <b>Study</b>Verse</div><div class="nav">
+<button onclick="page('home')">Home</button><button onclick="page('calc')">Calculators</button><button onclick="page('study')">Study</button><button onclick="page('games')">Games</button><button onclick="page('tools')">Tools</button><button onclick="dark()">☾</button><button onclick="sound()">🔊</button>
+</div></header>
 <main class="wrap">
-<section id="home" class="page active"><div class="hero center"><h2>Everything a student needs 🚀</h2>
-<p class="muted">Fast, free and browser-based. No paid API required.</p>
-<input id="search" oninput="searchTools()" placeholder="🔍 Search calculators..."></div>
-<div class="grid">
-<div class="card"><h3>🧮 Calculators</h3><p>Percentage, CGPA, interest, BMI, ratio and more.</p><button class="primary" onclick="showPage('calc')">Explore</button></div>
-<div class="card"><h3>⏱️ Focus Timer</h3><p>Pomodoro timer with optional sound effects.</p><button class="primary" onclick="showPage('study')">Start</button></div>
-<div class="card"><h3>✅ To-Do & Planner</h3><p>Your tasks are saved in this browser.</p><button class="primary" onclick="showPage('planner')">Plan</button></div>
-<div class="card"><h3>🎯 Quiz</h3><p>Quick questions with score tracking.</p><button class="primary" onclick="showPage('quiz')">Play</button></div>
+<section id="home" class="page active">
+<div class="hero"><span class="badge">🚀 FREE STUDENT SUPER HUB</span><h1>Study Smarter.</h1><p>Calculators, productivity tools, quizzes and mini-games — all inside one website.</p>
+<div class="search"><input id="find" placeholder="Search a tool..." oninput="findTool()"><button>⌕</button></div></div>
+<div class="stats"><div class="stat"><b id="xp">0</b>XP</div><div class="stat"><b id="done">0</b>Tasks Done</div><div class="stat"><b id="best">0</b>Quiz Best</div><div class="stat"><b id="sessions">0</b>Focus Sessions</div></div>
+<h2 class="section-title">🔥 Quick Access</h2><div class="grid">
+<div class="card"><div class="toolicon">🧮</div><h3>Smart Calculators</h3><p class="muted">Marks, CGPA, BMI, interest, ratio and more.</p><button class="btn" onclick="page('calc')">Open →</button></div>
+<div class="card"><div class="toolicon">⏱️</div><h3>Focus Mode</h3><p class="muted">Pomodoro timer for distraction-free study.</p><button class="btn" onclick="page('study')">Focus →</button></div>
+<div class="card"><div class="toolicon">🎮</div><h3>Mini Games</h3><p class="muted">Reaction test and number challenge.</p><button class="btn" onclick="page('games')">Play →</button></div>
+<div class="card"><div class="toolicon">🛠️</div><h3>Student Tools</h3><p class="muted">Word counter, converters, tables and random tasks.</p><button class="btn" onclick="page('tools')">Explore →</button></div>
 </div>
-<div class="card"><h2>📊 Dashboard</h2><div class="stats"><div><b id="doneStat">0</b><span>Completed tasks</span></div><div><b id="bestStat">0</b><span>Best quiz score</span></div><div><b id="sessionStat">0</b><span>Focus sessions</span></div></div></div>
 </section>
 
-<section id="calc" class="page"><div class="hero"><h2>🧮 Student Calculators</h2></div><div id="calcCards" class="grid">
-<div class="card calc-card"><h3>📊 Percentage</h3><label>Obtained</label><input id="obt"><label>Total</label><input id="total"><button class="primary" onclick="percentage()">Calculate</button><div id="percentOut" class="out"></div></div>
-<div class="card calc-card"><h3>🎓 CGPA → Percentage</h3><label>CGPA (0–10)</label><input id="cgpa" step=".01"><button class="primary" onclick="cg()">Calculate</button><div id="cgOut" class="out"></div><small>Common approximate formula: CGPA × 9.5.</small></div>
-<div class="card calc-card"><h3>➗ Average</h3><label>Numbers, comma separated</label><input id="numbers" placeholder="10,20,30"><button class="primary" onclick="average()">Calculate</button><div id="avgOut" class="out"></div></div>
-<div class="card calc-card"><h3>📈 Percentage Change</h3><label>Old value</label><input id="old"><label>New value</label><input id="new"><button class="primary" onclick="changePct()">Calculate</button><div id="changeOut" class="out"></div></div>
-<div class="card calc-card"><h3>💰 Simple Interest</h3><div class="row"><input id="sip" placeholder="Principal"><input id="sir" placeholder="Rate %"><input id="sit" placeholder="Years"></div><button class="primary" onclick="simpleInterest()">Calculate</button><div id="siOut" class="out"></div></div>
-<div class="card calc-card"><h3>💵 Compound Interest</h3><div class="row"><input id="cip" placeholder="Principal"><input id="cir" placeholder="Rate %"><input id="cit" placeholder="Years"></div><button class="primary" onclick="compoundInterest()">Calculate</button><div id="ciOut" class="out"></div></div>
-<div class="card calc-card"><h3>🎂 Age</h3><label>Date of birth</label><input id="dob" type="date"><button class="primary" onclick="ageCalc()">Calculate</button><div id="ageOut" class="out"></div></div>
-<div class="card calc-card"><h3>⚖️ BMI</h3><input id="weight" placeholder="Weight kg"><input id="height" placeholder="Height cm"><button class="primary" onclick="bmi()">Calculate</button><div id="bmiOut" class="out"></div></div>
-<div class="card calc-card"><h3>📐 Ratio Simplifier</h3><input id="ratio" placeholder="24:36"><button class="primary" onclick="ratioCalc()">Simplify</button><div id="ratioOut" class="out"></div></div>
-<div class="card calc-card"><h3>🔢 % of Number</h3><input id="pct" placeholder="Percent"><input id="pnum" placeholder="Number"><button class="primary" onclick="percentOf()">Calculate</button><div id="pnumOut" class="out"></div></div>
-<div class="card calc-card"><h3>🔁 Fraction → Decimal</h3><input id="num" placeholder="Numerator"><input id="den" placeholder="Denominator"><button class="primary" onclick="fraction()">Convert</button><div id="fracOut" class="out"></div></div>
-<div class="card calc-card"><h3>📏 Speed</h3><input id="distance" placeholder="Distance km"><input id="hours" placeholder="Time hours"><button class="primary" onclick="speed()">Calculate</button><div id="speedOut" class="out"></div></div>
+<section id="calc" class="page"><div class="hero"><span class="badge">🧮 SMART CALCULATORS</span><h2>Do the maths instantly.</h2></div><div class="grid" id="calcGrid">
+<div class="card"><h3>📊 Percentage</h3><input class="field" id="a" placeholder="Obtained"><input class="field" id="b" placeholder="Total"><button class="btn" onclick="pct()">Calculate</button><div id="po" class="out"></div></div>
+<div class="card"><h3>🎓 CGPA → %</h3><input class="field" id="cg" placeholder="CGPA 0–10"><button class="btn" onclick="cg()">Convert</button><div id="cgo" class="out"></div></div>
+<div class="card"><h3>➗ Average</h3><input class="field" id="nums" placeholder="10,20,30"><button class="btn" onclick="avg()">Calculate</button><div id="avo" class="out"></div></div>
+<div class="card"><h3>📈 % Change</h3><input class="field" id="old" placeholder="Old value"><input class="field" id="nw" placeholder="New value"><button class="btn" onclick="chg()">Calculate</button><div id="cho" class="out"></div></div>
+<div class="card"><h3>💰 Simple Interest</h3><div class="row"><input class="field" id="sp" placeholder="P"><input class="field" id="sr" placeholder="Rate %"><input class="field" id="st" placeholder="Years"></div><button class="btn" onclick="si()">Calculate</button><div id="sio" class="out"></div></div>
+<div class="card"><h3>💵 Compound Interest</h3><div class="row"><input class="field" id="cp" placeholder="P"><input class="field" id="cr" placeholder="Rate %"><input class="field" id="ct" placeholder="Years"></div><button class="btn" onclick="ci()">Calculate</button><div id="cio" class="out"></div></div>
+<div class="card"><h3>⚖️ BMI</h3><input class="field" id="w" placeholder="Weight kg"><input class="field" id="h" placeholder="Height cm"><button class="btn" onclick="bmi()">Calculate</button><div id="bmio" class="out"></div></div>
+<div class="card"><h3>📐 Ratio</h3><input class="field" id="rat" placeholder="24:36"><button class="btn" onclick="ratio()">Simplify</button><div id="rato" class="out"></div></div>
+<div class="card"><h3>🔢 % of Number</h3><input class="field" id="pc" placeholder="Percent"><input class="field" id="pn" placeholder="Number"><button class="btn" onclick="ofnum()">Calculate</button><div id="pno" class="out"></div></div>
+<div class="card"><h3>🔁 Fraction → Decimal</h3><input class="field" id="fn" placeholder="Numerator"><input class="field" id="fd" placeholder="Denominator"><button class="btn" onclick="frac()">Convert</button><div id="fro" class="out"></div></div>
 </div></section>
 
-<section id="study" class="page"><div class="hero"><h2>📚 Study Center</h2></div>
-<div class="card center"><h3>⏱️ Pomodoro Timer</h3><div id="timer">25:00</div>
-<button class="primary" onclick="startTimer()">▶ Start</button> <button onclick="pauseTimer()">⏸ Pause</button> <button onclick="resetTimer()">↻ Reset</button>
-<label>Minutes</label><input id="minutes" type="number" value="25" onchange="resetTimer()"></div>
-<div class="card"><h3>📖 Quick Study Tips</h3><ul><li>Break chapters into small goals.</li><li>Use active recall and practice questions.</li><li>Keep distractions away during focus time.</li><li>Take short breaks between sessions.</li></ul></div></section>
+<section id="study" class="page"><div class="hero"><span class="badge">📚 PRODUCTIVITY MODE</span><h2>Focus. Learn. Repeat.</h2></div>
+<div class="grid"><div class="card"><h3>⏱️ Pomodoro</h3><div class="timer" id="timer">25:00</div><div class="center"><button class="btn" onclick="start()">▶ Start</button> <button class="ghost" onclick="pause()">⏸ Pause</button> <button class="ghost" onclick="reset()">↻ Reset</button></div><input class="field" id="mins" type="number" value="25" onchange="reset()"></div>
+<div class="card"><h3>✅ To-Do List</h3><div class="row"><input class="field" id="task" placeholder="Add a task"><button class="btn" onclick="addTask()">Add</button></div><div id="tasks"></div><button class="ghost" onclick="clearDone()">Clear completed</button></div></div>
+<div class="card"><h3>📅 Study Plan</h3><div class="row"><input class="field" id="sub" placeholder="Subject"><input class="field" id="mins2" placeholder="Minutes"><button class="btn" onclick="addPlan()">Add</button></div><div id="plans"></div></div>
+</section>
 
-<section id="planner" class="page"><div class="hero"><h2>📅 Study Planner & To-Do</h2></div>
-<div class="card"><div class="row"><input id="taskInput" placeholder="e.g. Revise Accountancy Chapter 5"><button class="primary" onclick="addTask()">➕ Add</button></div><div id="tasks"></div><button onclick="clearCompleted()">Clear completed</button></div>
-<div class="card"><h3>📋 Study Plan</h3><div class="row"><input id="subject" placeholder="Subject"><input id="studyMinutes" placeholder="Minutes"><button class="primary" onclick="addPlan()">Add</button></div><div id="plans"></div></div></section>
-
-<section id="quiz" class="page"><div class="hero"><h2>🎯 Quick Quiz</h2></div><div class="card" id="quizBox"></div></section>
-
-<section id="tools" class="page"><div class="hero"><h2>🛠️ More Student Tools</h2></div><div class="grid">
-<div class="card"><h3>🔤 Word & Character Counter</h3><textarea id="counter" oninput="counter()"></textarea><div id="counterOut" class="out">Words: 0 | Characters: 0</div></div>
-<div class="card"><h3>🔄 Unit Converter</h3><select id="unitType" onchange="convert()"><option value="km">km → miles</option><option value="mi">miles → km</option><option value="kg">kg → lb</option><option value="lb">lb → kg</option><option value="c">°C → °F</option><option value="f">°F → °C</option></select><input id="unitValue" type="number" oninput="convert()"><div id="unitOut" class="out">Enter a value.</div></div>
-<div class="card"><h3>🔢 Multiplication Table</h3><input id="tableNumber" value="5"><button class="primary" onclick="table()">Generate</button><div id="tableOut" class="out"></div></div>
-<div class="card"><h3>📝 Random Study Task</h3><button class="primary" onclick="studyPrompt()">Give me a task</button><div id="promptOut" class="out">Ready?</div></div>
+<section id="games" class="page"><div class="hero"><span class="badge">🎮 MINI GAME ZONE</span><h2>Take a break & play.</h2></div><div class="grid">
+<div class="card gamebox"><h3>⚡ Reaction Test</h3><p class="muted">Press START, wait for the screen to turn green, then click FAST!</p><div id="react" class="out">Ready?</div><button id="reactBtn" class="btn" onclick="reaction()">START</button><div class="bigscore" id="reactScore">—</div></div>
+<div class="card gamebox"><h3>🔮 Number Guess</h3><p class="muted">Guess a number from 1 to 100.</p><input class="field" id="guess" type="number" placeholder="Your guess"><button class="btn" onclick="guessGame()">Guess</button><div id="guessOut" class="out">New number ready.</div><button class="ghost" onclick="newGuess()">New Game</button></div>
 </div></section>
-</main><footer>Student Super Hub • Free browser-based tools</footer>
-<script src="script.js"></script></body></html>'''
 
-css = ''':root{--bg:#f5f7fb;--card:#fff;--txt:#182033;--muted:#687386;--pri:#315efb;--bd:#dfe5ef}body.dark{--bg:#0d1320;--card:#151d2d;--txt:#eef3ff;--muted:#aab4c8;--bd:#2a3549}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:15px Arial,sans-serif;transition:.2s}header{padding:32px 15px;text-align:center;color:#fff;background:linear-gradient(135deg,#172033,#315efb)}header h1{margin:0;font-size:34px}header p{color:#dce5ff}.headbtn{background:#ffffff20;color:#fff;border:1px solid #ffffff45}button{padding:10px 14px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--txt);cursor:pointer;font-weight:600}.primary{background:var(--pri);color:#fff;border:0}nav{position:sticky;top:0;z-index:10;display:flex;gap:7px;justify-content:center;flex-wrap:wrap;padding:10px;background:var(--card);border-bottom:1px solid var(--bd)}.wrap{max-width:1150px;margin:auto;padding:20px 15px}.page{display:none}.page.active{display:block}.hero,.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:20px;margin-bottom:15px;box-shadow:0 5px 22px #0000000a}.center{text-align:center}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:14px}.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:9px}label{display:block;font-weight:bold;margin:9px 0 5px}input,select,textarea{width:100%;padding:11px;margin:4px 0;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--txt)}textarea{min-height:110px}.out{margin-top:10px;padding:11px;border-radius:10px;background:#edf8ef;color:#187346;font-weight:bold}.muted,small{color:var(--muted)}#timer{font-size:58px;font-variant-numeric:tabular-nums;margin:20px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stats div{padding:15px;background:var(--bg);border-radius:12px;text-align:center}.stats b{display:block;font-size:28px}.stats span{color:var(--muted)}.todo{display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--bd);padding:10px 0}.todo span{flex:1}.done{text-decoration:line-through;color:var(--muted)}footer{text-align:center;color:var(--muted);padding:30px}@media(max-width:600px){header h1{font-size:28px}.stats{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}'''
-
-js = '''let soundOn=localStorage.getItem("sound")!=="0",audio;
-document.getElementById("soundText").textContent=soundOn?"Sound ON":"Sound OFF";
-function beep(freq=650,d=.08){if(!soundOn)return;try{audio=audio||new(window.AudioContext||window.webkitAudioContext)();let o=audio.createOscillator(),g=audio.createGain();o.frequency.value=freq;g.gain.value=.04;o.connect(g);g.connect(audio.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+d);o.stop(audio.currentTime+d)}catch(e){}}
-function toggleSound(){soundOn=!soundOn;localStorage.setItem("sound",soundOn?"1":"0");document.getElementById("soundText").textContent=soundOn?"Sound ON":"Sound OFF";beep()}
-function toggleDark(){document.body.classList.toggle("dark");localStorage.setItem("dark",document.body.classList.contains("dark")?"1":"0");beep(450)}
-if(localStorage.getItem("dark")==="1")document.body.classList.add("dark");
-function showPage(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");scrollTo(0,0);beep(550)}
-const v=id=>Number(document.getElementById(id).value);
-function percentage(){document.getElementById("percentOut").textContent=v("total")?`Percentage = ${(v("obt")/v("total")*100).toFixed(2)}%`:"Enter valid values."}
-function cg(){let x=v("cgpa");document.getElementById("cgOut").textContent=x>=0&&x<=10?`Approx. Percentage = ${(x*9.5).toFixed(2)}%`:"Enter CGPA from 0 to 10."}
-function average(){let a=document.getElementById("numbers").value.split(",").map(Number).filter(x=>!isNaN(x));document.getElementById("avgOut").textContent=a.length?`Average = ${(a.reduce((x,y)=>x+y,0)/a.length).toFixed(2)}`:"Enter numbers."}
-function changePct(){let a=v("old"),b=v("new");document.getElementById("changeOut").textContent=a?`${(((b-a)/a)*100).toFixed(2)}% ${b>=a?"increase":"decrease"}`:"Old value cannot be zero."}
-function simpleInterest(){let p=v("sip"),r=v("sir"),t=v("sit"),x=p*r*t/100;document.getElementById("siOut").textContent=`SI = ₹${x.toFixed(2)} | Amount = ₹${(p+x).toFixed(2)}`}
-function compoundInterest(){let p=v("cip"),r=v("cir"),t=v("cit"),a=p*Math.pow(1+r/100,t);document.getElementById("ciOut").textContent=`Interest = ₹${(a-p).toFixed(2)} | Amount = ₹${a.toFixed(2)}`}
-function ageCalc(){let d=new Date(document.getElementById("dob").value),n=new Date();if(isNaN(d)){document.getElementById("ageOut").textContent="Enter date of birth.";return}let y=n.getFullYear()-d.getFullYear(),m=n.getMonth()-d.getMonth(),day=n.getDate()-d.getDate();if(day<0){m--;day+=new Date(n.getFullYear(),n.getMonth(),0).getDate()}if(m<0){y--;m+=12}document.getElementById("ageOut").textContent=`Age = ${y} years, ${m} months, ${day} days`}
-function bmi(){let x=v("weight")/Math.pow(v("height")/100,2);document.getElementById("bmiOut").textContent=v("weight")>0&&v("height")>0?`BMI = ${x.toFixed(1)}`:"Enter valid values."}
-function gcd(a,b){while(b)[a,b]=[b,a%b];return Math.abs(a)}
-function ratioCalc(){let a=document.getElementById("ratio").value.split(":").map(Number);if(a.length!==2||!a[0]||!a[1]){document.getElementById("ratioOut").textContent="Use format like 24:36.";return}let g=gcd(a[0],a[1]);document.getElementById("ratioOut").textContent=`Simplified ratio = ${a[0]/g}:${a[1]/g}`}
-function percentOf(){document.getElementById("pnumOut").textContent=`Result = ${(v("pct")*v("pnum")/100).toFixed(2)}`}
-function fraction(){document.getElementById("fracOut").textContent=v("den")?`Decimal = ${(v("num")/v("den")).toFixed(6)}`:"Denominator cannot be zero."}
-function speed(){document.getElementById("speedOut").textContent=v("hours")>0?`Speed = ${(v("distance")/v("hours")).toFixed(2)} km/h`:"Time must be greater than zero."}
-let timerID,remaining=1500;function updateTimer(){document.getElementById("timer").textContent=`${String(Math.floor(remaining/60)).padStart(2,"0")}:${String(remaining%60).padStart(2,"0")}`}
-function resetTimer(){clearInterval(timerID);timerID=null;remaining=Math.max(1,v("minutes")||25)*60;updateTimer()}function startTimer(){if(timerID)return;beep(750);timerID=setInterval(()=>{remaining--;updateTimer();if(remaining<=0){clearInterval(timerID);timerID=null;beep(1100,.15);setTimeout(()=>beep(1400,.15),180);localStorage.setItem("sessions",(Number(localStorage.getItem("sessions"))||0)+1);stats();alert("Focus session complete! 🎉")}},1000)}function pauseTimer(){clearInterval(timerID);timerID=null;beep(450)}resetTimer();
-let tasks=JSON.parse(localStorage.getItem("tasks")||"[]");function saveTasks(){localStorage.setItem("tasks",JSON.stringify(tasks));renderTasks();stats()}function addTask(){let x=document.getElementById("taskInput").value.trim();if(!x)return;tasks.push({x,done:false});document.getElementById("taskInput").value="";saveTasks();beep(650)}function toggleTask(i){tasks[i].done=!tasks[i].done;saveTasks();beep(tasks[i].done?900:450)}function deleteTask(i){tasks.splice(i,1);saveTasks()}function clearCompleted(){tasks=tasks.filter(x=>!x.done);saveTasks()}function renderTasks(){document.getElementById("tasks").innerHTML=tasks.length?tasks.map((x,i)=>`<div class="todo"><input type="checkbox" ${x.done?"checked":""} onchange="toggleTask(${i})"><span class="${x.done?"done":""}">${safe(x.x)}</span><button onclick="deleteTask(${i})">✕</button></div>`).join(""):"<p class='muted'>No tasks yet.</p>"}function safe(s){return s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}renderTasks();
-let plans=JSON.parse(localStorage.getItem("plans")||"[]");function addPlan(){let s=document.getElementById("subject").value.trim(),m=v("studyMinutes");if(!s||!m)return;plans.push({s,m});localStorage.setItem("plans",JSON.stringify(plans));renderPlans()}function renderPlans(){document.getElementById("plans").innerHTML=plans.length?plans.map((x,i)=>`<div class="todo"><span>📚 ${safe(x.s)} — ${x.m} min</span><button onclick="plans.splice(${i},1);localStorage.setItem('plans',JSON.stringify(plans));renderPlans()">✕</button></div>`).join(""):"<p class='muted'>No plan yet.</p>"}renderPlans();
-const questions=[["What is 25% of 200?",["25","40","50","75"],2],["Which planet is called the Red Planet?",["Earth","Mars","Jupiter","Venus"],1],["What is 12 × 8?",["86","96","108","112"],1],["Minutes in 2 hours?",["60","100","120","180"],2],["HTML stands for?",["HyperText Markup Language","HighText Machine Language","Home Tool Markup Language","Hyper Tool Link"],0]];
-let qi=0,score=0;function renderQuiz(){let q=questions[qi];document.getElementById("quizBox").innerHTML=`<h3>Question ${qi+1}/${questions.length}</h3><h2>${q[0]}</h2>${q[1].map((x,i)=>`<button onclick="answer(${i})">${x}</button>`).join("")}<p class='muted'>Score: ${score}</p>`}function answer(i){let q=questions[qi];if(i===q[2]){score++;beep(900)}else beep(220,.15);qi++;if(qi===questions.length){localStorage.setItem("best",Math.max(score,Number(localStorage.getItem("best"))||0));document.getElementById("quizBox").innerHTML=`<div class='center'><h2>🏆 Quiz Complete</h2><div class='stat'>${score}/${questions.length}</div><button class='primary' onclick='qi=0;score=0;renderQuiz()'>Play Again</button></div>`;stats()}else renderQuiz()}renderQuiz();
-function counter(){let t=document.getElementById("counter").value;document.getElementById("counterOut").textContent=`Words: ${t.trim()?t.trim().split(/\\s+/).length:0} | Characters: ${t.length} | Without spaces: ${t.replace(/\\s/g,"").length}`}
-function convert(){let x=v("unitValue"),t=document.getElementById("unitType").value,m={km:[x*.621371,"miles"],mi:[x*1.609344,"km"],kg:[x*2.20462,"lb"],lb:[x*.453592,"kg"],c:[x*9/5+32,"°F"],f:[(x-32)*5/9,"°C"]}[t];document.getElementById("unitOut").textContent=isNaN(x)?"Enter a value.":`Result = ${m[0].toFixed(3)} ${m[1]}`}
-function table(){let x=v("tableNumber");document.getElementById("tableOut").innerHTML=Array.from({length:10},(_,i)=>`${x} × ${i+1} = ${x*(i+1)}`).join("<br>")}
-function studyPrompt(){let a=["Revise 10 definitions.","Solve 5 practice questions.","Explain one difficult topic without notes.","Review yesterday's notes.","Make 10 flashcards."];document.getElementById("promptOut").textContent=a[Math.floor(Math.random()*a.length)];beep(700)}
-function searchTools(){let q=document.getElementById("search").value.toLowerCase();document.querySelectorAll(".calc-card").forEach(c=>c.style.display=!q||c.innerText.toLowerCase().includes(q)?"block":"none");if(q)showPage("calc")}
-function stats(){document.getElementById("doneStat").textContent=tasks.filter(x=>x.done).length;document.getElementById("bestStat").textContent=localStorage.getItem("best")||0;document.getElementById("sessionStat").textContent=localStorage.getItem("sessions")||0}stats();'''
-
-(root/"index.html").write_text(html,encoding="utf-8")
-(root/"style.css").write_text(css,encoding="utf-8")
-(root/"script.js").write_text(js,encoding="utf-8")
-(root/"README.txt").write_text("""STUDENT SUPER HUB
-Files:
-- index.html
-- style.css
-- script.js
-
-Upload all 3 files to the same GitHub repository folder.
-GitHub Pages should use main branch and / (root).
-""",encoding="utf-8")
-
-zip_path=Path("/mnt/data/student_super_hub.zip")
-with zipfile.ZipFile(zip_path,"w",zipfile.ZIP_DEFLATED) as z:
-    for f in root.iterdir():
-        z.write(f,f.name)
-
-print(f"Created: {zip_path}")
-print(f"Folder: {root}")
-
+<section id="tools" class="page"><div class="hero"><span class="badge">🛠️ STUDENT TOOLKIT</span><h2>Small tools. Big convenience.</h2></div><div class="grid">
+<div class="card"><h3>🔤 Word Counter</h3><textarea class="field" id="text" oninput="counter()" placeholder="Paste or type text..."></textarea><div id="counto" class="out">Words: 0 | Characters: 0</div></div>
+<div class="card"><h3>🔄 Unit Converter</h3><select class="field" id="unit" onchange="convert()"><option value="km">km → miles</option><option value="mi">miles → km</option><option value="kg">kg → lb</option><option value="lb">lb → kg</option><option value="c">°C → °F</option><option value="f">°F → °C</option></select><input class="field" id="uv" type="number" oninput="convert()"><div id="uo" class="out">Enter a value.</div></div>
+<div class="card"><h3>🔢 Multiplication Table</h3><input class="field" id="tn" value="5"><button class="btn" onclick="table()">Generate</button><div id="to" class="out"></div></div>
+<div class="card"><h3>📝 Random Study Task</h3><button class="btn" onclick="promptTask()">Give me a challenge</button><div id="pro" class="out">Ready?</div></div>
+<div class="card"><h3>🎲 Random Number</h3><div class="row"><input class="field" id="min" value="1"><input class="field" id="max" value="100"></div><button class="btn" onclick="randomNum()">Generate</button><div id="rnd" class="out"></div></div>
+</div></section>
+</main>
+<footer>StudyVerse © 2026 • Built as a single HTML file • Your data stays in your browser</footer>
+<script>
+let soundOn=localStorage.getItem("svsound")!=="0",ctx,timerID,rem=1500,xp=+localStorage.getItem("svxp")||0;
+function beep(f=600,d=.08){if(!soundOn)return;try{ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=f;g.gain.value=.035;o.connect(g);g.connect(ctx.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+d);o.stop(ctx.currentTime+d)}catch(e){}}
+function sound(){soundOn=!soundOn;localStorage.setItem("svsound",soundOn?"1":"0");beep()}
+function dark(){document.body.classList.toggle("light");if(document.body.classList.contains("light"))document.body.style.filter="";else document.body.style.filter="";beep(450)}
+function page(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");scrollTo(0,0);beep(520)}
+const n=id=>Number(document.getElementById(id).value);
+function pct(){document.getElementById("po").textContent=n("b")?`Result: ${(n("a")/n("b")*100).toFixed(2)}%`:"Enter values."}
+function cg(){let x=n("cg");document.getElementById("cgo").textContent=x>=0&&x<=10?`Approx. ${ (x*9.5).toFixed(2)}%`:"Enter CGPA 0–10."}
+function avg(){let a=document.getElementById("nums").value.split(",").map(Number).filter(Number.isFinite);document.getElementById("avo").textContent=a.length?`Average: ${(a.reduce((x,y)=>x+y,0)/a.length).toFixed(2)}`:"Enter numbers."}
+function chg(){let a=n("old"),b=n("nw");document.getElementById("cho").textContent=a?`${(((b-a)/a)*100).toFixed(2)}% ${b>=a?"increase":"decrease"}`:"Old value cannot be zero."}
+function si(){let p=n("sp"),r=n("sr"),t=n("st"),i=p*r*t/100;document.getElementById("sio").textContent=`SI ₹${i.toFixed(2)} | Amount ₹${(p+i).toFixed(2)}`}
+function ci(){let p=n("cp"),r=n("cr"),t=n("ct"),a=p*Math.pow(1+r/100,t);document.getElementById("cio").textContent=`Interest ₹${(a-p).toFixed(2)} | Amount ₹${a.toFixed(2)}`}
+function bmi(){let x=n("w")/Math.pow(n("h")/100,2);document.getElementById("bmio").textContent=n("w")&&n("h")?`BMI: ${x.toFixed(1)}`:"Enter valid values."}
+function gcd(a,b){while(b)[a,b]=[b,a%b];return Math.abs(a)}function ratio(){let a=document.getElementById("rat").value.split(":").map(Number);if(a.length!==2)return document.getElementById("rato").textContent="Use 24:36";let g=gcd(a[0],a[1]);document.getElementById("rato").textContent=`${a[0]/g}:${a[1]/g}`}
+function ofnum(){document.getElementById("pno").textContent=`Result: ${(n("pc")*n("pn")/100).toFixed(2)}`}
+function frac(){document.getElementById("fro").textContent=n("fd")?`Decimal: ${(n("fn")/n("fd")).toFixed(6)}`:"Denominator cannot be zero."}
+function update(){document.getElementById("timer").textContent=`${String(Math.floor(rem/60)).padStart(2,"0")}:${String(rem%60).padStart(2,"0")}`}
+function reset(){clearInterval(timerID);timerID=null;rem=Math.max(1,n("mins")||25)*60;update()}function start(){if(timerID)return;timerID=setInterval(()=>{rem--;update();if(rem<=0){clearInterval(timerID);timerID=null;beep(1100,.15);localStorage.setItem("svsessions",(+localStorage.getItem("svsessions")||0)+1);stats();alert("🎉 Focus session complete!")}},1000);beep(750)}function pause(){clearInterval(timerID);timerID=null;beep(400)}reset();
+let tasks=JSON.parse(localStorage.getItem("svtasks")||"[]");function saveTasks(){localStorage.setItem("svtasks",JSON.stringify(tasks));renderTasks();stats()}function addTask(){let x=document.getElementById("task").value.trim();if(!x)return;tasks.push({x,done:false});document.getElementById("task").value="";saveTasks();gain(10);beep(700)}function renderTasks(){document.getElementById("tasks").innerHTML=tasks.length?tasks.map((t,i)=>`<div class="todo"><input type="checkbox" ${t.done?"checked":""} onchange="toggleTask(${i})"><span class="${t.done?"done":""}">${escape(t.x)}</span><button class="ghost" onclick="delTask(${i})">✕</button></div>`).join(""):"<p class='muted'>No tasks yet.</p>"}function toggleTask(i){tasks[i].done=!tasks[i].done;saveTasks();if(tasks[i].done)gain(20)}function delTask(i){tasks.splice(i,1);saveTasks()}function clearDone(){tasks=tasks.filter(x=>!x.done);saveTasks()}function escape(s){return s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}renderTasks();
+let plans=JSON.parse(localStorage.getItem("svplans")||"[]");function addPlan(){let s=document.getElementById("sub").value,m=n("mins2");if(!s||!m)return;plans.push({s,m});localStorage.setItem("svplans",JSON.stringify(plans));renderPlans()}function renderPlans(){document.getElementById("plans").innerHTML=plans.map((x,i)=>`<div class="todo"><span>📚 ${escape(x.s)} — ${x.m} min</span><button class="ghost" onclick="plans.splice(${i},1);localStorage.setItem('svplans',JSON.stringify(plans));renderPlans()">✕</button></div>`).join("")||"<p class='muted'>No study plan yet.</p>"}renderPlans();
+const qs=[["25% of 200?",["25","40","50","75"],2],["Red Planet?",["Earth","Mars","Jupiter","Venus"],1],["12 × 8?",["86","96","108","112"],1],["2 hours = ? minutes",["60","100","120","180"],2],["HTML stands for?",["HyperText Markup Language","HighText Machine Language","Home Tool Markup Language","Hyper Tool Link"],0]];let qi=0,score=0;
+function quizRender(){let q=qs[qi];document.getElementById("quizBox")?.remove();let c=document.createElement("div");c.id="quizBox";c.className="card";c.innerHTML=`<h3>🎯 Quiz ${qi+1}/${qs.length}</h3><h2>${q[0]}</h2>${q[1].map((x,i)=>`<button class="ghost" onclick="answer(${i})">${x}</button>`).join("")}<p class="muted">Score: ${score}</p>`;document.getElementById("games").appendChild(c)}
+function answer(i){let q=qs[qi];if(i===q[2]){score++;gain(25);beep(900)}else beep(220,.12);qi++;if(qi===qs.length){let b=Math.max(score,+localStorage.getItem("svbest")||0);localStorage.setItem("svbest",b);alert(`🏆 Quiz: ${score}/${qs.length}`);qi=0;score=0}quizRender()}
+quizRender();
+function reaction(){let b=document.getElementById("reactBtn"),r=document.getElementById("react");if(b.dataset.go==="1"){let ms=Date.now()-+b.dataset.time;r.textContent=`⚡ ${ms} ms — ${ms<250?"INSANE!":ms<400?"Great!":"Keep practicing!"}`;document.getElementById("reactScore").textContent=ms+"ms";b.dataset.go="0";gain(Math.max(5,Math.floor(500/ms*10)));beep(900);return}r.textContent="WAIT...";b.textContent="WAIT...";b.dataset.go="0";setTimeout(()=>{r.textContent="🟢 CLICK NOW!";b.textContent="CLICK!";b.dataset.go="1";b.dataset.time=Date.now();beep(1000)},1000+Math.random()*3000)}
+let secret=Math.floor(Math.random()*100)+1;function newGuess(){secret=Math.floor(Math.random()*100)+1;document.getElementById("guessOut").textContent="New number ready."}function guessGame(){let g=n("guess");if(!g)return;if(g===secret){document.getElementById("guessOut").textContent="🎉 Correct! New number generated.";gain(30);newGuess()}else document.getElementById("guessOut").textContent=g<secret?"⬆️ Too low!":"⬇️ Too high!"}
+function counter(){let t=document.getElementById("text").value;document.getElementById("counto").textContent=`Words: ${t.trim()?t.trim().split(/\\s+/).length:0} | Characters: ${t.length}`}
+function convert(){let x=n("uv"),u=document.getElementById("unit").value,m={km:[x*.621371,"miles"],mi:[x*1.609344,"km"],kg:[x*2.20462,"lb"],lb:[x*.453592,"kg"],c:[x*9/5+32,"°F"],f:[(x-32)*5/9,"°C"]}[u];document.getElementById("uo").textContent=isNaN(x)?"Enter a value.":`Result: ${m[0].toFixed(3)} ${m[1]}`}
+function table(){let x=n("tn");document.getElementById("to").innerHTML=Array.from({length:10},(_,i)=>`${x} × ${i+1} = ${x*(i+1)}`).join("<br>")}
+function promptTask(){let a=["Revise 10 definitions.","Solve 5 practice questions.","Make 10 flashcards.","Explain one difficult topic without notes.","Review yesterday's notes."];document.getElementById("pro").textContent=a[Math.floor(Math.random()*a.length)];gain(5);beep(700)}
+function randomNum(){let a=n("min"),b=n("max");if(b<a)[a,b]=[b,a];document.getElementById("rnd").textContent=Math.floor(Math.random()*(b-a+1))+a}
+function findTool(){let q=document.getElementById("find").value.toLowerCase();if(!q)return;page("calc");document.querySelectorAll("#calcGrid .card").forEach(c=>c.classList.toggle("hidden",!c.innerText.toLowerCase().includes(q)))}
+function gain(x){xp+=x;localStorage.setItem("svxp",xp);stats()}function stats(){document.getElementById("xp").textContent=xp;document.getElementById("done").textContent=tasks.filter(x=>x.done).length;document.getElementById("best").textContent=localStorage.getItem("svbest")||0;document.getElementById("sessions").textContent=localStorage.getItem("svsessions")||0}stats();
+</script>
+</body></html>''',encoding="utf-8")
+print(p)
