@@ -1,158 +1,189 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Student Tools Hub | Free Student Calculators & Study Tools</title>
+<title>Student Tools Hub - Free Student Tools & Games</title>
 
-<meta name="description" content="Student Tools Hub provides free percentage, CGPA, GPA, attendance, marks, age, interest calculators, study planner, Pomodoro timer, exam countdown, timetable, to-do list and games.">
-
-<meta name="keywords" content="student tools, percentage calculator, CGPA calculator, GPA calculator, attendance calculator, study tools, exam countdown, Pomodoro timer">
-
-<meta name="author" content="Student Tools Hub">
+<meta name="description" content="Student Tools Hub - free calculators, study tools and browser games for students.">
 
 <style>
-
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
-
-html{
-scroll-behavior:smooth;
-}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 
 body{
-font-family:Arial,Helvetica,sans-serif;
-background:#f4f7fb;
-color:#172033;
-transition:.3s;
+margin:0;
+font-family:Arial,sans-serif;
+background:#070b16;
+color:#f8fafc;
+min-height:100vh;
+overflow-x:hidden;
 }
 
-body.dark{
-background:#0f172a;
-color:#f8fafc;
+/* RGB SIDE LIGHTS */
+
+body:before,
+body:after{
+content:"";
+position:fixed;
+top:0;
+bottom:0;
+width:5px;
+z-index:999;
+background:linear-gradient(
+180deg,
+#ff0055,
+#7c3aed,
+#00e5ff,
+#00ff88,
+#ffe600,
+#ff0055
+);
+background-size:100% 500%;
+animation:rgbMove 5s linear infinite;
+box-shadow:
+0 0 15px #ff0055,
+0 0 30px #00e5ff,
+0 0 45px #7c3aed;
+}
+
+body:before{left:0}
+body:after{right:0}
+
+@keyframes rgbMove{
+0%{background-position:0 0}
+100%{background-position:0 500%}
 }
 
 /* HEADER */
 
 header{
-background:linear-gradient(135deg,#315efb,#7c3aed);
-color:white;
 padding:45px 20px;
 text-align:center;
+background:
+radial-gradient(circle at 20% 30%,#315efb55,transparent 35%),
+radial-gradient(circle at 80% 60%,#e600ff44,transparent 35%),
+#0b1020;
+border-bottom:1px solid #ffffff18;
 }
 
-header h1{
-font-size:42px;
-margin-bottom:10px;
+.logo{
+font-size:44px;
+font-weight:900;
+background:linear-gradient(
+90deg,
+#ff0055,
+#7c3aed,
+#00e5ff,
+#00ff88,
+#ffe600
+);
+-webkit-background-clip:text;
+color:transparent;
+animation:hue 4s linear infinite;
+}
+
+@keyframes hue{
+to{filter:hue-rotate(360deg)}
 }
 
 header p{
+color:#b9c2d5;
 font-size:17px;
-opacity:.9;
 }
 
-/* NAVBAR */
+/* NAV */
 
 nav{
 position:sticky;
 top:0;
 z-index:100;
 display:flex;
-align-items:center;
-justify-content:center;
 gap:8px;
-flex-wrap:wrap;
-padding:13px;
-background:white;
-box-shadow:0 3px 15px #00000012;
-}
-
-body.dark nav{
-background:#111827;
+padding:12px;
+overflow-x:auto;
+background:#0b1020ee;
+backdrop-filter:blur(12px);
+border-bottom:1px solid #ffffff15;
 }
 
 nav button{
-border:none;
-padding:9px 14px;
+white-space:nowrap;
+border:1px solid #ffffff15;
+background:#151d31;
+color:white;
+padding:10px 15px;
 border-radius:20px;
-background:#eef2ff;
-color:#172033;
 cursor:pointer;
-font-weight:600;
 transition:.2s;
 }
 
 nav button:hover{
-transform:translateY(-2px);
 background:#315efb;
-color:white;
-}
-
-body.dark nav button{
-background:#1f2937;
-color:white;
+box-shadow:0 0 15px #315efb;
+transform:translateY(-2px);
 }
 
 /* CONTAINER */
 
 .container{
-max-width:1150px;
+max-width:1200px;
 margin:auto;
-padding:25px 16px;
+padding:25px 18px;
 }
 
-/* HERO */
+/* HOME */
+
+.tool{
+display:none;
+}
+
+.tool.active{
+display:block;
+}
 
 .hero{
-background:white;
-border-radius:24px;
-padding:35px;
+text-align:center;
+padding:35px 20px;
 margin-bottom:25px;
-box-shadow:0 10px 30px #00000008;
-}
-
-body.dark .hero,
-body.dark .card{
-background:#1e293b;
+border-radius:25px;
+background:
+linear-gradient(135deg,#111a30,#101525);
+border:1px solid #ffffff12;
+box-shadow:
+0 0 30px #315efb18;
 }
 
 .hero h2{
-font-size:30px;
-margin-bottom:10px;
+font-size:32px;
+margin:0 0 10px;
 }
 
 .hero p{
-color:#64748b;
-margin-bottom:20px;
+color:#aeb8cc;
 }
-
-body.dark .hero p{
-color:#cbd5e1;
-}
-
-/* SEARCH */
 
 .search{
 max-width:650px;
-margin:auto;
+margin:25px auto 0;
 }
 
 .search input{
 width:100%;
 padding:16px 20px;
-border:2px solid #e2e8f0;
 border-radius:15px;
+border:1px solid #334155;
+background:#080d19;
+color:white;
 font-size:16px;
 outline:none;
 }
 
 .search input:focus{
-border-color:#315efb;
+border-color:#00e5ff;
+box-shadow:0 0 15px #00e5ff44;
 }
 
 /* GRID */
@@ -164,78 +195,66 @@ repeat(auto-fit,minmax(240px,1fr));
 gap:18px;
 }
 
-/* CARD */
+/* CARDS */
 
 .card{
-background:white;
+background:#101827;
+border:1px solid #ffffff12;
 border-radius:20px;
 padding:22px;
-box-shadow:0 8px 25px #00000008;
+box-shadow:0 10px 30px #0005;
 }
-
-.card h2{
-margin-bottom:15px;
-}
-
-.card h3{
-margin-bottom:8px;
-}
-
-.card p{
-color:#64748b;
-margin-bottom:15px;
-}
-
-body.dark .card p{
-color:#cbd5e1;
-}
-
-/* TOOL CARDS */
 
 .tool-card{
 transition:.25s;
 }
 
 .tool-card:hover{
-transform:translateY(-5px);
-box-shadow:0 15px 35px #00000012;
+transform:translateY(-7px);
+border-color:#315efb88;
+box-shadow:
+0 10px 35px #315efb22,
+0 0 20px #7c3aed15;
 }
 
-.tool-icon{
-font-size:35px;
+.icon{
+font-size:38px;
 margin-bottom:10px;
+}
+
+.card p{
+color:#9da8bb;
+line-height:1.5;
 }
 
 /* BUTTONS */
 
+button{
+font-family:inherit;
+}
+
 .primary,
 .secondary,
 .danger{
-border:none;
+border:0;
 padding:11px 17px;
-border-radius:11px;
-cursor:pointer;
+border-radius:10px;
 font-weight:bold;
-transition:.2s;
+cursor:pointer;
 }
 
 .primary{
-background:#315efb;
+background:linear-gradient(135deg,#315efb,#7c3aed);
 color:white;
+box-shadow:0 5px 15px #315efb33;
 }
 
 .primary:hover{
-background:#244bd1;
-transform:translateY(-1px);
+box-shadow:0 0 20px #315efb88;
 }
 
 .secondary{
-background:#eef2f7;
-color:#172033;
-}
-
-body.dark .secondary{
-background:#374151;
+background:#202b3e;
 color:white;
 }
 
@@ -251,17 +270,6 @@ flex-wrap:wrap;
 margin-top:15px;
 }
 
-/* TOOLS */
-
-.tool{
-display:none;
-margin-top:22px;
-}
-
-.tool.active{
-display:block;
-}
-
 /* INPUTS */
 
 label{
@@ -270,24 +278,20 @@ font-weight:bold;
 margin:14px 0 6px;
 }
 
-input,
-select,
-textarea{
+input,select{
 width:100%;
 padding:12px;
-border:1px solid #cbd5e1;
 border-radius:10px;
+border:1px solid #334155;
+background:#080d19;
+color:white;
 font-size:16px;
-background:white;
-color:#172033;
+outline:none;
 }
 
-body.dark input,
-body.dark select,
-body.dark textarea{
-background:#0f172a;
-color:white;
-border-color:#475569;
+input:focus,select:focus{
+border-color:#00e5ff;
+box-shadow:0 0 10px #00e5ff33;
 }
 
 /* RESULT */
@@ -296,15 +300,11 @@ border-color:#475569;
 margin-top:15px;
 padding:15px;
 border-radius:12px;
-background:#ecfdf5;
-color:#166534;
+background:#092d24;
+border:1px solid #00ff8844;
+color:#9fffd0;
 font-weight:bold;
-min-height:25px;
-}
-
-body.dark .result{
-background:#163b2a;
-color:#bbf7d0;
+min-height:20px;
 }
 
 /* FORMULA */
@@ -312,44 +312,142 @@ color:#bbf7d0;
 .formula{
 margin-top:12px;
 padding:13px;
+background:#182235;
 border-radius:10px;
-background:#f1f5f9;
-}
-
-body.dark .formula{
-background:#334155;
-}
-
-/* NOTE */
-
-.note{
-font-size:14px;
-color:#64748b;
-margin-top:10px;
-}
-
-body.dark .note{
 color:#cbd5e1;
 }
 
-/* TABLE */
+/* TIMER */
 
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:15px;
+.timer{
+font-size:70px;
+text-align:center;
+font-weight:bold;
+margin:25px;
+text-shadow:
+0 0 10px #00e5ff,
+0 0 25px #7c3aed;
 }
 
-th,
-td{
-border:1px solid #cbd5e1;
-padding:10px;
-text-align:left;
+/* GAME AREA */
+
+.game-area{
+height:420px;
+position:relative;
+overflow:hidden;
+border-radius:20px;
+background:
+radial-gradient(circle at 20% 30%,#315efb44,transparent 20%),
+radial-gradient(circle at 80% 70%,#e600ff33,transparent 20%),
+#050914;
+border:1px solid #ffffff15;
 }
 
-body.dark th,
-body.dark td{
-border-color:#475569;
+/* CAR GAME */
+
+.road{
+position:absolute;
+left:10%;
+right:10%;
+top:0;
+bottom:0;
+background:#171b25;
+border-left:4px solid white;
+border-right:4px solid white;
+overflow:hidden;
+}
+
+.lane{
+position:absolute;
+top:0;
+bottom:0;
+width:4px;
+background:repeating-linear-gradient(
+to bottom,
+white 0 45px,
+transparent 45px 90px
+);
+opacity:.4;
+animation:road 1s linear infinite;
+}
+
+.lane.one{left:33%}
+.lane.two{left:66%}
+
+@keyframes road{
+to{background-position:0 90px}
+}
+
+.car{
+position:absolute;
+bottom:25px;
+width:48px;
+height:78px;
+background:linear-gradient(#00e5ff,#315efb);
+border-radius:12px;
+box-shadow:0 0 20px #00e5ff;
+z-index:5;
+}
+
+.car:before,
+.car:after{
+content:"";
+position:absolute;
+width:10px;
+height:18px;
+background:#050505;
+top:10px;
+border-radius:5px;
+}
+
+.car:before{left:-7px}
+.car:after{right:-7px}
+
+.obstacle{
+position:absolute;
+width:48px;
+height:70px;
+background:#ef4444;
+border-radius:10px;
+box-shadow:0 0 15px #ef4444;
+}
+
+/* AIRSHIP */
+
+.airship{
+position:absolute;
+font-size:55px;
+filter:drop-shadow(0 0 12px #00e5ff);
+}
+
+.cloud{
+position:absolute;
+font-size:45px;
+opacity:.5;
+}
+
+/* SHOOTING */
+
+.shooting-area{
+height:420px;
+position:relative;
+overflow:hidden;
+border-radius:20px;
+background:
+radial-gradient(circle,#172554,#020617);
+cursor:crosshair;
+}
+
+.targetEnemy{
+position:absolute;
+width:55px;
+height:55px;
+border:0;
+border-radius:50%;
+background:
+radial-gradient(circle,#fff 0 10%,#ef4444 11% 35%,#fff 36% 55%,#ef4444 56%);
+box-shadow:0 0 20px #ef4444;
+cursor:crosshair;
 }
 
 /* TODO */
@@ -365,66 +463,27 @@ flex:1;
 
 .todo-list{
 list-style:none;
-margin-top:15px;
+padding:0;
 }
 
 .todo-list li{
+padding:12px;
+border-bottom:1px solid #273449;
 display:flex;
 justify-content:space-between;
-align-items:center;
-gap:10px;
-padding:12px;
-border-bottom:1px solid #e2e8f0;
 }
 
-body.dark .todo-list li{
-border-color:#475569;
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
 }
 
-/* TIMER */
-
-.timer{
-font-size:65px;
-font-weight:bold;
-text-align:center;
-margin:25px 0;
-font-variant-numeric:tabular-nums;
-}
-
-/* GAME */
-
-.game-area{
-height:380px;
-position:relative;
-overflow:hidden;
-border-radius:18px;
-background:linear-gradient(
-135deg,
-#dbeafe,
-#ede9fe
-);
-}
-
-body.dark .game-area{
-background:linear-gradient(
-135deg,
-#172554,
-#312e81
-);
-}
-
-.target{
-position:absolute;
-width:60px;
-height:60px;
-border:none;
-border-radius:50%;
-background:#ef4444;
-color:white;
-font-size:26px;
-cursor:pointer;
-display:none;
-box-shadow:0 5px 15px #0004;
+th,td{
+border:1px solid #334155;
+padding:10px;
 }
 
 /* FOOTER */
@@ -432,142 +491,62 @@ box-shadow:0 5px 15px #0004;
 footer{
 text-align:center;
 padding:45px 20px;
-color:#64748b;
+color:#8995aa;
+border-top:1px solid #ffffff10;
+margin-top:30px;
 }
 
-body.dark footer{
-color:#cbd5e1;
-}
+@media(max-width:600px){
 
-/* MOBILE */
-
-@media(max-width:650px){
-
-header h1{
-font-size:30px;
-}
+.logo{font-size:32px}
 
 header{
 padding:35px 15px;
 }
 
-.hero{
-padding:24px;
-}
-
-nav{
-justify-content:flex-start;
-overflow-x:auto;
-flex-wrap:nowrap;
-}
-
-nav button{
-white-space:nowrap;
+.hero h2{
+font-size:25px;
 }
 
 .timer{
-font-size:45px;
+font-size:48px;
 }
 
-.todo-row{
-flex-direction:column;
+.game-area,
+.shooting-area{
+height:350px;
 }
 
 }
-
 </style>
 </head>
 
-
 <body>
 
-
-<!-- HEADER -->
-
 <header>
-
-<h1>🎓 Student Tools Hub</h1>
-
-<p>
-Free calculators, study tools & games for students
-</p>
-
+<div class="logo">🎓 STUDENT TOOLS HUB</div>
+<p>Free Student Tools • Calculators • Study Planner • Games</p>
 </header>
 
-
-<!-- NAVIGATION -->
-
 <nav>
-
-<button onclick="showTool('home')">
-🏠 Home
-</button>
-
-<button onclick="showTool('percentage')">
-📊 Percentage
-</button>
-
-<button onclick="showTool('cgpa')">
-🎓 CGPA
-</button>
-
-<button onclick="showTool('gpa')">
-📈 GPA
-</button>
-
-<button onclick="showTool('attendance')">
-📅 Attendance
-</button>
-
-<button onclick="showTool('marks')">
-📝 Marks
-</button>
-
-<button onclick="showTool('age')">
-🎂 Age
-</button>
-
-<button onclick="showTool('interest')">
-💰 Interest
-</button>
-
-<button onclick="showTool('study')">
-⏱️ Study
-</button>
-
-<button onclick="showTool('pomodoro')">
-🍅 Pomodoro
-</button>
-
-<button onclick="showTool('countdown')">
-📆 Exam
-</button>
-
-<button onclick="showTool('todo')">
-✅ To-Do
-</button>
-
-<button onclick="showTool('timetable')">
-📚 Timetable
-</button>
-
-<button onclick="showTool('converter')">
-🔢 Converter
-</button>
-
-<button onclick="showTool('game')">
-🎮 Game
-</button>
-
-<button onclick="toggleDark()">
-🌙
-</button>
-
+<button onclick="showTool('home')">🏠 Home</button>
+<button onclick="showTool('percentage')">📊 Percentage</button>
+<button onclick="showTool('cgpa')">🎓 CGPA</button>
+<button onclick="showTool('attendance')">📅 Attendance</button>
+<button onclick="showTool('marks')">📝 Marks</button>
+<button onclick="showTool('age')">🎂 Age</button>
+<button onclick="showTool('interest')">💰 Interest</button>
+<button onclick="showTool('study')">⏱ Study</button>
+<button onclick="showTool('pomodoro')">🍅 Pomodoro</button>
+<button onclick="showTool('countdown')">📆 Exam</button>
+<button onclick="showTool('todo')">✅ To-Do</button>
+<button onclick="showTool('game')">🎯 Target</button>
+<button onclick="showTool('car')">🏎️ Car</button>
+<button onclick="showTool('airship')">🚀 Airship</button>
+<button onclick="showTool('shooting')">🔫 Shooting</button>
 </nav>
 
-
 <main class="container">
-
 
 <!-- HOME -->
 
@@ -575,325 +554,122 @@ Free calculators, study tools & games for students
 
 <div class="hero">
 
-<h2>
-Everything Students Need 🚀
-</h2>
+<h2>Everything Students Need 🚀</h2>
 
 <p>
-Calculate marks, plan your study time, track exams and have some fun!
+Calculate • Study • Plan • Play
 </p>
 
 <div class="search">
-
 <input
 id="search"
-placeholder="🔎 Search student tools..."
+placeholder="🔎 Search tools..."
 oninput="searchTools()">
-
 </div>
 
 </div>
-
 
 <div class="grid" id="toolsGrid">
 
-
-<div class="card tool-card"
-data-name="percentage calculator">
-
-<div class="tool-icon">
-📊
-</div>
-
+<div class="card tool-card" data-name="percentage">
+<div class="icon">📊</div>
 <h3>Percentage Calculator</h3>
-
-<p>
-Calculate percentage from marks.
-</p>
-
-<button class="primary"
-onclick="showTool('percentage')">
-Open
-</button>
-
+<p>Calculate marks percentage quickly.</p>
+<button class="primary" onclick="showTool('percentage')">Open</button>
 </div>
 
-
-<div class="card tool-card"
-data-name="cgpa calculator">
-
-<div class="tool-icon">
-🎓
-</div>
-
+<div class="card tool-card" data-name="cgpa">
+<div class="icon">🎓</div>
 <h3>CGPA Calculator</h3>
-
-<p>
-Convert CGPA into approximate percentage.
-</p>
-
-<button class="primary"
-onclick="showTool('cgpa')">
-Open
-</button>
-
+<p>Convert CGPA into approximate percentage.</p>
+<button class="primary" onclick="showTool('cgpa')">Open</button>
 </div>
 
-
-<div class="card tool-card"
-data-name="gpa calculator">
-
-<div class="tool-icon">
-📈
-</div>
-
-<h3>GPA Calculator</h3>
-
-<p>
-Calculate weighted GPA.
-</p>
-
-<button class="primary"
-onclick="showTool('gpa')">
-Open
-</button>
-
-</div>
-
-
-<div class="card tool-card"
-data-name="attendance calculator">
-
-<div class="tool-icon">
-📅
-</div>
-
+<div class="card tool-card" data-name="attendance">
+<div class="icon">📅</div>
 <h3>Attendance Calculator</h3>
-
-<p>
-Check your attendance percentage.
-</p>
-
-<button class="primary"
-onclick="showTool('attendance')">
-Open
-</button>
-
+<p>Check your attendance percentage.</p>
+<button class="primary" onclick="showTool('attendance')">Open</button>
 </div>
 
-
-<div class="card tool-card"
-data-name="marks grade">
-
-<div class="tool-icon">
-📝
-</div>
-
+<div class="card tool-card" data-name="marks grade">
+<div class="icon">📝</div>
 <h3>Marks & Grade</h3>
-
-<p>
-Calculate percentage and grade.
-</p>
-
-<button class="primary"
-onclick="showTool('marks')">
-Open
-</button>
-
+<p>Calculate percentage and grade.</p>
+<button class="primary" onclick="showTool('marks')">Open</button>
 </div>
 
-
-<div class="card tool-card"
-data-name="age calculator">
-
-<div class="tool-icon">
-🎂
-</div>
-
+<div class="card tool-card" data-name="age">
+<div class="icon">🎂</div>
 <h3>Age Calculator</h3>
-
-<p>
-Calculate exact age from DOB.
-</p>
-
-<button class="primary"
-onclick="showTool('age')">
-Open
-</button>
-
+<p>Calculate your exact age.</p>
+<button class="primary" onclick="showTool('age')">Open</button>
 </div>
 
-
-<div class="card tool-card"
-data-name="interest calculator">
-
-<div class="tool-icon">
-💰
-</div>
-
+<div class="card tool-card" data-name="interest">
+<div class="icon">💰</div>
 <h3>Interest Calculator</h3>
-
-<p>
-Calculate simple or compound interest.
-</p>
-
-<button class="primary"
-onclick="showTool('interest')">
-Open
-</button>
-
+<p>Calculate simple and compound interest.</p>
+<button class="primary" onclick="showTool('interest')">Open</button>
 </div>
 
-
-<div class="card tool-card"
-data-name="study time">
-
-<div class="tool-icon">
-⏱️
+<div class="card tool-card" data-name="study planner">
+<div class="icon">⏱️</div>
+<h3>Study Planner</h3>
+<p>Divide your available study time.</p>
+<button class="primary" onclick="showTool('study')">Open</button>
 </div>
 
-<h3>Study Time Planner</h3>
-
-<p>
-Divide your study time into sessions.
-</p>
-
-<button class="primary"
-onclick="showTool('study')">
-Open
-</button>
-
-</div>
-
-
-<div class="card tool-card"
-data-name="pomodoro timer">
-
-<div class="tool-icon">
-🍅
-</div>
-
+<div class="card tool-card" data-name="pomodoro">
+<div class="icon">🍅</div>
 <h3>Pomodoro Timer</h3>
-
-<p>
-Focus with timed study sessions.
-</p>
-
-<button class="primary"
-onclick="showTool('pomodoro')">
-Open
-</button>
-
+<p>Focus using study sessions.</p>
+<button class="primary" onclick="showTool('pomodoro')">Open</button>
 </div>
 
-
-<div class="card tool-card"
-data-name="exam countdown">
-
-<div class="tool-icon">
-📆
-</div>
-
+<div class="card tool-card" data-name="exam countdown">
+<div class="icon">📆</div>
 <h3>Exam Countdown</h3>
-
-<p>
-See days remaining until your exam.
-</p>
-
-<button class="primary"
-onclick="showTool('countdown')">
-Open
-</button>
-
+<p>Find days remaining until exam.</p>
+<button class="primary" onclick="showTool('countdown')">Open</button>
 </div>
 
-
-<div class="card tool-card"
-data-name="todo homework">
-
-<div class="tool-icon">
-✅
-</div>
-
+<div class="card tool-card" data-name="todo">
+<div class="icon">✅</div>
 <h3>Student To-Do</h3>
-
-<p>
-Manage homework and tasks.
-</p>
-
-<button class="primary"
-onclick="showTool('todo')">
-Open
-</button>
-
+<p>Save your homework and tasks.</p>
+<button class="primary" onclick="showTool('todo')">Open</button>
 </div>
 
-
-<div class="card tool-card"
-data-name="timetable">
-
-<div class="tool-icon">
-📚
+<div class="card tool-card" data-name="target game">
+<div class="icon">🎯</div>
+<h3>Target Game</h3>
+<p>Test your clicking speed.</p>
+<button class="primary" onclick="showTool('game')">Play</button>
 </div>
 
-<h3>Study Timetable</h3>
-
-<p>
-Create your personal timetable.
-</p>
-
-<button class="primary"
-onclick="showTool('timetable')">
-Open
-</button>
-
+<div class="card tool-card" data-name="car racing game">
+<div class="icon">🏎️</div>
+<h3>Car Dodge</h3>
+<p>Avoid traffic and survive!</p>
+<button class="primary" onclick="showTool('car')">Play</button>
 </div>
 
-
-<div class="card tool-card"
-data-name="unit converter">
-
-<div class="tool-icon">
-🔢
+<div class="card tool-card" data-name="airship game">
+<div class="icon">🚀</div>
+<h3>Airship Adventure</h3>
+<p>Fly and avoid obstacles.</p>
+<button class="primary" onclick="showTool('airship')">Play</button>
 </div>
 
-<h3>Unit Converter</h3>
-
-<p>
-Convert length, weight and temperature.
-</p>
-
-<button class="primary"
-onclick="showTool('converter')">
-Open
-</button>
-
+<div class="card tool-card" data-name="shooting game">
+<div class="icon">🎯</div>
+<h3>Target Shooter</h3>
+<p>Hit targets and get a high score.</p>
+<button class="primary" onclick="showTool('shooting')">Play</button>
 </div>
 
-
-<div class="card tool-card"
-data-name="game tap target">
-
-<div class="tool-icon">
-🎮
 </div>
-
-<h3>Tap Target Game</h3>
-
-<p>
-Test your speed in 30 seconds.
-</p>
-
-<button class="primary"
-onclick="showTool('game')">
-Play
-</button>
-
-</div>
-
-
-</div>
-
 </section>
 
 
@@ -904,32 +680,17 @@ Play
 <h2>📊 Percentage Calculator</h2>
 
 <label>Obtained Marks</label>
-
-<input
-id="obtained"
-type="number"
-min="0">
+<input id="obtained" type="number">
 
 <label>Total Marks</label>
+<input id="total" type="number">
 
-<input
-id="total"
-type="number"
-min="1">
+<button class="primary" onclick="percentage()">Calculate</button>
 
-<button
-class="primary"
-onclick="percentage()">
-Calculate
-</button>
-
-<div
-id="percentageResult"
-class="result">
-</div>
+<div id="percentageResult" class="result"></div>
 
 <div class="formula">
-Percentage = (Obtained ÷ Total) × 100
+Percentage = Obtained ÷ Total × 100
 </div>
 
 </section>
@@ -942,107 +703,11 @@ Percentage = (Obtained ÷ Total) × 100
 <h2>🎓 CGPA Calculator</h2>
 
 <label>CGPA</label>
+<input id="cgpaInput" type="number" min="0" max="10" step=".01">
 
-<input
-id="cgpaInput"
-type="number"
-min="0"
-max="10"
-step=".01">
+<button class="primary" onclick="cgpa()">Calculate</button>
 
-<button
-class="primary"
-onclick="cgpa()">
-Calculate
-</button>
-
-<div
-id="cgpaResult"
-class="result">
-</div>
-
-<p class="note">
-Approximate formula: CGPA × 9.5
-</p>
-
-</section>
-
-
-<!-- GPA -->
-
-<section id="gpa" class="tool card">
-
-<h2>📈 GPA Calculator</h2>
-
-<p class="note">
-Enter grade point and credit for each subject.
-</p>
-
-<div class="grid">
-
-<div>
-
-<label>Subject 1 Grade</label>
-<input class="gp" type="number" min="0" max="10">
-
-<label>Credits</label>
-<input class="cr" type="number" value="1">
-
-</div>
-
-
-<div>
-
-<label>Subject 2 Grade</label>
-<input class="gp" type="number" min="0" max="10">
-
-<label>Credits</label>
-<input class="cr" type="number" value="1">
-
-</div>
-
-
-<div>
-
-<label>Subject 3 Grade</label>
-<input class="gp" type="number" min="0" max="10">
-
-<label>Credits</label>
-<input class="cr" type="number" value="1">
-
-</div>
-
-
-<div>
-
-<label>Subject 4 Grade</label>
-<input class="gp" type="number" min="0" max="10">
-
-<label>Credits</label>
-<input class="cr" type="number" value="1">
-
-</div>
-
-
-<div>
-
-<label>Subject 5 Grade</label>
-<input class="gp" type="number" min="0" max="10">
-
-<label>Credits</label>
-<input class="cr" type="number" value="1">
-
-</div>
-
-</div>
-
-<button
-class="primary"
-onclick="gpa()">
-Calculate GPA
-</button>
-
-<div id="gpaResult" class="result"></div>
+<div id="cgpaResult" class="result"></div>
 
 </section>
 
@@ -1054,29 +719,14 @@ Calculate GPA
 <h2>📅 Attendance Calculator</h2>
 
 <label>Total Classes</label>
-
 <input id="held" type="number">
 
 <label>Classes Attended</label>
-
 <input id="attended" type="number">
 
-<label>Target Attendance %</label>
+<button class="primary" onclick="attendance()">Calculate</button>
 
-<input
-id="targetAttendance"
-type="number"
-value="75">
-
-<button
-class="primary"
-onclick="attendance()">
-Calculate
-</button>
-
-<div id="attendanceResult"
-class="result">
-</div>
+<div id="attendanceResult" class="result"></div>
 
 </section>
 
@@ -1088,24 +738,14 @@ class="result">
 <h2>📝 Marks & Grade</h2>
 
 <label>Obtained Marks</label>
-
-<input id="marksObtained"
-type="number">
+<input id="marksObtained" type="number">
 
 <label>Total Marks</label>
+<input id="marksTotal" type="number">
 
-<input id="marksTotal"
-type="number">
+<button class="primary" onclick="marksGrade()">Calculate</button>
 
-<button
-class="primary"
-onclick="marksGrade()">
-Calculate
-</button>
-
-<div id="marksResult"
-class="result">
-</div>
+<div id="marksResult" class="result"></div>
 
 </section>
 
@@ -1117,19 +757,11 @@ class="result">
 <h2>🎂 Age Calculator</h2>
 
 <label>Date of Birth</label>
+<input id="dob" type="date">
 
-<input id="dob"
-type="date">
+<button class="primary" onclick="age()">Calculate</button>
 
-<button
-class="primary"
-onclick="age()">
-Calculate Age
-</button>
-
-<div id="ageResult"
-class="result">
-</div>
+<div id="ageResult" class="result"></div>
 
 </section>
 
@@ -1141,41 +773,27 @@ class="result">
 <h2>💰 Interest Calculator</h2>
 
 <label>Principal ₹</label>
-
-<input id="principal"
-type="number">
+<input id="principal" type="number">
 
 <label>Rate %</label>
+<input id="rate" type="number">
 
-<input id="rate"
-type="number"
-step=".01">
-
-<label>Time in Years</label>
-
-<input id="years"
-type="number"
-step=".01">
+<label>Time (Years)</label>
+<input id="years" type="number">
 
 <div class="actions">
 
-<button
-class="primary"
-onclick="simpleInterest()">
+<button class="primary" onclick="simpleInterest()">
 Simple Interest
 </button>
 
-<button
-class="secondary"
-onclick="compoundInterest()">
+<button class="secondary" onclick="compoundInterest()">
 Compound Interest
 </button>
 
 </div>
 
-<div id="interestResult"
-class="result">
-</div>
+<div id="interestResult" class="result"></div>
 
 </section>
 
@@ -1187,24 +805,14 @@ class="result">
 <h2>⏱️ Study Time Planner</h2>
 
 <label>Total Study Minutes</label>
-
-<input id="studyMinutes"
-type="number">
+<input id="studyMinutes" type="number">
 
 <label>Number of Sessions</label>
+<input id="sessions" type="number">
 
-<input id="sessions"
-type="number">
+<button class="primary" onclick="study()">Calculate</button>
 
-<button
-class="primary"
-onclick="study()">
-Calculate
-</button>
-
-<div id="studyResult"
-class="result">
-</div>
+<div id="studyResult" class="result"></div>
 
 </section>
 
@@ -1215,37 +823,17 @@ class="result">
 
 <h2>🍅 Pomodoro Timer</h2>
 
-<div id="timer"
-class="timer">
-25:00
-</div>
+<div id="timer" class="timer">25:00</div>
 
-<div
-class="actions"
-style="justify-content:center">
+<div class="actions">
 
-<button
-class="primary"
-onclick="startTimer()">
-▶ Start
-</button>
-
-<button
-class="secondary"
-onclick="pauseTimer()">
-⏸ Pause
-</button>
-
-<button
-class="secondary"
-onclick="resetTimer()">
-↻ Reset
-</button>
+<button class="primary" onclick="startTimer()">▶ Start</button>
+<button class="secondary" onclick="pauseTimer()">⏸ Pause</button>
+<button class="secondary" onclick="resetTimer()">↻ Reset</button>
 
 </div>
 
-<div id="timerStatus"
-class="result">
+<div id="timerStatus" class="result">
 Ready to study.
 </div>
 
@@ -1259,26 +847,14 @@ Ready to study.
 <h2>📆 Exam Countdown</h2>
 
 <label>Exam Name</label>
-
-<input
-id="examName"
-placeholder="Maths Exam">
+<input id="examName" placeholder="Maths Exam">
 
 <label>Exam Date</label>
+<input id="examDate" type="date">
 
-<input
-id="examDate"
-type="date">
+<button class="primary" onclick="countdown()">Calculate</button>
 
-<button
-class="primary"
-onclick="countdown()">
-Calculate
-</button>
-
-<div id="countdownResult"
-class="result">
-</div>
+<div id="countdownResult" class="result"></div>
 
 </section>
 
@@ -1291,157 +867,35 @@ class="result">
 
 <div class="todo-row">
 
-<input
-id="todoInput"
-placeholder="Enter homework or task">
+<input id="todoInput" placeholder="Enter homework/task">
 
-<button
-class="primary"
-onclick="addTodo()">
-Add
-</button>
+<button class="primary" onclick="addTodo()">Add</button>
 
 </div>
 
-<ul
-id="todoList"
-class="todo-list">
-</ul>
-
-<div class="actions">
-
-<button
-class="danger"
-onclick="clearTodos()">
-Clear All
-</button>
-
-</div>
+<ul id="todoList" class="todo-list"></ul>
 
 </section>
 
 
-<!-- TIMETABLE -->
-
-<section id="timetable" class="tool card">
-
-<h2>📚 Study Timetable</h2>
-
-<label>Subject</label>
-
-<input
-id="subjectName"
-placeholder="Accountancy">
-
-<label>Day</label>
-
-<select id="subjectDay">
-
-<option>Monday</option>
-<option>Tuesday</option>
-<option>Wednesday</option>
-<option>Thursday</option>
-<option>Friday</option>
-<option>Saturday</option>
-<option>Sunday</option>
-
-</select>
-
-<label>Time</label>
-
-<input
-id="subjectTime"
-type="time">
-
-<button
-class="primary"
-onclick="addTimetable()">
-Add Session
-</button>
-
-<div id="tableWrap"></div>
-
-</section>
-
-
-<!-- CONVERTER -->
-
-<section id="converter" class="tool card">
-
-<h2>🔢 Unit Converter</h2>
-
-<label>Category</label>
-
-<select
-id="convCategory"
-onchange="updateUnits()">
-
-<option value="length">
-Length
-</option>
-
-<option value="weight">
-Weight
-</option>
-
-<option value="temp">
-Temperature
-</option>
-
-</select>
-
-<label>From</label>
-
-<select id="convFrom"></select>
-
-<label>To</label>
-
-<select id="convTo"></select>
-
-<label>Value</label>
-
-<input
-id="convValue"
-type="number"
-step="any">
-
-<button
-class="primary"
-onclick="convert()">
-Convert
-</button>
-
-<div
-id="convResult"
-class="result">
-</div>
-
-</section>
-
-
-<!-- GAME -->
+<!-- TARGET GAME -->
 
 <section id="game" class="tool card">
 
-<h2>🎮 Tap the Target</h2>
+<h2>🎯 Target Game</h2>
 
-<p>
-Hit the target as many times as possible in 30 seconds!
-</p>
+<p>Hit the target as many times as possible in 30 seconds!</p>
 
-<div
-class="game-area"
-id="gameArea">
+<div class="game-area" id="targetArea">
 
 <button
-id="target"
-class="target"
+id="targetButton"
+class="targetEnemy"
 onclick="hitTarget()">
-🎯
 </button>
 
 <div
-id="gameMessage"
+id="targetMessage"
 style="
 position:absolute;
 inset:0;
@@ -1449,58 +903,199 @@ display:flex;
 align-items:center;
 justify-content:center;
 font-size:22px;
-font-weight:bold;
-">
-
-Press Start Game
-
+font-weight:bold;">
+Press Start
 </div>
 
 </div>
 
-<div
-class="actions"
-style="justify-content:center">
+<div class="actions">
 
-<button
-class="primary"
-onclick="startGame()">
-▶ Start Game
+<button class="primary" onclick="startTargetGame()">
+▶ Start
 </button>
 
-<button
-class="secondary"
-onclick="resetGame()">
+<button class="secondary" onclick="resetTargetGame()">
 ↻ Reset
 </button>
 
 </div>
 
-<div
-class="result"
-id="gameStats">
-
-Score: 0 | Time: 30s | Best: 0
-
+<div id="targetStats" class="result">
+Score: 0 | Time: 30
 </div>
 
 </section>
 
 
+<!-- CAR GAME -->
+
+<section id="car" class="tool card">
+
+<h2>🏎️ Car Dodge</h2>
+
+<p>
+Use ← → keys or buttons to move. Avoid the red cars!
+</p>
+
+<div class="game-area">
+
+<div class="road" id="road">
+
+<div class="lane one"></div>
+<div class="lane two"></div>
+
+<div
+id="playerCar"
+class="car"
+style="left:calc(50% - 24px)">
+</div>
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="secondary" onclick="moveCar(-1)">
+⬅️ Left
+</button>
+
+<button class="secondary" onclick="moveCar(1)">
+➡️ Right
+</button>
+
+<button class="primary" onclick="startCarGame()">
+▶ Start
+</button>
+
+<button class="danger" onclick="stopCarGame()">
+Stop
+</button>
+
+</div>
+
+<div id="carStats" class="result">
+Score: 0
+</div>
+
+</section>
+
+
+<!-- AIRSHIP -->
+
+<section id="airship" class="tool card">
+
+<h2>🚀 Airship Adventure</h2>
+
+<p>
+Use ↑ ↓ keys or buttons to move your airship and avoid the clouds!
+</p>
+
+<div class="game-area" id="airArea">
+
+<div id="airshipPlayer" class="airship">
+🚀
+</div>
+
+<div id="airMessage"
+style="
+position:absolute;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold;">
+Press Start
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="secondary" onclick="moveAir(-1)">
+⬆️ Up
+</button>
+
+<button class="secondary" onclick="moveAir(1)">
+⬇️ Down
+</button>
+
+<button class="primary" onclick="startAirGame()">
+▶ Start
+</button>
+
+<button class="danger" onclick="stopAirGame()">
+Stop
+</button>
+
+</div>
+
+<div id="airStats" class="result">
+Score: 0
+</div>
+
+</section>
+
+
+<!-- SHOOTING -->
+
+<section id="shooting" class="tool card">
+
+<h2>🎯 Target Shooter</h2>
+
+<p>
+Click the targets before time runs out!
+</p>
+
+<div
+id="shootArea"
+class="shooting-area">
+
+<div
+id="shootMessage"
+style="
+position:absolute;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold;">
+Press Start
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="primary" onclick="startShooting()">
+▶ Start
+</button>
+
+<button class="secondary" onclick="stopShooting()">
+Stop
+</button>
+
+</div>
+
+<div id="shootStats" class="result">
+Score: 0 | Time: 30
+</div>
+
+</section>
+
 </main>
 
-
-<!-- FOOTER -->
 
 <footer>
 
 <h3>🎓 Student Tools Hub</h3>
 
 <p>
-Free tools made for students.
+Free calculators, study tools and browser games.
 </p>
-
-<br>
 
 <p>
 © 2026 Student Tools Hub
@@ -1517,15 +1112,11 @@ function showTool(id){
 
 document
 .querySelectorAll('.tool')
-.forEach(tool=>{
-tool.classList.remove('active');
-});
+.forEach(x=>x.classList.remove('active'));
 
-const tool=document.getElementById(id);
-
-if(tool){
-tool.classList.add('active');
-}
+document
+.getElementById(id)
+.classList.add('active');
 
 window.scrollTo({
 top:0,
@@ -1539,7 +1130,7 @@ behavior:'smooth'
 
 function searchTools(){
 
-const query=
+const q=
 document
 .getElementById('search')
 .value
@@ -1549,11 +1140,8 @@ document
 .querySelectorAll('.tool-card')
 .forEach(card=>{
 
-const name=
-card.dataset.name.toLowerCase();
-
 card.style.display=
-name.includes(query)
+card.dataset.name.includes(q)
 ?'block'
 :'none';
 
@@ -1566,27 +1154,13 @@ name.includes(query)
 
 function percentage(){
 
-const obtained=
-Number(document.getElementById('obtained').value);
+let a=+obtained.value;
+let b=+total.value;
 
-const total=
-Number(document.getElementById('total').value);
-
-if(
-total<=0 ||
-obtained<0 ||
-obtained>total
-){
-
-document.getElementById('percentageResult').textContent=
-'❌ Enter valid marks.';
-
-return;
-
-}
-
-document.getElementById('percentageResult').textContent=
-`Percentage = ${(obtained/total*100).toFixed(2)}%`;
+percentageResult.textContent=
+b>0&&a>=0&&a<=b
+?`Percentage = ${(a/b*100).toFixed(2)}%`
+:'❌ Enter valid marks.';
 
 }
 
@@ -1595,71 +1169,12 @@ document.getElementById('percentageResult').textContent=
 
 function cgpa(){
 
-const value=
-Number(document.getElementById('cgpaInput').value);
+let c=+cgpaInput.value;
 
-if(value<0 || value>10){
-
-document.getElementById('cgpaResult').textContent=
-'❌ CGPA must be between 0 and 10.';
-
-return;
-
-}
-
-document.getElementById('cgpaResult').textContent=
-`Approx. Percentage = ${(value*9.5).toFixed(2)}%`;
-
-}
-
-
-/* GPA */
-
-function gpa(){
-
-const grades=
-document.querySelectorAll('.gp');
-
-const credits=
-document.querySelectorAll('.cr');
-
-let points=0;
-
-let totalCredits=0;
-
-grades.forEach((grade,index)=>{
-
-if(grade.value!==""){
-
-const g=
-Number(grade.value);
-
-const c=
-Number(credits[index].value);
-
-if(g>=0 && g<=10 && c>0){
-
-points+=g*c;
-
-totalCredits+=c;
-
-}
-
-}
-
-});
-
-if(totalCredits===0){
-
-document.getElementById('gpaResult').textContent=
-'❌ Enter subject details.';
-
-return;
-
-}
-
-document.getElementById('gpaResult').textContent=
-`GPA = ${(points/totalCredits).toFixed(2)}`;
+cgpaResult.textContent=
+c>=0&&c<=10
+?`Approx. Percentage = ${(c*9.5).toFixed(2)}%`
+:'❌ Enter CGPA between 0 and 10.';
 
 }
 
@@ -1668,48 +1183,18 @@ document.getElementById('gpaResult').textContent=
 
 function attendance(){
 
-const held=
-Number(document.getElementById('held').value);
+let h=+held.value;
+let a=+attended.value;
 
-const attended=
-Number(document.getElementById('attended').value);
+if(h<=0||a<0||a>h){
 
-const target=
-Number(document.getElementById('targetAttendance').value);
-
-if(
-held<=0 ||
-attended<0 ||
-attended>held
-){
-
-document.getElementById('attendanceResult').textContent=
-'❌ Enter valid values.';
-
+attendanceResult.textContent='❌ Enter valid values.';
 return;
 
 }
 
-const current=
-attended/held*100;
-
-if(current>=target){
-
-document.getElementById('attendanceResult').textContent=
-`Attendance = ${current.toFixed(2)}%. Target achieved! 🎉`;
-
-return;
-
-}
-
-const required=
-Math.ceil(
-(target*held/100-attended)/
-(1-target/100)
-);
-
-document.getElementById('attendanceResult').textContent=
-`Attendance = ${current.toFixed(2)}%. You need approximately ${required} more consecutive attended classes to reach ${target}%.`;
+attendanceResult.textContent=
+`Attendance = ${(a/h*100).toFixed(2)}%`;
 
 }
 
@@ -1718,50 +1203,27 @@ document.getElementById('attendanceResult').textContent=
 
 function marksGrade(){
 
-const obtained=
-Number(document.getElementById('marksObtained').value);
+let a=+marksObtained.value;
+let b=+marksTotal.value;
 
-const total=
-Number(document.getElementById('marksTotal').value);
+if(b<=0||a<0||a>b){
 
-if(
-total<=0 ||
-obtained<0 ||
-obtained>total
-){
-
-document.getElementById('marksResult').textContent=
-'❌ Enter valid marks.';
-
+marksResult.textContent='❌ Enter valid marks.';
 return;
 
 }
 
-const percent=
-obtained/total*100;
+let p=a/b*100;
 
-let grade;
+let grade=
+p>=90?'A+':
+p>=80?'A':
+p>=70?'B':
+p>=60?'C':
+p>=50?'D':'F';
 
-if(percent>=90)
-grade='A+';
-
-else if(percent>=80)
-grade='A';
-
-else if(percent>=70)
-grade='B';
-
-else if(percent>=60)
-grade='C';
-
-else if(percent>=50)
-grade='D';
-
-else
-grade='F';
-
-document.getElementById('marksResult').textContent=
-`Percentage = ${percent.toFixed(2)}% | Grade = ${grade}`;
+marksResult.textContent=
+`Percentage = ${p.toFixed(2)}% | Grade = ${grade}`;
 
 }
 
@@ -1770,58 +1232,40 @@ document.getElementById('marksResult').textContent=
 
 function age(){
 
-const value=
-document.getElementById('dob').value;
+if(!dob.value){
 
-if(!value){
-
-document.getElementById('ageResult').textContent=
-'❌ Enter your date of birth.';
-
+ageResult.textContent='❌ Select date of birth.';
 return;
 
 }
 
-const dob=
-new Date(value+'T00:00:00');
+let d=new Date(dob.value+'T00:00:00');
+let n=new Date();
 
-const today=
-new Date();
+let y=n.getFullYear()-d.getFullYear();
+let m=n.getMonth()-d.getMonth();
+let day=n.getDate()-d.getDate();
 
-let years=
-today.getFullYear()-
-dob.getFullYear();
+if(day<0){
 
-let months=
-today.getMonth()-
-dob.getMonth();
-
-let days=
-today.getDate()-
-dob.getDate();
-
-if(days<0){
-
-months--;
-
-days+=new Date(
-today.getFullYear(),
-today.getMonth(),
+m--;
+day+=new Date(
+n.getFullYear(),
+n.getMonth(),
 0
 ).getDate();
 
 }
 
-if(months<0){
+if(m<0){
 
-years--;
-
-months+=12;
+y--;
+m+=12;
 
 }
 
-document.getElementById('ageResult').textContent=
-`Age = ${years} years, ${months} months, ${days} days`;
+ageResult.textContent=
+`Age = ${y} years, ${m} months, ${day} days`;
 
 }
 
@@ -1830,19 +1274,13 @@ document.getElementById('ageResult').textContent=
 
 function simpleInterest(){
 
-const p=
-Number(document.getElementById('principal').value);
+let p=+principal.value;
+let r=+rate.value;
+let t=+years.value;
 
-const r=
-Number(document.getElementById('rate').value);
+let si=p*r*t/100;
 
-const t=
-Number(document.getElementById('years').value);
-
-const si=
-p*r*t/100;
-
-document.getElementById('interestResult').textContent=
+interestResult.textContent=
 `Simple Interest = ₹${si.toFixed(2)} | Total = ₹${(p+si).toFixed(2)}`;
 
 }
@@ -1850,26 +1288,14 @@ document.getElementById('interestResult').textContent=
 
 function compoundInterest(){
 
-const p=
-Number(document.getElementById('principal').value);
+let p=+principal.value;
+let r=+rate.value;
+let t=+years.value;
 
-const r=
-Number(document.getElementById('rate').value);
+let amount=p*Math.pow(1+r/100,t);
 
-const t=
-Number(document.getElementById('years').value);
-
-const amount=
-p*Math.pow(
-1+r/100,
-t
-);
-
-const ci=
-amount-p;
-
-document.getElementById('interestResult').textContent=
-`Compound Interest = ₹${ci.toFixed(2)} | Total = ₹${amount.toFixed(2)}`;
+interestResult.textContent=
+`Compound Interest = ₹${(amount-p).toFixed(2)} | Total = ₹${amount.toFixed(2)}`;
 
 }
 
@@ -1878,23 +1304,13 @@ document.getElementById('interestResult').textContent=
 
 function study(){
 
-const minutes=
-Number(document.getElementById('studyMinutes').value);
+let m=+studyMinutes.value;
+let s=+sessions.value;
 
-const sessions=
-Number(document.getElementById('sessions').value);
-
-if(minutes<=0 || sessions<=0){
-
-document.getElementById('studyResult').textContent=
-'❌ Enter valid values.';
-
-return;
-
-}
-
-document.getElementById('studyResult').textContent=
-`Each session = ${(minutes/sessions).toFixed(0)} minutes`;
+studyResult.textContent=
+m>0&&s>0
+?`Each session = ${(m/s).toFixed(0)} minutes`
+:'❌ Enter valid values.';
 
 }
 
@@ -1902,47 +1318,36 @@ document.getElementById('studyResult').textContent=
 /* POMODORO */
 
 let timerSeconds=1500;
-
 let timerInterval=null;
-
 
 function updateTimer(){
 
-const min=
-Math.floor(timerSeconds/60);
+let m=Math.floor(timerSeconds/60);
+let s=timerSeconds%60;
 
-const sec=
-timerSeconds%60;
-
-document.getElementById('timer').textContent=
-`${String(min).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+timer.textContent=
+`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 
 }
 
-
 function startTimer(){
 
-if(timerInterval)
-return;
+if(timerInterval)return;
 
-document.getElementById('timerStatus').textContent=
-'🔥 Focus mode ON!';
+timerStatus.textContent='🔥 Focus mode ON!';
 
-timerInterval=
-setInterval(()=>{
+timerInterval=setInterval(()=>{
 
 timerSeconds--;
-
 updateTimer();
 
 if(timerSeconds<=0){
 
 clearInterval(timerInterval);
-
 timerInterval=null;
 
-document.getElementById('timerStatus').textContent=
-'🎉 Session complete! Take a short break.';
+timerStatus.textContent=
+'🎉 Session complete!';
 
 }
 
@@ -1950,18 +1355,14 @@ document.getElementById('timerStatus').textContent=
 
 }
 
-
 function pauseTimer(){
 
 clearInterval(timerInterval);
-
 timerInterval=null;
 
-document.getElementById('timerStatus').textContent=
-'⏸ Timer paused.';
+timerStatus.textContent='⏸ Paused';
 
 }
-
 
 function resetTimer(){
 
@@ -1971,8 +1372,7 @@ timerSeconds=1500;
 
 updateTimer();
 
-document.getElementById('timerStatus').textContent=
-'Ready to study.';
+timerStatus.textContent='Ready to study.';
 
 }
 
@@ -1981,55 +1381,29 @@ document.getElementById('timerStatus').textContent=
 
 function countdown(){
 
-const date=
-document.getElementById('examDate').value;
+if(!examDate.value){
 
-if(!date){
-
-document.getElementById('countdownResult').textContent=
-'❌ Select exam date.';
-
+countdownResult.textContent='❌ Select exam date.';
 return;
 
 }
 
-const exam=
-new Date(date+'T00:00:00');
+let d=new Date(examDate.value+'T00:00:00');
 
-const today=
-new Date();
+let t=new Date();
 
-today.setHours(0,0,0,0);
+t.setHours(0,0,0,0);
 
-const days=
-Math.ceil(
-(exam-today)/86400000
-);
+let days=Math.ceil((d-t)/86400000);
 
-const name=
-document.getElementById('examName').value ||
-'Exam';
+let name=examName.value||'Exam';
 
-if(days>0){
-
-document.getElementById('countdownResult').textContent=
-`📚 ${name}: ${days} days remaining.`;
-
-}
-
-else if(days===0){
-
-document.getElementById('countdownResult').textContent=
-`🔥 ${name}: TODAY! Best of luck!`;
-
-}
-
-else{
-
-document.getElementById('countdownResult').textContent=
-`The exam date has passed.`;
-
-}
+countdownResult.textContent=
+days>0
+?`📚 ${name}: ${days} days remaining.`
+:days===0
+?`🔥 ${name}: TODAY!`
+:'The exam date has passed.';
 
 }
 
@@ -2037,48 +1411,31 @@ document.getElementById('countdownResult').textContent=
 /* TODO */
 
 let todos=
-JSON.parse(
-localStorage.getItem('studentTodos')||'[]'
-);
-
+JSON.parse(localStorage.getItem('studentTodos')||'[]');
 
 function renderTodos(){
 
-const list=
-document.getElementById('todoList');
+todoList.innerHTML='';
 
-list.innerHTML='';
+todos.forEach((x,i)=>{
 
-todos.forEach((todo,index)=>{
-
-const li=
-document.createElement('li');
+let li=document.createElement('li');
 
 li.innerHTML=
-`<span>${escapeHTML(todo)}</span>
-<button
-class="secondary"
-onclick="removeTodo(${index})">
-Done
-</button>`;
+`<span>${escapeHTML(x)}</span>
+<button class="secondary" onclick="removeTodo(${i})">Done</button>`;
 
-list.appendChild(li);
+todoList.appendChild(li);
 
 });
 
 }
 
-
 function addTodo(){
 
-const input=
-document.getElementById('todoInput');
+let text=todoInput.value.trim();
 
-const text=
-input.value.trim();
-
-if(!text)
-return;
+if(!text)return;
 
 todos.push(text);
 
@@ -2087,16 +1444,15 @@ localStorage.setItem(
 JSON.stringify(todos)
 );
 
-input.value='';
+todoInput.value='';
 
 renderTodos();
 
 }
 
+function removeTodo(i){
 
-function removeTodo(index){
-
-todos.splice(index,1);
+todos.splice(i,1);
 
 localStorage.setItem(
 'studentTodos',
@@ -2107,349 +1463,415 @@ renderTodos();
 
 }
 
+function escapeHTML(t){
 
-function clearTodos(){
-
-todos=[];
-
-localStorage.setItem(
-'studentTodos',
-'[]'
-);
-
-renderTodos();
-
-}
-
-
-function escapeHTML(text){
-
-return text.replace(
+return t.replace(
 /[&<>"']/g,
-function(char){
-
-return {
+c=>({
 '&':'&amp;',
 '<':'&lt;',
 '>':'&gt;',
 '"':'&quot;',
 "'":'&#039;'
-}[char];
-
-}
+}[c])
 );
 
 }
 
 
-/* TIMETABLE */
-
-let timetable=
-JSON.parse(
-localStorage.getItem('studentTimetable')||'[]'
-);
-
-
-function addTimetable(){
-
-const subject=
-document.getElementById('subjectName').value.trim();
-
-const day=
-document.getElementById('subjectDay').value;
-
-const time=
-document.getElementById('subjectTime').value;
-
-if(!subject || !time){
-
-alert('Enter subject and time.');
-
-return;
-
-}
-
-timetable.push({
-subject,
-day,
-time
-});
-
-localStorage.setItem(
-'studentTimetable',
-JSON.stringify(timetable)
-);
-
-document.getElementById('subjectName').value='';
-
-renderTable();
-
-}
-
-
-function renderTable(){
-
-const wrap=
-document.getElementById('tableWrap');
-
-if(!timetable.length){
-
-wrap.innerHTML=
-'<p class="note">No sessions added yet.</p>';
-
-return;
-
-}
-
-let html=
-`<table>
-<tr>
-<th>Day</th>
-<th>Time</th>
-<th>Subject</th>
-<th>Action</th>
-</tr>`;
-
-timetable.forEach((item,index)=>{
-
-html+=`
-<tr>
-
-<td>${item.day}</td>
-
-<td>${item.time}</td>
-
-<td>${escapeHTML(item.subject)}</td>
-
-<td>
-<button
-class="secondary"
-onclick="removeTable(${index})">
-Remove
-</button>
-</td>
-
-</tr>`;
-
-});
-
-html+='</table>';
-
-wrap.innerHTML=html;
-
-}
-
-
-function removeTable(index){
-
-timetable.splice(index,1);
-
-localStorage.setItem(
-'studentTimetable',
-JSON.stringify(timetable)
-);
-
-renderTable();
-
-}
-
-
-/* CONVERTER */
-
-const units={
-
-length:{
-Meter:1,
-Kilometer:1000,
-Centimeter:.01,
-Mile:1609.344,
-Foot:.3048
-},
-
-weight:{
-Kilogram:1,
-Gram:.001,
-Pound:.453592,
-Ounce:.0283495
-},
-
-temp:{
-Celsius:'C',
-Fahrenheit:'F',
-Kelvin:'K'
-}
-
-};
-
-
-function updateUnits(){
-
-const category=
-document.getElementById('convCategory').value;
-
-const names=
-Object.keys(units[category]);
-
-document.getElementById('convFrom').innerHTML=
-names.map(
-name=>`<option>${name}</option>`
-).join('');
-
-document.getElementById('convTo').innerHTML=
-names.map(
-name=>`<option>${name}</option>`
-).join('');
-
-}
-
-
-function convert(){
-
-const category=
-document.getElementById('convCategory').value;
-
-const from=
-document.getElementById('convFrom').value;
-
-const to=
-document.getElementById('convTo').value;
-
-const value=
-Number(document.getElementById('convValue').value);
-
-if(!Number.isFinite(value)){
-
-document.getElementById('convResult').textContent=
-'❌ Enter a value.';
-
-return;
-
-}
-
-if(category==='temp'){
-
-let celsius;
-
-if(from==='Celsius')
-celsius=value;
-
-else if(from==='Fahrenheit')
-celsius=(value-32)*5/9;
-
-else
-celsius=value-273.15;
-
-let result;
-
-if(to==='Celsius')
-result=celsius;
-
-else if(to==='Fahrenheit')
-result=celsius*9/5+32;
-
-else
-result=celsius+273.15;
-
-document.getElementById('convResult').textContent=
-`Result = ${result.toFixed(2)} ${to}`;
-
-return;
-
-}
-
-const result=
-value*
-units[category][from]/
-units[category][to];
-
-document.getElementById('convResult').textContent=
-`Result = ${result.toFixed(4)} ${to}`;
-
-}
-
-
-/* GAME */
-
-let gameScore=0;
-
-let gameTime=30;
-
-let gameInterval=null;
-
-let gameRunning=false;
-
-let bestScore=
-Number(
-localStorage.getItem('bestGameScore')||0
-);
-
-
-function updateGameStats(){
-
-document.getElementById('gameStats').textContent=
-`Score: ${gameScore} | Time: ${gameTime}s | Best: ${bestScore}`;
-
-}
-
+/* TARGET GAME */
+
+let targetScore=0;
+let targetTime=30;
+let targetInterval=null;
 
 function moveTarget(){
 
-const target=
-document.getElementById('target');
+let area=targetArea;
+let target=targetButton;
 
-const area=
-document.getElementById('gameArea');
+let x=Math.random()*
+(area.clientWidth-target.offsetWidth);
 
-const maxX=
-area.clientWidth-target.offsetWidth;
-
-const maxY=
-area.clientHeight-target.offsetHeight;
-
-const x=
-Math.random()*maxX;
-
-const y=
-Math.random()*maxY;
+let y=Math.random()*
+(area.clientHeight-target.offsetHeight);
 
 target.style.left=x+'px';
-
 target.style.top=y+'px';
 
 }
 
+function startTargetGame(){
 
-function startGame(){
+clearInterval(targetInterval);
 
-if(gameRunning)
-return;
+targetScore=0;
+targetTime=30;
 
-gameScore=0;
-
-gameTime=30;
-
-gameRunning=true;
-
-document.getElementById('target').style.display=
-'block';
-
-document.getElementById('gameMessage').style.display=
-'none';
-
-updateGameStats();
+targetButton.style.display='block';
+targetMessage.style.display='none';
 
 moveTarget();
 
-gameInterval=
-setInterval(()=>{
+updateTargetStats();
 
-gameTime--;
+targetInterval=setInterval(()=>{
 
-updateGameStats();
+targetTime--;
 
-if(gameTime<=0){
+updateTargetStats();
 
-endGame();
+if(targetTime<=0)
+endTargetGame();
+
+},1000);
+
+}
+
+function hitTarget(){
+
+if(!targetInterval)return;
+
+targetScore++;
+
+moveTarget();
+
+updateTargetStats();
+
+}
+
+function updateTargetStats(){
+
+targetStats.textContent=
+`Score: ${targetScore} | Time: ${targetTime}`;
+
+}
+
+function endTargetGame(){
+
+clearInterval(targetInterval);
+targetInterval=null;
+
+targetButton.style.display='none';
+
+targetMessage.style.display='flex';
+
+targetMessage.textContent=
+`🎉 Game Over! Score: ${targetScore}`;
+
+}
+
+function resetTargetGame(){
+
+clearInterval(targetInterval);
+targetInterval=null;
+
+targetScore=0;
+targetTime=30;
+
+targetButton.style.display='none';
+
+targetMessage.style.display='flex';
+
+targetMessage.textContent='Press Start';
+
+updateTargetStats();
+
+}
+
+
+/* CAR GAME */
+
+let carRunning=false;
+let carScore=0;
+let carX=50;
+let carInterval=null;
+
+function moveCar(direction){
+
+carX+=direction*10;
+
+if(carX<20)carX=20;
+if(carX>80)carX=80;
+
+playerCar.style.left=
+`calc(${carX}% - 24px)`;
+
+}
+
+document.addEventListener('keydown',e=>{
+
+if(e.key==='ArrowLeft')moveCar(-1);
+if(e.key==='ArrowRight')moveCar(1);
+if(e.key==='ArrowUp')moveAir(-1);
+if(e.key==='ArrowDown')moveAir(1);
+
+});
+
+function startCarGame(){
+
+if(carRunning)return;
+
+carRunning=true;
+carScore=0;
+
+let road=document.getElementById('road');
+
+carInterval=setInterval(()=>{
+
+carScore++;
+
+carStats.textContent=
+`Score: ${carScore}`;
+
+if(Math.random()<.04){
+
+let obstacle=document.createElement('div');
+
+obstacle.className='obstacle';
+
+obstacle.style.left=
+(10+Math.random()*70)+'%';
+
+obstacle.style.top='-80px';
+
+road.appendChild(obstacle);
+
+let fall=setInterval(()=>{
+
+let y=parseFloat(obstacle.style.top);
+
+y+=6;
+
+obstacle.style.top=y+'px';
+
+let carRect=
+playerCar.getBoundingClientRect();
+
+let obsRect=
+obstacle.getBoundingClientRect();
+
+if(
+carRect.left<obsRect.right &&
+carRect.right>obsRect.left &&
+carRect.top<obsRect.bottom &&
+carRect.bottom>obsRect.top
+){
+
+stopCarGame();
+
+alert('💥 Game Over! Score: '+carScore);
+
+clearInterval(fall);
+obstacle.remove();
+
+}
+
+if(y>450){
+
+clearInterval(fall);
+obstacle.remove();
+
+}
+
+},30);
+
+}
+
+},100);
+
+}
+
+function stopCarGame(){
+
+carRunning=false;
+
+clearInterval(carInterval);
+carInterval=null;
+
+document
+.querySelectorAll('.obstacle')
+.forEach(x=>x.remove());
+
+}
+
+
+/* AIRSHIP GAME */
+
+let airRunning=false;
+let airScore=0;
+let airY=45;
+let airInterval=null;
+
+function moveAir(direction){
+
+airY+=direction*7;
+
+if(airY<10)airY=10;
+if(airY>85)airY=85;
+
+airshipPlayer.style.top=
+`calc(${airY}% - 25px)`;
+
+}
+
+function startAirGame(){
+
+if(airRunning)return;
+
+airRunning=true;
+airScore=0;
+
+airshipPlayer.style.left='30px';
+
+airInterval=setInterval(()=>{
+
+airScore++;
+
+airStats.textContent=
+`Score: ${airScore}`;
+
+if(Math.random()<.035){
+
+let cloud=document.createElement('div');
+
+cloud.className='cloud';
+
+cloud.textContent='☁️';
+
+cloud.style.left='100%';
+
+cloud.style.top=
+(5+Math.random()*80)+'%';
+
+airArea.appendChild(cloud);
+
+let fall=setInterval(()=>{
+
+let x=parseFloat(cloud.style.left);
+
+x-=1.5;
+
+cloud.style.left=x+'%';
+
+let p=
+airshipPlayer.getBoundingClientRect();
+
+let c=
+cloud.getBoundingClientRect();
+
+if(
+p.left<c.right &&
+p.right>c.left &&
+p.top<c.bottom &&
+p.bottom>c.top
+){
+
+stopAirGame();
+
+alert(
+'💥 Airship crashed! Score: '+airScore
+);
+
+clearInterval(fall);
+cloud.remove();
+
+}
+
+if(x<-10){
+
+clearInterval(fall);
+cloud.remove();
+
+}
+
+},30);
+
+}
+
+},100);
+
+}
+
+function stopAirGame(){
+
+airRunning=false;
+
+clearInterval(airInterval);
+airInterval=null;
+
+document
+.querySelectorAll('.cloud')
+.forEach(x=>x.remove());
+
+}
+
+
+/* SHOOTING GAME */
+
+let shootRunning=false;
+let shootScore=0;
+let shootTime=30;
+let shootInterval=null;
+
+function createEnemy(){
+
+if(!shootRunning)return;
+
+let enemy=document.createElement('button');
+
+enemy.className='targetEnemy';
+
+enemy.style.left=
+Math.random()*85+'%';
+
+enemy.style.top=
+Math.random()*80+'%';
+
+enemy.onclick=function(){
+
+shootScore++;
+
+enemy.remove();
+
+updateShootStats();
+
+};
+
+shootArea.appendChild(enemy);
+
+}
+
+function startShooting(){
+
+stopShooting();
+
+shootRunning=true;
+shootScore=0;
+shootTime=30;
+
+shootMessage.style.display='none';
+
+updateShootStats();
+
+createEnemy();
+
+shootInterval=setInterval(()=>{
+
+shootTime--;
+
+updateShootStats();
+
+createEnemy();
+
+if(shootTime<=0){
+
+stopShooting();
+
+shootMessage.style.display='flex';
+
+shootMessage.textContent=
+`🏆 Time Up! Score: ${shootScore}`;
 
 }
 
@@ -2457,115 +1879,32 @@ endGame();
 
 }
 
+function updateShootStats(){
 
-function hitTarget(){
+shootStats.textContent=
+`Score: ${shootScore} | Time: ${shootTime}`;
 
-if(!gameRunning)
-return;
+}
 
-gameScore++;
+function stopShooting(){
 
-updateGameStats();
+clearInterval(shootInterval);
+shootInterval=null;
 
-moveTarget();
+shootRunning=false;
+
+document
+.querySelectorAll('.targetEnemy')
+.forEach(x=>x.remove());
 
 }
 
 
-function endGame(){
-
-clearInterval(gameInterval);
-
-gameInterval=null;
-
-gameRunning=false;
-
-document.getElementById('target').style.display=
-'none';
-
-document.getElementById('gameMessage').style.display=
-'flex';
-
-document.getElementById('gameMessage').textContent=
-`🎉 Game Over! Score: ${gameScore}`;
-
-if(gameScore>bestScore){
-
-bestScore=gameScore;
-
-localStorage.setItem(
-'bestGameScore',
-bestScore
-);
-
-}
-
-updateGameStats();
-
-}
-
-
-function resetGame(){
-
-clearInterval(gameInterval);
-
-gameInterval=null;
-
-gameRunning=false;
-
-gameScore=0;
-
-gameTime=30;
-
-document.getElementById('target').style.display=
-'none';
-
-document.getElementById('gameMessage').style.display=
-'flex';
-
-document.getElementById('gameMessage').textContent=
-'Press Start Game';
-
-updateGameStats();
-
-}
-
-
-/* DARK MODE */
-
-if(
-localStorage.getItem('studentDarkMode')
-==='true'
-){
-
-document.body.classList.add('dark');
-
-}
-
-
-function toggleDark(){
-
-document.body.classList.toggle('dark');
-
-localStorage.setItem(
-'studentDarkMode',
-document.body.classList.contains('dark')
-);
-
-}
-
-
-/* INITIALIZE */
+/* START */
 
 updateTimer();
 
 renderTodos();
-
-renderTable();
-
-updateUnits();
-
-updateGameStats();
 
 </script>
 
