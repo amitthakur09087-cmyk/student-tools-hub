@@ -3,133 +3,2104 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Student Tools Hub — Free Student Calculators</title>
-<meta name="description" content="Free online calculators and study tools for students: percentage, CGPA, age, simple interest, study time and more.">
+
+<title>Student Tools Hub — Free Student Calculators & Study Tools</title>
+
+<meta name="description" content="Free student calculators and study tools including percentage, CGPA, GPA, attendance, marks, age, interest, Pomodoro timer, exam countdown, timetable and to-do list.">
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#182033}
-header{background:#182033;color:white;padding:28px 18px;text-align:center}
-header h1{margin:0 0 8px;font-size:32px}header p{margin:0;color:#cbd3e3}
-nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px;background:white;position:sticky;top:0;z-index:5;box-shadow:0 2px 10px #00000010}
-nav button{border:0;background:#eef2f8;padding:9px 14px;border-radius:20px;cursor:pointer}
-.container{max-width:1050px;margin:auto;padding:22px 16px}
-.hero{background:white;border-radius:18px;padding:28px;margin-bottom:20px;box-shadow:0 5px 20px #00000008}
-.hero h2{margin-top:0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.card{background:white;border-radius:16px;padding:20px;box-shadow:0 5px 20px #00000008}
-.card h3{margin-top:0}.card p{color:#657084}.card button,.primary{border:0;background:#315efb;color:white;padding:11px 16px;border-radius:10px;cursor:pointer}
-.tool{display:none;margin-top:20px}.tool.active{display:block}
-label{display:block;font-weight:bold;margin:12px 0 6px}input{width:100%;padding:11px;border:1px solid #ccd3df;border-radius:9px;font-size:16px}
-.result{margin-top:14px;padding:14px;background:#eef7ee;border-radius:10px;font-weight:bold}
-.note{color:#667085;font-size:14px}.formula{background:#f0f3f8;padding:12px;border-radius:9px;margin-top:10px}
-footer{text-align:center;padding:30px;color:#667085}
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+color:#182033;
+line-height:1.5;
+transition:.3s
+}
+
+body.dark{
+background:#111827;
+color:#f3f4f6
+}
+
+header{
+background:#182033;
+color:white;
+padding:30px 18px;
+text-align:center
+}
+
+header h1{
+margin:0 0 8px;
+font-size:34px
+}
+
+header p{
+margin:0;
+color:#cbd3e3
+}
+
+nav{
+display:flex;
+gap:8px;
+justify-content:center;
+flex-wrap:wrap;
+padding:14px;
+background:white;
+position:sticky;
+top:0;
+z-index:10;
+box-shadow:0 2px 10px #00000010
+}
+
+body.dark nav{
+background:#1f2937
+}
+
+nav button{
+border:0;
+background:#eef2f8;
+padding:9px 14px;
+border-radius:20px;
+cursor:pointer;
+color:#182033
+}
+
+body.dark nav button{
+background:#374151;
+color:white
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:22px 16px
+}
+
+.hero{
+background:white;
+border-radius:18px;
+padding:28px;
+margin-bottom:20px;
+box-shadow:0 5px 20px #00000008
+}
+
+body.dark .hero,
+body.dark .card{
+background:#1f2937;
+color:#f3f4f6
+}
+
+.hero h2{
+margin-top:0
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:16px
+}
+
+.card{
+background:white;
+border-radius:16px;
+padding:20px;
+box-shadow:0 5px 20px #00000008
+}
+
+.card h3{
+margin-top:0
+}
+
+.card p{
+color:#657084
+}
+
+body.dark .card p{
+color:#cbd5e1
+}
+
+.card button,
+.primary{
+border:0;
+background:#315efb;
+color:white;
+padding:11px 16px;
+border-radius:10px;
+cursor:pointer
+}
+
+.secondary{
+border:1px solid #ccd3df;
+background:white;
+padding:10px 14px;
+border-radius:10px;
+cursor:pointer
+}
+
+body.dark .secondary{
+background:#374151;
+color:white;
+border-color:#4b5563
+}
+
+.tool{
+display:none;
+margin-top:20px
+}
+
+.tool.active{
+display:block
+}
+
+label{
+display:block;
+font-weight:bold;
+margin:12px 0 6px
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:11px;
+border:1px solid #ccd3df;
+border-radius:9px;
+font-size:16px;
+background:white;
+color:#182033
+}
+
+body.dark input,
+body.dark select,
+body.dark textarea{
+background:#111827;
+color:white;
+border-color:#4b5563
+}
+
+.result{
+margin-top:14px;
+padding:14px;
+background:#eef7ee;
+border-radius:10px;
+font-weight:bold
+}
+
+body.dark .result{
+background:#243b2a
+}
+
+.note{
+color:#667085;
+font-size:14px
+}
+
+body.dark .note{
+color:#cbd5e1
+}
+
+.formula{
+background:#f0f3f8;
+padding:12px;
+border-radius:9px;
+margin-top:10px
+}
+
+body.dark .formula{
+background:#374151
+}
+
+.search{
+max-width:600px;
+margin:20px auto
+}
+
+.search input{
+font-size:17px
+}
+
+.actions{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:12px
+}
+
+.timer{
+font-size:55px;
+text-align:center;
+font-weight:bold;
+margin:20px 0
+}
+
+.todo-row{
+display:flex;
+gap:8px
+}
+
+.todo-row input{
+flex:1
+}
+
+.todo-list{
+padding:0;
+list-style:none
+}
+
+.todo-list li{
+padding:10px;
+border-bottom:1px solid #ddd;
+display:flex;
+justify-content:space-between;
+gap:10px
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:12px
+}
+
+th,td{
+border:1px solid #ccd3df;
+padding:8px;
+text-align:left
+}
+
+body.dark th,
+body.dark td{
+border-color:#4b5563
+}
+
+footer{
+text-align:center;
+padding:30px;
+color:#667085
+}
+
+body.dark footer{
+color:#cbd5e1
+}
+
+@media(max-width:600px){
+
+header h1{
+font-size:27px
+}
+
+.hero{
+padding:20px
+}
+
+.card{
+padding:16px
+}
+
+.timer{
+font-size:42px
+}
+
+}
 </style>
 </head>
+
 <body>
+
 <header>
+
 <h1>Student Tools Hub</h1>
+
 <p>Free calculators and simple study tools for students</p>
+
 </header>
 
+
 <nav>
+
 <button onclick="showTool('home')">Home</button>
+
 <button onclick="showTool('percentage')">Percentage</button>
+
 <button onclick="showTool('cgpa')">CGPA</button>
+
+<button onclick="showTool('gpa')">GPA</button>
+
+<button onclick="showTool('attendance')">Attendance</button>
+
+<button onclick="showTool('marks')">Marks & Grade</button>
+
 <button onclick="showTool('age')">Age</button>
-<button onclick="showTool('interest')">Simple Interest</button>
+
+<button onclick="showTool('interest')">Interest</button>
+
 <button onclick="showTool('study')">Study Time</button>
+
+<button onclick="showTool('pomodoro')">Pomodoro</button>
+
+<button onclick="showTool('countdown')">Exam Countdown</button>
+
+<button onclick="showTool('timetable')">Timetable</button>
+
+<button onclick="showTool('todo')">To-Do</button>
+
+<button onclick="showTool('goals')">Goals</button>
+
+<button onclick="showTool('converter')">Converter</button>
+
+<button onclick="showTool('days')">Date Difference</button>
+
+<button onclick="toggleDark()">🌙</button>
+
 </nav>
 
+
 <main class="container">
+
+
+<!-- HOME -->
+
 <section id="home" class="tool active">
+
 <div class="hero">
-<h2>Free Student Calculators</h2>
-<p>Quick, simple and mobile-friendly tools for everyday student calculations.</p>
+
+<h2>🎓 All-in-One Student Tools</h2>
+
+<p>
+Quick, simple and mobile-friendly tools for everyday student calculations and study planning.
+</p>
+
+<div class="search">
+
+<input
+id="toolSearch"
+placeholder="🔎 Search a tool..."
+oninput="filterTools()">
+
 </div>
-<div class="grid">
-<div class="card"><h3>📊 Percentage Calculator</h3><p>Find percentage from obtained and total marks.</p><button onclick="showTool('percentage')">Open Tool</button></div>
-<div class="card"><h3>🎓 CGPA Calculator</h3><p>Convert CGPA into an approximate percentage.</p><button onclick="showTool('cgpa')">Open Tool</button></div>
-<div class="card"><h3>🎂 Age Calculator</h3><p>Calculate your age from your date of birth.</p><button onclick="showTool('age')">Open Tool</button></div>
-<div class="card"><h3>💰 Simple Interest</h3><p>Calculate simple interest and total amount.</p><button onclick="showTool('interest')">Open Tool</button></div>
-<div class="card"><h3>⏱️ Study Time Calculator</h3><p>Split your available time into study sessions.</p><button onclick="showTool('study')">Open Tool</button></div>
+
+<div class="actions">
+
+<button class="primary"
+onclick="showTool('percentage')">
+Start Calculating
+</button>
+
+<button class="secondary"
+onclick="showTool('pomodoro')">
+Start Studying
+</button>
+
 </div>
+
+</div>
+
+
+<div class="grid" id="toolGrid">
+
+
+<div class="card tool-card" data-name="percentage">
+
+<h3>📊 Percentage Calculator</h3>
+
+<p>Find percentage from obtained and total marks.</p>
+
+<button onclick="showTool('percentage')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="cgpa">
+
+<h3>🎓 CGPA Calculator</h3>
+
+<p>Convert CGPA into approximate percentage.</p>
+
+<button onclick="showTool('cgpa')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="gpa">
+
+<h3>🎓 GPA Calculator</h3>
+
+<p>Calculate GPA from grade points and credits.</p>
+
+<button onclick="showTool('gpa')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="attendance">
+
+<h3>📅 Attendance Calculator</h3>
+
+<p>Calculate attendance percentage.</p>
+
+<button onclick="showTool('attendance')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="marks grade">
+
+<h3>📝 Marks & Grade</h3>
+
+<p>Calculate percentage and estimated grade.</p>
+
+<button onclick="showTool('marks')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="age">
+
+<h3>🎂 Age Calculator</h3>
+
+<p>Calculate your age from date of birth.</p>
+
+<button onclick="showTool('age')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="interest">
+
+<h3>💰 Interest Calculator</h3>
+
+<p>Calculate simple and compound interest.</p>
+
+<button onclick="showTool('interest')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="study time">
+
+<h3>⏱️ Study Time</h3>
+
+<p>Split study time into sessions.</p>
+
+<button onclick="showTool('study')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="pomodoro">
+
+<h3>🍅 Pomodoro Timer</h3>
+
+<p>Focus using timed study sessions.</p>
+
+<button onclick="showTool('pomodoro')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="exam countdown">
+
+<h3>📆 Exam Countdown</h3>
+
+<p>See how many days remain until your exam.</p>
+
+<button onclick="showTool('countdown')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="timetable">
+
+<h3>📚 Timetable</h3>
+
+<p>Create your weekly study timetable.</p>
+
+<button onclick="showTool('timetable')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="todo homework">
+
+<h3>✅ To-Do List</h3>
+
+<p>Track homework and study tasks.</p>
+
+<button onclick="showTool('todo')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="goals">
+
+<h3>🎯 Study Goal Tracker</h3>
+
+<p>Set and track your daily study goal.</p>
+
+<button onclick="showTool('goals')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="unit converter">
+
+<h3>🔢 Unit Converter</h3>
+
+<p>Convert length, weight and temperature.</p>
+
+<button onclick="showTool('converter')">
+Open Tool
+</button>
+
+</div>
+
+
+<div class="card tool-card" data-name="date difference">
+
+<h3>📅 Date Difference</h3>
+
+<p>Find the number of days between dates.</p>
+
+<button onclick="showTool('days')">
+Open Tool
+</button>
+
+</div>
+
+</div>
+
 </section>
+
+
+<!-- PERCENTAGE -->
 
 <section id="percentage" class="tool card">
+
 <h2>📊 Percentage Calculator</h2>
-<label>Obtained Marks</label><input id="obtained" type="number" min="0">
-<label>Total Marks</label><input id="total" type="number" min="1">
-<button class="primary" onclick="percentage()">Calculate</button>
+
+<label>Obtained Marks</label>
+
+<input id="obtained" type="number" min="0">
+
+<label>Total Marks</label>
+
+<input id="total" type="number" min="1">
+
+<button class="primary" onclick="percentage()">
+Calculate
+</button>
+
 <div id="percentageResult" class="result"></div>
-<div class="formula">Percentage = (Obtained Marks ÷ Total Marks) × 100</div>
+
+<div class="formula">
+Percentage = (Obtained ÷ Total) × 100
+</div>
+
 </section>
+
+
+<!-- CGPA -->
 
 <section id="cgpa" class="tool card">
+
 <h2>🎓 CGPA Calculator</h2>
-<label>CGPA</label><input id="cgpaInput" type="number" min="0" max="10" step="0.01">
-<button class="primary" onclick="cgpa()">Calculate</button>
+
+<label>CGPA</label>
+
+<input
+id="cgpaInput"
+type="number"
+min="0"
+max="10"
+step="0.01">
+
+<button class="primary" onclick="cgpa()">
+Calculate
+</button>
+
 <div id="cgpaResult" class="result"></div>
-<p class="note">This uses the common approximate formula CGPA × 9.5. Check your board/school's official conversion rules where applicable.</p>
+
+<p class="note">
+Approximate formula: CGPA × 9.5.
+</p>
+
 </section>
+
+
+<!-- GPA -->
+
+<section id="gpa" class="tool card">
+
+<h2>🎓 GPA Calculator</h2>
+
+<p class="note">
+Enter grade points and credits for your subjects.
+</p>
+
+<div class="grid">
+
+<div>
+
+<label>Subject 1 Grade Point</label>
+
+<input class="gp" type="number" min="0" max="10" step=".1">
+
+<label>Credits</label>
+
+<input class="cr" type="number" min="1" value="1">
+
+</div>
+
+
+<div>
+
+<label>Subject 2 Grade Point</label>
+
+<input class="gp" type="number" min="0" max="10" step=".1">
+
+<label>Credits</label>
+
+<input class="cr" type="number" min="1" value="1">
+
+</div>
+
+
+<div>
+
+<label>Subject 3 Grade Point</label>
+
+<input class="gp" type="number" min="0" max="10" step=".1">
+
+<label>Credits</label>
+
+<input class="cr" type="number" min="1" value="1">
+
+</div>
+
+
+<div>
+
+<label>Subject 4 Grade Point</label>
+
+<input class="gp" type="number" min="0" max="10" step=".1">
+
+<label>Credits</label>
+
+<input class="cr" type="number" min="1" value="1">
+
+</div>
+
+
+<div>
+
+<label>Subject 5 Grade Point</label>
+
+<input class="gp" type="number" min="0" max="10" step=".1">
+
+<label>Credits</label>
+
+<input class="cr" type="number" min="1" value="1">
+
+</div>
+
+</div>
+
+<button class="primary" onclick="gpa()">
+Calculate GPA
+</button>
+
+<div id="gpaResult" class="result"></div>
+
+</section>
+
+
+<!-- ATTENDANCE -->
+
+<section id="attendance" class="tool card">
+
+<h2>📅 Attendance Calculator</h2>
+
+<label>Total Classes Held</label>
+
+<input id="held" type="number" min="1">
+
+<label>Classes Attended</label>
+
+<input id="attended" type="number" min="0">
+
+<label>Target Attendance %</label>
+
+<input
+id="targetAttendance"
+type="number"
+min="1"
+max="100"
+value="75">
+
+<button class="primary" onclick="attendance()">
+Calculate
+</button>
+
+<div id="attendanceResult" class="result"></div>
+
+</section>
+
+
+<!-- MARKS -->
+
+<section id="marks" class="tool card">
+
+<h2>📝 Marks & Grade Calculator</h2>
+
+<label>Obtained Marks</label>
+
+<input id="marksObtained" type="number" min="0">
+
+<label>Total Marks</label>
+
+<input id="marksTotal" type="number" min="1">
+
+<button class="primary" onclick="marksGrade()">
+Calculate
+</button>
+
+<div id="marksResult" class="result"></div>
+
+<p class="note">
+A+ ≥ 90 | A ≥ 80 | B ≥ 70 | C ≥ 60 | D ≥ 50 | F below 50
+</p>
+
+</section>
+
+
+<!-- AGE -->
 
 <section id="age" class="tool card">
+
 <h2>🎂 Age Calculator</h2>
-<label>Date of Birth</label><input id="dob" type="date">
-<button class="primary" onclick="age()">Calculate</button>
+
+<label>Date of Birth</label>
+
+<input id="dob" type="date">
+
+<button class="primary" onclick="age()">
+Calculate
+</button>
+
 <div id="ageResult" class="result"></div>
+
 </section>
+
+
+<!-- INTEREST -->
 
 <section id="interest" class="tool card">
-<h2>💰 Simple Interest Calculator</h2>
-<label>Principal (₹)</label><input id="principal" type="number" min="0">
-<label>Rate (% per year)</label><input id="rate" type="number" min="0" step="0.01">
-<label>Time (years)</label><input id="years" type="number" min="0" step="0.01">
-<button class="primary" onclick="interest()">Calculate</button>
+
+<h2>💰 Interest Calculator</h2>
+
+<label>Principal (₹)</label>
+
+<input id="principal" type="number" min="0">
+
+<label>Rate (% per year)</label>
+
+<input id="rate" type="number" min="0" step=".01">
+
+<label>Time (years)</label>
+
+<input id="years" type="number" min="0" step=".01">
+
+<div class="actions">
+
+<button class="primary" onclick="simpleInterest()">
+Simple Interest
+</button>
+
+<button class="secondary" onclick="compoundInterest()">
+Compound Interest
+</button>
+
+</div>
+
 <div id="interestResult" class="result"></div>
-<div class="formula">SI = (P × R × T) ÷ 100</div>
+
 </section>
+
+
+<!-- STUDY TIME -->
 
 <section id="study" class="tool card">
+
 <h2>⏱️ Study Time Calculator</h2>
-<label>Total available study time (minutes)</label><input id="studyMinutes" type="number" min="1">
-<label>Number of sessions</label><input id="sessions" type="number" min="1">
-<button class="primary" onclick="study()">Calculate</button>
+
+<label>Total Study Time (minutes)</label>
+
+<input id="studyMinutes" type="number" min="1">
+
+<label>Number of Sessions</label>
+
+<input id="sessions" type="number" min="1">
+
+<button class="primary" onclick="study()">
+Calculate
+</button>
+
 <div id="studyResult" class="result"></div>
-<p class="note">This is a simple equal-split planner. Add breaks separately according to your routine.</p>
+
 </section>
+
+
+<!-- POMODORO -->
+
+<section id="pomodoro" class="tool card">
+
+<h2>🍅 Pomodoro Study Timer</h2>
+
+<p class="note">
+Default focus time: 25 minutes.
+</p>
+
+<div id="timer" class="timer">
+25:00
+</div>
+
+<div class="actions" style="justify-content:center">
+
+<button class="primary" onclick="startTimer()">
+Start
+</button>
+
+<button class="secondary" onclick="pauseTimer()">
+Pause
+</button>
+
+<button class="secondary" onclick="resetTimer()">
+Reset
+</button>
+
+</div>
+
+<div id="timerStatus" class="result">
+Ready to focus.
+</div>
+
+</section>
+
+
+<!-- COUNTDOWN -->
+
+<section id="countdown" class="tool card">
+
+<h2>📆 Exam Countdown</h2>
+
+<label>Exam Name</label>
+
+<input
+id="examName"
+placeholder="e.g. Maths Exam">
+
+<label>Exam Date</label>
+
+<input id="examDate" type="date">
+
+<button class="primary" onclick="countdown()">
+Calculate
+</button>
+
+<div id="countdownResult" class="result"></div>
+
+</section>
+
+
+<!-- TIMETABLE -->
+
+<section id="timetable" class="tool card">
+
+<h2>📚 Study Timetable Generator</h2>
+
+<label>Subject</label>
+
+<input
+id="subjectName"
+placeholder="e.g. Accountancy">
+
+<label>Day</label>
+
+<select id="subjectDay">
+
+<option>Monday</option>
+<option>Tuesday</option>
+<option>Wednesday</option>
+<option>Thursday</option>
+<option>Friday</option>
+<option>Saturday</option>
+<option>Sunday</option>
+
+</select>
+
+<label>Time</label>
+
+<input id="subjectTime" type="time">
+
+<button class="primary" onclick="addTimetable()">
+Add to Timetable
+</button>
+
+<div id="tableWrap"></div>
+
+</section>
+
+
+<!-- TODO -->
+
+<section id="todo" class="tool card">
+
+<h2>✅ Student To-Do List</h2>
+
+<div class="todo-row">
+
+<input
+id="todoInput"
+placeholder="Enter homework or task">
+
+<button class="primary" onclick="addTodo()">
+Add
+</button>
+
+</div>
+
+<ul id="todoList" class="todo-list"></ul>
+
+<button class="secondary" onclick="clearTodos()">
+Clear All
+</button>
+
+</section>
+
+
+<!-- GOALS -->
+
+<section id="goals" class="tool card">
+
+<h2>🎯 Study Goal Tracker</h2>
+
+<label>Daily Goal (minutes)</label>
+
+<input
+id="goalMinutes"
+type="number"
+min="1"
+value="120">
+
+<label>Minutes Studied</label>
+
+<input
+id="doneMinutes"
+type="number"
+min="0"
+value="0">
+
+<button class="primary" onclick="goal()">
+Track Progress
+</button>
+
+<div id="goalResult" class="result"></div>
+
+</section>
+
+
+<!-- CONVERTER -->
+
+<section id="converter" class="tool card">
+
+<h2>🔢 Unit Converter</h2>
+
+<label>Category</label>
+
+<select id="convCategory" onchange="updateUnits()">
+
+<option value="length">Length</option>
+
+<option value="weight">Weight</option>
+
+<option value="temp">Temperature</option>
+
+</select>
+
+<label>From</label>
+
+<select id="convFrom"></select>
+
+<label>To</label>
+
+<select id="convTo"></select>
+
+<label>Value</label>
+
+<input id="convValue" type="number" step="any">
+
+<button class="primary" onclick="convert()">
+Convert
+</button>
+
+<div id="convResult" class="result"></div>
+
+</section>
+
+
+<!-- DATE DIFFERENCE -->
+
+<section id="days" class="tool card">
+
+<h2>📅 Days Between Dates</h2>
+
+<label>Start Date</label>
+
+<input id="startDate" type="date">
+
+<label>End Date</label>
+
+<input id="endDate" type="date">
+
+<button class="primary" onclick="dateDiff()">
+Calculate
+</button>
+
+<div id="daysResult" class="result"></div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section class="card" style="margin-top:20px">
+
+<h2>❓ Frequently Asked Questions</h2>
+
+<p>
+<b>Are these tools free?</b><br>
+Yes. Student Tools Hub is free to use.
+</p>
+
+<p>
+<b>Can I use these tools on mobile?</b><br>
+Yes. The website is mobile-friendly.
+</p>
+
+<p>
+<b>Are calculator results official?</b><br>
+Results are for general use. For school or board-specific rules, check official instructions.
+</p>
+
+</section>
+
 </main>
 
-<footer>Student Tools Hub • Free student tools</footer>
+
+<footer>
+
+Student Tools Hub • Free Student Tools
+
+<br><br>
+
+Made for students ❤️
+
+</footer>
+
 
 <script>
+
+/* NAVIGATION */
+
 function showTool(id){
- document.querySelectorAll('.tool').forEach(x=>x.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- window.scrollTo({top:0,behavior:'smooth'});
+
+document
+.querySelectorAll('.tool')
+.forEach(x=>x.classList.remove('active'));
+
+const element=document.getElementById(id);
+
+if(element){
+element.classList.add('active');
 }
+
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
+
+}
+
+
+/* VALUE */
+
+function val(id){
+
+return +document.getElementById(id).value;
+
+}
+
+
+/* PERCENTAGE */
+
 function percentage(){
- const a=+document.getElementById('obtained').value,b=+document.getElementById('total').value;
- document.getElementById('percentageResult').textContent=b>0 ? `Percentage = ${(a/b*100).toFixed(2)}%` : 'Enter valid marks.';
+
+const obtained=val('obtained');
+
+const total=val('total');
+
+if(total<=0 || obtained<0 || obtained>total){
+
+document.getElementById('percentageResult').textContent=
+'Enter valid marks.';
+
+return;
+
 }
+
+document.getElementById('percentageResult').textContent=
+`Percentage = ${(obtained/total*100).toFixed(2)}%`;
+
+}
+
+
+/* CGPA */
+
 function cgpa(){
- const c=+document.getElementById('cgpaInput').value;
- document.getElementById('cgpaResult').textContent=(c>=0&&c<=10)?`Approx. Percentage = ${(c*9.5).toFixed(2)}%`:'Enter CGPA from 0 to 10.';
+
+const c=val('cgpaInput');
+
+if(c<0 || c>10){
+
+document.getElementById('cgpaResult').textContent=
+'Enter CGPA from 0 to 10.';
+
+return;
+
 }
+
+document.getElementById('cgpaResult').textContent=
+`Approx. Percentage = ${(c*9.5).toFixed(2)}%`;
+
+}
+
+
+/* GPA */
+
+function gpa(){
+
+const grades=[
+...document.querySelectorAll('.gp')
+];
+
+const credits=[
+...document.querySelectorAll('.cr')
+];
+
+let totalPoints=0;
+
+let totalCredits=0;
+
+grades.forEach((g,i)=>{
+
+const grade=+g.value;
+
+const credit=+credits[i].value;
+
+if(g.value!=='' && credit>0){
+
+totalPoints+=grade*credit;
+
+totalCredits+=credit;
+
+}
+
+});
+
+if(totalCredits===0){
+
+document.getElementById('gpaResult').textContent=
+'Enter at least one subject.';
+
+return;
+
+}
+
+document.getElementById('gpaResult').textContent=
+`GPA = ${(totalPoints/totalCredits).toFixed(2)}`;
+
+}
+
+
+/* ATTENDANCE */
+
+function attendance(){
+
+const held=val('held');
+
+const attended=val('attended');
+
+const target=val('targetAttendance');
+
+if(
+held<=0 ||
+attended<0 ||
+attended>held ||
+target<=0 ||
+target>100
+){
+
+document.getElementById('attendanceResult').textContent=
+'Enter valid values.';
+
+return;
+
+}
+
+const current=attended/held*100;
+
+if(current>=target){
+
+document.getElementById('attendanceResult').textContent=
+`Current Attendance = ${current.toFixed(2)}%. You are above your target.`;
+
+return;
+
+}
+
+const required=
+Math.ceil(
+(target*held/100-attended)/
+(1-target/100)
+);
+
+document.getElementById('attendanceResult').textContent=
+`Current Attendance = ${current.toFixed(2)}%. You need approximately ${required} consecutive attended class(es) to reach ${target}%.`;
+
+}
+
+
+/* MARKS */
+
+function marksGrade(){
+
+const obtained=val('marksObtained');
+
+const total=val('marksTotal');
+
+if(
+total<=0 ||
+obtained<0 ||
+obtained>total
+){
+
+document.getElementById('marksResult').textContent=
+'Enter valid marks.';
+
+return;
+
+}
+
+const percentage=
+obtained/total*100;
+
+let grade;
+
+if(percentage>=90)
+grade='A+';
+
+else if(percentage>=80)
+grade='A';
+
+else if(percentage>=70)
+grade='B';
+
+else if(percentage>=60)
+grade='C';
+
+else if(percentage>=50)
+grade='D';
+
+else
+grade='F';
+
+document.getElementById('marksResult').textContent=
+`Percentage = ${percentage.toFixed(2)}% | Grade = ${grade}`;
+
+}
+
+
+/* AGE */
+
 function age(){
- const d=new Date(document.getElementById('dob').value), now=new Date();
- if(isNaN(d)){document.getElementById('ageResult').textContent='Enter your date of birth.';return}
- let y=now.getFullYear()-d.getFullYear(),m=now.getMonth()-d.getMonth(),day=now.getDate()-d.getDate();
- if(day<0){m--;day+=new Date(now.getFullYear(),now.getMonth(),0).getDate()}
- if(m<0){y--;m+=12}
- document.getElementById('ageResult').textContent=`Age = ${y} years, ${m} months, ${day} days`;
+
+const value=document.getElementById('dob').value;
+
+if(!value){
+
+document.getElementById('ageResult').textContent=
+'Enter your date of birth.';
+
+return;
+
 }
-function interest(){
- const p=+document.getElementById('principal').value,r=+document.getElementById('rate').value,t=+document.getElementById('years').value;
- const si=p*r*t/100;
- document.getElementById('interestResult').textContent=`Simple Interest = ₹${si.toFixed(2)} | Total Amount = ₹${(p+si).toFixed(2)}`;
+
+const dob=new Date(value+'T00:00:00');
+
+const today=new Date();
+
+if(dob>today){
+
+document.getElementById('ageResult').textContent=
+'Date of birth cannot be in the future.';
+
+return;
+
 }
+
+let years=
+today.getFullYear()-dob.getFullYear();
+
+let months=
+today.getMonth()-dob.getMonth();
+
+let days=
+today.getDate()-dob.getDate();
+
+if(days<0){
+
+months--;
+
+days+=new Date(
+today.getFullYear(),
+today.getMonth(),
+0
+).getDate();
+
+}
+
+if(months<0){
+
+years--;
+
+months+=12;
+
+}
+
+document.getElementById('ageResult').textContent=
+`Age = ${years} years, ${months} months, ${days} days`;
+
+}
+
+
+/* SIMPLE INTEREST */
+
+function simpleInterest(){
+
+const p=val('principal');
+
+const r=val('rate');
+
+const t=val('years');
+
+if(p<0 || r<0 || t<0){
+
+document.getElementById('interestResult').textContent=
+'Enter valid values.';
+
+return;
+
+}
+
+const si=p*r*t/100;
+
+document.getElementById('interestResult').textContent=
+`Simple Interest = ₹${si.toFixed(2)} | Total = ₹${(p+si).toFixed(2)}`;
+
+}
+
+
+/* COMPOUND INTEREST */
+
+function compoundInterest(){
+
+const p=val('principal');
+
+const r=val('rate');
+
+const t=val('years');
+
+if(p<0 || r<0 || t<0){
+
+document.getElementById('interestResult').textContent=
+'Enter valid values.';
+
+return;
+
+}
+
+const amount=
+p*Math.pow(1+r/100,t);
+
+const ci=amount-p;
+
+document.getElementById('interestResult').textContent=
+`Compound Interest = ₹${ci.toFixed(2)} | Total = ₹${amount.toFixed(2)}`;
+
+}
+
+
+/* STUDY TIME */
+
 function study(){
- const m=+document.getElementById('studyMinutes').value,s=+document.getElementById('sessions').value;
- document.getElementById('studyResult').textContent=s>0&&m>0?`Each session = ${(m/s).toFixed(0)} minutes`:'Enter valid values.';
+
+const minutes=val('studyMinutes');
+
+const sessions=val('sessions');
+
+if(minutes<=0 || sessions<=0){
+
+document.getElementById('studyResult').textContent=
+'Enter valid values.';
+
+return;
+
 }
+
+document.getElementById('studyResult').textContent=
+`Each session = ${(minutes/sessions).toFixed(0)} minutes`;
+
+}
+
+
+/* POMODORO */
+
+let timerSeconds=1500;
+
+let timerInterval=null;
+
+
+function renderTimer(){
+
+const minutes=
+Math.floor(timerSeconds/60);
+
+const seconds=
+timerSeconds%60;
+
+document.getElementById('timer').textContent=
+`${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+
+}
+
+
+function startTimer(){
+
+if(timerInterval)
+return;
+
+document.getElementById('timerStatus').textContent=
+'Focus time running...';
+
+timerInterval=setInterval(()=>{
+
+if(timerSeconds>0){
+
+timerSeconds--;
+
+renderTimer();
+
+}
+
+else{
+
+clearInterval(timerInterval);
+
+timerInterval=null;
+
+document.getElementById('timerStatus').textContent=
+'🎉 Session complete! Take a short break.';
+
+}
+
+},1000);
+
+}
+
+
+function pauseTimer(){
+
+clearInterval(timerInterval);
+
+timerInterval=null;
+
+document.getElementById('timerStatus').textContent=
+'Timer paused.';
+
+}
+
+
+function resetTimer(){
+
+pauseTimer();
+
+timerSeconds=1500;
+
+renderTimer();
+
+document.getElementById('timerStatus').textContent=
+'Ready to focus.';
+
+}
+
+
+/* EXAM COUNTDOWN */
+
+function countdown(){
+
+const date=
+document.getElementById('examDate').value;
+
+if(!date){
+
+document.getElementById('countdownResult').textContent=
+'Choose an exam date.';
+
+return;
+
+}
+
+const exam=
+new Date(date+'T00:00:00');
+
+const today=
+new Date();
+
+today.setHours(0,0,0,0);
+
+const days=
+Math.ceil(
+(exam-today)/86400000
+);
+
+const name=
+document.getElementById('examName').value ||
+'Exam';
+
+if(days>0){
+
+document.getElementById('countdownResult').textContent=
+`${name}: ${days} day(s) remaining.`;
+
+}
+
+else if(days===0){
+
+document.getElementById('countdownResult').textContent=
+`${name}: Today! All the best! 🎯`;
+
+}
+
+else{
+
+document.getElementById('countdownResult').textContent=
+`${name}: This date has already passed.`;
+
+}
+
+}
+
+
+/* TIMETABLE */
+
+let timetable=
+JSON.parse(
+localStorage.getItem('studentToolsTimetable') || '[]'
+);
+
+
+function renderTable(){
+
+const wrap=
+document.getElementById('tableWrap');
+
+if(!timetable.length){
+
+wrap.innerHTML=
+'<p class="note">No sessions added yet.</p>';
+
+return;
+
+}
+
+let html=
+`<table>
+<tr>
+<th>Day</th>
+<th>Time</th>
+<th>Subject</th>
+<th>Action</th>
+</tr>`;
+
+timetable.forEach((item,index)=>{
+
+html+=`
+<tr>
+<td>${item.day}</td>
+<td>${item.time}</td>
+<td>${escapeHTML(item.subject)}</td>
+<td>
+<button
+class="secondary"
+onclick="removeTable(${index})">
+Remove
+</button>
+</td>
+</tr>`;
+
+});
+
+html+='</table>';
+
+wrap.innerHTML=html;
+
+}
+
+
+function addTimetable(){
+
+const subject=
+document.getElementById('subjectName').value.trim();
+
+const day=
+document.getElementById('subjectDay').value;
+
+const time=
+document.getElementById('subjectTime').value;
+
+if(!subject || !time){
+
+alert('Enter subject and time.');
+
+return;
+
+}
+
+timetable.push({
+subject,
+day,
+time
+});
+
+localStorage.setItem(
+'studentToolsTimetable',
+JSON.stringify(timetable)
+);
+
+document.getElementById('subjectName').value='';
+
+renderTable();
+
+}
+
+
+function removeTable(index){
+
+timetable.splice(index,1);
+
+localStorage.setItem(
+'studentToolsTimetable',
+JSON.stringify(timetable)
+);
+
+renderTable();
+
+}
+
+
+/* TODO */
+
+let todos=
+JSON.parse(
+localStorage.getItem('studentToolsTodos') || '[]'
+);
+
+
+function escapeHTML(text){
+
+return text.replace(
+/[&<>"']/g,
+
+function(match){
+
+return {
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#039;'
+}[match];
+
+}
+
+);
+
+}
+
+
+function renderTodos(){
+
+const list=
+document.getElementById('todoList');
+
+list.innerHTML='';
+
+todos.forEach((todo,index)=>{
+
+const li=document.createElement('li');
+
+li.innerHTML=
+`<span>${escapeHTML(todo)}</span>
+<button
+class="secondary"
+onclick="removeTodo(${index})">
+Done
+</button>`;
+
+list.appendChild(li);
+
+});
+
+}
+
+
+function addTodo(){
+
+const input=
+document.getElementById('todoInput');
+
+const text=input.value.trim();
+
+if(!text)
+return;
+
+todos.push(text);
+
+localStorage.setItem(
+'studentToolsTodos',
+JSON.stringify(todos)
+);
+
+input.value='';
+
+renderTodos();
+
+}
+
+
+function removeTodo(index){
+
+todos.splice(index,1);
+
+localStorage.setItem(
+'studentToolsTodos',
+JSON.stringify(todos)
+);
+
+renderTodos();
+
+}
+
+
+function clearTodos(){
+
+todos=[];
+
+localStorage.setItem(
+'studentToolsTodos',
+'[]'
+);
+
+renderTodos();
+
+}
+
+
+/* GOALS */
+
+function goal(){
+
+const goalMinutes=
+val('goalMinutes');
+
+const done=
+val('doneMinutes');
+
+if(goalMinutes<=0 || done<0){
+
+document.getElementById('goalResult').textContent=
+'Enter valid values.';
+
+return;
+
+}
+
+const progress=
+Math.min(
+100,
+done/goalMinutes*100
+);
+
+document.getElementById('goalResult').textContent=
+`Progress = ${progress.toFixed(0)}% (${done}/${goalMinutes} minutes). ${
+progress>=100
+?'🎉 Goal completed!'
+:'Keep going!'
+}`;
+
+}
+
+
+/* UNIT CONVERTER */
+
+const units={
+
+length:{
+Meter:1,
+Kilometer:1000,
+Centimeter:.01,
+Mile:1609.344,
+Foot:.3048
+},
+
+weight:{
+Kilogram:1,
+Gram:.001,
+Pound:.453592,
+Ounce:.0283495
+},
+
+temp:{
+Celsius:'C',
+Fahrenheit:'F',
+Kelvin:'K'
+}
+
+};
+
+
+function updateUnits(){
+
+const category=
+document.getElementById('convCategory').value;
+
+const names=
+Object.keys(units[category]);
+
+document.getElementById('convFrom').innerHTML=
+names.map(
+x=>`<option>${x}</option>`
+).join('');
+
+document.getElementById('convTo').innerHTML=
+names.map(
+x=>`<option>${x}</option>`
+).join('');
+
+}
+
+
+function convert(){
+
+const category=
+document.getElementById('convCategory').value;
+
+const from=
+document.getElementById('convFrom').value;
+
+const to=
+document.getElementById('convTo').value;
+
+const value=
+val('convValue');
+
+if(!Number.isFinite(value)){
+
+document.getElementById('convResult').textContent=
+'Enter a value.';
+
+return;
+
+}
+
+if(category==='temp'){
+
+let celsius;
+
+if(from==='Celsius')
+celsius=value;
+
+else if(from==='Fahrenheit')
+celsius=(value-32)*5/9;
+
+else
+celsius=value-273.15;
+
+let result;
+
+if(to==='Celsius')
+result=celsius;
+
+else if(to==='Fahrenheit')
+result=celsius*9/5+32;
+
+else
+result=celsius+273.15;
+
+document.getElementById('convResult').textContent=
+`Result = ${result.toFixed(2)} ${to}`;
+
+return;
+
+}
+
+const result=
+value*
+units[category][from]/
+units[category][to];
+
+document.getElementById('convResult').textContent=
+`Result = ${result.toFixed(4)} ${to}`;
+
+}
+
+
+/* DATE DIFFERENCE */
+
+function dateDiff(){
+
+const start=
+document.getElementById('startDate').value;
+
+const end=
+document.getElementById('endDate').value;
+
+if(!start || !end){
+
+document.getElementById('daysResult').textContent=
+'Choose both dates.';
+
+return;
+
+}
+
+const difference=
+Math.abs(
+(
+new Date(end)-
+new Date(start)
+)/86400000
+);
+
+document.getElementById('daysResult').textContent=
+`Difference = ${difference} day(s).`;
+
+}
+
+
+/* DARK MODE */
+
+function toggleDark(){
+
+document.body.classList.toggle('dark');
+
+localStorage.setItem(
+'studentToolsDark',
+document.body.classList.contains('dark')
+);
+
+}
+
+
+/* SEARCH */
+
+function filterTools(){
+
+const query=
+document.getElementById('toolSearch')
+.value
+.toLowerCase();
+
+document
+.querySelectorAll('.tool-card')
+.forEach(card=>{
+
+const name=
+card.dataset.name.toLowerCase();
+
+card.style.display=
+name.includes(query)
+?'block'
+:'none';
+
+});
+
+}
+
+
+/* LOAD */
+
+if(
+localStorage.getItem('studentToolsDark')
+==='true'
+){
+
+document.body.classList.add('dark');
+
+}
+
+renderTimer();
+
+renderTodos();
+
+renderTable();
+
+updateUnits();
+
 </script>
+
 </body>
 </html>
+
+
+
