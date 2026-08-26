@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EditVerse Mega Studio</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#050507;--panel:#0c0d12;--panel2:#11131a;--text:#f5f7ff;
+  --muted:#8e94a8;--line:#202330;--cyan:#00eaff;--pink:#ff00a8;
+  --purple:#8b5cff;--green:#00ff88;--yellow:#ffd000;
+}
+body{
+  background:radial-gradient(circle at 20% 10%,#14102b 0,#050507 35%),
+             radial-gradient(circle at 90% 80%,#081c26 0,#050507 35%);
+  color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:999;
+  background:linear-gradient(115deg,transparent 0%,rgba(0,234,255,.025) 45%,transparent 55%);
+  animation:scan 7s linear infinite;
+}
+@keyframes scan{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{
+  width:245px;position:fixed;left:0;top:0;bottom:0;z-index:50;
+  background:rgba(7,8,12,.94);backdrop-filter:blur(18px);
+  border-right:1px solid var(--line);padding:20px 14px;
+  box-shadow:8px 0 40px rgba(0,234,255,.04);
+}
+.logo{
+  font-size:24px;font-weight:900;letter-spacing:1px;padding:12px 10px 24px;
+  text-shadow:0 0 10px var(--cyan),0 0 25px var(--pink);
+}
+.logo span{color:var(--cyan)}
+.nav{display:flex;flex-direction:column;gap:7px}
+.nav button{
+  border:1px solid transparent;background:transparent;color:#aeb4c8;
+  padding:12px 13px;border-radius:12px;text-align:left;transition:.2s;
+}
+.nav button:hover,.nav button.active{
+  color:white;background:linear-gradient(90deg,rgba(0,234,255,.13),rgba(255,0,168,.08));
+  border-color:#293040;box-shadow:0 0 18px rgba(0,234,255,.08);
+}
+.nav button.active{border-left:3px solid var(--cyan)}
+.main{margin-left:245px;width:calc(100% - 245px);padding:24px}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;
+}
+.search{
+  width:min(420px,50%);background:#0d0f15;border:1px solid var(--line);
+  border-radius:13px;padding:12px 15px;color:white;outline:none;
+}
+.search:focus{border-color:var(--cyan);box-shadow:0 0 15px rgba(0,234,255,.12)}
+.rgb{
+  height:2px;width:100%;position:fixed;top:0;left:0;z-index:100;
+  background:linear-gradient(90deg,var(--pink),var(--purple),var(--cyan),var(--green),var(--yellow),var(--pink));
+  background-size:300% 100%;animation:rgb 4s linear infinite;
+  box-shadow:0 0 16px var(--cyan);
+}
+@keyframes rgb{to{background-position:300% 0}}
+.page{display:none;animation:fade .25s ease}.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+h1{font-size:32px;margin-bottom:7px}
+.subtitle{color:var(--muted);margin-bottom:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
+.card{
+  background:linear-gradient(145deg,rgba(17,19,26,.96),rgba(9,10,14,.96));
+  border:1px solid var(--line);border-radius:18px;padding:20px;
+  box-shadow:inset 0 1px rgba(255,255,255,.025),0 15px 35px rgba(0,0,0,.18);
+}
+.card:hover{border-color:#303746}
+.stat{font-size:30px;font-weight:900;margin:8px 0}
+.muted{color:var(--muted)}
+.neon-btn{
+  border:1px solid #303846;background:#10131a;color:white;border-radius:10px;
+  padding:10px 14px;transition:.2s;
+}
+.neon-btn:hover{border-color:var(--cyan);box-shadow:0 0 18px rgba(0,234,255,.14);transform:translateY(-1px)}
+.primary{background:linear-gradient(90deg,#007c91,#6d1c91);border-color:#00dfff}
+.danger{border-color:#702044}.success{border-color:#176846}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.small{font-size:13px}.tag{
+  display:inline-block;border:1px solid #2b3040;border-radius:999px;padding:5px 9px;
+  color:#bfc5d7;font-size:12px;margin:3px;
+}
+
+/* EDITOR */
+.editor{
+  background:#07080b;border:1px solid #252936;border-radius:18px;overflow:hidden;
+  box-shadow:0 0 40px rgba(0,234,255,.05);
+}
+.editor-toolbar{
+  min-height:60px;border-bottom:1px solid #20232d;padding:10px;display:flex;
+  gap:7px;align-items:center;flex-wrap:wrap;background:#0a0b10;
+}
+.tool-btn{
+  background:#11131a;color:#cbd0df;border:1px solid #252a37;border-radius:9px;
+  padding:8px 11px;font-size:13px;
+}
+.tool-btn:hover{color:white;border-color:var(--cyan)}
+.editor-workspace{display:grid;grid-template-columns:170px 1fr 220px;min-height:520px}
+.media-panel,.properties{background:#0b0c11;padding:12px;border-right:1px solid #20232d}
+.properties{border-right:0;border-left:1px solid #20232d}
+.media-panel h3,.properties h3{font-size:13px;margin-bottom:12px;color:#c9cede}
+.media-item{
+  padding:12px;border:1px dashed #303544;border-radius:10px;margin-bottom:8px;
+  text-align:center;color:#9299ad;font-size:12px;
+}
+.canvas-area{display:flex;align-items:center;justify-content:center;padding:25px;background:#050608}
+.canvas{
+  width:min(640px,100%);aspect-ratio:16/9;background:#111;
+  border:1px solid #343846;position:relative;overflow:hidden;
+  box-shadow:0 0 45px rgba(0,0,0,.5);
+}
+.canvas.vertical{aspect-ratio:9/16;width:min(330px,70%)}
+.canvas.square{aspect-ratio:1;width:min(450px,80%)}
+.canvas video,.canvas img{width:100%;height:100%;object-fit:contain}
+.canvas-text{
+  position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);
+  font-size:32px;font-weight:900;text-align:center;text-shadow:0 2px 8px black;
+  display:none;white-space:nowrap;
+}
+.placeholder{text-align:center;color:#4c5263;padding-top:24%}
+.prop{margin-bottom:15px}.prop label{font-size:11px;color:#81879a;display:block;margin-bottom:5px}
+.prop input,.prop select{
+  width:100%;background:#101219;border:1px solid #282d3a;color:white;
+  padding:9px;border-radius:8px;outline:none;
+}
+.timeline{border-top:1px solid #20232d;background:#090a0e;padding:12px}
+.track{
+  height:58px;border:1px solid #242936;background:#0d0f15;border-radius:8px;
+  margin-bottom:8px;position:relative;overflow:hidden;
+}
+.track-title{position:absolute;left:7px;top:5px;color:#666d7f;font-size:10px;z-index:2}
+.clip{
+  position:absolute;top:20px;height:30px;border-radius:6px;padding:7px;
+  font-size:11px;background:linear-gradient(90deg,#094c59,#63275f);
+  border:1px solid #00b8ce;min-width:100px;cursor:pointer;
+}
+.playhead{position:absolute;top:0;bottom:0;width:2px;background:#ff315f;left:10%;z-index:5;box-shadow:0 0 10px #ff315f}
+
+/* TRADING */
+.trading-grid{display:grid;grid-template-columns:1fr 300px;gap:15px}
+.market{
+  height:350px;background:#080a0f;border:1px solid #252936;border-radius:15px;
+  position:relative;overflow:hidden;padding:15px;
+}
+canvas.chart{width:100%;height:280px}
+.trade-box input,.trade-box select{
+  width:100%;margin-bottom:10px;background:#0d1017;color:white;
+  border:1px solid #292e3b;padding:10px;border-radius:8px;
+}
+.buy{background:#073b2a;border-color:#00a967}.sell{background:#461421;border-color:#bd3152}
+.balance{font-size:26px;font-weight:900}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:11px;border-bottom:1px solid #222632;font-size:13px}
+th{color:#777e92}
+
+/* TOOLS */
+.tool-card{min-height:155px}
+.tool-card h3{margin-bottom:8px}
+.tool-card input,.tool-card textarea,.tool-card select{
+  width:100%;background:#0b0d12;color:white;border:1px solid #282d3b;
+  padding:10px;border-radius:8px;margin:8px 0;outline:none;
+}
+
+/* NOTES */
+.subject-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
+.subject-tabs button{background:#10121a;color:#b8bfd1;border:1px solid #292e3b;padding:9px 12px;border-radius:9px}
+.subject-tabs button.active{border-color:var(--cyan);color:white}
+.chapter{
+  background:#0d0f15;border:1px solid #252a36;border-radius:14px;margin-bottom:12px;overflow:hidden;
+}
+.chapter button{
+  width:100%;background:none;border:0;color:white;padding:16px;text-align:left;font-weight:700;
+}
+.chapter-content{display:none;padding:0 16px 18px;color:#c1c6d4;line-height:1.7}
+.chapter.open .chapter-content{display:block}
+.chapter-content h4{color:#fff;margin:14px 0 6px}
+.chapter-content ul{padding-left:22px}
+
+/* GAMES */
+.game{
+  background:#08090d;border:1px solid #252a36;border-radius:15px;padding:14px;
+}
+.game canvas{width:100%;height:250px;background:#020304;border-radius:9px;display:block}
+.game h3{margin-bottom:10px}
+
+/* MODAL */
+.modal{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:200;
+  align-items:center;justify-content:center;padding:20px;
+}
+.modal.show{display:flex}
+.modal-box{
+  width:min(650px,100%);max-height:85vh;overflow:auto;background:#0d0f15;
+  border:1px solid #303544;border-radius:18px;padding:20px;box-shadow:0 0 60px rgba(0,234,255,.12)
+}
+.close{float:right;background:none;color:white;border:0;font-size:22px}
+.toast{
+  position:fixed;right:20px;bottom:20px;background:#11151d;border:1px solid var(--cyan);
+  padding:13px 17px;border-radius:10px;display:none;z-index:500;box-shadow:0 0 20px rgba(0,234,255,.18)
+}
+.toast.show{display:block}
+
+/* MOBILE */
+@media(max-width:1000px){
+  .sidebar{width:72px;padding:15px 8px}.logo{font-size:0;text-align:center}
+  .logo span{font-size:25px}.nav button{font-size:0;text-align:center}.nav button:first-letter{font-size:20px}
+  .main{margin-left:72px;width:calc(100% - 72px)}
+  .editor-workspace{grid-template-columns:1fr}.media-panel,.properties{display:none}
+  .trading-grid{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+  .main{padding:14px}.topbar{gap:10px}.search{width:55%}h1{font-size:25px}
+}
+</style>
+</head>
+
+<body>
+<div class="rgb"></div>
+
+<div class="app">
+<aside class="sidebar">
+  <div class="logo">EDIT<span>VERSE</span></div>
+  <div class="nav">
+    <button class="active" data-page="home">🏠 Dashboard</button>
+    <button data-page="editor">🎬 Editing Studio</button>
+    <button data-page="trading">📈 Demo Trading</button>
+    <button data-page="tools">🧰 Tools</button>
+    <button data-page="games">🎮 Games</button>
+    <button data-page="notes">📚 StudyVerse</button>
+    <button data-page="settings">⚙️ Settings</button>
+  </div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div>
+    <b id="pageTitle">Dashboard</b>
+    <div class="muted small">Creative • Learning • Simulation</div>
+  </div>
+  <input class="search" id="globalSearch" placeholder="Search tools, notes, games...">
+</header>
+
+<!-- DASHBOARD -->
+<section class="page active" id="home">
+  <h1>Welcome to <span style="color:var(--cyan)">EditVerse</span> ⚡</h1>
+  <p class="subtitle">Your all-in-one creative and study workspace.</p>
+
+  <div class="grid">
+    <div class="card"><span class="muted">Editing Projects</span><div class="stat" id="projectCount">0</div><span class="tag">Browser</span></div>
+    <div class="card"><span class="muted">Virtual Balance</span><div class="stat" id="dashBalance">₹100,000</div><span class="tag">Demo only</span></div>
+    <div class="card"><span class="muted">Study Subjects</span><div class="stat">6</div><span class="tag">Class 11</span></div>
+    <div class="card"><span class="muted">Mini Games</span><div class="stat">5</div><span class="tag">Play</span></div>
+  </div>
+
+  <div style="height:15px"></div>
+  <div class="grid">
+    <div class="card">
+      <h2>🎬 Editing Studio</h2><p class="muted" style="margin:8px 0 15px">Create videos with a CapCut-inspired workflow.</p>
+      <button class="neon-btn primary" onclick="showPage('editor')">Open Editor →</button>
+    </div>
+    <div class="card">
+      <h2>📈 Trading Simulator</h2><p class="muted" style="margin:8px 0 15px">Practice buying and selling with virtual money.</p>
+      <button class="neon-btn" onclick="showPage('trading')">Start Practice →</button>
+    </div>
+    <div class="card">
+      <h2>📚 Detailed Notes</h2><p class="muted" style="margin:8px 0 15px">Class 11 notes across six subjects.</p>
+      <button class="neon-btn" onclick="showPage('notes')">Study Now →</button>
+    </div>
+  </div>
+</section>
+
+<!-- EDITOR -->
+<section class="page" id="editor">
+  <h1>🎬 Editing Studio</h1>
+  <p class="subtitle">Browser video/photo editor — import media and build your timeline.</p>
+
+  <div class="editor">
+    <div class="editor-toolbar">
+      <button class="tool-btn" onclick="document.getElementById('mediaInput').click()">📁 Import</button>
+      <input type="file" id="mediaInput" accept="video/*,image/*" multiple hidden>
+      <button class="tool-btn" onclick="addText()">T Text</button>
+      <button class="tool-btn" onclick="splitClip()">✂ Split</button>
+      <button class="tool-btn" onclick="deleteClip()">🗑 Delete</button>
+      <button class="tool-btn" onclick="setSpeed(.5)">0.5×</button>
+      <button class="tool-btn" onclick="setSpeed(1)">1×</button>
+      <button class="tool-btn" onclick="setSpeed(2)">2×</button>
+      <button class="tool-btn" onclick="toggleFilter()">🎨 Filter</button>
+      <button class="tool-btn" onclick="setRatio('16:9')">16:9</button>
+      <button class="tool-btn" onclick="setRatio('9:16')">9:16</button>
+      <button class="tool-btn" onclick="setRatio('1:1')">1:1</button>
+      <button class="tool-btn primary" onclick="exportProject()">⬇ Export</button>
+    </div>
+
+    <div class="editor-workspace">
+      <div class="media-panel">
+        <h3>MEDIA</h3>
+        <div class="media-item" onclick="document.getElementById('mediaInput').click()">＋ Add Media</div>
+        <div id="mediaList"></div>
+        <h3 style="margin-top:18px">ELEMENTS</h3>
+        <div class="media-item" onclick="addText()">T Text</div>
+        <div class="media-item" onclick="toggleFilter()">✨ Effects</div>
+        <div class="media-item" onclick="toast('Audio track ready')">🎵 Audio</div>
+      </div>
+
+      <div class="canvas-area">
+        <div class="canvas" id="previewCanvas">
+          <div class="placeholder" id="placeholder">Import a video or image<br><small>Preview appears here</small></div>
+          <video id="previewVideo" controls style="display:none"></video>
+          <img id="previewImage" style="display:none">
+          <div class="canvas-text" id="canvasText">Your Text</div>
+        </div>
+      </div>
+
+      <div class="properties">
+        <h3>PROPERTIES</h3>
+        <div class="prop">
+          <label>TEXT</label>
+          <input id="textInput" value="Your Text" oninput="updateText()">
+        </div>
+        <div class="prop">
+          <label>TEXT SIZE</label>
+          <input type="range" min="12" max="90" value="32" id="textSize" oninput="updateText()">
+        </div>
+        <div class="prop">
+          <label>OPACITY</label>
+          <input type="range" min="0" max="100" value="100" id="opacity" oninput="updateOpacity()">
+        </div>
+        <div class="prop">
+          <label>BRIGHTNESS</label>
+          <input type="range" min="50" max="150" value="100" id="brightness" oninput="updateFilter()">
+        </div>
+        <div class="prop">
+          <label>CONTRAST</label>
+          <input type="range" min="50" max="150" value="100" id="contrast" oninput="updateFilter()">
+        </div>
+        <div class="prop">
+          <label>SATURATION</label>
+          <input type="range" min="0" max="200" value="100" id="saturation" oninput="updateFilter()">
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="row" style="justify-content:space-between;margin-bottom:8px">
+        <span class="muted small">TIMELINE</span>
+        <span class="muted small" id="timeLabel">00:00 / 00:00</span>
+      </div>
+      <div class="track" id="videoTrack">
+        <span class="track-title">VIDEO</span>
+        <div class="playhead" id="playhead"></div>
+      </div>
+      <div class="track">
+        <span class="track-title">TEXT</span>
+        <div class="clip" style="left:10%;width:25%">Text Layer</div>
+      </div>
+      <div class="track">
+        <span class="track-title">AUDIO</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRADING -->
+<section class="page" id="trading">
+  <h1>📈 Demo Trading Simulator</h1>
+  <p class="subtitle">Practice trading with virtual money. No real transactions.</p>
+
+  <div class="grid" style="margin-bottom:15px">
+    <div class="card"><span class="muted">Virtual Cash</span><div class="balance" id="balance">₹100,000</div></div>
+    <div class="card"><span class="muted">Portfolio Value</span><div class="balance" id="portfolioValue">₹100,000</div></div>
+    <div class="card"><span class="muted">P&L</span><div class="balance" id="pnl">₹0</div></div>
+  </div>
+
+  <div class="trading-grid">
+    <div>
+      <div class="market">
+        <div class="section-head">
+          <div><b id="stockName">NEON TECH</b> <span class="tag">SIM</span></div>
+          <div><b id="price">₹250.00</b></div>
+        </div>
+        <canvas id="tradingChart" class="chart"></canvas>
+      </div>
+      <div class="card" style="margin-top:15px">
+        <div class="section-head"><h3>Portfolio</h3><span class="muted small">Virtual positions</span></div>
+        <div id="portfolioList" class="muted">No positions yet.</div>
+      </div>
+    </div>
+
+    <div class="card trade-box">
+      <h3 style="margin-bottom:15px">Trade Panel</h3>
+      <select id="tradeSymbol">
+        <option value="NEON">NEON TECH</option>
+        <option value="PIXEL">PIXEL MOTORS</option>
+        <option value="CYBER">CYBER ENERGY</option>
+      </select>
+      <input type="number" id="tradeQty" value="1" min="1" placeholder="Quantity">
+      <div class="row">
+        <button class="neon-btn buy" style="flex:1" onclick="trade('buy')">BUY</button>
+        <button class="neon-btn sell" style="flex:1" onclick="trade('sell')">SELL</button>
+      </div>
+      <p class="muted small" style="margin-top:15px">Prices move automatically for simulation.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:15px">
+    <h3 style="margin-bottom:10px">Trade History</h3>
+    <table><thead><tr><th>Time</th><th>Action</th><th>Asset</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead>
+    <tbody id="tradeHistory"><tr><td colspan="6" class="muted">No trades yet.</td></tr></tbody></table>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="page" id="tools">
+  <h1>🧰 Tools</h1>
+  <p class="subtitle">Useful everyday utilities built directly into EditVerse.</p>
+
+  <div class="grid">
+    <div class="card tool-card">
+      <h3>🧮 Calculator</h3>
+      <input id="calc" placeholder="Example: 25*4+10">
+      <button class="neon-btn primary" onclick="calculate()">Calculate</button>
+      <p id="calcResult" class="stat" style="font-size:20px"></p>
+    </div>
+
+    <div class="card tool-card">
+      <h3>📊 Percentage</h3>
+      <input id="p1" type="number" placeholder="Value">
+      <input id="p2" type="number" placeholder="Total">
+      <button class="neon-btn" onclick="percentage()">Find %</button>
+      <p id="pResult" class="stat" style="font-size:20px"></p>
+    </div>
+
+    <div class="card tool-card">
+      <h3>🔄 Unit Converter</h3>
+      <input id="unitVal" type="number" value="1">
+      <select id="unitType"><option value="kmmi">KM → Miles</option><option value="mft">Meters → Feet</option><option value="kgp">KG → Pounds</option><option value="cm">CM → Inches</option></select>
+      <button class="neon-btn" onclick="convertUnit()">Convert</button>
+      <p id="unitResult" class="stat" style="font-size:20px"></p>
+    </div>
+
+    <div class="card tool-card">
+      <h3>🎂 Age Calculator</h3>
+      <input id="birthDate" type="date">
+      <button class="neon-btn" onclick="ageCalc()">Calculate Age</button>
+      <p id="ageResult" class="stat" style="font-size:20px"></p>
+    </div>
+
+    <div class="card tool-card">
+      <h3>⚖️ BMI Calculator</h3>
+      <input id="height" type="number" placeholder="Height cm">
+      <input id="weight" type="number" placeholder="Weight kg">
+      <button class="neon-btn" onclick="bmiCalc()">Calculate BMI</button>
+      <p id="bmiResult" class="stat" style="font-size:20px"></p>
+    </div>
+
+    <div class="card tool-card">
+      <h3>🔐 Password Generator</h3>
+      <input id="passLen" type="number" value="16" min="4" max="64">
+      <button class="neon-btn" onclick="generatePassword()">Generate</button>
+      <input id="passwordResult" readonly>
+    </div>
+
+    <div class="card tool-card">
+      <h3>📝 Text Counter</h3>
+      <textarea id="counterText" rows="3" placeholder="Type text..." oninput="countText()"></textarea>
+      <p id="countResult" class="muted">0 characters • 0 words</p>
+    </div>
+
+    <div class="card tool-card">
+      <h3>⏱️ Stopwatch</h3>
+      <div class="stat" id="stopwatch">00:00:00</div>
+      <div class="row"><button class="neon-btn" onclick="startStopwatch()">Start</button><button class="neon-btn" onclick="stopStopwatch()">Stop</button><button class="neon-btn" onclick="resetStopwatch()">Reset</button></div>
+    </div>
+
+    <div class="card tool-card">
+      <h3>⏲️ Timer</h3>
+      <input id="timerInput" type="number" placeholder="Seconds">
+      <button class="neon-btn" onclick="startTimer()">Start Timer</button>
+      <div class="stat" id="timerDisplay" style="font-size:20px">00:00</div>
+    </div>
+
+    <div class="card tool-card">
+      <h3>📐 Quick Notes</h3>
+      <textarea id="quickNotes" rows="4" placeholder="Write something..."></textarea>
+      <button class="neon-btn" onclick="saveQuickNotes()">Save</button>
+    </div>
+
+    <div class="card tool-card">
+      <h3>🖼️ Image Preview</h3>
+      <input type="file" accept="image/*" id="imageTool">
+      <div id="imageInfo" class="muted small" style="margin-top:8px">Select an image to preview its size.</div>
+    </div>
+
+    <div class="card tool-card">
+      <h3>🔢 Number Generator</h3>
+      <input id="minNum" type="number" placeholder="Min" value="1">
+      <input id="maxNum" type="number" placeholder="Max" value="100">
+      <button class="neon-btn" onclick="randomNumber()">Generate</button>
+      <div class="stat" id="randomResult" style="font-size:24px">—</div>
+    </div>
+  </div>
+</section>
+
+<!-- GAMES -->
+<section class="page" id="games">
+  <h1>🎮 Game Zone</h1>
+  <p class="subtitle">Five lightweight browser games.</p>
+
+  <div class="grid">
+    <div class="game">
+      <h3>🚗 Neon Car</h3>
+      <canvas id="carGame" width="500" height="250"></canvas>
+      <button class="neon-btn primary" onclick="startCarGame()">Start / Restart</button>
+      <span class="muted small">Use ← → keys</span>
+    </div>
+
+    <div class="game">
+      <h3>🚀 Airship Dodge</h3>
+      <canvas id="airGame" width="500" height="250"></canvas>
+      <button class="neon-btn primary" onclick="startAirGame()">Start / Restart</button>
+      <span class="muted small">Use ↑ ↓ keys</span>
+    </div>
+
+    <div class="game">
+      <h3>🔫 Target Shooter</h3>
+      <canvas id="shootGame" width="500" height="250"></canvas>
+      <button class="neon-btn primary" onclick="startShootGame()">Start</button>
+      <span class="muted small">Click targets</span>
+    </div>
+
+    <div class="game">
+      <h3>🐍 Snake</h3>
+      <canvas id="snakeGame" width="500" height="250"></canvas>
+      <button class="neon-btn primary" onclick="startSnake()">Start / Restart</button>
+      <span class="muted small">Arrow keys</span>
+    </div>
+
+    <div class="game">
+      <h3>🧱 Brick Breaker</h3>
+      <canvas id="brickGame" width="500" height="250"></canvas>
+      <button class="neon-btn primary" onclick="startBrick()">Start / Restart</button>
+      <span class="muted small">Use mouse / ← →</span>
+    </div>
+  </div>
+</section>
+
+<!-- NOTES -->
+<section class="page" id="notes">
+  <h1>📚 StudyVerse</h1>
+  <p class="subtitle">Class 11 detailed study notes — six subjects.</p>
+
+  <div class="subject-tabs" id="subjectTabs"></div>
+  <div id="notesContent"></div>
+</section>
+
+<!-- SETTINGS -->
+<section class="page" id="settings">
+  <h1>⚙️ Settings</h1>
+  <p class="subtitle">Customize your EditVerse workspace.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>🌈 RGB Mode</h3>
+      <p class="muted" style="margin:8px 0 15px">Animated neon interface.</p>
+      <button class="neon-btn" onclick="toggleRGB()">Toggle RGB</button>
+    </div>
+    <div class="card">
+      <h3>💾 Local Data</h3>
+      <p class="muted" style="margin:8px 0 15px">Trading and quick notes are saved locally.</p>
+      <button class="neon-btn danger" onclick="clearLocal()">Clear Local Data</button>
+    </div>
+    <div class="card">
+      <h3>ℹ️ About</h3>
+      <p class="muted" style="margin-top:8px">EditVerse is a single-file browser app combining creative tools, education, games and a paper-trading simulator.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================
+   NAVIGATION
+========================= */
+const pages=[...document.querySelectorAll(".page")];
+const navButtons=[...document.querySelectorAll(".nav button")];
+const titles={
+ home:"Dashboard",editor:"Editing Studio",trading:"Demo Trading",
+ tools:"Tools",games:"Games",notes:"StudyVerse",settings:"Settings"
+};
+function showPage(id){
+  pages.forEach(p=>p.classList.toggle("active",p.id===id));
+  navButtons.forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+  document.getElementById("pageTitle").textContent=titles[id]||id;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+navButtons.forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;t.classList.add("show");
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>t.classList.remove("show"),2200);
+}
+document.getElementById("globalSearch").addEventListener("input",e=>{
+  const q=e.target.value.toLowerCase().trim();
+  if(!q)return;
+  if(q.includes("edit"))showPage("editor");
+  else if(q.includes("trade"))showPage("trading");
+  else if(q.includes("game"))showPage("games");
+  else if(q.includes("note")||q.includes("study"))showPage("notes");
+  else if(q.includes("tool"))showPage("tools");
+});
+
+/* =========================
+   EDITOR
+========================= */
+let currentMedia=null;
+let clips=[];
+let editorFilter=false;
+
+const mediaInput=document.getElementById("mediaInput");
+mediaInput.addEventListener("change",e=>{
+  [...e.target.files].forEach(file=>{
+    const url=URL.createObjectURL(file);
+    clips.push({name:file.name,url,type:file.type});
+    addMediaItem(file,url);
+    if(!currentMedia)loadMedia(file,url);
+  });
+  document.getElementById("projectCount").textContent=clips.length;
+});
+
+function addMediaItem(file,url){
+  const div=document.createElement("div");
+  div.className="media-item";
+  div.textContent="🎞 "+file.name.slice(0,20);
+  div.onclick=()=>loadMedia(file,url);
+  document.getElementById("mediaList").appendChild(div);
+
+  const track=document.getElementById("videoTrack");
+  const clip=document.createElement("div");
+  clip.className="clip";
+  clip.style.left=(10+Math.min(70,clips.length*8))+"%";
+  clip.style.width="18%";
+  clip.textContent=file.name.slice(0,18);
+  track.appendChild(clip);
+}
+function loadMedia(file,url){
+  currentMedia={file,url};
+  const v=document.getElementById("previewVideo");
+  const img=document.getElementById("previewImage");
+  const ph=document.getElementById("placeholder");
+  ph.style.display="none";
+  if(file.type.startsWith("video/")){
+    img.style.display="none";v.style.display="block";v.src=url;
+    v.playbackRate=1;
+    v.onloadedmetadata=()=>updateTime();
+    v.ontimeupdate=updateTime;
+  }else{
+    v.pause();v.style.display="none";img.style.display="block";img.src=url;
+  }
+  toast("Media loaded");
+}
+function updateTime(){
+  const v=document.getElementById("previewVideo");
+  const f=n=>String(Math.floor(n||0)/60|0).padStart(2,"0")+":"+String(Math.floor(n||0)%60).padStart(2,"0");
+  document.getElementById("timeLabel").textContent=f(v.currentTime)+" / "+f(v.duration);
+  if(v.duration)document.getElementById("playhead").style.left=(v.currentTime/v.duration*100)+"%";
+}
+function addText(){
+  const t=document.getElementById("canvasText");
+  t.style.display="block";updateText();toast("Text layer added");
+}
+function updateText(){
+  const t=document.getElementById("canvasText");
+  t.textContent=document.getElementById("textInput").value;
+  t.style.fontSize=document.getElementById("textSize").value+"px";
+}
+function updateOpacity(){
+  document.getElementById("canvasText").style.opacity=document.getElementById("opacity").value/100;
+}
+function updateFilter(){
+  const b=document.getElementById("brightness").value;
+  const c=document.getElementById("contrast").value;
+  const s=document.getElementById("saturation").value;
+  const f=`brightness(${b}%) contrast(${c}%) saturate(${s}%)`;
+  document.getElementById("previewVideo").style.filter=f;
+  document.getElementById("previewImage").style.filter=f;
+}
+function toggleFilter(){
+  editorFilter=!editorFilter;
+  if(editorFilter){
+    document.getElementById("brightness").value=115;
+    document.getElementById("contrast").value=115;
+    document.getElementById("saturation").value=135;
+  }else{
+    document.getElementById("brightness").value=100;
+    document.getElementById("contrast").value=100;
+    document.getElementById("saturation").value=100;
+  }
+  updateFilter();toast(editorFilter?"Cinematic filter ON":"Filter OFF");
+}
+function setSpeed(speed){
+  const v=document.getElementById("previewVideo");
+  v.playbackRate=speed;
+  toast("Playback speed: "+speed+"×");
+}
+function setRatio(r){
+  const c=document.getElementById("previewCanvas");
+  c.classList.remove("vertical","square");
+  if(r==="9:16")c.classList.add("vertical");
+  if(r==="1:1")c.classList.add("square");
+  toast("Canvas: "+r);
+}
+function splitClip(){toast("Clip split at current playhead");}
+function deleteClip(){
+  if(clips.length){
+    clips.pop();
+    const list=document.getElementById("mediaList");
+    if(list.lastChild)list.removeChild(list.lastChild);
+    document.getElementById("projectCount").textContent=clips.length;
+    toast("Last imported clip removed");
+  }else toast("Nothing to delete");
+}
+function exportProject(){
+  if(currentMedia && currentMedia.file.type.startsWith("image/")){
+    const a=document.createElement("a");a.href=currentMedia.url;a.download="editverse-image."+currentMedia.file.name.split(".").pop();a.click();
+    toast("Image exported");
+  }else{
+    const data=`EditVerse Project\nMedia: ${clips.length}\nText: ${document.getElementById("textInput").value}`;
+    const blob=new Blob([data],{type:"text/plain"});
+    const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="EditVerse_Project.txt";a.click();
+    toast("Project summary exported");
+  }
+}
+
+/* =========================
+   TRADING SIMULATOR
+========================= */
+const assets={
+ NEON:{name:"NEON TECH",price:250},
+ PIXEL:{name:"PIXEL MOTORS",price:180},
+ CYBER:{name:"CYBER ENERGY",price:320}
+};
+let tradeState=JSON.parse(localStorage.getItem("editverseTrade")||"null")||{
+ cash:100000,positions:{},history:[],start:100000
+};
+function money(n){return "₹"+Number(n).toLocaleString("en-IN",{maximumFractionDigits:2})}
+function selectedAsset(){return document.getElementById("tradeSymbol").value}
+function refreshTrading(){
+  const sym=selectedAsset();
+  document.getElementById("stockName").textContent=assets[sym].name;
+  document.getElementById("price").textContent=money(assets[sym].price);
+  document.getElementById("balance").textContent=money(tradeState.cash);
+  document.getElementById("dashBalance").textContent=money(tradeState.cash);
+
+  let pv=tradeState.cash;
+  let html="";
+  for(const [s,q] of Object.entries(tradeState.positions)){
+    const val=q*assets[s].price;pv+=val;
+    html+=`<div class="row" style="justify-content:space-between;padding:8px 0;border-bottom:1px solid #222632">
+      <span>${assets[s].name} × ${q}</span><b>${money(val)}</b></div>`;
+  }
+  document.getElementById("portfolioValue").textContent=money(pv);
+  document.getElementById("pnl").textContent=money(pv-tradeState.start);
+  document.getElementById("portfolioList").innerHTML=html||"No positions yet.";
+  document.getElementById("tradeHistory").innerHTML=tradeState.history.length?
+    tradeState.history.slice().reverse().map(t=>`<tr><td>${t.time}</td><td>${t.action}</td><td>${assets[t.sym].name}</td><td>${t.qty}</td><td>${money(t.price)}</td><td>${money(t.total)}</td></tr>`).join(""):
+    `<tr><td colspan="6" class="muted">No trades yet.</td></tr>`;
+}
+document.getElementById("tradeSymbol").addEventListener("change",refreshTrading);
+
+function trade(action){
+  const sym=selectedAsset(),q=Math.max(1,parseInt(document.getElementById("tradeQty").value)||1);
+  const p=assets[sym].price,total=p*q;
+  tradeState.positions[sym]||=0;
+  if(action==="buy"){
+    if(tradeState.cash<total)return toast("Not enough virtual cash");
+    tradeState.cash-=total;tradeState.positions[sym]+=q;
+  }else{
+    if(tradeState.positions[sym]<q)return toast("Not enough shares");
+    tradeState.cash+=total;tradeState.positions[sym]-=q;
+    if(!tradeState.positions[sym])delete tradeState.positions[sym];
+  }
+  tradeState.history.push({time:new Date().toLocaleTimeString(),action:action.toUpperCase(),sym,qty:q,price:p,total});
+  localStorage.setItem("editverseTrade",JSON.stringify(tradeState));
+  refreshTrading();toast(action.toUpperCase()+" order executed");
+}
+function marketTick(){
+  Object.keys(assets).forEach(k=>{
+    const change=(Math.random()-.5)*3.5;
+    assets[k].price=Math.max(10,assets[k].price+change);
+  });
+  refreshTrading();drawTradingChart();
+}
+setInterval(marketTick,1600);
+
+/* chart */
+const tc=document.getElementById("tradingChart"),ctx=tc.getContext("2d");
+let prices=Array.from({length:70},(_,i)=>250+Math.sin(i/5)*10+Math.random()*8);
+function resizeCanvas(c){
+  const r=c.getBoundingClientRect(),d=devicePixelRatio||1;
+  c.width=r.width*d;c.height=r.height*d;
+  c.getContext("2d").setTransform(d,0,0,d,0,0);
+}
+function drawTradingChart(){
+  resizeCanvas(tc);
+  const w=tc.clientWidth,h=tc.clientHeight;
+  prices.push(assets.NEON.price);if(prices.length>70)prices.shift();
+  ctx.clearRect(0,0,w,h);
+  ctx.strokeStyle="#1b2430";ctx.lineWidth=1;
+  for(let y=30;y<h;y+=45){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
+  const min=Math.min(...prices)-5,max=Math.max(...prices)+5;
+  ctx.beginPath();
+  prices.forEach((p,i)=>{
+    const x=i/(prices.length-1)*w,y=h-(p-min)/(max-min)*h;
+    i?ctx.lineTo(x,y):ctx.moveTo(x,y);
+  });
+  ctx.strokeStyle="#00eaff";ctx.lineWidth=2;ctx.stroke();
+}
+window.addEventListener("resize",drawTradingChart);
+setTimeout(()=>{refreshTrading();drawTradingChart()},100);
+
+/* =========================
+   TOOLS
+========================= */
+function calculate(){
+  const v=document.getElementById("calc").value;
+  try{
+    if(!/^[0-9+\-*/().%\s]+$/.test(v))throw Error();
+    document.getElementById("calcResult").textContent=Function("return "+v)();
+  }catch{document.getElementById("calcResult").textContent="Invalid";}
+}
+function percentage(){
+  const a=+document.getElementById("p1").value,b=+document.getElementById("p2").value;
+  document.getElementById("pResult").textContent=b?(a/b*100).toFixed(2)+"%":"—";
+}
+function convertUnit(){
+  const v=+document.getElementById("unitVal").value,t=document.getElementById("unitType").value;
+  const map={kmmi:v*.621371,mft:v*3.28084,kgp:v*2.20462,cm:v*.393701};
+  document.getElementById("unitResult").textContent=map[t].toFixed(3);
+}
+function ageCalc(){
+  const d=new Date(document.getElementById("birthDate").value);
+  if(isNaN(d))return;
+  const n=new Date();
+  let age=n.getFullYear()-d.getFullYear();
+  const m=n.getMonth()-d.getMonth();
+  if(m<0||(m===0&&n.getDate()<d.getDate()))age--;
+  document.getElementById("ageResult").textContent=age+" years";
+}
+function bmiCalc(){
+  const h=+document.getElementById("height").value/100,w=+document.getElementById("weight").value;
+  document.getElementById("bmiResult").textContent=h&&w?(w/(h*h)).toFixed(1):"—";
+}
+function generatePassword(){
+  const n=Math.min(64,Math.max(4,+document.getElementById("passLen").value||16));
+  const chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+  let p="";for(let i=0;i<n;i++)p+=chars[Math.floor(Math.random()*chars.length)];
+  document.getElementById("passwordResult").value=p;
+}
+function countText(){
+  const v=document.getElementById("counterText").value;
+  const words=v.trim()?v.trim().split(/\s+/).length:0;
+  document.getElementById("countResult").textContent=`${v.length} characters • ${words} words`;
+}
+function saveQuickNotes(){
+  localStorage.setItem("editverseQuickNotes",document.getElementById("quickNotes").value);
+  toast("Notes saved");
+}
+document.getElementById("quickNotes").value=localStorage.getItem("editverseQuickNotes")||"";
+document.getElementById("imageTool").onchange=function(){
+  const f=this.files[0];if(f)document.getElementById("imageInfo").textContent=`${f.name} • ${(f.size/1024).toFixed(1)} KB`;
+};
+function randomNumber(){
+  const a=+document.getElementById("minNum").value,b=+document.getElementById("maxNum").value;
+  document.getElementById("randomResult").textContent=Math.floor(Math.random()*(b-a+1))+a;
+}
+let swStart=0,swTimer=null,swElapsed=0;
+function renderSW(){
+  let x=swElapsed+(swStart?Date.now()-swStart:0);
+  x=Math.floor(x/1000);document.getElementById("stopwatch").textContent=
+  [Math.floor(x/3600),Math.floor(x/60)%60,x%60].map(n=>String(n).padStart(2,"0")).join(":");
+}
+function startStopwatch(){if(!swStart){swStart=Date.now();swTimer=setInterval(renderSW,250)}}
+function stopStopwatch(){if(swStart){swElapsed+=Date.now()-swStart;swStart=0;clearInterval(swTimer);renderSW()}}
+function resetStopwatch(){stopStopwatch();swElapsed=0;renderSW()}
+let timerInt=null;
+function startTimer(){
+  clearInterval(timerInt);let s=+document.getElementById("timerInput").value||0;
+  const out=document.getElementById("timerDisplay");
+  timerInt=setInterval(()=>{out.textContent="00:"+String(s).padStart(2,"0");if(--s<0){clearInterval(timerInt);out.textContent="00:00";toast("Timer finished 🔔")}},1000);
+}
+
+/* =========================
+   NOTES
+========================= */
+const notes={
+"Accountancy":[
+["Introduction to Accounting",`
+<h4>Meaning of Accounting</h4>
+Accounting is the systematic process of identifying, measuring, recording, classifying, summarising and communicating financial information of a business. It helps owners and other users understand the financial position and performance of an organisation.
+<h4>Objectives</h4>
+<ul><li>Maintain systematic records of business transactions.</li><li>Calculate profit or loss.</li><li>Know the financial position of the business.</li><li>Provide useful information to management and other users.</li></ul>
+<h4>Basic Terms</h4>
+<ul><li><b>Assets:</b> Resources owned by the business.</li><li><b>Liabilities:</b> Amounts payable to outsiders.</li><li><b>Capital:</b> Owner's claim in the business.</li><li><b>Revenue:</b> Income generated from normal activities.</li><li><b>Expense:</b> Cost incurred to earn revenue.</li></ul>`],
+["Theory Base of Accounting",`
+<h4>Accounting Principles</h4>
+Accounting principles are basic rules and concepts followed while recording transactions.
+<ul><li><b>Business Entity:</b> Business and owner are treated as separate entities.</li><li><b>Going Concern:</b> Business is assumed to continue for the foreseeable future.</li><li><b>Money Measurement:</b> Only transactions measurable in money are recorded.</li><li><b>Accounting Period:</b> Life of business is divided into periods for reporting.</li><li><b>Dual Aspect:</b> Every transaction has two aspects.</li></ul>
+<h4>Accounting Equation</h4>
+<b>Assets = Capital + Liabilities</b><br>
+Every transaction keeps this equation balanced.`],
+["Journal & Ledger",`
+<h4>Journal</h4>
+Journal is the book of original entry. Transactions are recorded chronologically with debit and credit aspects.
+<h4>Rules of Debit and Credit</h4>
+<ul><li>Personal Account: Debit the receiver, credit the giver.</li><li>Real Account: Debit what comes in, credit what goes out.</li><li>Nominal Account: Debit expenses/losses, credit incomes/gains.</li></ul>
+<h4>Ledger</h4>
+Ledger is the principal book containing separate accounts. Journal entries are posted into relevant ledger accounts.`]
+],
+"Business Studies":[
+["Nature and Significance of Business",`
+<h4>Business</h4>
+Business refers to economic activities concerned with production, purchase and sale of goods or services with the objective of earning profit.
+<h4>Characteristics</h4>
+<ul><li>Economic activity</li><li>Production or procurement of goods and services</li><li>Sale or exchange</li><li>Regular dealings</li><li>Profit motive</li><li>Element of risk</li></ul>
+<h4>Business Risk</h4>
+Business risk means the possibility of inadequate profits or losses due to uncertainties such as demand changes, competition, price changes and natural events.`],
+["Forms of Business Organisation",`
+<h4>Sole Proprietorship</h4>
+A business owned, managed and controlled by one person. It is easy to form and provides quick decisions, but resources are limited and liability is generally unlimited.
+<h4>Partnership</h4>
+Two or more persons agree to carry on a business and share profits according to an agreement.
+<h4>Company</h4>
+An incorporated association with separate legal identity, perpetual succession and limited liability, subject to applicable law.
+<h4>Co-operative Society</h4>
+An association formed to promote the economic interests of members through mutual help.`],
+["Private, Public and Global Enterprises",`
+<h4>Private Sector</h4>
+Enterprises owned and controlled by private individuals or groups.
+<h4>Public Sector</h4>
+Enterprises where government has ownership/control. They may be departmental undertakings, statutory corporations or government companies.
+<h4>Global Enterprises</h4>
+Large businesses operating across countries with significant resources, advanced technology and international operations.`]
+],
+"Economics":[
+["Introduction to Economics",`
+<h4>Meaning</h4>
+Economics studies how individuals and societies use scarce resources that have alternative uses to satisfy wants.
+<h4>Microeconomics</h4>
+Studies individual consumers, firms and particular markets.
+<h4>Macroeconomics</h4>
+Studies the economy as a whole, including national income, employment, inflation and growth.
+<h4>Central Problems</h4>
+<ul><li>What to produce?</li><li>How to produce?</li><li>For whom to produce?</li></ul>`],
+["Statistics in Economics",`
+<h4>Meaning of Data</h4>
+Data are facts or numerical information collected for a particular purpose.
+<h4>Primary Data</h4>
+Collected directly by the investigator for the specific study.
+<h4>Secondary Data</h4>
+Already collected by another person or organisation and used for a new purpose.
+<h4>Organisation of Data</h4>
+Data may be classified and arranged into tables, frequency distributions and other suitable forms for analysis.`],
+["Measures of Central Tendency",`
+<h4>Arithmetic Mean</h4>
+Mean = Sum of observations ÷ Number of observations.
+<h4>Median</h4>
+Median is the middle value when observations are arranged in ascending or descending order.
+<h4>Mode</h4>
+Mode is the value that occurs most frequently in a dataset.
+These measures help represent a large dataset through a single typical value.`]
+],
+"English":[
+["Reading Skills",`
+<h4>Reading Comprehension</h4>
+Read the passage carefully, identify the central idea, understand supporting details and answer questions using evidence from the text.
+<h4>Good Strategy</h4>
+<ul><li>Read the questions first when appropriate.</li><li>Identify keywords.</li><li>Distinguish facts from opinions.</li><li>Answer precisely and avoid unnecessary information.</li></ul>`],
+["Writing Skills",`
+<h4>Notice</h4>
+A notice is a short formal announcement containing essential information such as heading, date, event, details and issuing authority.
+<h4>Article</h4>
+An article normally contains a title, introduction, logical development of ideas and conclusion.
+<h4>Formal Letter</h4>
+Use a clear subject, formal language, organised paragraphs and a proper closing.`],
+["Literature Skills",`
+<h4>How to Analyse a Chapter</h4>
+Identify the setting, characters, major events, conflict, themes and message.
+<h4>Answer Writing</h4>
+Use evidence from the chapter, explain the point and connect it to the question. Avoid simply retelling the entire story.`]
+],
+"Mathematics":[
+["Sets",`
+<h4>Set</h4>
+A set is a well-defined collection of distinct objects.
+<h4>Representations</h4>
+Sets can be represented by roster form and set-builder form.
+<h4>Important Operations</h4>
+Union combines elements, intersection contains common elements, and difference contains elements belonging to one set but not the other.
+<h4>Formula</h4>
+For finite sets: n(A∪B)=n(A)+n(B)-n(A∩B).`],
+["Relations & Functions",`
+<h4>Relation</h4>
+A relation from set A to set B is a subset of A×B.
+<h4>Function</h4>
+A function assigns exactly one element of the codomain to each element of the domain.
+<h4>Key Terms</h4>
+Domain = set of input values. Range = actual output values. Codomain = specified set containing outputs.`],
+["Sequences and Series",`
+<h4>Arithmetic Progression</h4>
+An AP has a constant common difference d.
+nth term: <b>aₙ = a + (n−1)d</b>.
+Sum of first n terms: <b>Sₙ = n/2 [2a + (n−1)d]</b>.
+<h4>Geometric Progression</h4>
+A GP has a constant common ratio r. nth term: <b>aₙ = arⁿ⁻¹</b>.`]
+],
+"Computer Science":[
+["Computer Systems",`
+<h4>Computer</h4>
+A computer is an electronic machine that accepts input, processes data according to instructions, stores information and produces output.
+<h4>Components</h4>
+<ul><li>CPU — processes instructions.</li><li>Memory — stores data/instructions.</li><li>Input devices — provide data.</li><li>Output devices — present results.</li></ul>`],
+["Python Basics",`
+<h4>Variables</h4>
+A variable is a name referring to a value.
+<h4>Common Data Types</h4>
+<ul><li>int — integers</li><li>float — decimal numbers</li><li>str — text</li><li>bool — True/False</li><li>list — ordered mutable collection</li></ul>
+<h4>Example</h4>
+<code>x = 10<br>name = "Kunal"<br>print(x, name)</code>`],
+["Programming Fundamentals",`
+<h4>Control Flow</h4>
+Conditional statements make decisions. Loops repeat a block of code.
+<h4>Important Concepts</h4>
+<ul><li>if / elif / else</li><li>for loops</li><li>while loops</li><li>functions</li><li>lists and dictionaries</li></ul>
+Good programs should be readable, logically structured and tested with different inputs.`]
+]
+};
+
+let currentSubject="Accountancy";
+function renderSubjects(){
+  const tabs=document.getElementById("subjectTabs");
+  tabs.innerHTML=Object.keys(notes).map(s=>`<button class="${s===currentSubject?"active":""}" onclick="selectSubject('${s}')">${s}</button>`).join("");
+  const data=notes[currentSubject];
+  document.getElementById("notesContent").innerHTML=data.map((x,i)=>`
+    <div class="chapter ${i===0?"open":""}">
+      <button onclick="this.parentElement.classList.toggle('open')">${i+1}. ${x[0]} <span style="float:right">⌄</span></button>
+      <div class="chapter-content">${x[1]}</div>
+    </div>`).join("");
+}
+function selectSubject(s){currentSubject=s;renderSubjects()}
+renderSubjects();
+
+/* =========================
+   GAMES
+========================= */
+const keys={};
+window.addEventListener("keydown",e=>{keys[e.key]=true});
+window.addEventListener("keyup",e=>{keys[e.key]=false});
+
+/* CAR */
+let carRunning=false,carX=230,carObs=[],carScore=0,carRAF;
+function startCarGame(){
+  cancelAnimationFrame(carRAF);carRunning=true;carX=230;carObs=[];carScore=0;carLoop();
+}
+function carLoop(){
+  const c=document.getElementById("carGame"),x=c.getContext("2d");
+  x.clearRect(0,0,c.width,c.height);
+  x.fillStyle="#06070a";x.fillRect(0,0,c.width,c.height);
+  x.strokeStyle="#222a34";x.lineWidth=3;
+  for(let i=0;i<6;i++){x.beginPath();x.moveTo(160+i*70,0);x.lineTo(160+i*70,c.height);x.stroke()}
+  if(keys.ArrowLeft)carX-=5;if(keys.ArrowRight)carX+=5;
+  carX=Math.max(165,Math.min(335,carX));
+  if(Math.random()<.025)carObs.push({x:165+Math.random()*170,y:-30});
+  carObs.forEach(o=>o.y+=4+carScore/700);
+  carObs=carObs.filter(o=>o.y<280);
+  x.fillStyle="#00eaff";x.fillRect(carX,205,35,55);
+  x.fillStyle="#ff00a8";x.fillRect(carX+7,213,21,15);
+  carObs.forEach(o=>{x.fillStyle="#ff315f";x.fillRect(o.x,o.y,35,45)});
+  carObs.forEach(o=>{if(o.x<carX+35&&o.x+35>carX&&o.y<260&&o.y+45>205){carRunning=false;toast("Car crash! Score "+carScore)}})
+  x.fillStyle="white";x.font="16px Arial";x.fillText("Score: "+carScore,15,25);
+  carScore++;
+  if(carRunning)carRAF=requestAnimationFrame(carLoop);
+}
+
+/* AIRSHIP */
+let airRunning=false,airY=120,airObs=[],airScore=0,airRAF;
+function startAirGame(){cancelAnimationFrame(airRAF);airRunning=true;airY=120;airObs=[];airScore=0;airLoop()}
+function airLoop(){
+  const c=document.getElementById("airGame"),x=c.getContext("2d");
+  x.clearRect(0,0,c.width,c.height);x.fillStyle="#020912";x.fillRect(0,0,c.width,c.height);
+  if(keys.ArrowUp)airY-=4;if(keys.ArrowDown)airY+=4;airY=Math.max(20,Math.min(200,airY));
+  if(Math.random()<.035)airObs.push({x:500,y:Math.random()*210,w:25});
+  airObs.forEach(o=>o.x-=4);airObs=airObs.filter(o=>o.x>-40);
+  x.fillStyle="#8b5cff";x.beginPath();x.arc(90,airY,18,0,Math.PI*2);x.fill();
+  airObs.forEach(o=>{x.fillStyle="#ff00a8";x.fillRect(o.x,o.y,25,50)});
+  airObs.forEach(o=>{if(o.x<110&&o.x+25>70&&airY+18>o.y&&airY-18<o.y+50){airRunning=false;toast("Airship hit! Score "+airScore)}})
+  x.fillStyle="white";x.font="16px Arial";x.fillText("Score: "+airScore,15,25);airScore++;
+  if(airRunning)airRAF=requestAnimationFrame(airLoop);
+}
+
+/* SHOOTER */
+let shootRunning=false,targets=[],shootScore=0,shootTimer;
+function startShootGame(){
+  const c=document.getElementById("shootGame");
+  shootRunning=true;shootScore=0;targets=[];clearInterval(shootTimer);
+  shootTimer=setInterval(()=>{
+    if(!shootRunning)return;
+    targets.push({x:30+Math.random()*440,y:35+Math.random()*180,r:18,life:0});
+    targets=targets.filter(t=>++t.life<50);
+    drawShooter();
+  },650);drawShooter();
+  c.onclick=e=>{
+    if(!shootRunning)return;
+    const r=c.getBoundingClientRect(),mx=(e.clientX-r.left)*c.width/r.width,my=(e.clientY-r.top)*c.height/r.height;
+    targets=targets.filter(t=>{
+      if(Math.hypot(t.x-mx,t.y-my)<t.r){shootScore++;return false}return true;
+    });drawShooter();
+  };
+}
+function drawShooter(){
+  const c=document.getElementById("shootGame"),x=c.getContext("2d");
+  x.fillStyle="#050609";x.fillRect(0,0,c.width,c.height);
+  targets.forEach(t=>{x.fillStyle="#ff315f";x.beginPath();x.arc(t.x,t.y,t.r,0,Math.PI*2);x.fill();x.fillStyle="white";x.beginPath();x.arc(t.x,t.y,6,0,Math.PI*2);x.fill()});
+  x.fillStyle="white";x.font="16px Arial";x.fillText("Score: "+shootScore,15,25);
+}
+
+/* SNAKE */
+let snakeRunning=false,snake=[],food={},dir={x:1,y:0},snakeRAF,snakeScore=0;
+function startSnake(){
+  snakeRunning=true;snake=[{x:10,y:5},{x:9,y:5},{x:8,y:5}];dir={x:1,y:0};snakeScore=0;placeFood();snakeLoop();
+}
+function placeFood(){food={x:Math.floor(Math.random()*24),y:Math.floor(Math.random()*11)}}
+window.addEventListener("keydown",e=>{
+  if(e.key==="ArrowUp"&&dir.y!==1)dir={x:0,y:-1};
+  if(e.key==="ArrowDown"&&dir.y!==-1)dir={x:0,y:1};
+  if(e.key==="ArrowLeft"&&dir.x!==1)dir={x:-1,y:0};
+  if(e.key==="ArrowRight"&&dir.x!==-1)dir={x:1,y:0};
+});
+function snakeLoop(){
+  if(!snakeRunning)return;
+  const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+  if(head.x<0||head.x>=25||head.y<0||head.y>=12||snake.some(s=>s.x===head.x&&s.y===head.y)){snakeRunning=false;toast("Snake game over: "+snakeScore);return}
+  snake.unshift(head);
+  if(head.x===food.x&&head.y===food.y){snakeScore++;placeFood()}else snake.pop();
+  const c=document.getElementById("snakeGame"),x=c.getContext("2d");
+  x.fillStyle="#030507";x.fillRect(0,0,c.width,c.height);
+  snake.forEach(s=>{x.fillStyle="#00ff88";x.fillRect(s.x*20,s.y*20,18,18)});
+  x.fillStyle="#ff00a8";x.fillRect(food.x*20,food.y*20,18,18);
+  x.fillStyle="white";x.fillText("Score: "+snakeScore,15,240);
+  snakeRAF=setTimeout(snakeLoop,100);
+}
+
+/* BRICK BREAKER */
+let brickRAF,brickRunning=false,bx=245,ball={x:250,y:210,vx:3,vy:-3},bricks=[];
+function startBrick(){
+  cancelAnimationFrame(brickRAF);brickRunning=true;bx=215;ball={x:250,y:210,vx:3,vy:-3};bricks=[];
+  for(let r=0;r<4;r++)for(let col=0;col<10;col++)bricks.push({x:col*48+10,y:r*25+15,on:true});
+  brickLoop();
+}
+function brickLoop(){
+  if(!brickRunning)return;
+  const c=document.getElementById("brickGame"),x=c.getContext("2d");
+  if(keys.ArrowLeft)bx-=6;if(keys.ArrowRight)bx+=6;bx=Math.max(0,Math.min(430,bx));
+  ball.x+=ball.vx;ball.y+=ball.vy;
+  if(ball.x<5||ball.x>495)ball.vx*=-1;
+  if(ball.y<5)ball.vy*=-1;
+  if(ball.y>230){brickRunning=false;toast("Game over");return}
+  if(ball.y>225&&ball.y<240&&ball.x>bx&&ball.x<bx+70)ball.vy=-Math.abs(ball.vy);
+  bricks.forEach(b=>{
+    if(b.on&&ball.x>b.x&&ball.x<b.x+42&&ball.y>b.y&&ball.y<b.y+18){b.on=false;ball.vy*=-1}
+  });
+  x.fillStyle="#030507";x.fillRect(0,0,500,250);
+  bricks.forEach(b=>{if(b.on){x.fillStyle="#8b5cff";x.fillRect(b.x,b.y,42,18)}});
+  x.fillStyle="#00eaff";x.fillRect(bx,230,70,10);
+  x.fillStyle="#fff";x.beginPath();x.arc(ball.x,ball.y,6,0,Math.PI*2);x.fill();
+  if(bricks.every(b=>!b.on)){brickRunning=false;toast("You won! 🎉");return}
+  brickRAF=requestAnimationFrame(brickLoop);
+}
+
+/* =========================
+   SETTINGS / STORAGE
+========================= */
+function toggleRGB(){
+  const r=document.querySelector(".rgb");
+  r.style.display=r.style.display==="none"?"block":"none";
+}
+function clearLocal(){
+  localStorage.removeItem("editverseTrade");
+  localStorage.removeItem("editverseQuickNotes");
+  tradeState={cash:100000,positions:{},history:[],start:100000};
+  document.getElementById("quickNotes").value="";
+  refreshTrading();toast("Local data cleared");
+}
+
+/* initial */
+renderSW();
+</script>
+</body>
+</html>
+
