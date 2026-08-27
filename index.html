@@ -1,121 +1,1862 @@
-
-from pathlib import Path
-
-html = r'''<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NovaVerse — Black RGB</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NovaVerse Black RGB</title>
+
 <style>
-:root{--bg:#050507;--panel:#0d0d12;--panel2:#13131a;--text:#f5f7ff;--muted:#9296a8;--rgb:#00f6ff;--rgb2:#ff00e6;--ok:#39ff88;--bad:#ff4d6d}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#151526 0,#050507 38%,#020204 100%);color:var(--text);font:14px system-ui,Segoe UI,sans-serif;min-height:100vh}
-body.rgb:before{content:"";position:fixed;inset:0;pointer-events:none;box-shadow:inset 0 0 90px #00f6ff18,inset 0 0 180px #ff00e618;z-index:20}
-header{position:sticky;top:0;z-index:30;background:#07070be8;backdrop-filter:blur(14px);border-bottom:1px solid #ffffff12;padding:14px 18px;display:flex;gap:12px;align-items:center}
-.logo{font-size:21px;font-weight:900;letter-spacing:.8px;text-shadow:0 0 14px var(--rgb)}.logo i{color:var(--rgb);font-style:normal}
-.search{flex:1;max-width:600px;margin:auto;position:relative}.search input{width:100%;padding:12px 15px;border-radius:12px;border:1px solid #ffffff16;background:#0c0c12;color:white;outline:0}.search input:focus{border-color:var(--rgb);box-shadow:0 0 18px #00f6ff22}
-button,.btn{border:1px solid #ffffff18;background:#11111a;color:white;padding:10px 13px;border-radius:10px;cursor:pointer;transition:.18s}.btn:hover,button:hover{transform:translateY(-1px);border-color:var(--rgb);box-shadow:0 0 15px #00f6ff20}button.primary{background:linear-gradient(90deg,#00bcd4,#8b00ff);border:0}
-.layout{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 65px)}aside{border-right:1px solid #ffffff10;padding:15px;position:sticky;top:65px;height:calc(100vh - 65px);overflow:auto}.nav{display:flex;flex-direction:column;gap:6px}.nav button{text-align:left;background:transparent}.nav button.active{background:#ffffff0c;border-color:#00f6ff66}.main{padding:20px;max-width:1500px;width:100%;margin:auto}.hero{padding:26px;border:1px solid #ffffff10;border-radius:20px;background:linear-gradient(135deg,#101019cc,#09090dcc);box-shadow:0 0 35px #00f6ff08}.hero h1{font-size:clamp(28px,5vw,54px);margin:0 0 8px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:16px}.card{background:#0c0c12;border:1px solid #ffffff10;border-radius:15px;padding:15px;box-shadow:0 0 18px #0008}.card h3{margin:0 0 7px}.card p{color:var(--muted);margin:7px 0 13px}.view{display:none}.view.active{display:block}.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.output{min-height:70px;padding:12px;border-radius:10px;background:#06060a;border:1px solid #ffffff10;white-space:pre-wrap}.field{width:100%;padding:10px;background:#090910;color:white;border:1px solid #ffffff18;border-radius:9px;margin:5px 0;outline:0}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1}.game{min-height:230px;display:grid;place-items:center;background:#050508;border:1px solid #ffffff10;border-radius:14px;margin-top:12px;overflow:hidden}.game canvas{max-width:100%;background:#020204}.stat{font-size:25px;font-weight:800}.green{color:var(--ok)}.red{color:var(--bad)}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px;border-bottom:1px solid #ffffff0d}.tag{display:inline-block;padding:4px 8px;border-radius:999px;background:#ffffff0c;color:var(--muted);margin:2px}.challenge{display:flex;align-items:center;gap:12px;padding:12px;border-bottom:1px solid #ffffff0d}.challenge input{width:18px;height:18px}.code{font-family:Consolas,monospace;min-height:300px;resize:vertical}.resultbox{min-height:80px}.clock{font-size:60px;font-variant-numeric:tabular-nums;text-align:center;text-shadow:0 0 22px var(--rgb)}@media(max-width:800px){.layout{grid-template-columns:1fr}aside{position:static;height:auto;border-right:0;border-bottom:1px solid #ffffff10}.nav{display:grid;grid-template-columns:repeat(3,1fr)}.nav button{font-size:12px}.main{padding:12px}header{flex-wrap:wrap}.search{order:3;flex-basis:100%;max-width:none}}
+*{box-sizing:border-box}
+:root{
+  --bg:#000;
+  --panel:#090909;
+  --panel2:#101010;
+  --border:#252525;
+  --text:#f5f5f5;
+  --muted:#8d8d8d;
+  --rgb1:#00ffff;
+  --rgb2:#ff00ff;
+  --rgb3:#ff1744;
+}
+body{
+  margin:0;
+  background:#000;
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+}
+
+/* RGB LIGHTS */
+.rgb{
+  position:fixed;
+  z-index:999;
+  pointer-events:none;
+  background:linear-gradient(
+    180deg,
+    #ff0000,#ff8a00,#ffff00,#00ff66,
+    #00ffff,#0066ff,#8a00ff,#ff00ff,#ff0000
+  );
+  background-size:100% 500%;
+  animation:rgbMove 5s linear infinite;
+}
+.rgb.left{left:0;top:0;width:4px;height:100vh}
+.rgb.right{right:0;top:0;width:4px;height:100vh}
+.rgb.top{top:0;left:0;width:100%;height:3px}
+.rgb.bottom{bottom:0;left:0;width:100%;height:3px}
+@keyframes rgbMove{
+  0%{background-position:0 0}
+  100%{background-position:0 100%}
+}
+
+.app{display:flex;min-height:100vh}
+
+.sidebar{
+  width:245px;
+  min-height:100vh;
+  position:sticky;
+  top:0;
+  padding:18px 14px;
+  background:#050505;
+  border-right:1px solid #222;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:900;
+  padding:8px;
+  margin-bottom:18px;
+}
+.logo span{
+  color:#00eaff;
+  text-shadow:0 0 15px #00eaff;
+}
+
+.nav button{
+  width:100%;
+  border:1px solid #1d1d1d;
+  background:#0c0c0c;
+  color:#eee;
+  padding:12px;
+  border-radius:10px;
+  margin:4px 0;
+  text-align:left;
+  cursor:pointer;
+  transition:.2s;
+}
+.nav button:hover,
+.nav button.active{
+  background:#151515;
+  border-color:#00eaff;
+  box-shadow:0 0 14px #00eaff44;
+}
+
+.main{
+  flex:1;
+  padding:20px;
+  max-width:1600px;
+  margin:auto;
+}
+
+.top{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.search{
+  flex:1;
+  padding:13px 16px;
+  border-radius:12px;
+  border:1px solid #292929;
+  background:#0b0b0b;
+  color:white;
+  outline:none;
+}
+.search:focus{
+  border-color:#00eaff;
+  box-shadow:0 0 12px #00eaff33;
+}
+
+.page{display:none}
+.page.active{display:block}
+
+.hero,.card,.panel{
+  background:linear-gradient(145deg,#0b0b0b,#111);
+  border:1px solid #242424;
+  border-radius:17px;
+  padding:18px;
+  box-shadow:0 0 25px #000;
+}
+
+.hero{
+  background:
+    radial-gradient(circle at 10% 20%,#28135d55,transparent 30%),
+    radial-gradient(circle at 90% 80%,#005f6d55,transparent 30%),
+    #080808;
+}
+
+h1{margin:0 0 8px}
+h2{margin:3px 0 14px}
+h3{margin-top:5px}
+.muted{color:var(--muted)}
+
+.grid{
+  display:grid;
+  gap:12px;
+}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.stat{
+  font-size:27px;
+  font-weight:900;
+}
+
+.btn{
+  border:0;
+  padding:10px 15px;
+  border-radius:10px;
+  background:#00d9ff;
+  color:#001015;
+  font-weight:900;
+  cursor:pointer;
+  margin:3px;
+}
+.btn:hover{
+  box-shadow:0 0 18px #00d9ff88;
+}
+.btn.alt{
+  background:#181818;
+  color:#fff;
+  border:1px solid #333;
+}
+
+.notice{
+  background:#0c0c0c;
+  border:1px solid #222;
+  padding:11px;
+  border-radius:10px;
+  color:#999;
+  font-size:13px;
+}
+
+/* RGB SETTINGS */
+.rgbSettings{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+/* CODING */
+.coding{
+  display:grid;
+  grid-template-columns:220px 1fr 380px;
+  gap:12px;
+}
+textarea.code{
+  width:100%;
+  min-height:500px;
+  resize:vertical;
+  background:#030303;
+  color:#d9faff;
+  border:1px solid #272727;
+  border-radius:12px;
+  padding:15px;
+  font:14px Consolas,monospace;
+  outline:none;
+}
+.preview{
+  height:500px;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+}
+.preview iframe{
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+/* WEATHER */
+.weatherTop{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:12px;
+}
+.weatherMain{
+  min-height:250px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.bigTemp{
+  font-size:70px;
+  font-weight:900;
+}
+.weatherIcon{
+  font-size:90px;
+}
+.forecast{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:8px;
+}
+.day{
+  background:#101010;
+  border:1px solid #252525;
+  padding:12px;
+  border-radius:12px;
+  text-align:center;
+}
+
+/* CHALLENGE */
+.challenge{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:12px;
+}
+.days{
+  display:grid;
+  gap:7px;
+}
+.dayBtn{
+  background:#101010;
+  border:1px solid #282828;
+  color:#fff;
+  border-radius:9px;
+  padding:10px;
+  text-align:left;
+  cursor:pointer;
+}
+.dayBtn.active{
+  border-color:#00eaff;
+  box-shadow:0 0 12px #00eaff33;
+}
+.progress{
+  width:100%;
+  height:10px;
+  border-radius:10px;
+  overflow:hidden;
+  background:#191919;
+}
+.progress span{
+  display:block;
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#00ffff,#ff00ff);
+}
+
+/* LIVE */
+.liveGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+/* GAMES / TOOLS */
+.gamegrid,.toolgrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+.gamegrid button,.toolgrid button{
+  min-height:90px;
+  background:#0d0d0d;
+  color:white;
+  border:1px solid #282828;
+  border-radius:13px;
+  padding:14px;
+  text-align:left;
+  cursor:pointer;
+}
+.gamegrid button:hover,.toolgrid button:hover{
+  border-color:#ff00ff;
+  box-shadow:0 0 15px #ff00ff33;
+}
+.gameCanvas{
+  width:100%;
+  background:#020202;
+  border-radius:12px;
+  border:1px solid #222;
+}
+
+/* WATCH */
+.clock{
+  width:245px;
+  height:245px;
+  border:7px solid #222;
+  border-radius:50%;
+  margin:auto;
+  position:relative;
+  background:#080808;
+  box-shadow:0 0 25px #00eaff33;
+}
+.hand{
+  position:absolute;
+  left:50%;
+  bottom:50%;
+  transform-origin:bottom;
+  border-radius:5px;
+  background:#fff;
+}
+.hour{width:6px;height:60px}
+.minute{width:4px;height:88px;background:#00eaff}
+.second{width:2px;height:103px;background:#ff3366}
+.dot{
+  position:absolute;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:white;
+  left:calc(50% - 6px);
+  top:calc(50% - 6px);
+}
+
+/* TRADE */
+.trade{
+  display:grid;
+  grid-template-columns:220px 1fr 260px;
+  gap:12px;
+}
+.assets{
+  display:grid;
+  gap:7px;
+}
+.asset{
+  display:flex;
+  justify-content:space-between;
+  padding:11px;
+  background:#101010;
+  border:1px solid #252525;
+  border-radius:9px;
+  cursor:pointer;
+}
+.asset.selected{
+  border-color:#00eaff;
+  box-shadow:0 0 12px #00eaff33;
+}
+.chart{
+  height:360px;
+  background:#030303;
+  border:1px solid #252525;
+  border-radius:13px;
+}
+.chart canvas{
+  width:100%;
+  height:100%;
+}
+.input{
+  width:100%;
+  background:#0c0c0c;
+  color:#fff;
+  border:1px solid #292929;
+  border-radius:8px;
+  padding:10px;
+  margin:5px 0 10px;
+}
+
+.table{
+  width:100%;
+  border-collapse:collapse;
+}
+.table th,.table td{
+  padding:9px;
+  border-bottom:1px solid #242424;
+  text-align:left;
+}
+
+#toast{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  background:#101010;
+  border:1px solid #00eaff;
+  box-shadow:0 0 20px #00eaff55;
+  padding:12px 16px;
+  border-radius:10px;
+  display:none;
+  z-index:1000;
+}
+
+@media(max-width:1100px){
+  .coding,.trade{grid-template-columns:1fr}
+  .weatherTop{grid-template-columns:1fr}
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .gamegrid,.toolgrid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:700px){
+  .app{display:block}
+  .sidebar{
+    width:100%;
+    min-height:auto;
+    position:relative;
+  }
+  .main{padding:10px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .gamegrid,.toolgrid{grid-template-columns:repeat(2,1fr)}
+  .forecast{grid-template-columns:repeat(2,1fr)}
+  .liveGrid{grid-template-columns:1fr}
+  .challenge{grid-template-columns:1fr}
+}
 </style>
 </head>
-<body class="rgb">
-<header><div class="logo">NOVA<span><i>VERSE</i></span></div><div class="search"><input id="globalSearch" placeholder="Search games, tools, weather, trading..."></div><button id="rgbBtn">RGB ON</button><button id="brightBtn">Brightness</button></header>
-<div class="layout">
-<aside><div class="nav" id="nav">
-<button class="active" data-view="home">⌂ Dashboard</button><button data-view="games">🎮 Games</button><button data-view="tools">🛠 Tools</button><button data-view="weather">🌦 Weather</button><button data-view="trading">📈 Paper Trading</button><button data-view="watch">⌚ Smartwatch</button><button data-view="coding">💻 Coding Sandbox</button><button data-view="challenge">📅 10-Day Challenge</button>
-</div></aside>
+
+<body>
+
+<div class="rgb left"></div>
+<div class="rgb right"></div>
+<div class="rgb top"></div>
+<div class="rgb bottom"></div>
+
+<div class="app">
+
+<aside class="sidebar">
+
+<div class="logo">NOVA<span>VERSE</span> ULTRA</div>
+
+<div class="rgbSettings">
+<button class="btn" onclick="toggleRGB()">RGB ON/OFF</button>
+<label class="muted">Brightness</label>
+<input type="range" min="10" max="100" value="100"
+oninput="setRGB(this.value)">
+</div>
+
+<div class="nav">
+<button class="active" data-page="home">🏠 Dashboard</button>
+<button data-page="weather">🌦️ Weather Center</button>
+<button data-page="coding">💻 Coding Hub</button>
+<button data-page="challenge">📅 10-Day Challenge</button>
+<button data-page="live">📡 Live Hub</button>
+<button data-page="games">🎮 5 Games</button>
+<button data-page="tools">🛠️ 10 Tools</button>
+<button data-page="watch">⌚ Smartwatch</button>
+<button data-page="trade">📈 Paper Trading</button>
+</div>
+
+</aside>
+
 <main class="main">
-<section id="home" class="view active"><div class="hero"><h1>Black RGB Command Center</h1><p class="muted">20 playable games • 35 working tools • weather • paper trading • smartwatch • coding sandbox • persistent challenge.</p><div class="toolbar"><button class="primary" data-go="games">Play Games</button><button data-go="tools">Open 35 Tools</button><button data-go="trading">Paper Trade</button></div></div><div class="grid" id="homeCards"></div></section>
-<section id="games" class="view"><h2>🎮 20 Playable Games</h2><p class="muted">Each game has its own working controls and score/restart logic.</p><div class="grid" id="gamesGrid"></div><div id="gameArea"></div></section>
-<section id="tools" class="view"><h2>🛠 35 Working Tools</h2><div class="grid" id="toolsGrid"></div></section>
-<section id="weather" class="view"><h2>🌦 Weather</h2><div class="card"><div class="row"><input id="city" class="field" placeholder="Enter city (e.g. Muzaffarnagar)"><button id="weatherBtn" class="primary">Get Weather</button></div><div id="weatherOut" class="output">Weather uses a live public forecast endpoint when internet access is available.</div></div></section>
-<section id="trading" class="view"><h2>📈 Paper Trading</h2><div class="grid"><div class="card"><h3>Account</h3><div class="stat" id="cash">₹100,000</div><p>Available cash</p><button id="resetTrade">Reset</button></div><div class="card"><h3>Order</h3><select id="symbol" class="field"><option>NVDA</option><option>AAPL</option><option>TSLA</option><option>BTC</option><option>ETH</option><option>RELIANCE</option><option>TCS</option></select><input id="qty" class="field" type="number" min="1" value="1"><input id="price" class="field" type="number" min="0" step="0.01" placeholder="Price"><div class="row"><button id="buy" class="primary">BUY</button><button id="sell">SELL</button></div></div><div class="card"><h3>Portfolio P&L</h3><div id="pnl" class="stat">₹0</div><p>Realized + mark-to-entry P&L for this paper account.</p></div></div><div class="card" style="margin-top:12px"><h3>Holdings</h3><div id="holdings"></div></div></section>
-<section id="watch" class="view"><h2>⌚ Smartwatch</h2><div class="grid"><div class="card"><h3>Digital Watch</h3><div class="clock" id="clock"></div><div id="date" class="muted" style="text-align:center"></div></div><div class="card"><h3>Stopwatch</h3><div class="clock" id="sw">00:00.00</div><div class="toolbar"><button id="swStart">Start</button><button id="swLap">Lap</button><button id="swReset">Reset</button></div><div id="laps"></div></div><div class="card"><h3>Timer</h3><input id="timerMin" class="field" type="number" min="0" value="5"><div class="clock" id="timer">05:00</div><div class="toolbar"><button id="timerStart">Start</button><button id="timerReset">Reset</button></div></div></div></section>
-<section id="coding" class="view"><h2>💻 Coding Sandbox</h2><p class="muted">Run JavaScript locally in the browser. Output is captured below.</p><textarea id="code" class="field code">console.log("Hello NovaVerse!");
-const x = 7 * 6;
-console.log("7 × 6 =", x);</textarea><div class="toolbar"><button id="runCode" class="primary">Run JavaScript</button><button id="clearCode">Clear</button></div><pre id="codeOut" class="output"></pre></section>
-<section id="challenge" class="view"><h2>📅 Persistent 10-Day Challenge</h2><p class="muted">Your completion state is stored in localStorage and survives reloads.</p><div class="card" id="challengeList"></div></section>
-</main></div>
+
+<div class="top">
+<input id="search" class="search" placeholder="Search NovaVerse...">
+<b id="time"></b>
+</div>
+
+<!-- DASHBOARD -->
+<section class="page active" id="home">
+
+<div class="hero">
+<h1>NovaVerse Ultra ⚡</h1>
+<p class="muted">
+Black RGB all-in-one browser hub.
+Coding • Weather • Challenge • Games • Tools • Watch • Trading
+</p>
+<button class="btn" onclick="go('coding')">Open Coding Hub</button>
+<button class="btn alt" onclick="go('weather')">Weather</button>
+</div>
+
+<div class="grid g4" style="margin-top:12px">
+<div class="card">💻 Coding<div class="stat">Live IDE</div></div>
+<div class="card">🌦️ Weather<div class="stat" id="dashTemp">--°C</div></div>
+<div class="card">🎮 Games<div class="stat">5</div></div>
+<div class="card">🛠️ Tools<div class="stat">10</div></div>
+</div>
+
+<div class="grid g3" style="margin-top:12px">
+<div class="card">
+<h3>📅 Challenge</h3>
+<div class="stat">10 Days</div>
+<span class="muted">Coding practice</span>
+</div>
+
+<div class="card">
+<h3>⌚ Smartwatch</h3>
+<div class="stat" id="dashClock">--:--</div>
+<span class="muted">Live clock</span>
+</div>
+
+<div class="card">
+<h3>📈 Trading</h3>
+<div class="stat">₹10,00,000</div>
+<span class="muted">Virtual balance</span>
+</div>
+</div>
+
+</section>
+
+<!-- WEATHER -->
+<section class="page" id="weather">
+
+<h2>🌦️ Weather Center</h2>
+
+<div class="weatherTop">
+
+<div class="card weatherMain">
+<div>
+<span class="muted">Current Weather</span>
+<h1>Muzaffarnagar</h1>
+<div class="bigTemp" id="temp">--°C</div>
+<b id="weatherDesc">Loading...</b>
+</div>
+<div class="weatherIcon" id="weatherIcon">🌤️</div>
+</div>
+
+<div class="grid g2">
+<div class="card">💧 Humidity<div class="stat" id="humidity">--%</div></div>
+<div class="card">💨 Wind<div class="stat" id="wind">--</div></div>
+<div class="card">🌧️ Rain<div class="stat" id="rain">--%</div></div>
+<div class="card">🌅 Sunrise<div class="stat" id="sunrise">--</div></div>
+</div>
+
+</div>
+
+<div class="card" style="margin-top:12px">
+<h3>7-Day Forecast</h3>
+<div id="forecast" class="forecast"></div>
+</div>
+
+<p class="notice">
+Live weather uses Open-Meteo. Internet connection is required.
+</p>
+
+</section>
+
+<!-- CODING -->
+<section class="page" id="coding">
+
+<h2>💻 Coding Hub</h2>
+
+<div class="coding">
+
+<div class="card">
+<h3>Languages</h3>
+
+<button class="btn" onclick="setLang('html')">HTML</button>
+<button class="btn alt" onclick="setLang('css')">CSS</button>
+<button class="btn alt" onclick="setLang('js')">JS</button>
+
+<hr>
+
+<button class="btn" onclick="runCode()">▶ Run</button>
+<button class="btn alt" onclick="resetCode()">Reset</button>
+<button class="btn alt" onclick="copyCode()">Copy</button>
+
+<p class="muted">
+Write HTML/CSS/JS and instantly preview it.
+</p>
+</div>
+
+<div class="card">
+<textarea id="editor" class="code" spellcheck="false"></textarea>
+</div>
+
+<div class="card">
+<h3>Live Preview</h3>
+<div class="preview">
+<iframe id="preview" sandbox="allow-scripts"></iframe>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- CHALLENGE -->
+<section class="page" id="challenge">
+
+<h2>📅 10-Day Coding Challenge</h2>
+
+<div class="challenge">
+
+<div class="card">
+<h3>Progress</h3>
+
+<div class="progress">
+<span id="progressBar"></span>
+</div>
+
+<p id="progressText">0/10 completed</p>
+
+<div id="days" class="days"></div>
+</div>
+
+<div class="card">
+<h2 id="challengeTitle"></h2>
+<p id="challengeDesc"></p>
+
+<div class="hero">
+<b>Today's Task</b>
+<p id="challengeTask"></p>
+<button class="btn" onclick="completeDay()">✓ Mark Complete</button>
+</div>
+
+<h3>💡 Hint</h3>
+<p id="challengeHint" class="muted"></p>
+</div>
+
+</div>
+</section>
+
+<!-- LIVE -->
+<section class="page" id="live">
+
+<h2>📡 Live Hub</h2>
+
+<div class="liveGrid">
+
+<div class="card">
+<h3>🌦️ Weather</h3>
+<div class="stat" id="liveWeather">--</div>
+</div>
+
+<div class="card">
+<h3>🥇 Gold</h3>
+<div class="stat">₹1,01,250</div>
+<span class="muted">Demo feed</span>
+</div>
+
+<div class="card">
+<h3>🥈 Silver</h3>
+<div class="stat">₹1,16,800</div>
+<span class="muted">Demo feed</span>
+</div>
+
+<div class="card">
+<h3>💱 USD/INR</h3>
+<div class="stat">₹87.42</div>
+<span class="muted">Demo feed</span>
+</div>
+
+<div class="card">
+<h3>📊 NIFTY 50</h3>
+<div class="stat">25,420</div>
+<span class="muted">Demo feed</span>
+</div>
+
+<div class="card">
+<h3>📊 SENSEX</h3>
+<div class="stat">83,180</div>
+<span class="muted">Demo feed</span>
+</div>
+
+</div>
+
+<p class="notice">
+Market values shown here are demo values, not guaranteed live market prices.
+</p>
+
+</section>
+
+<!-- GAMES -->
+<section class="page" id="games">
+
+<h2>🎮 5 Games</h2>
+
+<div class="gamegrid">
+
+<button onclick="startGame('Snake')">
+🎮 <b>1. Snake</b><br>
+<span class="muted">Mini playable mode</span>
+</button>
+
+<button onclick="startGame('Tic Tac Toe')">
+🎮 <b>2. Tic Tac Toe</b><br>
+<span class="muted">Classic game</span>
+</button>
+
+<button onclick="startGame('2048')">
+🎮 <b>3. 2048</b><br>
+<span class="muted">Number puzzle</span>
+</button>
+
+<button onclick="startGame('Pong')">
+🎮 <b>4. Pong</b><br>
+<span class="muted">Arcade mode</span>
+</button>
+
+<button onclick="startGame('Car Dodge')">
+🎮 <b>5. Car Dodge</b><br>
+<span class="muted">Dodge obstacles</span>
+</button>
+
+</div>
+
+<div id="gameBox" class="card" style="display:none;margin-top:12px">
+
+<h2 id="gameTitle"></h2>
+
+<canvas id="gameCanvas"
+class="gameCanvas"
+width="900"
+height="360"></canvas>
+
+<p>
+Score:
+<b id="gameScore">0</b>
+</p>
+
+<button class="btn" onclick="gamePoint()">Score / Move</button>
+<button class="btn alt" onclick="stopGame()">Stop</button>
+
+</div>
+
+</section>
+
+<!-- TOOLS -->
+<section class="page" id="tools">
+
+<h2>🛠️ 10 Working Tools</h2>
+
+<div class="toolgrid">
+
+<button onclick="openTool('Calculator')">🧮 <b>1. Calculator</b></button>
+<button onclick="openTool('Unit Converter')">📏 <b>2. Unit Converter</b></button>
+<button onclick="openTool('Stopwatch')">⏱️ <b>3. Stopwatch</b></button>
+<button onclick="openTool('Timer')">⏲️ <b>4. Timer</b></button>
+<button onclick="openTool('Percentage')">％ <b>5. Percentage</b></button>
+<button onclick="openTool('EMI')">💰 <b>6. EMI Calculator</b></button>
+<button onclick="openTool('Age')">🎂 <b>7. Age Calculator</b></button>
+<button onclick="openTool('Random')">🎲 <b>8. Random Generator</b></button>
+<button onclick="openTool('Text')">📝 <b>9. Text Counter</b></button>
+<button onclick="openTool('Color')">🎨 <b>10. Color Picker</b></button>
+
+</div>
+
+<div id="toolOut" class="card" style="margin-top:12px">
+Select a tool.
+</div>
+
+</section>
+
+<!-- WATCH -->
+<section class="page" id="watch">
+
+<h2>⌚ Smartwatch</h2>
+
+<div class="grid g2">
+
+<div class="card">
+
+<div class="clock">
+<div id="hourHand" class="hand hour"></div>
+<div id="minuteHand" class="hand minute"></div>
+<div id="secondHand" class="hand second"></div>
+<div class="dot"></div>
+</div>
+
+<h2 style="text-align:center" id="digital"></h2>
+
+</div>
+
+<div class="grid g2">
+
+<div class="card">
+<h3>⏱️ Stopwatch</h3>
+<div class="stat" id="watchSW">0.0s</div>
+<button class="btn" onclick="toggleWatchSW()">Start/Stop</button>
+<button class="btn alt" onclick="resetWatchSW()">Reset</button>
+</div>
+
+<div class="card">
+<h3>⌚ Smart Stats</h3>
+🔋 Battery 87%<br>
+👟 Steps 7,842<br>
+❤️ Heart 72 BPM<br>
+🔥 Calories 486 kcal
+</div>
+
+<div class="card">
+<h3>🌍 World Clock</h3>
+<div id="worldClock"></div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<!-- TRADING -->
+<section class="page" id="trade">
+
+<h2>📈 Paper Trading</h2>
+
+<div class="trade">
+
+<div class="card">
+<h3>Market Watch</h3>
+<div id="assets" class="assets"></div>
+</div>
+
+<div>
+
+<div class="card">
+<b id="assetName">NIFTY 50</b>
+<div class="stat" id="tradePrice">25,420</div>
+</div>
+
+<div class="chart">
+<canvas id="tradeChart"></canvas>
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Order Ticket</h3>
+
+<label>Quantity</label>
+<input id="qty" class="input" type="number" value="1" min="1">
+
+<button class="btn" onclick="placeOrder('BUY')">BUY</button>
+<button class="btn" onclick="placeOrder('SELL')">SELL</button>
+
+<hr>
+
+Balance
+
+<div class="stat" id="balance">
+₹10,00,000
+</div>
+
+</div>
+
+</div>
+
+<div class="card" style="margin-top:12px">
+
+<h3>Trade History</h3>
+
+<table class="table" id="history">
+<tr>
+<th>Side</th>
+<th>Asset</th>
+<th>Qty</th>
+<th>Price</th>
+<th>Status</th>
+</tr>
+</table>
+
+</div>
+
+</section>
+
+</main>
+</div>
+
+<div id="toast"></div>
+
 <script>
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const views=$$('.view'); function show(id){views.forEach(v=>v.classList.toggle('active',v.id===id));$$('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));location.hash=id}
-$$('#nav button').forEach(b=>b.onclick=()=>show(b.dataset.view)); $$('[data-go]').forEach(b=>b.onclick=()=>show(b.dataset.go));
 
-let rgb=true,bright=1;$('#rgbBtn').onclick=()=>{rgb=!rgb;document.body.classList.toggle('rgb',rgb);$('#rgbBtn').textContent=rgb?'RGB ON':'RGB OFF'};
-$('#brightBtn').onclick=()=>{bright=bright>=1?.65:bright+.35;document.body.style.filter=`brightness(${bright})`;};
+/* GENERAL */
+const $=id=>document.getElementById(id);
 
-const games=[
-['Snake','snake'],['Pong','pong'],['Breakout','breakout'],['Flappy','flappy'],['2048','2048'],['Tic Tac Toe','ttt'],['Memory','memory'],['Minesweeper','mine'],['Reaction','reaction'],['Clicker','clicker'],['Number Guess','guess'],['Rock Paper Scissors','rps'],['Whack-a-Mole','whack'],['Space Dodge','dodge'],['Car Dodge','car'],['Asteroids','asteroids'],['Connect Four','connect4'],['Hangman','hangman'],['Math Sprint','math'],['Color Match','color']];
-$('#gamesGrid').innerHTML=games.map((g,i)=>`<div class="card"><h3>${i+1}. ${g[0]}</h3><p>Playable ${g[0]} mini-game.</p><button onclick="startGame('${g[1]}')">Play</button></div>`).join('');
+function toast(text){
+  const t=$('toast');
+  t.textContent=text;
+  t.style.display='block';
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>t.style.display='none',1600);
+}
 
-const toolDefs=[
-['Calculator',()=>toolCalc()],['Unit Converter',()=>toolUnit()],['BMI Calculator',()=>toolBMI()],['Percentage',()=>toolPercent()],['Age Calculator',()=>toolAge()],['Tip Calculator',()=>toolTip()],['Loan EMI',()=>toolEMI()],['Compound Interest',()=>toolCI()],['Simple Interest',()=>toolSI()],['Random Number',()=>toolRandom()],['Password Generator',()=>toolPass()],['Color Generator',()=>toolColor()],['Text Counter',()=>toolText()],['Word Counter',()=>toolWords()],['Case Converter',()=>toolCase()],['Base64',()=>toolBase64()],['JSON Formatter',()=>toolJSON()],['Timestamp',()=>toolTime()],['Stopwatch',()=>show('watch')],['Timer',()=>show('watch')],['Notes',()=>toolNotes()],['To-do List',()=>toolTodo()],['Pomodoro',()=>toolPomodoro()],['Dice Roller',()=>toolDice()],['Coin Flip',()=>toolCoin()],['QR Generator',()=>toolQR()],['Regex Tester',()=>toolRegex()],['HTML Preview',()=>toolHTML()],['JS Runner',()=>show('coding')],['IP/Network Info',()=>toolNet()],['Character Frequency',()=>toolFreq()],['Fibonacci',()=>toolFib()],['Prime Checker',()=>toolPrime()],['Markdown Preview',()=>toolMD()],['Theme Toggle',()=>rgbBtn.click()]
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>{
+    p.classList.toggle('active',p.id===id);
+  });
+
+  document.querySelectorAll('.nav button').forEach(b=>{
+    b.classList.toggle('active',b.dataset.page===id);
+  });
+
+  if(id==='trade'){
+    setTimeout(drawTradeChart,50);
+  }
+}
+
+document.querySelectorAll('.nav button').forEach(b=>{
+  b.onclick=()=>go(b.dataset.page);
+});
+
+setInterval(()=>{
+  $('time').textContent=new Date().toLocaleTimeString();
+},1000);
+
+
+/* RGB */
+let rgbEnabled=true;
+
+function toggleRGB(){
+  rgbEnabled=!rgbEnabled;
+  document.querySelectorAll('.rgb').forEach(x=>{
+    x.style.display=rgbEnabled?'block':'none';
+  });
+  toast(rgbEnabled?'RGB ON':'RGB OFF');
+}
+
+function setRGB(v){
+  document.querySelectorAll('.rgb').forEach(x=>{
+    x.style.opacity=v/100;
+  });
+}
+
+
+/* WEATHER */
+function weatherCode(code){
+  if(code===0)return['Clear Sky','☀️'];
+  if(code<=3)return['Cloudy','🌤️'];
+  if(code<=48)return['Fog','🌫️'];
+  if(code<=67)return['Rain','🌧️'];
+  if(code<=77)return['Snow','❄️'];
+  if(code<=82)return['Showers','🌦️'];
+  return['Thunderstorm','⛈️'];
+}
+
+async function loadWeather(){
+
+  try{
+
+    const url=
+    'https://api.open-meteo.com/v1/forecast?'+
+    'latitude=29.47&longitude=77.71&'+
+    'current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&'+
+    'hourly=precipitation_probability&'+
+    'daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&'+
+    'timezone=Asia%2FKolkata&forecast_days=7';
+
+    const res=await fetch(url);
+    const d=await res.json();
+
+    const c=d.current;
+    const info=weatherCode(c.weather_code);
+
+    const temp=Math.round(c.temperature_2m);
+
+    $('temp').textContent=temp+'°C';
+    $('dashTemp').textContent=temp+'°C';
+    $('liveWeather').textContent=temp+'°C';
+
+    $('weatherDesc').textContent=info[0];
+    $('weatherIcon').textContent=info[1];
+
+    $('humidity').textContent=c.relative_humidity_2m+'%';
+    $('wind').textContent=Math.round(c.wind_speed_10m)+' km/h';
+
+    $('rain').textContent=
+      (d.hourly.precipitation_probability[0]||0)+'%';
+
+    $('sunrise').textContent=
+      new Date(d.daily.sunrise[0])
+      .toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+
+    $('forecast').innerHTML=
+      d.daily.time.map((date,i)=>{
+
+        const w=weatherCode(d.daily.weather_code[i]);
+
+        return `
+        <div class="day">
+          <b>${new Date(date).toLocaleDateString([],{weekday:'short'})}</b>
+          <div style="font-size:30px">${w[1]}</div>
+          <b>${Math.round(d.daily.temperature_2m_max[i])}°</b>
+          /
+          ${Math.round(d.daily.temperature_2m_min[i])}°
+        </div>`;
+
+      }).join('');
+
+  }catch(e){
+
+    $('weatherDesc').textContent='Weather unavailable';
+    $('weatherIcon').textContent='🌐';
+    $('liveWeather').textContent='Offline';
+
+  }
+}
+
+loadWeather();
+
+
+/* CODING HUB */
+const codeTemplates={
+
+html:
+`<!doctype html>
+<html>
+<head>
+<title>NovaVerse</title>
+</head>
+<body>
+<h1>Hello NovaVerse!</h1>
+<p>This is my webpage.</p>
+<button onclick="alert('It works!')">Click Me</button>
+</body>
+</html>`,
+
+css:
+`<style>
+body{
+  background:#111;
+  color:white;
+  font-family:Arial;
+  text-align:center;
+  padding:50px;
+}
+h1{
+  color:#00eaff;
+  text-shadow:0 0 20px #00eaff;
+}
+</style>
+<h1>CSS Demo</h1>
+<p>Beautiful black interface.</p>`,
+
+js:
+`<h1 id="title">JavaScript Demo</h1>
+<button onclick="
+document.getElementById('title').textContent='JavaScript Works!'
+">
+Run JavaScript
+</button>`
+};
+
+let currentLang='html';
+
+$('editor').value=codeTemplates.html;
+
+function setLang(lang){
+  currentLang=lang;
+  $('editor').value=codeTemplates[lang];
+  toast(lang.toUpperCase()+' selected');
+}
+
+function runCode(){
+  $('preview').srcdoc=$('editor').value;
+  toast('Code executed');
+}
+
+function resetCode(){
+  $('editor').value=codeTemplates[currentLang];
+  $('preview').srcdoc='';
+}
+
+async function copyCode(){
+  try{
+    await navigator.clipboard.writeText($('editor').value);
+    toast('Code copied');
+  }catch{
+    toast('Copy unavailable');
+  }
+}
+
+
+/* 10 DAY CHALLENGE */
+const challenges=[
+
+['HTML Basics',
+'Learn headings, paragraphs, links and buttons.',
+'Build a simple webpage.',
+'Use h1, p, a and button.'],
+
+['HTML Forms',
+'Learn form and input elements.',
+'Build a registration form.',
+'Use label, input and form.'],
+
+['CSS Basics',
+'Learn colors, spacing and borders.',
+'Design a profile card.',
+'Use padding and border-radius.'],
+
+['Flexbox',
+'Learn responsive layouts.',
+'Create a navigation bar.',
+'Use display:flex and gap.'],
+
+['JavaScript Basics',
+'Learn variables and functions.',
+'Build a counter.',
+'Start with let count=0.'],
+
+['DOM',
+'Change webpage content with JavaScript.',
+'Build a text changing button.',
+'Use getElementById.'],
+
+['Events',
+'React to user actions.',
+'Create interactive buttons.',
+'Try addEventListener.'],
+
+['Local Storage',
+'Save browser data.',
+'Build saved notes.',
+'Use localStorage.setItem().'],
+
+['Mini Project',
+'Combine HTML CSS and JS.',
+'Build a calculator or todo app.',
+'Keep functions small and clear.'],
+
+['Final Project',
+'Create your own complete website.',
+'Finish and test your project.',
+'Check every button before publishing.']
+
 ];
-$('#toolsGrid').innerHTML=toolDefs.map((t,i)=>`<div class="card"><h3>${i+1}. ${t[0]}</h3><button onclick="toolOpen(${i})">Open</button></div>`).join('');
-function toolOpen(i){toolDefs[i][1]();}
 
-function popup(title,html,fn){$('#gameArea').innerHTML=`<div class="card"><h2>${title}</h2>${html}<div id="toolResult" class="output"></div></div>`; if(fn)fn();}
-function toolCalc(){popup('Calculator',`<input id="a" class="field" placeholder="Expression e.g. (12+8)*3"><button onclick="toolResult.textContent=Function('return '+a.value)()">Calculate</button>`)}
-function toolUnit(){popup('Unit Converter',`<input id="a" class="field" type="number" value="1"><select id="u" class="field"><option>km-mi</option><option>mi-km</option><option>kg-lb</option><option>lb-kg</option><option>C-F</option><option>F-C</option></select><button onclick="let x=+a.value;let r={\"km-mi\":x*.621371,\"mi-km\":x*1.60934,\"kg-lb\":x*2.20462,\"lb-kg\":x*.453592,\"C-F\":x*9/5+32,\"F-C\":(x-32)*5/9}[u.value];toolResult.textContent=r.toFixed(4)">Convert</button>`)}
-function toolBMI(){popup('BMI Calculator',`<input id="a" class="field" placeholder="kg"><input id="b" class="field" placeholder="height cm"><button onclick="toolResult.textContent=(+a.value/((+b.value/100)**2)).toFixed(2)">Calculate</button>`)}
-function toolPercent(){popup('Percentage',`<input id="a" class="field" placeholder="Value"><input id="b" class="field" placeholder="%"><button onclick="toolResult.textContent=(+a.value*+b.value/100)">Calculate</button>`)}
-function toolAge(){popup('Age Calculator',`<input id="a" class="field" type="date"><button onclick="let d=new Date(a.value),n=new Date();toolResult.textContent=Math.floor((n-d)/31557600000)+' years'">Calculate</button>`)}
-function toolTip(){popup('Tip Calculator',`<input id="a" class="field" placeholder="Bill"><input id="b" class="field" placeholder="Tip %"><button onclick="toolResult.textContent='Tip ₹'+(+a.value*+b.value/100).toFixed(2)+' | Total ₹'+(+a.value*(1+ +b.value/100)).toFixed(2)">Calculate</button>`)}
-function toolEMI(){popup('Loan EMI',`<input id="a" class="field" placeholder="Principal"><input id="b" class="field" placeholder="Annual rate %"><input id="c" class="field" placeholder="Months"><button onclick="let r=+b.value/1200,n=+c.value,p=+a.value;toolResult.textContent='EMI ₹'+(p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1)).toFixed(2)">Calculate</button>`)}
-function toolCI(){popup('Compound Interest',`<input id="a" class="field" placeholder="Principal"><input id="b" class="field" placeholder="Rate %"><input id="c" class="field" placeholder="Years"><button onclick="toolResult.textContent=(+a.value*Math.pow(1+ +b.value/100,+c.value)).toFixed(2)">Calculate</button>`)}
-function toolSI(){popup('Simple Interest',`<input id="a" class="field" placeholder="Principal"><input id="b" class="field" placeholder="Rate %"><input id="c" class="field" placeholder="Years"><button onclick="toolResult.textContent=(+a.value*+b.value*+c.value/100).toFixed(2)">Calculate</button>`)}
-function toolRandom(){popup('Random Number',`<input id="a" class="field" type="number" value="1"><input id="b" class="field" type="number" value="100"><button onclick="toolResult.textContent=Math.floor(+a.value+Math.random()*(+b.value-+a.value+1))">Generate</button>`)}
-function toolPass(){popup('Password Generator',`<input id="a" class="field" type="number" value="16"><button onclick="let s='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%';toolResult.textContent=[...crypto.getRandomValues(new Uint32Array(+a.value))].map(x=>s[x%s.length]).join('')">Generate</button>`)}
-function toolColor(){popup('Color Generator',`<button onclick="let c='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');toolResult.textContent=c;toolResult.style.color=c">Generate Color</button>`)}
-function toolText(){popup('Text Counter',`<textarea id="a" class="field"></textarea><button onclick="toolResult.textContent='Characters: '+a.value.length">Count</button>`)}
-function toolWords(){popup('Word Counter',`<textarea id="a" class="field"></textarea><button onclick="toolResult.textContent='Words: '+(a.value.trim()?a.value.trim().split(/\\s+/).length:0)">Count</button>`)}
-function toolCase(){popup('Case Converter',`<textarea id="a" class="field"></textarea><button onclick="toolResult.textContent=a.value.toUpperCase()">UPPERCASE</button><button onclick="toolResult.textContent=a.value.toLowerCase()">lowercase</button>`)}
-function toolBase64(){popup('Base64',`<textarea id="a" class="field"></textarea><button onclick="toolResult.textContent=btoa(unescape(encodeURIComponent(a.value)))">Encode</button><button onclick="toolResult.textContent=decodeURIComponent(escape(atob(a.value)))">Decode</button>`)}
-function toolJSON(){popup('JSON Formatter',`<textarea id="a" class="field"></textarea><button onclick="try{toolResult.textContent=JSON.stringify(JSON.parse(a.value),null,2)}catch(e){toolResult.textContent=e}">Format</button>`)}
-function toolTime(){popup('Timestamp',`<button onclick="toolResult.textContent=Date.now()">Current Unix ms</button>`)}
-function toolNotes(){popup('Notes',`<textarea id="a" class="field" style="min-height:220px" placeholder="Saved automatically...">${localStorage.notes||''}</textarea><button onclick="localStorage.notes=a.value;toolResult.textContent='Saved'">Save</button>`)}
-function toolTodo(){popup('To-do List',`<input id="a" class="field" placeholder="Task"><button onclick="let x=JSON.parse(localStorage.todo||'[]');x.push(a.value);localStorage.todo=JSON.stringify(x);toolResult.textContent=x.map((v,i)=>(i+1)+'. '+v).join('\\n')">Add</button>`)}
-function toolPomodoro(){popup('Pomodoro',`<div class="clock" id="pom">25:00</div><button onclick="startPom()">Start</button>`);window.startPom=()=>{let t=1500;let id=setInterval(()=>{t--;pom.textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');if(t<=0)clearInterval(id)},1000)}}
-function toolDice(){popup('Dice Roller',`<button onclick="toolResult.textContent=1+Math.floor(Math.random()*6)">Roll d6</button>`)}
-function toolCoin(){popup('Coin Flip',`<button onclick="toolResult.textContent=Math.random()<.5?'Heads':'Tails'">Flip</button>`)}
-function toolQR(){popup('QR Generator',`<input id="a" class="field" placeholder="Text or URL"><button onclick="toolResult.innerHTML='<img alt=QR src=https://api.qrserver.com/v1/create-qr-code/?size=180x180&data='+encodeURIComponent(a.value)+'>'">Generate</button>`)}
-function toolRegex(){popup('Regex Tester',`<input id="a" class="field" placeholder="Regex"><input id="b" class="field" placeholder="Text"><button onclick="try{toolResult.textContent=new RegExp(a.value).test(b.value)}catch(e){toolResult.textContent=e}">Test</button>`)}
-function toolHTML(){popup('HTML Preview',`<textarea id="a" class="field"></textarea><button onclick="toolResult.innerHTML=a.value">Preview</button>`)}
-function toolNet(){popup('Network Info',`<button onclick="toolResult.textContent=navigator.onLine?'Online':'Offline'">Check</button>`)}
-function toolFreq(){popup('Character Frequency',`<textarea id="a" class="field"></textarea><button onclick="let m={};for(let c of a.value)m[c]=(m[c]||0)+1;toolResult.textContent=JSON.stringify(m,null,2)">Count</button>`)}
-function toolFib(){popup('Fibonacci',`<input id="a" class="field" type="number" value="10"><button onclick="let n=+a.value,x=0,y=1,s=[];for(let i=0;i<n;i++){s.push(x);[x,y]=[y,x+y]}toolResult.textContent=s.join(', ')">Generate</button>`)}
-function toolPrime(){popup('Prime Checker',`<input id="a" class="field" type="number"><button onclick="let n=+a.value,p=n>1;for(let i=2;i*i<=n;i++)if(n%i===0)p=false;toolResult.textContent=p?'Prime':'Not prime'">Check</button>`)}
-function toolMD(){popup('Markdown Preview',`<textarea id="a" class="field"></textarea><button onclick="toolResult.innerHTML=a.value.replace(/\\*\\*(.*?)\\*\\*/g,'<b>$1</b>').replace(/^# (.*)$/gm,'<h2>$1</h2>').replace(/\\n/g,'<br>')">Preview</button>`)}
+let completed=
+JSON.parse(localStorage.getItem('novaChallenge')||'[]');
 
-function startGame(type){const a=$('#gameArea'); if(['clicker','guess','rps','reaction','math','color'].includes(type)){simpleGame(type);return}
-let title=games.find(x=>x[1]===type)?.[0]||type;a.innerHTML=`<div class="card"><h2>${title}</h2><div class="game"><canvas id="gc" width="720" height="360"></canvas></div><div class="toolbar"><button onclick="startGame('${type}')">Restart</button><span id="score" class="tag">Score: 0</span></div><p class="muted">Controls: keyboard arrows/WASD where applicable. Tap/click the game for mouse interaction.</p></div>`;canvasGame(type)}
-function simpleGame(t){if(t==='clicker')popup('Clicker','<button id="big" class="primary" style="font-size:35px;padding:35px">CLICK</button>',()=>{let n=0;big.onclick=()=>toolResult.textContent=++n});else if(t==='guess')popup('Number Guess','<input id="a" class="field" type="number" placeholder="1-100"><button onclick="let n=+a.value,r=window.gn||(window.gn=1+Math.floor(Math.random()*100));toolResult.textContent=n===r?'Correct!':n<r?'Too low':'Too high'">Guess</button>');else if(t==='rps')popup('Rock Paper Scissors','<div class="toolbar"><button onclick="rps(0)">Rock</button><button onclick="rps(1)">Paper</button><button onclick="rps(2)">Scissors</button></div>',()=>window.rps=x=>{let c=Math.floor(Math.random()*3);toolResult.textContent=x===c?'Draw':(x+2)%3===c?'You win!':'CPU wins!'});else if(t==='reaction')popup('Reaction Test','<button id="react" class="primary">Wait...</button>',()=>{let st=0;react.disabled=true;setTimeout(()=>{react.disabled=false;react.textContent='CLICK NOW';st=performance.now();react.onclick=()=>toolResult.textContent=Math.round(performance.now()-st)+' ms'},1000+Math.random()*3000)});else if(t==='math'){let q=Math.floor(Math.random()*20)+1,r=Math.floor(Math.random()*20)+1;popup('Math Sprint',`<div class="stat">${q} + ${r} = ?</div><input id="a" class="field" type="number"><button onclick="toolResult.textContent=(+a.value===${q+r})?'Correct!':'Try again'">Answer</button>`)}else if(t==='color'){let c=['red','blue','green','yellow','purple'][Math.floor(Math.random()*5)];popup('Color Match',`<div style="font-size:35px;text-align:center;color:${c}">${c.toUpperCase()}</div><button onclick="toolResult.textContent='Matched '+ '${c}'">Match</button>`)}}
-function canvasGame(type){const c=$('#gc'),x=c.getContext('2d');let score=0,keys={};onkeydown=e=>keys[e.key.toLowerCase()]=1;onkeyup=e=>keys[e.key.toLowerCase()]=0;
-if(type==='pong'){let py=150,by=180,bx=360,vx=4,vy=3;function f(){x.clearRect(0,0,720,360);x.fillStyle='#fff';x.fillRect(15,py,12,70);x.fillRect(693,by,12,70);x.beginPath();x.arc(bx,by+25,9,0,7);x.fill();py+=((keys.w?-6:0)+(keys.s?6:0));bx+=vx;by+=vy;if(by<0||by>350)vy*=-1;if(bx<30&&by>py-10&&by<py+80)vx=Math.abs(vx);if(bx>680&&by>by-1){by+=0}if(bx>700){bx=360;score++}if(bx<0){bx=360;vx=4}$('#score').textContent='Score: '+score;requestAnimationFrame(f)}f()}
-else if(type==='snake'){let s=[[10,10]],d=[1,0],food=[20,15];function f(){x.clearRect(0,0,720,360);d=keys.arrowup?[0,-1]:keys.arrowdown?[0,1]:keys.arrowleft?[-1,0]:keys.arrowright?[1,0]:d;let h=[s[0][0]+d[0],s[0][1]+d[1]];if(h[0]<0||h[0]>=36||h[1]<0||h[1]>=18||s.some(p=>p[0]===h[0]&&p[1]===h[1])){s=[[10,10]];score=0}else{s.unshift(h);if(h[0]===food[0]&&h[1]===food[1]){food=[Math.floor(Math.random()*36),Math.floor(Math.random()*18)];score++}else s.pop()}x.fillStyle='#00f6ff';s.forEach(p=>x.fillRect(p[0]*20,p[1]*20,18,18));x.fillStyle='#ff00e6';x.fillRect(food[0]*20,food[1]*20,18,18);$('#score').textContent='Score: '+score;setTimeout(f,110)}f()}
-else {let px=350,py=320,obs=[];function f(){x.clearRect(0,0,720,360);if(keys.arrowleft||keys.a)px-=6;if(keys.arrowright||keys.d)px+=6;px=Math.max(0,Math.min(690,px));if(Math.random()<.035)obs.push({x:Math.random()*680,y:-20});obs.forEach(o=>o.y+=4);x.fillStyle='#00f6ff';x.fillRect(px,py,30,20);x.fillStyle='#ff00e6';obs.forEach(o=>x.fillRect(o.x,o.y,25,25));obs=obs.filter(o=>o.y<380);$('#score').textContent='Score: '+(++score);requestAnimationFrame(f)}f()}}
-let portfolio=JSON.parse(localStorage.portfolio||'{}'),cash=+(localStorage.cash||100000);function saveTrade(){localStorage.portfolio=JSON.stringify(portfolio);localStorage.cash=cash}function renderTrade(){cashEl.textContent='₹'+cash.toFixed(2);holdings.innerHTML=Object.entries(portfolio).map(([s,v])=>`<div class="challenge"><b>${s}</b><span>${v.qty} @ ₹${v.avg.toFixed(2)}</span><span>Value ₹${(v.qty*v.avg).toFixed(2)}</span></div>`).join('')||'<p class="muted">No holdings.</p>';pnl.textContent='₹0 (entry basis)';}const cashEl=$('#cash');$('#buy').onclick=()=>{let s=symbol.value,q=+qty.value,p=+price.value;if(!q||!p)return alert('Enter quantity and price');let cost=q*p;if(cost>cash)return alert('Insufficient paper cash');let v=portfolio[s]||{qty:0,avg:0};v.avg=(v.avg*v.qty+cost)/(v.qty+q);v.qty+=q;portfolio[s]=v;cash-=cost;saveTrade();renderTrade()};$('#sell').onclick=()=>{let s=symbol.value,q=+qty.value,p=+price.value,v=portfolio[s];if(!v||q>v.qty)return alert('Not enough holdings');cash+=q*p;v.qty-=q;if(!v.qty)delete portfolio[s];saveTrade();renderTrade()};$('#resetTrade').onclick=()=>{portfolio={};cash=100000;saveTrade();renderTrade()};renderTrade();
+let selectedDay=0;
 
-setInterval(()=>{let n=new Date();clock.textContent=n.toLocaleTimeString();date.textContent=n.toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'})},1000);
-let swRun=false,swStart=0,swBase=0,swId;$('#swStart').onclick=()=>{if(swRun){swBase+=performance.now()-swStart;swRun=false;clearInterval(swId);swStart.textContent='Start'}else{swRun=true;swStart=performance.now();swId=setInterval(drawSW,30);swStart.textContent='Stop'}};function drawSW(){let t=(swBase+(swRun?performance.now()-swStart:0))/1000;sw.textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+(t%60).toFixed(2).padStart(5,'0')}$('#swReset').onclick=()=>{swBase=0;swRun=false;clearInterval(swId);sw.textContent='00:00.00'};$('#swLap').onclick=()=>laps.innerHTML+=`<div class="tag">${sw.textContent}</div>`;
-let timerId,timerSec=300;function drawTimer(){timer.textContent=String(Math.floor(timerSec/60)).padStart(2,'0')+':'+String(timerSec%60).padStart(2,'0')}$('#timerStart').onclick=()=>{clearInterval(timerId);timerSec=+timerMin.value*60;timerId=setInterval(()=>{if(timerSec<=0){clearInterval(timerId);alert('Timer finished!');return}timerSec--;drawTimer()},1000)};$('#timerReset').onclick=()=>{clearInterval(timerId);timerSec=+timerMin.value*60;drawTimer()};
+$('days').innerHTML=
+challenges.map((c,i)=>`
+<button class="dayBtn" onclick="selectDay(${i})">
+Day ${i+1} — ${c[0]}
+</button>
+`).join('');
 
-$('#runCode').onclick=()=>{let out=[];try{const log=(...x)=>out.push(x.join(' '));new Function('console',code.value)({log});codeOut.textContent=out.join('\\n')||'Executed successfully.'}catch(e){codeOut.textContent=e}};
-$('#clearCode').onclick=()=>code.value='';
+function selectDay(i){
+  selectedDay=i;
+  renderChallenge();
+}
 
-const days=Array.from({length:10},(_,i)=>({day:i+1,done:false}));let challenge=JSON.parse(localStorage.challenge||'null')||days;function renderChallenge(){$('#challengeList').innerHTML=challenge.map((d,i)=>`<label class="challenge"><input type="checkbox" ${d.done?'checked':''} onchange="challenge[${i}].done=this.checked;localStorage.challenge=JSON.stringify(challenge)"><b>Day ${d.day}</b><span>Complete today's challenge</span></label>`).join('')};renderChallenge();
+function renderChallenge(){
 
-$('#globalSearch').oninput=e=>{let q=e.target.value.toLowerCase();if(!q)return;let hit=[...games.map(g=>g[0]),...toolDefs.map(t=>t[0]),'Weather','Paper Trading','Smartwatch','Coding Sandbox','10-Day Challenge'].find(x=>x.toLowerCase().includes(q));if(hit){if(games.some(g=>g[0]===hit))show('games');else if(toolDefs.some(t=>t[0]===hit))show('tools');else if(hit==='Weather')show('weather');else if(hit==='Paper Trading')show('trading');else if(hit==='Smartwatch')show('watch');else if(hit==='Coding Sandbox')show('coding');else show('challenge')}};
+  const c=challenges[selectedDay];
 
-$('#weatherBtn').onclick=async()=>{let q=$('#city').value.trim();if(!q)return;$('#weatherOut').textContent='Loading...';try{let geo=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(q)+'&count=1&language=en&format=json').then(r=>r.json());if(!geo.results?.length)throw Error('City not found');let g=geo.results[0];let w=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${g.latitude}&longitude=${g.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`).then(r=>r.json());let names={0:'Clear',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',51:'Drizzle',61:'Rain',71:'Snow',80:'Showers',95:'Thunderstorm'};$('#weatherOut').innerHTML=`<h3>${g.name}, ${g.country}</h3><div class="grid"><div class="card"><b>Now</b><div class="stat">${w.current.temperature_2m}°C</div><span>${names[w.current.weather_code]||'Weather'}</span></div><div class="card"><b>Feels like</b><div class="stat">${w.current.apparent_temperature}°C</div><span>Humidity ${w.current.relative_humidity_2m}%</span></div><div class="card"><b>Wind</b><div class="stat">${w.current.wind_speed_10m} km/h</div></div></div><h3>7-day forecast</h3><div class="grid">${w.daily.time.map((d,i)=>`<div class="card"><b>${d}</b><p>${w.daily.temperature_2m_min[i]}° / ${w.daily.temperature_2m_max[i]}°C</p><span>Rain chance ${w.daily.precipitation_probability_max[i]}%</span></div>`).join('')}</div>`}catch(e){$('#weatherOut').textContent='Could not load live weather. Check your internet connection and try again.'}};
+  $('challengeTitle').textContent=
+    'Day '+(selectedDay+1)+' — '+c[0];
 
-$('#homeCards').innerHTML=[['🎮','20 Games','Playable mini-games'],['🛠','35 Tools','Useful browser utilities'],['📈','Paper Trading','Buy, sell, holdings & P/L'],['🌦','Weather','Live 7-day forecast'],['⌚','Smartwatch','Clock, stopwatch & timer'],['💻','Coding','JavaScript sandbox'],['📅','Challenge','Persistent 10-day progress']].map(x=>`<div class="card"><h3>${x[0]} ${x[1]}</h3><p>${x[2]}</p></div>`).join('');
-if(location.hash&&document.getElementById(location.hash.slice(1)))show(location.hash.slice(1));
+  $('challengeDesc').textContent=c[1];
+  $('challengeTask').textContent=c[2];
+  $('challengeHint').textContent=c[3];
+
+  const percent=completed.length*10;
+
+  $('progressBar').style.width=percent+'%';
+
+  $('progressText').textContent=
+    completed.length+'/10 completed';
+
+  document.querySelectorAll('.dayBtn').forEach((b,i)=>{
+    b.classList.toggle('active',i===selectedDay);
+    b.textContent=
+      'Day '+(i+1)+' — '+challenges[i][0]+
+      (completed.includes(i)?' ✓':'');
+  });
+}
+
+function completeDay(){
+
+  if(!completed.includes(selectedDay)){
+    completed.push(selectedDay);
+    localStorage.setItem(
+      'novaChallenge',
+      JSON.stringify(completed)
+    );
+  }
+
+  renderChallenge();
+  toast('Challenge completed!');
+}
+
+renderChallenge();
+
+
+/* GAMES */
+let currentGame='';
+let gameScore=0;
+
+function startGame(name){
+
+  currentGame=name;
+  gameScore=0;
+
+  $('gameBox').style.display='block';
+  $('gameTitle').textContent='🎮 '+name;
+  $('gameScore').textContent='0';
+
+  drawGame();
+
+  toast(name+' started');
+}
+
+function gamePoint(){
+
+  gameScore++;
+  $('gameScore').textContent=gameScore;
+
+  drawGame();
+}
+
+function stopGame(){
+  $('gameBox').style.display='none';
+}
+
+function drawGame(){
+
+  const c=$('gameCanvas');
+  const ctx=c.getContext('2d');
+
+  ctx.clearRect(0,0,c.width,c.height);
+
+  ctx.fillStyle='#050505';
+  ctx.fillRect(0,0,c.width,c.height);
+
+  ctx.fillStyle='#00eaff';
+  ctx.font='28px Arial';
+
+  ctx.fillText(
+    currentGame+' — Mini Playable Demo',
+    25,45
+  );
+
+  ctx.fillStyle='#fff';
+  ctx.font='20px Arial';
+
+  ctx.fillText(
+    'Press "Score / Move" to play',
+    25,80
+  );
+
+  ctx.fillStyle='#ff00ff';
+
+  const x=
+    100+(gameScore*47)%700;
+
+  ctx.beginPath();
+  ctx.arc(x,180,25,0,Math.PI*2);
+  ctx.fill();
+
+  ctx.fillStyle='#00ffff';
+  ctx.fillRect(
+    650-(gameScore*13)%500,
+    260,
+    80,
+    15
+  );
+}
+
+
+/* TOOLS */
+let timerInterval=null;
+let timerSeconds=0;
+
+function openTool(name){
+
+  if(name==='Calculator'){
+
+    $('toolOut').innerHTML=`
+    <h3>🧮 Calculator</h3>
+    <input id="calcInput" class="input"
+    placeholder="25*4+10">
+    <button class="btn" onclick="calculate()">
+    Calculate
+    </button>
+    <div id="calcResult" class="stat"></div>`;
+
+  }
+
+  else if(name==='Unit Converter'){
+
+    $('toolOut').innerHTML=`
+    <h3>📏 Unit Converter</h3>
+    <input id="unitValue" class="input"
+    type="number" value="1">
+    <select id="unitType" class="input">
+      <option value="kmmi">KM → Miles</option>
+      <option value="mft">Meters → Feet</option>
+      <option value="kgp">KG → Pounds</option>
+      <option value="cf">Celsius → Fahrenheit</option>
+    </select>
+    <button class="btn" onclick="convertUnit()">Convert</button>
+    <div id="unitResult" class="stat"></div>`;
+
+  }
+
+  else if(name==='Stopwatch'){
+
+    $('toolOut').innerHTML=`
+    <h3>⏱️ Stopwatch</h3>
+    <div id="toolSW" class="stat">0.0s</div>
+    <button class="btn" onclick="startToolSW()">Start</button>
+    <button class="btn alt" onclick="stopToolSW()">Stop</button>
+    <button class="btn alt" onclick="resetToolSW()">Reset</button>`;
+
+  }
+
+  else if(name==='Timer'){
+
+    $('toolOut').innerHTML=`
+    <h3>⏲️ Timer</h3>
+    <input id="timerInput" class="input"
+    type="number" value="60">
+    <button class="btn" onclick="startTimer()">Start</button>
+    <button class="btn alt" onclick="stopTimer()">Stop</button>
+    <div id="timerOut" class="stat">60s</div>`;
+
+  }
+
+  else if(name==='Percentage'){
+
+    $('toolOut').innerHTML=`
+    <h3>％ Percentage</h3>
+    <input id="percentA" class="input"
+    type="number" placeholder="Value">
+    <input id="percentB" class="input"
+    type="number" placeholder="Percent">
+    <button class="btn" onclick="percentage()">Calculate</button>
+    <div id="percentOut" class="stat"></div>`;
+
+  }
+
+  else if(name==='EMI'){
+
+    $('toolOut').innerHTML=`
+    <h3>💰 EMI Calculator</h3>
+    <input id="emiP" class="input" placeholder="Principal">
+    <input id="emiR" class="input" placeholder="Annual Interest %">
+    <input id="emiN" class="input" placeholder="Months">
+    <button class="btn" onclick="emi()">Calculate EMI</button>
+    <div id="emiOut" class="stat"></div>`;
+
+  }
+
+  else if(name==='Age'){
+
+    $('toolOut').innerHTML=`
+    <h3>🎂 Age Calculator</h3>
+    <input id="birthDate" class="input" type="date">
+    <button class="btn" onclick="ageCalc()">Calculate</button>
+    <div id="ageOut" class="stat"></div>`;
+
+  }
+
+  else if(name==='Random'){
+
+    $('toolOut').innerHTML=`
+    <h3>🎲 Random Generator</h3>
+    <input id="randomMin" class="input" type="number" value="1">
+    <input id="randomMax" class="input" type="number" value="100">
+    <button class="btn" onclick="randomNumber()">Generate</button>
+    <div id="randomOut" class="stat"></div>`;
+
+  }
+
+  else if(name==='Text'){
+
+    $('toolOut').innerHTML=`
+    <h3>📝 Text Counter</h3>
+    <textarea id="textInput" class="input"
+    style="height:180px"
+    placeholder="Type or paste text..."></textarea>
+    <button class="btn" onclick="countText()">Count</button>
+    <div id="textOut" class="stat"></div>`;
+
+  }
+
+  else if(name==='Color'){
+
+    $('toolOut').innerHTML=`
+    <h3>🎨 Color Picker</h3>
+    <input id="colorInput" type="color" value="#00eaff"
+    style="width:100%;height:70px">
+    <div id="colorOut" class="stat">#00EAFF</div>
+    <button class="btn" onclick="getColor()">Get HEX</button>`;
+
+  }
+
+}
+
+
+/* TOOL FUNCTIONS */
+
+function calculate(){
+
+  const value=$('calcInput').value;
+
+  if(!/^[0-9+*/().%\\-\\s]+$/.test(value)){
+    toast('Invalid expression');
+    return;
+  }
+
+  try{
+    $('calcResult').textContent=
+      Function('return ('+value+')')();
+  }catch{
+    $('calcResult').textContent='Invalid';
+  }
+}
+
+function convertUnit(){
+
+  const v=Number($('unitValue').value);
+  const type=$('unitType').value;
+
+  let result=0;
+
+  if(type==='kmmi')result=v*0.621371;
+  if(type==='mft')result=v*3.28084;
+  if(type==='kgp')result=v*2.20462;
+  if(type==='cf')result=(v*9/5)+32;
+
+  $('unitResult').textContent=result.toFixed(3);
+}
+
+let toolSWTimer=null;
+let toolSWStart=0;
+let toolSWElapsed=0;
+
+function startToolSW(){
+
+  if(toolSWTimer)return;
+
+  toolSWStart=Date.now()-toolSWElapsed;
+
+  toolSWTimer=setInterval(()=>{
+
+    toolSWElapsed=Date.now()-toolSWStart;
+
+    $('toolSW').textContent=
+      (toolSWElapsed/1000).toFixed(1)+'s';
+
+  },100);
+
+}
+
+function stopToolSW(){
+  clearInterval(toolSWTimer);
+  toolSWTimer=null;
+}
+
+function resetToolSW(){
+  stopToolSW();
+  toolSWElapsed=0;
+  $('toolSW').textContent='0.0s';
+}
+
+function startTimer(){
+
+  stopTimer();
+
+  timerSeconds=
+    Math.max(1,Number($('timerInput').value)||60);
+
+  $('timerOut').textContent=
+    timerSeconds+'s';
+
+  timerInterval=setInterval(()=>{
+
+    timerSeconds--;
+
+    $('timerOut').textContent=
+      timerSeconds+'s';
+
+    if(timerSeconds<=0){
+
+      stopTimer();
+      toast('Timer finished!');
+
+    }
+
+  },1000);
+}
+
+function stopTimer(){
+
+  clearInterval(timerInterval);
+  timerInterval=null;
+}
+
+function percentage(){
+
+  const a=Number($('percentA').value);
+  const b=Number($('percentB').value);
+
+  $('percentOut').textContent=
+    (a*b/100).toFixed(2);
+}
+
+function emi(){
+
+  const P=Number($('emiP').value);
+  const annual=Number($('emiR').value);
+  const N=Number($('emiN').value);
+
+  const r=annual/12/100;
+
+  if(!P||!N){
+    $('emiOut').textContent='Enter values';
+    return;
+  }
+
+  const payment=
+    r===0
+    ? P/N
+    : P*r*Math.pow(1+r,N)/
+      (Math.pow(1+r,N)-1);
+
+  $('emiOut').textContent=
+    '₹'+payment.toFixed(2)+' / month';
+}
+
+function ageCalc(){
+
+  const birth=new Date($('birthDate').value);
+
+  if(isNaN(birth)){
+    $('ageOut').textContent='Select birth date';
+    return;
+  }
+
+  const now=new Date();
+
+  let age=
+    now.getFullYear()-birth.getFullYear();
+
+  const m=
+    now.getMonth()-birth.getMonth();
+
+  if(m<0 || (m===0 && now.getDate()<birth.getDate())){
+    age--;
+  }
+
+  $('ageOut').textContent=
+    age+' years old';
+}
+
+function randomNumber(){
+
+  let min=Number($('randomMin').value);
+  let max=Number($('randomMax').value);
+
+  if(min>max)[min,max]=[max,min];
+
+  $('randomOut').textContent=
+    Math.floor(Math.random()*(max-min+1))+min;
+}
+
+function countText(){
+
+  const text=$('textInput').value;
+
+  const words=
+    text.trim()?text.trim().split(/\s+/).length:0;
+
+  $('textOut').innerHTML=
+    'Characters: '+text.length+
+    '<br>Words: '+words+
+    '<br>Lines: '+(text?text.split('\\n').length:0);
+}
+
+function getColor(){
+
+  $('colorOut').textContent=
+    $('colorInput').value.toUpperCase();
+}
+
+
+/* SMARTWATCH */
+function clockTick(){
+
+  const d=new Date();
+
+  const h=d.getHours()%12;
+  const m=d.getMinutes();
+  const s=d.getSeconds();
+
+  $('digital').textContent=
+    d.toLocaleTimeString();
+
+  $('dashClock').textContent=
+    d.toLocaleTimeString([],{
+      hour:'2-digit',
+      minute:'2-digit'
+    });
+
+  $('hourHand').style.transform=
+    'rotate('+(h*30+m*.5)+'deg)';
+
+  $('minuteHand').style.transform=
+    'rotate('+(m*6+s*.1)+'deg)';
+
+  $('secondHand').style.transform=
+    'rotate('+(s*6)+'deg)';
+
+  $('worldClock').innerHTML=
+    '🇮🇳 '+
+    d.toLocaleTimeString('en-IN',{
+      timeZone:'Asia/Kolkata'
+    })+
+    '<br>🇬🇧 '+
+    d.toLocaleTimeString('en-GB',{
+      timeZone:'Europe/London'
+    })+
+    '<br>🇺🇸 '+
+    d.toLocaleTimeString('en-US',{
+      timeZone:'America/New_York'
+    });
+}
+
+setInterval(clockTick,1000);
+clockTick();
+
+
+/* WATCH STOPWATCH */
+let watchTimer=null;
+let watchStart=0;
+let watchElapsed=0;
+
+function toggleWatchSW(){
+
+  if(watchTimer){
+
+    clearInterval(watchTimer);
+    watchTimer=null;
+
+  }else{
+
+    watchStart=Date.now()-watchElapsed;
+
+    watchTimer=setInterval(()=>{
+
+      watchElapsed=Date.now()-watchStart;
+
+      $('watchSW').textContent=
+        (watchElapsed/1000).toFixed(1)+'s';
+
+    },100);
+
+  }
+}
+
+function resetWatchSW(){
+
+  clearInterval(watchTimer);
+  watchTimer=null;
+  watchElapsed=0;
+
+  $('watchSW').textContent='0.0s';
+}
+
+
+/* PAPER TRADING */
+const assets=[
+['NIFTY 50',25420],
+['SENSEX',83180],
+['BANK NIFTY',57120],
+['RELIANCE',1420],
+['TCS',3120],
+['INFY',1495],
+['HDFC BANK',2010],
+['TATA MOTORS',685]
+];
+
+let selectedAsset=0;
+let tradePrice=25420;
+let virtualBalance=1000000;
+
+$('assets').innerHTML=
+assets.map((a,i)=>`
+<div class="asset ${i===0?'selected':''}"
+onclick="selectAsset(${i})">
+<span>${a[0]}</span>
+<b>${a[1].toLocaleString('en-IN')}</b>
+</div>
+`).join('');
+
+function selectAsset(i){
+
+  selectedAsset=i;
+  tradePrice=assets[i][1];
+
+  $('assetName').textContent=
+    assets[i][0];
+
+  $('tradePrice').textContent=
+    tradePrice.toLocaleString('en-IN');
+
+  document.querySelectorAll('.asset').forEach((x,j)=>{
+    x.classList.toggle('selected',i===j);
+  });
+
+  drawTradeChart();
+}
+
+function drawTradeChart(){
+
+  const c=$('tradeChart');
+
+  if(!c)return;
+
+  const rect=c.getBoundingClientRect();
+
+  if(!rect.width)return;
+
+  const d=devicePixelRatio||1;
+
+  c.width=rect.width*d;
+  c.height=rect.height*d;
+
+  const ctx=c.getContext('2d');
+
+  ctx.setTransform(d,0,0,d,0,0);
+
+  ctx.clearRect(0,0,rect.width,rect.height);
+
+  ctx.strokeStyle='#222';
+
+  for(let i=1;i<8;i++){
+
+    ctx.beginPath();
+    ctx.moveTo(0,i*rect.height/8);
+    ctx.lineTo(rect.width,i*rect.height/8);
+    ctx.stroke();
+
+  }
+
+  ctx.strokeStyle='#00eaff';
+  ctx.lineWidth=2;
+
+  ctx.beginPath();
+
+  let y=rect.height*.5;
+
+  for(let i=0;i<90;i++){
+
+    y+=Math.random()*20-10;
+
+    y=Math.max(15,
+      Math.min(rect.height-15,y));
+
+    const x=i*rect.width/89;
+
+    if(i===0)ctx.moveTo(x,y);
+    else ctx.lineTo(x,y);
+
+  }
+
+  ctx.stroke();
+
+}
+
+function placeOrder(side){
+
+  const qty=
+    Math.max(
+      1,
+      Math.floor(Number($('qty').value)||1)
+    );
+
+  const value=qty*tradePrice;
+
+  if(side==='BUY' && value>virtualBalance){
+
+    toast('Insufficient virtual balance');
+    return;
+  }
+
+  if(side==='BUY'){
+    virtualBalance-=value;
+  }else{
+    virtualBalance+=value;
+  }
+
+  $('balance').textContent=
+    '₹'+Math.round(virtualBalance)
+    .toLocaleString('en-IN');
+
+  const row=document.createElement('tr');
+
+  [side,
+   assets[selectedAsset][0],
+   qty,
+   tradePrice.toLocaleString('en-IN'),
+   'FILLED'
+  ].forEach(v=>{
+
+    const td=document.createElement('td');
+    td.textContent=v;
+    row.appendChild(td);
+
+  });
+
+  $('history').appendChild(row);
+
+  toast(side+' order filled');
+}
+
+window.addEventListener('resize',()=>{
+  requestAnimationFrame(drawTradeChart);
+});
+
+requestAnimationFrame(drawTradeChart);
+
+
+/* SEARCH */
+$('search').addEventListener('input',e=>{
+
+  const q=e.target.value.toLowerCase();
+
+  document.querySelectorAll(
+    '.nav button,.gamegrid button,.toolgrid button,.dayBtn'
+  ).forEach(el=>{
+
+    el.style.display=
+      !q ||
+      el.textContent.toLowerCase().includes(q)
+      ? ''
+      : 'none';
+
+  });
+
+});
+
 </script>
-</body></html>'''
-Path("/mnt/data/index.html").write_text(html, encoding="utf-8")
-print("Created /mnt/data/index.html")
-print("Single-file build: 20 games, 35 tools, weather, paper trading, smartwatch, coding sandbox, persistent challenge, RGB controls, global search, responsive black/RGB UI.")
+
+</body>
+</html>
 
 
 
