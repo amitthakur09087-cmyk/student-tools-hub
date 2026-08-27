@@ -2,881 +2,1164 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>NovaVerse Black RGB</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaVerse by Kunal</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
+
 :root{
-  --bg:#000;
-  --panel:#090909;
-  --panel2:#101010;
-  --border:#252525;
-  --text:#f5f5f5;
-  --muted:#8d8d8d;
-  --rgb1:#00ffff;
-  --rgb2:#ff00ff;
-  --rgb3:#ff1744;
+    --bg:#030303;
+    --panel:#0b0b11;
+    --panel2:#11111a;
+    --line:#28283a;
+    --text:#f5f7ff;
+    --muted:#858ba2;
+    --cyan:#00eaff;
+    --purple:#7c4dff;
+    --pink:#ff3cac;
+    --green:#00e39a;
+    --red:#ff4d6d;
 }
+
 body{
-  margin:0;
-  background:#000;
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-  overflow-x:hidden;
+    margin:0;
+    background:
+        radial-gradient(circle at 15% 0%,#21134a 0,transparent 28%),
+        radial-gradient(circle at 90% 20%,#082b35 0,transparent 25%),
+        #030303;
+    color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
 }
 
-/* RGB LIGHTS */
-.rgb{
-  position:fixed;
-  z-index:999;
-  pointer-events:none;
-  background:linear-gradient(
-    180deg,
-    #ff0000,#ff8a00,#ffff00,#00ff66,
-    #00ffff,#0066ff,#8a00ff,#ff00ff,#ff0000
-  );
-  background-size:100% 500%;
-  animation:rgbMove 5s linear infinite;
-}
-.rgb.left{left:0;top:0;width:4px;height:100vh}
-.rgb.right{right:0;top:0;width:4px;height:100vh}
-.rgb.top{top:0;left:0;width:100%;height:3px}
-.rgb.bottom{bottom:0;left:0;width:100%;height:3px}
-@keyframes rgbMove{
-  0%{background-position:0 0}
-  100%{background-position:0 100%}
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    border:1px solid rgba(0,234,255,.18);
+    box-shadow:
+        inset 0 0 80px rgba(0,234,255,.04),
+        inset 0 0 120px rgba(255,60,172,.04);
+    animation:hue 8s linear infinite;
 }
 
-.app{display:flex;min-height:100vh}
+@keyframes hue{
+    0%{filter:hue-rotate(0deg)}
+    100%{filter:hue-rotate(360deg)}
+}
+
+.app{
+    display:flex;
+    min-height:100vh;
+}
 
 .sidebar{
-  width:245px;
-  min-height:100vh;
-  position:sticky;
-  top:0;
-  padding:18px 14px;
-  background:#050505;
-  border-right:1px solid #222;
+    width:245px;
+    height:100vh;
+    position:sticky;
+    top:0;
+    padding:16px;
+    background:#08080d;
+    border-right:1px solid var(--line);
+    z-index:10;
 }
 
 .logo{
-  font-size:22px;
-  font-weight:900;
-  padding:8px;
-  margin-bottom:18px;
+    font-size:23px;
+    font-weight:900;
+    margin:5px;
 }
+
 .logo span{
-  color:#00eaff;
-  text-shadow:0 0 15px #00eaff;
+    color:var(--cyan);
+}
+
+.logo small{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    letter-spacing:2px;
+    margin-top:4px;
+}
+
+.nav{
+    margin-top:25px;
 }
 
 .nav button{
-  width:100%;
-  border:1px solid #1d1d1d;
-  background:#0c0c0c;
-  color:#eee;
-  padding:12px;
-  border-radius:10px;
-  margin:4px 0;
-  text-align:left;
-  cursor:pointer;
-  transition:.2s;
+    width:100%;
+    padding:12px;
+    margin:4px 0;
+    background:#11111a;
+    color:white;
+    border:1px solid transparent;
+    border-radius:10px;
+    text-align:left;
+    cursor:pointer;
+    font-weight:bold;
 }
+
 .nav button:hover,
 .nav button.active{
-  background:#151515;
-  border-color:#00eaff;
-  box-shadow:0 0 14px #00eaff44;
+    background:linear-gradient(90deg,#25194d,#092c34);
+    border-color:#3b3b55;
+    box-shadow:0 0 18px rgba(0,234,255,.08);
 }
 
 .main{
-  flex:1;
-  padding:20px;
-  max-width:1600px;
-  margin:auto;
+    flex:1;
+    padding:18px;
+    width:100%;
+    max-width:1500px;
+    margin:auto;
 }
 
 .top{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  margin-bottom:18px;
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
 }
 
 .search{
-  flex:1;
-  padding:13px 16px;
-  border-radius:12px;
-  border:1px solid #292929;
-  background:#0b0b0b;
-  color:white;
-  outline:none;
-}
-.search:focus{
-  border-color:#00eaff;
-  box-shadow:0 0 12px #00eaff33;
+    flex:1;
+    padding:12px;
+    background:#0c0c13;
+    color:white;
+    border:1px solid var(--line);
+    border-radius:11px;
+    outline:none;
 }
 
-.page{display:none}
-.page.active{display:block}
+.time{
+    padding:12px 15px;
+    background:#0c0c13;
+    border:1px solid var(--line);
+    border-radius:11px;
+    font-weight:bold;
+}
 
-.hero,.card,.panel{
-  background:linear-gradient(145deg,#0b0b0b,#111);
-  border:1px solid #242424;
-  border-radius:17px;
-  padding:18px;
-  box-shadow:0 0 25px #000;
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.hero,
+.card{
+    background:rgba(12,12,19,.94);
+    border:1px solid var(--line);
+    border-radius:17px;
+    padding:17px;
+    margin-bottom:12px;
 }
 
 .hero{
-  background:
-    radial-gradient(circle at 10% 20%,#28135d55,transparent 30%),
-    radial-gradient(circle at 90% 80%,#005f6d55,transparent 30%),
-    #080808;
+    background:linear-gradient(135deg,#25164e,#092a32);
 }
 
-h1{margin:0 0 8px}
-h2{margin:3px 0 14px}
-h3{margin-top:5px}
-.muted{color:var(--muted)}
+h1,h2,h3{
+    margin-top:0;
+}
+
+.muted{
+    color:var(--muted);
+}
 
 .grid{
-  display:grid;
-  gap:12px;
+    display:grid;
+    gap:12px;
 }
+
 .g2{grid-template-columns:repeat(2,1fr)}
 .g3{grid-template-columns:repeat(3,1fr)}
 .g4{grid-template-columns:repeat(4,1fr)}
 
 .stat{
-  font-size:27px;
-  font-weight:900;
+    font-size:27px;
+    font-weight:900;
 }
 
 .btn{
-  border:0;
-  padding:10px 15px;
-  border-radius:10px;
-  background:#00d9ff;
-  color:#001015;
-  font-weight:900;
-  cursor:pointer;
-  margin:3px;
+    border:0;
+    border-radius:10px;
+    padding:10px 14px;
+    background:linear-gradient(90deg,#744cff,#00bfe0);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
 }
+
 .btn:hover{
-  box-shadow:0 0 18px #00d9ff88;
+    filter:brightness(1.15);
 }
+
 .btn.alt{
-  background:#181818;
-  color:#fff;
-  border:1px solid #333;
+    background:#191923;
+    border:1px solid var(--line);
 }
 
-.notice{
-  background:#0c0c0c;
-  border:1px solid #222;
-  padding:11px;
-  border-radius:10px;
-  color:#999;
-  font-size:13px;
+.btn.red{
+    background:#39131f;
+    color:#ff7089;
 }
 
-/* RGB SETTINGS */
-.rgbSettings{
-  display:flex;
-  gap:8px;
-  align-items:center;
-  flex-wrap:wrap;
+.btn.green{
+    background:#0b382c;
+    color:#35efb1;
 }
 
-/* CODING */
-.coding{
-  display:grid;
-  grid-template-columns:220px 1fr 380px;
-  gap:12px;
-}
-textarea.code{
-  width:100%;
-  min-height:500px;
-  resize:vertical;
-  background:#030303;
-  color:#d9faff;
-  border:1px solid #272727;
-  border-radius:12px;
-  padding:15px;
-  font:14px Consolas,monospace;
-  outline:none;
-}
-.preview{
-  height:500px;
-  background:white;
-  border-radius:12px;
-  overflow:hidden;
-}
-.preview iframe{
-  width:100%;
-  height:100%;
-  border:0;
+input,
+select{
+    width:100%;
+    padding:11px;
+    background:#08080d;
+    color:white;
+    border:1px solid var(--line);
+    border-radius:9px;
+    outline:none;
 }
 
-/* WEATHER */
-.weatherTop{
-  display:grid;
-  grid-template-columns:1.4fr 1fr;
-  gap:12px;
-}
-.weatherMain{
-  min-height:250px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.bigTemp{
-  font-size:70px;
-  font-weight:900;
-}
-.weatherIcon{
-  font-size:90px;
-}
-.forecast{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:8px;
-}
-.day{
-  background:#101010;
-  border:1px solid #252525;
-  padding:12px;
-  border-radius:12px;
-  text-align:center;
+input:focus,
+select:focus{
+    border-color:var(--cyan);
 }
 
-/* CHALLENGE */
-.challenge{
-  display:grid;
-  grid-template-columns:280px 1fr;
-  gap:12px;
-}
-.days{
-  display:grid;
-  gap:7px;
-}
-.dayBtn{
-  background:#101010;
-  border:1px solid #282828;
-  color:#fff;
-  border-radius:9px;
-  padding:10px;
-  text-align:left;
-  cursor:pointer;
-}
-.dayBtn.active{
-  border-color:#00eaff;
-  box-shadow:0 0 12px #00eaff33;
-}
-.progress{
-  width:100%;
-  height:10px;
-  border-radius:10px;
-  overflow:hidden;
-  background:#191919;
-}
-.progress span{
-  display:block;
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,#00ffff,#ff00ff);
+/* GAMES */
+
+.games{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
 }
 
-/* LIVE */
-.liveGrid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
+.game-card{
+    background:#0e0e16;
+    border:1px solid var(--line);
+    border-radius:15px;
+    padding:16px;
 }
 
-/* GAMES / TOOLS */
-.gamegrid,.toolgrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-.gamegrid button,.toolgrid button{
-  min-height:90px;
-  background:#0d0d0d;
-  color:white;
-  border:1px solid #282828;
-  border-radius:13px;
-  padding:14px;
-  text-align:left;
-  cursor:pointer;
-}
-.gamegrid button:hover,.toolgrid button:hover{
-  border-color:#ff00ff;
-  box-shadow:0 0 15px #ff00ff33;
-}
-.gameCanvas{
-  width:100%;
-  background:#020202;
-  border-radius:12px;
-  border:1px solid #222;
+.game-card button{
+    width:100%;
+    margin-top:10px;
 }
 
-/* WATCH */
-.clock{
-  width:245px;
-  height:245px;
-  border:7px solid #222;
-  border-radius:50%;
-  margin:auto;
-  position:relative;
-  background:#080808;
-  box-shadow:0 0 25px #00eaff33;
-}
-.hand{
-  position:absolute;
-  left:50%;
-  bottom:50%;
-  transform-origin:bottom;
-  border-radius:5px;
-  background:#fff;
-}
-.hour{width:6px;height:60px}
-.minute{width:4px;height:88px;background:#00eaff}
-.second{width:2px;height:103px;background:#ff3366}
-.dot{
-  position:absolute;
-  width:12px;
-  height:12px;
-  border-radius:50%;
-  background:white;
-  left:calc(50% - 6px);
-  top:calc(50% - 6px);
+.game-box{
+    display:none;
 }
 
-/* TRADE */
-.trade{
-  display:grid;
-  grid-template-columns:220px 1fr 260px;
-  gap:12px;
+.game-canvas{
+    display:block;
+    width:100%;
+    max-width:850px;
+    height:auto;
+    margin:auto;
+    background:#05050a;
+    border:1px solid #33334b;
+    border-radius:13px;
+    touch-action:none;
 }
+
+.dpad{
+    display:grid;
+    grid-template-columns:55px 55px 55px;
+    gap:5px;
+    justify-content:center;
+    margin-top:10px;
+}
+
+.dpad button{
+    height:45px;
+}
+
+/* DRAWING */
+
+.draw-tools{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:12px;
+    background:#0b0b11;
+    border:1px solid var(--line);
+    border-radius:13px;
+    margin-bottom:10px;
+}
+
+.draw-tools input[type="color"]{
+    width:45px;
+    height:40px;
+    padding:3px;
+}
+
+.draw-canvas{
+    width:100%;
+    background:white;
+    border-radius:10px;
+    display:block;
+    touch-action:none;
+}
+
+/* TRADING */
+
+.trade-layout{
+    display:grid;
+    grid-template-columns:220px 1fr 270px;
+    gap:12px;
+}
+
 .assets{
-  display:grid;
-  gap:7px;
+    display:grid;
+    gap:6px;
 }
+
 .asset{
-  display:flex;
-  justify-content:space-between;
-  padding:11px;
-  background:#101010;
-  border:1px solid #252525;
-  border-radius:9px;
-  cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    padding:11px;
+    background:#12121b;
+    border:1px solid transparent;
+    border-radius:9px;
+    cursor:pointer;
 }
-.asset.selected{
-  border-color:#00eaff;
-  box-shadow:0 0 12px #00eaff33;
+
+.asset.active{
+    border-color:var(--cyan);
 }
+
+.price-up{
+    color:var(--green);
+}
+
+.price-down{
+    color:var(--red);
+}
+
+.chart-box{
+    height:280px;
+    background:#06060b;
+    border:1px solid var(--line);
+    border-radius:13px;
+    padding:5px;
+}
+
 .chart{
-  height:360px;
-  background:#030303;
-  border:1px solid #252525;
-  border-radius:13px;
-}
-.chart canvas{
-  width:100%;
-  height:100%;
-}
-.input{
-  width:100%;
-  background:#0c0c0c;
-  color:#fff;
-  border:1px solid #292929;
-  border-radius:8px;
-  padding:10px;
-  margin:5px 0 10px;
+    width:100%;
+    height:100%;
 }
 
-.table{
-  width:100%;
-  border-collapse:collapse;
-}
-.table th,.table td{
-  padding:9px;
-  border-bottom:1px solid #242424;
-  text-align:left;
+.trading-charts{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-top:12px;
 }
 
-#toast{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  background:#101010;
-  border:1px solid #00eaff;
-  box-shadow:0 0 20px #00eaff55;
-  padding:12px 16px;
-  border-radius:10px;
-  display:none;
-  z-index:1000;
+.small-chart{
+    height:250px;
 }
+
+.metric-row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+    margin-top:10px;
+}
+
+.metric{
+    background:#101018;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px;
+}
+
+.metric small{
+    color:var(--muted);
+    display:block;
+    margin-bottom:5px;
+}
+
+.history{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.history th,
+.history td{
+    padding:9px;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+}
+
+/* TOOLS */
+
+.tools{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.tool-card{
+    padding:15px;
+    background:#0e0e16;
+    border:1px solid var(--line);
+    border-radius:13px;
+    cursor:pointer;
+}
+
+.tool-card:hover{
+    border-color:var(--cyan);
+}
+
+/* CLOCK */
+
+.clock{
+    width:260px;
+    height:260px;
+    margin:20px auto;
+    border:7px solid #39435e;
+    border-radius:50%;
+    position:relative;
+    background:#101626;
+    box-shadow:0 0 35px rgba(0,234,255,.08);
+}
+
+.hand{
+    position:absolute;
+    left:50%;
+    bottom:50%;
+    transform-origin:bottom;
+    border-radius:5px;
+}
+
+.hour{
+    width:6px;
+    height:65px;
+    background:white;
+}
+
+.minute{
+    width:4px;
+    height:90px;
+    background:var(--cyan);
+}
+
+.second{
+    width:2px;
+    height:105px;
+    background:var(--pink);
+}
+
+.dot{
+    position:absolute;
+    width:12px;
+    height:12px;
+    left:calc(50% - 6px);
+    top:calc(50% - 6px);
+    border-radius:50%;
+    background:white;
+}
+
+/* RESPONSIVE */
 
 @media(max-width:1100px){
-  .coding,.trade{grid-template-columns:1fr}
-  .weatherTop{grid-template-columns:1fr}
-  .g4{grid-template-columns:repeat(2,1fr)}
-  .gamegrid,.toolgrid{grid-template-columns:repeat(3,1fr)}
+    .trade-layout{
+        grid-template-columns:1fr;
+    }
+
+    .games{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .tools{
+        grid-template-columns:repeat(2,1fr);
+    }
 }
+
 @media(max-width:700px){
-  .app{display:block}
-  .sidebar{
-    width:100%;
-    min-height:auto;
-    position:relative;
-  }
-  .main{padding:10px}
-  .g2,.g3,.g4{grid-template-columns:1fr}
-  .gamegrid,.toolgrid{grid-template-columns:repeat(2,1fr)}
-  .forecast{grid-template-columns:repeat(2,1fr)}
-  .liveGrid{grid-template-columns:1fr}
-  .challenge{grid-template-columns:1fr}
+    .app{
+        display:block;
+    }
+
+    .sidebar{
+        width:100%;
+        height:auto;
+        position:relative;
+    }
+
+    .nav{
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:5px;
+    }
+
+    .top{
+        flex-direction:column;
+    }
+
+    .g2,
+    .g3,
+    .g4,
+    .games,
+    .tools,
+    .trading-charts{
+        grid-template-columns:1fr;
+    }
+
+    .metric-row{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .main{
+        padding:10px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="rgb left"></div>
-<div class="rgb right"></div>
-<div class="rgb top"></div>
-<div class="rgb bottom"></div>
-
 <div class="app">
+
+<!-- SIDEBAR -->
 
 <aside class="sidebar">
 
-<div class="logo">NOVA<span>VERSE</span> ULTRA</div>
-
-<div class="rgbSettings">
-<button class="btn" onclick="toggleRGB()">RGB ON/OFF</button>
-<label class="muted">Brightness</label>
-<input type="range" min="10" max="100" value="100"
-oninput="setRGB(this.value)">
+<div class="logo">
+    NOVA<span>VERSE</span>
+    <small>BY KUNAL</small>
 </div>
 
 <div class="nav">
-<button class="active" data-page="home">🏠 Dashboard</button>
-<button data-page="weather">🌦️ Weather Center</button>
-<button data-page="coding">💻 Coding Hub</button>
-<button data-page="challenge">📅 10-Day Challenge</button>
-<button data-page="live">📡 Live Hub</button>
-<button data-page="games">🎮 5 Games</button>
-<button data-page="tools">🛠️ 10 Tools</button>
-<button data-page="watch">⌚ Smartwatch</button>
-<button data-page="trade">📈 Paper Trading</button>
+
+<button class="active" onclick="showPage('home',this)">
+🏠 Dashboard
+</button>
+
+<button onclick="showPage('coding',this)">
+💻 Coding Hub
+</button>
+
+<button onclick="showPage('games',this)">
+🎮 Games
+</button>
+
+<button onclick="showPage('tools',this)">
+🛠️ Tools
+</button>
+
+<button onclick="showPage('drawing',this)">
+🎨 Drawing
+</button>
+
+<button onclick="showPage('trading',this)">
+📈 Demo Trading
+</button>
+
+<button onclick="showPage('watch',this)">
+⌚ Smartwatch
+</button>
+
 </div>
 
 </aside>
 
+
+<!-- MAIN -->
+
 <main class="main">
 
 <div class="top">
-<input id="search" class="search" placeholder="Search NovaVerse...">
-<b id="time"></b>
+
+<input
+id="search"
+class="search"
+placeholder="🔍 Search NovaVerse..."
+oninput="globalSearch()"
+>
+
+<div class="time" id="time"></div>
+
 </div>
 
-<!-- DASHBOARD -->
-<section class="page active" id="home">
+
+<!-- HOME -->
+
+<section id="home" class="page active">
 
 <div class="hero">
-<h1>NovaVerse Ultra ⚡</h1>
+
+<h1>⚡ NovaVerse by Kunal</h1>
+
 <p class="muted">
-Black RGB all-in-one browser hub.
-Coding • Weather • Challenge • Games • Tools • Watch • Trading
+Your personal black RGB digital hub.
 </p>
-<button class="btn" onclick="go('coding')">Open Coding Hub</button>
-<button class="btn alt" onclick="go('weather')">Weather</button>
+
+<button class="btn" onclick="showPage('coding')">
+Open Coding Hub
+</button>
+
 </div>
 
-<div class="grid g4" style="margin-top:12px">
-<div class="card">💻 Coding<div class="stat">Live IDE</div></div>
-<div class="card">🌦️ Weather<div class="stat" id="dashTemp">--°C</div></div>
-<div class="card">🎮 Games<div class="stat">5</div></div>
-<div class="card">🛠️ Tools<div class="stat">10</div></div>
-</div>
+<div class="grid g4">
 
-<div class="grid g3" style="margin-top:12px">
 <div class="card">
-<h3>📅 Challenge</h3>
-<div class="stat">10 Days</div>
-<span class="muted">Coding practice</span>
+<h3>💻 Coding</h3>
+<div class="stat">Ready</div>
 </div>
 
 <div class="card">
-<h3>⌚ Smartwatch</h3>
-<div class="stat" id="dashClock">--:--</div>
-<span class="muted">Live clock</span>
+<h3>🎮 Games</h3>
+<div class="stat">5</div>
+</div>
+
+<div class="card">
+<h3>🛠️ Tools</h3>
+<div class="stat">10</div>
 </div>
 
 <div class="card">
 <h3>📈 Trading</h3>
-<div class="stat">₹10,00,000</div>
-<span class="muted">Virtual balance</span>
-</div>
-</div>
-
-</section>
-
-<!-- WEATHER -->
-<section class="page" id="weather">
-
-<h2>🌦️ Weather Center</h2>
-
-<div class="weatherTop">
-
-<div class="card weatherMain">
-<div>
-<span class="muted">Current Weather</span>
-<h1>Muzaffarnagar</h1>
-<div class="bigTemp" id="temp">--°C</div>
-<b id="weatherDesc">Loading...</b>
-</div>
-<div class="weatherIcon" id="weatherIcon">🌤️</div>
-</div>
-
-<div class="grid g2">
-<div class="card">💧 Humidity<div class="stat" id="humidity">--%</div></div>
-<div class="card">💨 Wind<div class="stat" id="wind">--</div></div>
-<div class="card">🌧️ Rain<div class="stat" id="rain">--%</div></div>
-<div class="card">🌅 Sunrise<div class="stat" id="sunrise">--</div></div>
+<div class="stat">Demo</div>
 </div>
 
 </div>
 
-<div class="card" style="margin-top:12px">
-<h3>7-Day Forecast</h3>
-<div id="forecast" class="forecast"></div>
-</div>
+<div class="grid g3">
 
-<p class="notice">
-Live weather uses Open-Meteo. Internet connection is required.
+<div class="card">
+<h3>🎨 Drawing Studio</h3>
+<p class="muted">
+Create drawings and save them as PNG.
 </p>
+</div>
+
+<div class="card">
+<h3>📈 Paper Trading</h3>
+<p class="muted">
+Virtual money with simulated market movement.
+</p>
+</div>
+
+<div class="card">
+<h3>⌚ Smartwatch</h3>
+<p class="muted">
+Clock, stopwatch and world time.
+</p>
+</div>
+
+</div>
 
 </section>
+
 
 <!-- CODING -->
-<section class="page" id="coding">
+
+<section id="coding" class="page">
 
 <h2>💻 Coding Hub</h2>
 
-<div class="coding">
+<div class="card">
+
+<h3>Mini HTML Runner</h3>
+
+<textarea
+id="codeInput"
+style="width:100%;height:260px;background:#050509;color:#00eaff;border:1px solid #303047;border-radius:10px;padding:15px;font-family:monospace"
+><h1 style="color:#00eaff">Hello NovaVerse!</h1>
+<p>This code is running inside Coding Hub.</p>
+<button onclick="alert('Working!')">Click Me</button></textarea>
+
+<br><br>
+
+<button class="btn" onclick="runCode()">
+▶ Run Code
+</button>
+
+<button class="btn alt" onclick="downloadCode()">
+💾 Download HTML
+</button>
+
+</div>
 
 <div class="card">
-<h3>Languages</h3>
 
-<button class="btn" onclick="setLang('html')">HTML</button>
-<button class="btn alt" onclick="setLang('css')">CSS</button>
-<button class="btn alt" onclick="setLang('js')">JS</button>
+<h3>Preview</h3>
 
-<hr>
-
-<button class="btn" onclick="runCode()">▶ Run</button>
-<button class="btn alt" onclick="resetCode()">Reset</button>
-<button class="btn alt" onclick="copyCode()">Copy</button>
-
-<p class="muted">
-Write HTML/CSS/JS and instantly preview it.
-</p>
-</div>
-
-<div class="card">
-<textarea id="editor" class="code" spellcheck="false"></textarea>
-</div>
-
-<div class="card">
-<h3>Live Preview</h3>
-<div class="preview">
-<iframe id="preview" sandbox="allow-scripts"></iframe>
-</div>
-</div>
+<iframe
+id="codePreview"
+style="width:100%;height:300px;background:white;border:0;border-radius:10px">
+</iframe>
 
 </div>
+
 </section>
 
-<!-- CHALLENGE -->
-<section class="page" id="challenge">
-
-<h2>📅 10-Day Coding Challenge</h2>
-
-<div class="challenge">
-
-<div class="card">
-<h3>Progress</h3>
-
-<div class="progress">
-<span id="progressBar"></span>
-</div>
-
-<p id="progressText">0/10 completed</p>
-
-<div id="days" class="days"></div>
-</div>
-
-<div class="card">
-<h2 id="challengeTitle"></h2>
-<p id="challengeDesc"></p>
-
-<div class="hero">
-<b>Today's Task</b>
-<p id="challengeTask"></p>
-<button class="btn" onclick="completeDay()">✓ Mark Complete</button>
-</div>
-
-<h3>💡 Hint</h3>
-<p id="challengeHint" class="muted"></p>
-</div>
-
-</div>
-</section>
-
-<!-- LIVE -->
-<section class="page" id="live">
-
-<h2>📡 Live Hub</h2>
-
-<div class="liveGrid">
-
-<div class="card">
-<h3>🌦️ Weather</h3>
-<div class="stat" id="liveWeather">--</div>
-</div>
-
-<div class="card">
-<h3>🥇 Gold</h3>
-<div class="stat">₹1,01,250</div>
-<span class="muted">Demo feed</span>
-</div>
-
-<div class="card">
-<h3>🥈 Silver</h3>
-<div class="stat">₹1,16,800</div>
-<span class="muted">Demo feed</span>
-</div>
-
-<div class="card">
-<h3>💱 USD/INR</h3>
-<div class="stat">₹87.42</div>
-<span class="muted">Demo feed</span>
-</div>
-
-<div class="card">
-<h3>📊 NIFTY 50</h3>
-<div class="stat">25,420</div>
-<span class="muted">Demo feed</span>
-</div>
-
-<div class="card">
-<h3>📊 SENSEX</h3>
-<div class="stat">83,180</div>
-<span class="muted">Demo feed</span>
-</div>
-
-</div>
-
-<p class="notice">
-Market values shown here are demo values, not guaranteed live market prices.
-</p>
-
-</section>
 
 <!-- GAMES -->
-<section class="page" id="games">
 
-<h2>🎮 5 Games</h2>
+<section id="games" class="page">
 
-<div class="gamegrid">
+<h2>🎮 Nova Games</h2>
 
-<button onclick="startGame('Snake')">
-🎮 <b>1. Snake</b><br>
-<span class="muted">Mini playable mode</span>
-</button>
+<div class="games">
 
-<button onclick="startGame('Tic Tac Toe')">
-🎮 <b>2. Tic Tac Toe</b><br>
-<span class="muted">Classic game</span>
-</button>
+<div class="game-card">
+<h3>🏎️ Car Racing</h3>
+<p class="muted">Avoid enemy cars.</p>
+<button class="btn" onclick="openGame('car')">Play</button>
+</div>
 
-<button onclick="startGame('2048')">
-🎮 <b>3. 2048</b><br>
-<span class="muted">Number puzzle</span>
-</button>
+<div class="game-card">
+<h3>🐍 Snake</h3>
+<p class="muted">Eat food and grow.</p>
+<button class="btn" onclick="openGame('snake')">Play</button>
+</div>
 
-<button onclick="startGame('Pong')">
-🎮 <b>4. Pong</b><br>
-<span class="muted">Arcade mode</span>
-</button>
+<div class="game-card">
+<h3>🚀 Space Shooter</h3>
+<p class="muted">Destroy incoming enemies.</p>
+<button class="btn" onclick="openGame('space')">Play</button>
+</div>
 
-<button onclick="startGame('Car Dodge')">
-🎮 <b>5. Car Dodge</b><br>
-<span class="muted">Dodge obstacles</span>
-</button>
+<div class="game-card">
+<h3>🧱 Breakout</h3>
+<p class="muted">Break all the blocks.</p>
+<button class="btn" onclick="openGame('breakout')">Play</button>
+</div>
+
+<div class="game-card">
+<h3>🏓 Pong</h3>
+<p class="muted">Beat the AI.</p>
+<button class="btn" onclick="openGame('pong')">Play</button>
+</div>
 
 </div>
 
-<div id="gameBox" class="card" style="display:none;margin-top:12px">
+
+<div id="gameBox" class="card game-box">
 
 <h2 id="gameTitle"></h2>
 
-<canvas id="gameCanvas"
-class="gameCanvas"
-width="900"
-height="360"></canvas>
+<canvas
+id="gameCanvas"
+class="game-canvas"
+width="800"
+height="450">
+</canvas>
+
+<div class="controls">
+
+<button class="btn" onclick="startCurrentGame()">
+▶ Start / Restart
+</button>
+
+<button class="btn alt" onclick="pauseGame()">
+⏸ Pause
+</button>
+
+</div>
+
+<div class="dpad">
+
+<div></div>
+<button onclick="gameLeft()">⬆️</button>
+<div></div>
+
+<button onclick="gameLeft()">⬅️</button>
+<button onclick="gameAction()">⏺</button>
+<button onclick="gameRight()">➡️</button>
+
+</div>
 
 <p>
 Score:
 <b id="gameScore">0</b>
 </p>
 
-<button class="btn" onclick="gamePoint()">Score / Move</button>
-<button class="btn alt" onclick="stopGame()">Stop</button>
-
 </div>
 
 </section>
 
+
 <!-- TOOLS -->
-<section class="page" id="tools">
 
-<h2>🛠️ 10 Working Tools</h2>
+<section id="tools" class="page">
 
-<div class="toolgrid">
+<h2>🛠️ 10 Tools</h2>
 
-<button onclick="openTool('Calculator')">🧮 <b>1. Calculator</b></button>
-<button onclick="openTool('Unit Converter')">📏 <b>2. Unit Converter</b></button>
-<button onclick="openTool('Stopwatch')">⏱️ <b>3. Stopwatch</b></button>
-<button onclick="openTool('Timer')">⏲️ <b>4. Timer</b></button>
-<button onclick="openTool('Percentage')">％ <b>5. Percentage</b></button>
-<button onclick="openTool('EMI')">💰 <b>6. EMI Calculator</b></button>
-<button onclick="openTool('Age')">🎂 <b>7. Age Calculator</b></button>
-<button onclick="openTool('Random')">🎲 <b>8. Random Generator</b></button>
-<button onclick="openTool('Text')">📝 <b>9. Text Counter</b></button>
-<button onclick="openTool('Color')">🎨 <b>10. Color Picker</b></button>
+<div class="tools">
+
+<div class="tool-card" onclick="openTool('calculator')">
+🧮 <b>Calculator</b>
+</div>
+
+<div class="tool-card" onclick="openTool('stopwatch')">
+⏱️ <b>Stopwatch</b>
+</div>
+
+<div class="tool-card" onclick="openTool('timer')">
+⏰ <b>Timer</b>
+</div>
+
+<div class="tool-card" onclick="openTool('percentage')">
+🔢 <b>Percentage</b>
+</div>
+
+<div class="tool-card" onclick="openTool('discount')">
+🏷️ <b>Discount</b>
+</div>
+
+<div class="tool-card" onclick="openTool('emi')">
+💰 <b>EMI Calculator</b>
+</div>
+
+<div class="tool-card" onclick="openTool('unit')">
+📏 <b>Unit Converter</b>
+</div>
+
+<div class="tool-card" onclick="openTool('color')">
+🎨 <b>Color Picker</b>
+</div>
+
+<div class="tool-card" onclick="openTool('random')">
+🎲 <b>Random Number</b>
+</div>
+
+<div class="tool-card" onclick="openTool('dice')">
+🎯 <b>Dice Roller</b>
+</div>
 
 </div>
 
-<div id="toolOut" class="card" style="margin-top:12px">
+<div id="toolOutput" class="card" style="margin-top:12px">
 Select a tool.
 </div>
 
 </section>
 
-<!-- WATCH -->
-<section class="page" id="watch">
 
-<h2>⌚ Smartwatch</h2>
+<!-- DRAWING -->
 
-<div class="grid g2">
+<section id="drawing" class="page">
+
+<h2>🎨 NovaDraw Studio</h2>
+
+<div class="draw-tools">
+
+<button class="btn" onclick="drawTool='brush'">
+🖌️ Brush
+</button>
+
+<button class="btn alt" onclick="drawTool='eraser'">
+🧹 Eraser
+</button>
+
+<input id="drawColor" type="color" value="#111111">
+
+<input
+id="drawSize"
+type="range"
+min="1"
+max="60"
+value="8"
+>
+
+<button class="btn alt" onclick="undoDraw()">
+↩️ Undo
+</button>
+
+<button class="btn alt" onclick="redoDraw()">
+↪️ Redo
+</button>
+
+<button class="btn red" onclick="clearDraw()">
+🧽 Clear
+</button>
+
+<button class="btn" onclick="saveDraw()">
+💾 Save PNG
+</button>
+
+</div>
 
 <div class="card">
 
-<div class="clock">
-<div id="hourHand" class="hand hour"></div>
-<div id="minuteHand" class="hand minute"></div>
-<div id="secondHand" class="hand second"></div>
-<div class="dot"></div>
-</div>
-
-<h2 style="text-align:center" id="digital"></h2>
+<canvas
+id="drawCanvas"
+class="draw-canvas"
+width="1000"
+height="600">
+</canvas>
 
 </div>
 
-<div class="grid g2">
-
-<div class="card">
-<h3>⏱️ Stopwatch</h3>
-<div class="stat" id="watchSW">0.0s</div>
-<button class="btn" onclick="toggleWatchSW()">Start/Stop</button>
-<button class="btn alt" onclick="resetWatchSW()">Reset</button>
-</div>
-
-<div class="card">
-<h3>⌚ Smart Stats</h3>
-🔋 Battery 87%<br>
-👟 Steps 7,842<br>
-❤️ Heart 72 BPM<br>
-🔥 Calories 486 kcal
-</div>
-
-<div class="card">
-<h3>🌍 World Clock</h3>
-<div id="worldClock"></div>
-</div>
-
-</div>
-
-</div>
 </section>
 
+
 <!-- TRADING -->
-<section class="page" id="trade">
 
-<h2>📈 Paper Trading</h2>
+<section id="trading" class="page">
 
-<div class="trade">
+<h2>📈 Demo Paper Trading</h2>
+
+<div class="hero">
+
+<h3>⚠️ DEMO MODE — VIRTUAL MONEY ONLY</h3>
+
+<p class="muted">
+Prices are simulated and automatically change every second.
+No real money or real orders are involved.
+</p>
+
+</div>
+
+<div class="trade-layout">
 
 <div class="card">
+
 <h3>Market Watch</h3>
+
 <div id="assets" class="assets"></div>
+
 </div>
+
 
 <div>
 
 <div class="card">
-<b id="assetName">NIFTY 50</b>
-<div class="stat" id="tradePrice">25,420</div>
+
+<h3 id="tradeAsset">
+NIFTY 50
+</h3>
+
+<div id="tradePrice" class="stat">
+25,420.00
 </div>
 
-<div class="chart">
-<canvas id="tradeChart"></canvas>
+<div id="tradeChange" class="price-up">
++0.00%
 </div>
 
 </div>
+
+
+<div class="metric-row">
+
+<div class="metric">
+<small>24H High</small>
+<b id="high">25,420</b>
+</div>
+
+<div class="metric">
+<small>24H Low</small>
+<b id="low">25,420</b>
+</div>
+
+<div class="metric">
+<small>Volume</small>
+<b id="volume">0</b>
+</div>
+
+<div class="metric">
+<small>Status</small>
+<b class="green">SIMULATED</b>
+</div>
+
+</div>
+
+
+<div class="chart-box">
+
+<canvas id="priceChart" class="chart"></canvas>
+
+</div>
+
+</div>
+
 
 <div class="card">
 
 <h3>Order Ticket</h3>
 
 <label>Quantity</label>
-<input id="qty" class="input" type="number" value="1" min="1">
+<input id="qty" type="number" min="1" value="1">
 
-<button class="btn" onclick="placeOrder('BUY')">BUY</button>
-<button class="btn" onclick="placeOrder('SELL')">SELL</button>
+<br><br>
+
+<button class="btn green" onclick="placeOrder('BUY')">
+BUY
+</button>
+
+<button class="btn red" onclick="placeOrder('SELL')">
+SELL
+</button>
 
 <hr>
 
-Balance
+<p>Virtual Balance</p>
 
 <div class="stat" id="balance">
 ₹10,00,000
 </div>
 
+<p>Position</p>
+
+<div id="position">
+No position
+</div>
+
+<button class="btn alt" onclick="resetTrading()">
+Reset Demo
+</button>
+
+</div>
+
+</div>
+
+
+<div class="trading-charts">
+
+<div class="card">
+
+<h3>📈 Price / Candlestick Style</h3>
+
+<div class="chart-box small-chart">
+
+<canvas id="candleChart" class="chart"></canvas>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>📊 Volume</h3>
+
+<div class="chart-box small-chart">
+
+<canvas id="volumeChart" class="chart"></canvas>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>📉 RSI</h3>
+
+<div class="chart-box small-chart">
+
+<canvas id="rsiChart" class="chart"></canvas>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>📈 MACD</h3>
+
+<div class="chart-box small-chart">
+
+<canvas id="macdChart" class="chart"></canvas>
+
+</div>
+
 </div>
 
 </div>
 
-<div class="card" style="margin-top:12px">
+
+<div class="card">
 
 <h3>Trade History</h3>
 
-<table class="table" id="history">
+<table class="history">
+
+<thead>
+
 <tr>
 <th>Side</th>
 <th>Asset</th>
 <th>Qty</th>
 <th>Price</th>
-<th>Status</th>
+<th>Value</th>
 </tr>
+
+</thead>
+
+<tbody id="history"></tbody>
+
 </table>
+
+</div>
+
+</section>
+
+
+<!-- SMARTWATCH -->
+
+<section id="watch" class="page">
+
+<h2>⌚ Smartwatch Studio</h2>
+
+<div class="grid g2">
+
+<div class="card">
+
+<div class="clock">
+
+<div id="hour" class="hand hour"></div>
+<div id="minute" class="hand minute"></div>
+<div id="second" class="hand second"></div>
+<div class="dot"></div>
+
+</div>
+
+<h2 id="digital" style="text-align:center"></h2>
+
+</div>
+
+
+<div class="grid g2">
+
+<div class="card">
+
+<h3>⏱️ Stopwatch</h3>
+
+<div id="sw" class="stat">
+0.0s
+</div>
+
+<button class="btn" onclick="toggleSW()">
+Start / Stop
+</button>
+
+<button class="btn alt" onclick="resetSW()">
+Reset
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>⌚ Status</h3>
+
+<p>🔋 Battery 87%</p>
+<p>👟 Steps 7,842</p>
+<p>❤️ Heart 72 BPM</p>
+<p>🔥 Calories 486 kcal</p>
+
+</div>
+
+</div>
 
 </div>
 
@@ -885,979 +1168,2091 @@ Balance
 </main>
 </div>
 
-<div id="toast"></div>
 
 <script>
 
-/* GENERAL */
-const $=id=>document.getElementById(id);
+/* =========================
+NAVIGATION
+========================= */
 
-function toast(text){
-  const t=$('toast');
-  t.textContent=text;
-  t.style.display='block';
-  clearTimeout(window.toastTimer);
-  window.toastTimer=setTimeout(()=>t.style.display='none',1600);
-}
+function showPage(id,btn){
 
-function go(id){
-  document.querySelectorAll('.page').forEach(p=>{
-    p.classList.toggle('active',p.id===id);
-  });
-
-  document.querySelectorAll('.nav button').forEach(b=>{
-    b.classList.toggle('active',b.dataset.page===id);
-  });
-
-  if(id==='trade'){
-    setTimeout(drawTradeChart,50);
-  }
-}
-
-document.querySelectorAll('.nav button').forEach(b=>{
-  b.onclick=()=>go(b.dataset.page);
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active");
 });
 
-setInterval(()=>{
-  $('time').textContent=new Date().toLocaleTimeString();
-},1000);
+const page=document.getElementById(id);
 
+if(page) page.classList.add("active");
 
-/* RGB */
-let rgbEnabled=true;
+document.querySelectorAll(".nav button").forEach(b=>{
+b.classList.remove("active");
+});
 
-function toggleRGB(){
-  rgbEnabled=!rgbEnabled;
-  document.querySelectorAll('.rgb').forEach(x=>{
-    x.style.display=rgbEnabled?'block':'none';
-  });
-  toast(rgbEnabled?'RGB ON':'RGB OFF');
+if(btn) btn.classList.add("active");
+
+if(id==="trading"){
+setTimeout(drawAllTradingCharts,50);
 }
 
-function setRGB(v){
-  document.querySelectorAll('.rgb').forEach(x=>{
-    x.style.opacity=v/100;
-  });
 }
 
 
-/* WEATHER */
-function weatherCode(code){
-  if(code===0)return['Clear Sky','☀️'];
-  if(code<=3)return['Cloudy','🌤️'];
-  if(code<=48)return['Fog','🌫️'];
-  if(code<=67)return['Rain','🌧️'];
-  if(code<=77)return['Snow','❄️'];
-  if(code<=82)return['Showers','🌦️'];
-  return['Thunderstorm','⛈️'];
+/* =========================
+CLOCK
+========================= */
+
+function updateClock(){
+
+const d=new Date();
+
+document.getElementById("time").textContent=
+d.toLocaleTimeString();
+
+const h=d.getHours()%12;
+const m=d.getMinutes();
+const s=d.getSeconds();
+
+document.getElementById("digital").textContent=
+d.toLocaleTimeString();
+
+document.getElementById("hour").style.transform=
+"rotate("+(h*30+m*.5)+"deg)";
+
+document.getElementById("minute").style.transform=
+"rotate("+(m*6+s*.1)+"deg)";
+
+document.getElementById("second").style.transform=
+"rotate("+(s*6)+"deg)";
 }
 
-async function loadWeather(){
-
-  try{
-
-    const url=
-    'https://api.open-meteo.com/v1/forecast?'+
-    'latitude=29.47&longitude=77.71&'+
-    'current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&'+
-    'hourly=precipitation_probability&'+
-    'daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&'+
-    'timezone=Asia%2FKolkata&forecast_days=7';
-
-    const res=await fetch(url);
-    const d=await res.json();
-
-    const c=d.current;
-    const info=weatherCode(c.weather_code);
-
-    const temp=Math.round(c.temperature_2m);
-
-    $('temp').textContent=temp+'°C';
-    $('dashTemp').textContent=temp+'°C';
-    $('liveWeather').textContent=temp+'°C';
-
-    $('weatherDesc').textContent=info[0];
-    $('weatherIcon').textContent=info[1];
-
-    $('humidity').textContent=c.relative_humidity_2m+'%';
-    $('wind').textContent=Math.round(c.wind_speed_10m)+' km/h';
-
-    $('rain').textContent=
-      (d.hourly.precipitation_probability[0]||0)+'%';
-
-    $('sunrise').textContent=
-      new Date(d.daily.sunrise[0])
-      .toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-
-    $('forecast').innerHTML=
-      d.daily.time.map((date,i)=>{
-
-        const w=weatherCode(d.daily.weather_code[i]);
-
-        return `
-        <div class="day">
-          <b>${new Date(date).toLocaleDateString([],{weekday:'short'})}</b>
-          <div style="font-size:30px">${w[1]}</div>
-          <b>${Math.round(d.daily.temperature_2m_max[i])}°</b>
-          /
-          ${Math.round(d.daily.temperature_2m_min[i])}°
-        </div>`;
-
-      }).join('');
-
-  }catch(e){
-
-    $('weatherDesc').textContent='Weather unavailable';
-    $('weatherIcon').textContent='🌐';
-    $('liveWeather').textContent='Offline';
-
-  }
-}
-
-loadWeather();
+setInterval(updateClock,1000);
+updateClock();
 
 
-/* CODING HUB */
-const codeTemplates={
-
-html:
-`<!doctype html>
-<html>
-<head>
-<title>NovaVerse</title>
-</head>
-<body>
-<h1>Hello NovaVerse!</h1>
-<p>This is my webpage.</p>
-<button onclick="alert('It works!')">Click Me</button>
-</body>
-</html>`,
-
-css:
-`<style>
-body{
-  background:#111;
-  color:white;
-  font-family:Arial;
-  text-align:center;
-  padding:50px;
-}
-h1{
-  color:#00eaff;
-  text-shadow:0 0 20px #00eaff;
-}
-</style>
-<h1>CSS Demo</h1>
-<p>Beautiful black interface.</p>`,
-
-js:
-`<h1 id="title">JavaScript Demo</h1>
-<button onclick="
-document.getElementById('title').textContent='JavaScript Works!'
-">
-Run JavaScript
-</button>`
-};
-
-let currentLang='html';
-
-$('editor').value=codeTemplates.html;
-
-function setLang(lang){
-  currentLang=lang;
-  $('editor').value=codeTemplates[lang];
-  toast(lang.toUpperCase()+' selected');
-}
+/* =========================
+CODING HUB
+========================= */
 
 function runCode(){
-  $('preview').srcdoc=$('editor').value;
-  toast('Code executed');
+
+const code=
+document.getElementById("codeInput").value;
+
+document.getElementById("codePreview")
+.srcdoc=code;
+
 }
 
-function resetCode(){
-  $('editor').value=codeTemplates[currentLang];
-  $('preview').srcdoc='';
+function downloadCode(){
+
+const code=
+document.getElementById("codeInput").value;
+
+const blob=
+new Blob([code],{type:"text/html"});
+
+const url=
+URL.createObjectURL(blob);
+
+const a=document.createElement("a");
+
+a.href=url;
+a.download="novaverse-project.html";
+a.click();
+
+URL.revokeObjectURL(url);
+
 }
 
-async function copyCode(){
-  try{
-    await navigator.clipboard.writeText($('editor').value);
-    toast('Code copied');
-  }catch{
-    toast('Copy unavailable');
-  }
+
+/* =========================
+GAMES
+========================= */
+
+const gameCanvas=
+document.getElementById("gameCanvas");
+
+const ctx=
+gameCanvas.getContext("2d");
+
+let currentGame="";
+let gameRunning=false;
+let gamePaused=false;
+let gameLoopID=null;
+let score=0;
+
+let car={
+x:375,
+y:360,
+w:50,
+h:75
+};
+
+let enemy={
+x:200,
+y:-100,
+w:50,
+h:75
+};
+
+let snake=[];
+let food={x:400,y:200};
+let direction={x:1,y:0};
+
+let player={
+x:375,
+y:380
+};
+
+let bullets=[];
+let enemies=[];
+
+let ball={
+x:400,
+y:225,
+vx:5,
+vy:3,
+r:8
+};
+
+let paddle={
+x:340,
+y:420,
+w:120,
+h:12
+};
+
+function openGame(game){
+
+currentGame=game;
+
+document.getElementById("gameBox").style.display="block";
+
+const names={
+car:"🏎️ Car Racing",
+snake:"🐍 Snake",
+space:"🚀 Space Shooter",
+breakout:"🧱 Breakout",
+pong:"🏓 Pong"
+};
+
+document.getElementById("gameTitle").textContent=
+names[game];
+
+startCurrentGame();
+
+}
+
+function startCurrentGame(){
+
+cancelAnimationFrame(gameLoopID);
+
+score=0;
+
+document.getElementById("gameScore").textContent=0;
+
+gameRunning=true;
+gamePaused=false;
+
+if(currentGame==="car")initCar();
+if(currentGame==="snake")initSnake();
+if(currentGame==="space")initSpace();
+if(currentGame==="breakout")initBreakout();
+if(currentGame==="pong")initPong();
+
+gameLoop();
+
+}
+
+function pauseGame(){
+
+gamePaused=!gamePaused;
+
+if(gamePaused){
+
+cancelAnimationFrame(gameLoopID);
+
+}else{
+
+gameLoop();
+
+}
+
+}
+
+function gameLoop(){
+
+if(!gameRunning || gamePaused)return;
+
+ctx.clearRect(0,0,800,450);
+
+if(currentGame==="car")drawCarGame();
+if(currentGame==="snake")drawSnake();
+if(currentGame==="space")drawSpace();
+if(currentGame==="breakout")drawBreakout();
+if(currentGame==="pong")drawPong();
+
+gameLoopID=requestAnimationFrame(gameLoop);
+
+}
+
+function gameOver(){
+
+gameRunning=false;
+
+cancelAnimationFrame(gameLoopID);
+
+setTimeout(()=>{
+
+alert(
+"Game Over!\nScore: "+score
+);
+
+},50);
+
 }
 
 
-/* 10 DAY CHALLENGE */
-const challenges=[
+/* CAR */
 
-['HTML Basics',
-'Learn headings, paragraphs, links and buttons.',
-'Build a simple webpage.',
-'Use h1, p, a and button.'],
+function initCar(){
 
-['HTML Forms',
-'Learn form and input elements.',
-'Build a registration form.',
-'Use label, input and form.'],
+car.x=375;
+enemy.x=100;
+enemy.y=-100;
 
-['CSS Basics',
-'Learn colors, spacing and borders.',
-'Design a profile card.',
-'Use padding and border-radius.'],
+}
 
-['Flexbox',
-'Learn responsive layouts.',
-'Create a navigation bar.',
-'Use display:flex and gap.'],
+function drawCarGame(){
 
-['JavaScript Basics',
-'Learn variables and functions.',
-'Build a counter.',
-'Start with let count=0.'],
+ctx.fillStyle="#15151d";
+ctx.fillRect(0,0,800,450);
 
-['DOM',
-'Change webpage content with JavaScript.',
-'Build a text changing button.',
-'Use getElementById.'],
+ctx.fillStyle="#272733";
+ctx.fillRect(150,0,500,450);
 
-['Events',
-'React to user actions.',
-'Create interactive buttons.',
-'Try addEventListener.'],
+ctx.fillStyle="#fff";
 
-['Local Storage',
-'Save browser data.',
-'Build saved notes.',
-'Use localStorage.setItem().'],
+for(let y=0;y<450;y+=80){
 
-['Mini Project',
-'Combine HTML CSS and JS.',
-'Build a calculator or todo app.',
-'Keep functions small and clear.'],
+ctx.fillRect(
+395,
+(y+Date.now()/8)%520-70,
+10,
+40
+);
 
-['Final Project',
-'Create your own complete website.',
-'Finish and test your project.',
-'Check every button before publishing.']
+}
 
+ctx.fillStyle="#00eaff";
+ctx.fillRect(car.x,car.y,car.w,car.h);
+
+ctx.fillStyle="#ff416d";
+
+enemy.y+=4+score*.03;
+
+if(enemy.y>450){
+
+enemy.y=-100;
+enemy.x=160+Math.random()*440;
+
+score++;
+
+document.getElementById("gameScore").textContent=score;
+
+}
+
+ctx.fillRect(enemy.x,enemy.y,enemy.w,enemy.h);
+
+if(
+car.x<enemy.x+enemy.w &&
+car.x+car.w>enemy.x &&
+car.y<enemy.y+enemy.h &&
+car.y+car.h>enemy.y
+){
+
+gameOver();
+
+}
+
+}
+
+function gameLeft(){
+
+if(currentGame==="car"){
+car.x=Math.max(155,car.x-30);
+}
+
+if(currentGame==="pong"){
+paddle.x=Math.max(0,paddle.x-35);
+}
+
+}
+
+function gameRight(){
+
+if(currentGame==="car"){
+car.x=Math.min(595,car.x+30);
+}
+
+if(currentGame==="pong"){
+paddle.x=Math.min(680,paddle.x+35);
+}
+
+}
+
+function gameAction(){
+
+if(currentGame==="space"){
+
+bullets.push({
+x:player.x+25,
+y:player.y,
+w:5,
+h:15
+});
+
+}
+
+}
+
+
+/* SNAKE */
+
+function initSnake(){
+
+snake=[
+{x:10,y:10},
+{x:9,y:10},
+{x:8,y:10}
 ];
 
-let completed=
-JSON.parse(localStorage.getItem('novaChallenge')||'[]');
+direction={x:1,y:0};
 
-let selectedDay=0;
+food={
+x:Math.floor(Math.random()*38),
+y:Math.floor(Math.random()*20)
+};
 
-$('days').innerHTML=
-challenges.map((c,i)=>`
-<button class="dayBtn" onclick="selectDay(${i})">
-Day ${i+1} — ${c[0]}
+}
+
+let snakeTimer=0;
+
+function drawSnake(){
+
+ctx.fillStyle="#05050a";
+ctx.fillRect(0,0,800,450);
+
+snakeTimer++;
+
+if(snakeTimer%7===0){
+
+let head={
+x:snake[0].x+direction.x,
+y:snake[0].y+direction.y
+};
+
+if(
+head.x<0||
+head.x>=40||
+head.y<0||
+head.y>=22
+){
+
+gameOver();
+return;
+
+}
+
+for(let s of snake){
+
+if(s.x===head.x&&s.y===head.y){
+
+gameOver();
+return;
+
+}
+
+}
+
+snake.unshift(head);
+
+if(
+head.x===food.x&&
+head.y===food.y
+){
+
+score++;
+
+document.getElementById("gameScore").textContent=score;
+
+food={
+x:Math.floor(Math.random()*38),
+y:Math.floor(Math.random()*20)
+};
+
+}else{
+
+snake.pop();
+
+}
+
+}
+
+ctx.fillStyle="#00eaff";
+
+snake.forEach(s=>{
+
+ctx.fillRect(
+s.x*20,
+s.y*20,
+18,
+18
+);
+
+});
+
+ctx.fillStyle="#ff3cac";
+
+ctx.fillRect(
+food.x*20,
+food.y*20,
+18,
+18
+);
+
+}
+
+
+/* SPACE */
+
+function initSpace(){
+
+player.x=375;
+player.y=380;
+
+bullets=[];
+enemies=[];
+
+for(let i=0;i<6;i++){
+
+enemies.push({
+x:50+i*130,
+y:-Math.random()*400,
+w:35,
+h:25
+});
+
+}
+
+}
+
+function drawSpace(){
+
+ctx.fillStyle="#03040a";
+ctx.fillRect(0,0,800,450);
+
+ctx.fillStyle="#fff";
+
+for(let i=0;i<50;i++){
+
+ctx.fillRect(
+(i*97)%800,
+(i*53)%450,
+2,
+2
+);
+
+}
+
+ctx.fillStyle="#00eaff";
+
+ctx.fillRect(
+player.x,
+player.y,
+50,
+25
+);
+
+bullets.forEach(b=>{
+
+b.y-=8;
+
+ctx.fillStyle="#ffef4d";
+ctx.fillRect(b.x,b.y,b.w,b.h);
+
+});
+
+enemies.forEach(e=>{
+
+e.y+=2.5;
+
+ctx.fillStyle="#ff416d";
+ctx.fillRect(e.x,e.y,e.w,e.h);
+
+if(e.y>450){
+
+e.y=-30;
+e.x=Math.random()*760;
+
+}
+
+bullets.forEach(b=>{
+
+if(
+b.x<e.x+e.w&&
+b.x+b.w>e.x&&
+b.y<e.y+e.h&&
+b.y+b.h>e.y
+){
+
+e.y=-30;
+e.x=Math.random()*760;
+
+score++;
+
+document.getElementById("gameScore").textContent=score;
+
+}
+
+});
+
+});
+
+}
+
+
+/* BREAKOUT */
+
+let bricks=[];
+
+function initBreakout(){
+
+paddle.x=340;
+
+ball={
+x:400,
+y:360,
+vx:4,
+vy:-4,
+r:8
+};
+
+bricks=[];
+
+for(let r=0;r<4;r++){
+
+for(let c=0;c<10;c++){
+
+bricks.push({
+x:55+c*70,
+y:50+r*30,
+w:60,
+h:20,
+alive:true
+});
+
+}
+
+}
+
+}
+
+function drawBreakout(){
+
+ctx.fillStyle="#06060b";
+ctx.fillRect(0,0,800,450);
+
+ball.x+=ball.vx;
+ball.y+=ball.vy;
+
+if(ball.x<8||ball.x>792)
+ball.vx*=-1;
+
+if(ball.y<8)
+ball.vy*=-1;
+
+if(
+ball.y+ball.r>paddle.y&&
+ball.x>paddle.x&&
+ball.x<paddle.x+paddle.w
+){
+
+ball.vy=-Math.abs(ball.vy);
+
+}
+
+if(ball.y>450){
+
+gameOver();
+return;
+
+}
+
+bricks.forEach(b=>{
+
+if(
+b.alive&&
+ball.x>b.x&&
+ball.x<b.x+b.w&&
+ball.y>b.y&&
+ball.y<b.y+b.h
+){
+
+b.alive=false;
+ball.vy*=-1;
+
+score++;
+
+document.getElementById("gameScore").textContent=score;
+
+}
+
+});
+
+ctx.fillStyle="#00eaff";
+
+ctx.fillRect(
+paddle.x,
+paddle.y,
+paddle.w,
+paddle.h
+);
+
+ctx.fillStyle="#ff3cac";
+
+ctx.beginPath();
+
+ctx.arc(
+ball.x,
+ball.y,
+ball.r,
+0,
+Math.PI*2
+);
+
+ctx.fill();
+
+bricks.forEach(b=>{
+
+if(b.alive){
+
+ctx.fillStyle="#7c4dff";
+
+ctx.fillRect(
+b.x,
+b.y,
+b.w,
+b.h
+);
+
+}
+
+});
+
+}
+
+
+/* PONG */
+
+function initPong(){
+
+paddle.x=40;
+
+ball={
+x:400,
+y:225,
+vx:5,
+vy:3,
+r:8
+};
+
+}
+
+let aiY=180;
+
+function drawPong(){
+
+ctx.fillStyle="#05050a";
+ctx.fillRect(0,0,800,450);
+
+ball.x+=ball.vx;
+ball.y+=ball.vy;
+
+if(ball.y<0||ball.y>450)
+ball.vy*=-1;
+
+if(
+ball.x<65&&
+ball.x>40&&
+ball.y>paddle.x&&
+ball.y<paddle.x+100
+){
+
+ball.vx=Math.abs(ball.vx);
+
+}
+
+aiY+=(ball.y-aiY)*.05;
+
+if(
+ball.x>735&&
+ball.x<760&&
+ball.y>aiY&&
+ball.y<aiY+100
+){
+
+ball.vx=-Math.abs(ball.vx);
+
+}
+
+if(ball.x<0||ball.x>800){
+
+if(ball.x>800){
+
+score++;
+
+document.getElementById("gameScore").textContent=score;
+
+}
+
+ball.x=400;
+ball.y=225;
+
+}
+
+ctx.fillStyle="#00eaff";
+
+ctx.fillRect(
+40,
+paddle.x,
+15,
+100
+);
+
+ctx.fillStyle="#ff3cac";
+
+ctx.fillRect(
+745,
+aiY,
+15,
+100
+);
+
+ctx.fillStyle="white";
+
+ctx.beginPath();
+
+ctx.arc(
+ball.x,
+ball.y,
+ball.r,
+0,
+Math.PI*2
+);
+
+ctx.fill();
+
+}
+
+
+/* KEYBOARD */
+
+document.addEventListener("keydown",e=>{
+
+if(e.key==="ArrowLeft")gameLeft();
+if(e.key==="ArrowRight")gameRight();
+
+if(e.key==="ArrowUp"&&currentGame==="snake"){
+direction={x:0,y:-1};
+}
+
+if(e.key==="ArrowDown"&&currentGame==="snake"){
+direction={x:0,y:1};
+}
+
+if(e.key==="ArrowLeft"&&currentGame==="snake"){
+direction={x:-1,y:0};
+}
+
+if(e.key==="ArrowRight"&&currentGame==="snake"){
+direction={x:1,y:0};
+}
+
+if(e.code==="Space"&&currentGame==="space"){
+gameAction();
+}
+
+});
+
+
+/* =========================
+TOOLS
+========================= */
+
+function openTool(type){
+
+const out=document.getElementById("toolOutput");
+
+if(type==="calculator"){
+
+out.innerHTML=`
+
+<h3>🧮 Calculator</h3>
+
+<input id="calcInput" placeholder="Example: 25*4+10">
+
+<br><br>
+
+<button class="btn" onclick="calculate()">
+Calculate
 </button>
-`).join('');
 
-function selectDay(i){
-  selectedDay=i;
-  renderChallenge();
-}
+<p id="calcResult"></p>
 
-function renderChallenge(){
-
-  const c=challenges[selectedDay];
-
-  $('challengeTitle').textContent=
-    'Day '+(selectedDay+1)+' — '+c[0];
-
-  $('challengeDesc').textContent=c[1];
-  $('challengeTask').textContent=c[2];
-  $('challengeHint').textContent=c[3];
-
-  const percent=completed.length*10;
-
-  $('progressBar').style.width=percent+'%';
-
-  $('progressText').textContent=
-    completed.length+'/10 completed';
-
-  document.querySelectorAll('.dayBtn').forEach((b,i)=>{
-    b.classList.toggle('active',i===selectedDay);
-    b.textContent=
-      'Day '+(i+1)+' — '+challenges[i][0]+
-      (completed.includes(i)?' ✓':'');
-  });
-}
-
-function completeDay(){
-
-  if(!completed.includes(selectedDay)){
-    completed.push(selectedDay);
-    localStorage.setItem(
-      'novaChallenge',
-      JSON.stringify(completed)
-    );
-  }
-
-  renderChallenge();
-  toast('Challenge completed!');
-}
-
-renderChallenge();
-
-
-/* GAMES */
-let currentGame='';
-let gameScore=0;
-
-function startGame(name){
-
-  currentGame=name;
-  gameScore=0;
-
-  $('gameBox').style.display='block';
-  $('gameTitle').textContent='🎮 '+name;
-  $('gameScore').textContent='0';
-
-  drawGame();
-
-  toast(name+' started');
-}
-
-function gamePoint(){
-
-  gameScore++;
-  $('gameScore').textContent=gameScore;
-
-  drawGame();
-}
-
-function stopGame(){
-  $('gameBox').style.display='none';
-}
-
-function drawGame(){
-
-  const c=$('gameCanvas');
-  const ctx=c.getContext('2d');
-
-  ctx.clearRect(0,0,c.width,c.height);
-
-  ctx.fillStyle='#050505';
-  ctx.fillRect(0,0,c.width,c.height);
-
-  ctx.fillStyle='#00eaff';
-  ctx.font='28px Arial';
-
-  ctx.fillText(
-    currentGame+' — Mini Playable Demo',
-    25,45
-  );
-
-  ctx.fillStyle='#fff';
-  ctx.font='20px Arial';
-
-  ctx.fillText(
-    'Press "Score / Move" to play',
-    25,80
-  );
-
-  ctx.fillStyle='#ff00ff';
-
-  const x=
-    100+(gameScore*47)%700;
-
-  ctx.beginPath();
-  ctx.arc(x,180,25,0,Math.PI*2);
-  ctx.fill();
-
-  ctx.fillStyle='#00ffff';
-  ctx.fillRect(
-    650-(gameScore*13)%500,
-    260,
-    80,
-    15
-  );
-}
-
-
-/* TOOLS */
-let timerInterval=null;
-let timerSeconds=0;
-
-function openTool(name){
-
-  if(name==='Calculator'){
-
-    $('toolOut').innerHTML=`
-    <h3>🧮 Calculator</h3>
-    <input id="calcInput" class="input"
-    placeholder="25*4+10">
-    <button class="btn" onclick="calculate()">
-    Calculate
-    </button>
-    <div id="calcResult" class="stat"></div>`;
-
-  }
-
-  else if(name==='Unit Converter'){
-
-    $('toolOut').innerHTML=`
-    <h3>📏 Unit Converter</h3>
-    <input id="unitValue" class="input"
-    type="number" value="1">
-    <select id="unitType" class="input">
-      <option value="kmmi">KM → Miles</option>
-      <option value="mft">Meters → Feet</option>
-      <option value="kgp">KG → Pounds</option>
-      <option value="cf">Celsius → Fahrenheit</option>
-    </select>
-    <button class="btn" onclick="convertUnit()">Convert</button>
-    <div id="unitResult" class="stat"></div>`;
-
-  }
-
-  else if(name==='Stopwatch'){
-
-    $('toolOut').innerHTML=`
-    <h3>⏱️ Stopwatch</h3>
-    <div id="toolSW" class="stat">0.0s</div>
-    <button class="btn" onclick="startToolSW()">Start</button>
-    <button class="btn alt" onclick="stopToolSW()">Stop</button>
-    <button class="btn alt" onclick="resetToolSW()">Reset</button>`;
-
-  }
-
-  else if(name==='Timer'){
-
-    $('toolOut').innerHTML=`
-    <h3>⏲️ Timer</h3>
-    <input id="timerInput" class="input"
-    type="number" value="60">
-    <button class="btn" onclick="startTimer()">Start</button>
-    <button class="btn alt" onclick="stopTimer()">Stop</button>
-    <div id="timerOut" class="stat">60s</div>`;
-
-  }
-
-  else if(name==='Percentage'){
-
-    $('toolOut').innerHTML=`
-    <h3>％ Percentage</h3>
-    <input id="percentA" class="input"
-    type="number" placeholder="Value">
-    <input id="percentB" class="input"
-    type="number" placeholder="Percent">
-    <button class="btn" onclick="percentage()">Calculate</button>
-    <div id="percentOut" class="stat"></div>`;
-
-  }
-
-  else if(name==='EMI'){
-
-    $('toolOut').innerHTML=`
-    <h3>💰 EMI Calculator</h3>
-    <input id="emiP" class="input" placeholder="Principal">
-    <input id="emiR" class="input" placeholder="Annual Interest %">
-    <input id="emiN" class="input" placeholder="Months">
-    <button class="btn" onclick="emi()">Calculate EMI</button>
-    <div id="emiOut" class="stat"></div>`;
-
-  }
-
-  else if(name==='Age'){
-
-    $('toolOut').innerHTML=`
-    <h3>🎂 Age Calculator</h3>
-    <input id="birthDate" class="input" type="date">
-    <button class="btn" onclick="ageCalc()">Calculate</button>
-    <div id="ageOut" class="stat"></div>`;
-
-  }
-
-  else if(name==='Random'){
-
-    $('toolOut').innerHTML=`
-    <h3>🎲 Random Generator</h3>
-    <input id="randomMin" class="input" type="number" value="1">
-    <input id="randomMax" class="input" type="number" value="100">
-    <button class="btn" onclick="randomNumber()">Generate</button>
-    <div id="randomOut" class="stat"></div>`;
-
-  }
-
-  else if(name==='Text'){
-
-    $('toolOut').innerHTML=`
-    <h3>📝 Text Counter</h3>
-    <textarea id="textInput" class="input"
-    style="height:180px"
-    placeholder="Type or paste text..."></textarea>
-    <button class="btn" onclick="countText()">Count</button>
-    <div id="textOut" class="stat"></div>`;
-
-  }
-
-  else if(name==='Color'){
-
-    $('toolOut').innerHTML=`
-    <h3>🎨 Color Picker</h3>
-    <input id="colorInput" type="color" value="#00eaff"
-    style="width:100%;height:70px">
-    <div id="colorOut" class="stat">#00EAFF</div>
-    <button class="btn" onclick="getColor()">Get HEX</button>`;
-
-  }
+`;
 
 }
 
+else if(type==="stopwatch"){
 
-/* TOOL FUNCTIONS */
+out.innerHTML=`
+
+<h3>⏱️ Stopwatch</h3>
+
+<div class="stat" id="toolSW">0.0s</div>
+
+<button class="btn" onclick="toolSWStart()">Start</button>
+<button class="btn alt" onclick="toolSWStop()">Stop</button>
+<button class="btn red" onclick="toolSWReset()">Reset</button>
+
+`;
+
+}
+
+else if(type==="timer"){
+
+out.innerHTML=`
+
+<h3>⏰ Timer</h3>
+
+<input id="timerInput" type="number" placeholder="Seconds">
+
+<br><br>
+
+<button class="btn" onclick="startTimer()">
+Start
+</button>
+
+<div class="stat" id="timerOut">0</div>
+
+`;
+
+}
+
+else if(type==="percentage"){
+
+out.innerHTML=`
+
+<h3>🔢 Percentage</h3>
+
+<input id="p1" type="number" placeholder="Value">
+<br><br>
+<input id="p2" type="number" placeholder="Percentage">
+
+<br><br>
+
+<button class="btn" onclick="percentage()">
+Calculate
+</button>
+
+<p id="pResult"></p>
+
+`;
+
+}
+
+else if(type==="discount"){
+
+out.innerHTML=`
+
+<h3>🏷️ Discount</h3>
+
+<input id="priceInput" type="number" placeholder="Price">
+<br><br>
+<input id="discountInput" type="number" placeholder="Discount %">
+
+<br><br>
+
+<button class="btn" onclick="discount()">
+Calculate
+</button>
+
+<p id="discountResult"></p>
+
+`;
+
+}
+
+else if(type==="emi"){
+
+out.innerHTML=`
+
+<h3>💰 EMI Calculator</h3>
+
+<input id="loan" type="number" placeholder="Loan Amount">
+<br><br>
+<input id="rate" type="number" placeholder="Annual Interest %">
+<br><br>
+<input id="months" type="number" placeholder="Months">
+
+<br><br>
+
+<button class="btn" onclick="emi()">
+Calculate EMI
+</button>
+
+<p id="emiResult"></p>
+
+`;
+
+}
+
+else if(type==="unit"){
+
+out.innerHTML=`
+
+<h3>📏 Unit Converter</h3>
+
+<input id="km" type="number" placeholder="Kilometers">
+
+<br><br>
+
+<button class="btn" onclick="convertKM()">
+Convert
+</button>
+
+<p id="unitResult"></p>
+
+`;
+
+}
+
+else if(type==="color"){
+
+out.innerHTML=`
+
+<h3>🎨 Color Picker</h3>
+
+<input id="toolColor" type="color" value="#00eaff">
+
+<p id="hex">#00EAFF</p>
+
+`;
+
+document.getElementById("toolColor").oninput=e=>{
+document.getElementById("hex").textContent=
+e.target.value.toUpperCase();
+};
+
+}
+
+else if(type==="random"){
+
+out.innerHTML=`
+
+<h3>🎲 Random Number</h3>
+
+<button class="btn" onclick="randomNumber()">
+Generate
+</button>
+
+<div class="stat" id="randomOut">-</div>
+
+`;
+
+}
+
+else if(type==="dice"){
+
+out.innerHTML=`
+
+<h3>🎯 Dice Roller</h3>
+
+<button class="btn" onclick="rollDice()">
+Roll Dice
+</button>
+
+<div class="stat" id="diceOut">🎲</div>
+
+`;
+
+}
+
+}
 
 function calculate(){
 
-  const value=$('calcInput').value;
+try{
 
-  if(!/^[0-9+*/().%\\-\\s]+$/.test(value)){
-    toast('Invalid expression');
-    return;
-  }
+const value=
+Function(
+"return "+
+document.getElementById("calcInput").value
+)();
 
-  try{
-    $('calcResult').textContent=
-      Function('return ('+value+')')();
-  }catch{
-    $('calcResult').textContent='Invalid';
-  }
-}
+document.getElementById("calcResult").textContent=
+"Result: "+value;
 
-function convertUnit(){
+}catch{
 
-  const v=Number($('unitValue').value);
-  const type=$('unitType').value;
-
-  let result=0;
-
-  if(type==='kmmi')result=v*0.621371;
-  if(type==='mft')result=v*3.28084;
-  if(type==='kgp')result=v*2.20462;
-  if(type==='cf')result=(v*9/5)+32;
-
-  $('unitResult').textContent=result.toFixed(3);
-}
-
-let toolSWTimer=null;
-let toolSWStart=0;
-let toolSWElapsed=0;
-
-function startToolSW(){
-
-  if(toolSWTimer)return;
-
-  toolSWStart=Date.now()-toolSWElapsed;
-
-  toolSWTimer=setInterval(()=>{
-
-    toolSWElapsed=Date.now()-toolSWStart;
-
-    $('toolSW').textContent=
-      (toolSWElapsed/1000).toFixed(1)+'s';
-
-  },100);
+document.getElementById("calcResult").textContent=
+"Invalid expression";
 
 }
 
-function stopToolSW(){
-  clearInterval(toolSWTimer);
-  toolSWTimer=null;
 }
 
-function resetToolSW(){
-  stopToolSW();
-  toolSWElapsed=0;
-  $('toolSW').textContent='0.0s';
+let toolSW=null;
+let toolSWStartTime=0;
+
+function toolSWStart(){
+
+toolSWStartTime=Date.now();
+
+clearInterval(toolSW);
+
+toolSW=setInterval(()=>{
+
+document.getElementById("toolSW").textContent=
+((Date.now()-toolSWStartTime)/1000).toFixed(1)+"s";
+
+},100);
+
 }
+
+function toolSWStop(){
+
+clearInterval(toolSW);
+
+}
+
+function toolSWReset(){
+
+clearInterval(toolSW);
+
+document.getElementById("toolSW").textContent="0.0s";
+
+}
+
+let timerID;
 
 function startTimer(){
 
-  stopTimer();
+let sec=
+Number(document.getElementById("timerInput").value)||0;
 
-  timerSeconds=
-    Math.max(1,Number($('timerInput').value)||60);
+clearInterval(timerID);
 
-  $('timerOut').textContent=
-    timerSeconds+'s';
+document.getElementById("timerOut").textContent=sec;
 
-  timerInterval=setInterval(()=>{
+timerID=setInterval(()=>{
 
-    timerSeconds--;
+sec--;
 
-    $('timerOut').textContent=
-      timerSeconds+'s';
+document.getElementById("timerOut").textContent=sec;
 
-    if(timerSeconds<=0){
+if(sec<=0){
 
-      stopTimer();
-      toast('Timer finished!');
+clearInterval(timerID);
 
-    }
+alert("⏰ Timer Finished!");
 
-  },1000);
 }
 
-function stopTimer(){
+},1000);
 
-  clearInterval(timerInterval);
-  timerInterval=null;
 }
 
 function percentage(){
 
-  const a=Number($('percentA').value);
-  const b=Number($('percentB').value);
+let a=Number(document.getElementById("p1").value);
+let b=Number(document.getElementById("p2").value);
 
-  $('percentOut').textContent=
-    (a*b/100).toFixed(2);
+document.getElementById("pResult").textContent=
+b+"% of "+a+" = "+(a*b/100);
+
+}
+
+function discount(){
+
+let p=Number(document.getElementById("priceInput").value);
+let d=Number(document.getElementById("discountInput").value);
+
+let save=p*d/100;
+
+document.getElementById("discountResult").textContent=
+"Final Price: ₹"+(p-save).toFixed(2)+
+" | Saved: ₹"+save.toFixed(2);
+
 }
 
 function emi(){
 
-  const P=Number($('emiP').value);
-  const annual=Number($('emiR').value);
-  const N=Number($('emiN').value);
+let P=Number(document.getElementById("loan").value);
+let annual=Number(document.getElementById("rate").value);
+let n=Number(document.getElementById("months").value);
 
-  const r=annual/12/100;
+let r=annual/12/100;
 
-  if(!P||!N){
-    $('emiOut').textContent='Enter values';
-    return;
-  }
+let payment=
+r===0?
+P/n:
+P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
 
-  const payment=
-    r===0
-    ? P/N
-    : P*r*Math.pow(1+r,N)/
-      (Math.pow(1+r,N)-1);
+document.getElementById("emiResult").textContent=
+"Monthly EMI: ₹"+payment.toFixed(2);
 
-  $('emiOut').textContent=
-    '₹'+payment.toFixed(2)+' / month';
 }
 
-function ageCalc(){
+function convertKM(){
 
-  const birth=new Date($('birthDate').value);
+let km=Number(document.getElementById("km").value);
 
-  if(isNaN(birth)){
-    $('ageOut').textContent='Select birth date';
-    return;
-  }
+document.getElementById("unitResult").textContent=
+km+" km = "+(km*1000)+" meters = "+(km*.621371).toFixed(3)+" miles";
 
-  const now=new Date();
-
-  let age=
-    now.getFullYear()-birth.getFullYear();
-
-  const m=
-    now.getMonth()-birth.getMonth();
-
-  if(m<0 || (m===0 && now.getDate()<birth.getDate())){
-    age--;
-  }
-
-  $('ageOut').textContent=
-    age+' years old';
 }
 
 function randomNumber(){
 
-  let min=Number($('randomMin').value);
-  let max=Number($('randomMax').value);
+document.getElementById("randomOut").textContent=
+Math.floor(Math.random()*1000)+1;
 
-  if(min>max)[min,max]=[max,min];
-
-  $('randomOut').textContent=
-    Math.floor(Math.random()*(max-min+1))+min;
 }
 
-function countText(){
+function rollDice(){
 
-  const text=$('textInput').value;
+document.getElementById("diceOut").textContent=
+"🎲 "+(Math.floor(Math.random()*6)+1);
 
-  const words=
-    text.trim()?text.trim().split(/\s+/).length:0;
-
-  $('textOut').innerHTML=
-    'Characters: '+text.length+
-    '<br>Words: '+words+
-    '<br>Lines: '+(text?text.split('\\n').length:0);
-}
-
-function getColor(){
-
-  $('colorOut').textContent=
-    $('colorInput').value.toUpperCase();
 }
 
 
-/* SMARTWATCH */
-function clockTick(){
+/* =========================
+DRAWING
+========================= */
 
-  const d=new Date();
+const drawCanvas=
+document.getElementById("drawCanvas");
 
-  const h=d.getHours()%12;
-  const m=d.getMinutes();
-  const s=d.getSeconds();
+const dctx=
+drawCanvas.getContext("2d");
 
-  $('digital').textContent=
-    d.toLocaleTimeString();
+let drawing=false;
+let drawTool="brush";
+let drawHistory=[];
+let redoHistory=[];
 
-  $('dashClock').textContent=
-    d.toLocaleTimeString([],{
-      hour:'2-digit',
-      minute:'2-digit'
-    });
+dctx.fillStyle="white";
+dctx.fillRect(
+0,
+0,
+drawCanvas.width,
+drawCanvas.height
+);
 
-  $('hourHand').style.transform=
-    'rotate('+(h*30+m*.5)+'deg)';
+function saveDrawState(){
 
-  $('minuteHand').style.transform=
-    'rotate('+(m*6+s*.1)+'deg)';
+drawHistory.push(
+drawCanvas.toDataURL()
+);
 
-  $('secondHand').style.transform=
-    'rotate('+(s*6)+'deg)';
+if(drawHistory.length>30)
+drawHistory.shift();
 
-  $('worldClock').innerHTML=
-    '🇮🇳 '+
-    d.toLocaleTimeString('en-IN',{
-      timeZone:'Asia/Kolkata'
-    })+
-    '<br>🇬🇧 '+
-    d.toLocaleTimeString('en-GB',{
-      timeZone:'Europe/London'
-    })+
-    '<br>🇺🇸 '+
-    d.toLocaleTimeString('en-US',{
-      timeZone:'America/New_York'
-    });
+redoHistory=[];
+
 }
 
-setInterval(clockTick,1000);
-clockTick();
+function drawPosition(e){
 
+const rect=
+drawCanvas.getBoundingClientRect();
 
-/* WATCH STOPWATCH */
-let watchTimer=null;
-let watchStart=0;
-let watchElapsed=0;
+let x,y;
 
-function toggleWatchSW(){
+if(e.touches){
 
-  if(watchTimer){
+x=e.touches[0].clientX;
+y=e.touches[0].clientY;
 
-    clearInterval(watchTimer);
-    watchTimer=null;
+}else{
 
-  }else{
+x=e.clientX;
+y=e.clientY;
 
-    watchStart=Date.now()-watchElapsed;
-
-    watchTimer=setInterval(()=>{
-
-      watchElapsed=Date.now()-watchStart;
-
-      $('watchSW').textContent=
-        (watchElapsed/1000).toFixed(1)+'s';
-
-    },100);
-
-  }
 }
 
-function resetWatchSW(){
+return{
 
-  clearInterval(watchTimer);
-  watchTimer=null;
-  watchElapsed=0;
+x:(x-rect.left)*
+(drawCanvas.width/rect.width),
 
-  $('watchSW').textContent='0.0s';
+y:(y-rect.top)*
+(drawCanvas.height/rect.height)
+
+};
+
+}
+
+function beginDraw(e){
+
+e.preventDefault();
+
+saveDrawState();
+
+drawing=true;
+
+const p=drawPosition(e);
+
+dctx.beginPath();
+dctx.moveTo(p.x,p.y);
+
+}
+
+function paint(e){
+
+if(!drawing)return;
+
+e.preventDefault();
+
+const p=drawPosition(e);
+
+dctx.lineWidth=
+Number(document.getElementById("drawSize").value);
+
+dctx.lineCap="round";
+dctx.lineJoin="round";
+
+if(drawTool==="eraser"){
+
+dctx.globalCompositeOperation=
+"destination-out";
+
+}else{
+
+dctx.globalCompositeOperation=
+"source-over";
+
+dctx.strokeStyle=
+document.getElementById("drawColor").value;
+
+}
+
+dctx.lineTo(p.x,p.y);
+dctx.stroke();
+
+}
+
+function endDraw(){
+
+drawing=false;
+
+dctx.closePath();
+
+dctx.globalCompositeOperation=
+"source-over";
+
+}
+
+drawCanvas.addEventListener(
+"mousedown",
+beginDraw
+);
+
+drawCanvas.addEventListener(
+"mousemove",
+paint
+);
+
+drawCanvas.addEventListener(
+"mouseup",
+endDraw
+);
+
+drawCanvas.addEventListener(
+"mouseleave",
+endDraw
+);
+
+drawCanvas.addEventListener(
+"touchstart",
+beginDraw,
+{passive:false}
+);
+
+drawCanvas.addEventListener(
+"touchmove",
+paint,
+{passive:false}
+);
+
+drawCanvas.addEventListener(
+"touchend",
+endDraw
+);
+
+function restoreDraw(data){
+
+const img=new Image();
+
+img.onload=()=>{
+
+dctx.clearRect(
+0,
+0,
+drawCanvas.width,
+drawCanvas.height
+);
+
+dctx.drawImage(img,0,0);
+
+};
+
+img.src=data;
+
+}
+
+function undoDraw(){
+
+if(!drawHistory.length)return;
+
+redoHistory.push(
+drawCanvas.toDataURL()
+);
+
+restoreDraw(
+drawHistory.pop()
+);
+
+}
+
+function redoDraw(){
+
+if(!redoHistory.length)return;
+
+drawHistory.push(
+drawCanvas.toDataURL()
+);
+
+restoreDraw(
+redoHistory.pop()
+);
+
+}
+
+function clearDraw(){
+
+saveDrawState();
+
+dctx.fillStyle="white";
+
+dctx.fillRect(
+0,
+0,
+drawCanvas.width,
+drawCanvas.height
+);
+
+}
+
+function saveDraw(){
+
+const a=document.createElement("a");
+
+a.download="novaverse-drawing.png";
+
+a.href=
+drawCanvas.toDataURL("image/png");
+
+a.click();
+
 }
 
 
-/* PAPER TRADING */
-const assets=[
-['NIFTY 50',25420],
-['SENSEX',83180],
-['BANK NIFTY',57120],
-['RELIANCE',1420],
-['TCS',3120],
-['INFY',1495],
-['HDFC BANK',2010],
-['TATA MOTORS',685]
-];
+/* =========================
+DEMO TRADING
+========================= */
 
-let selectedAsset=0;
-let tradePrice=25420;
+const market={
+
+"NIFTY 50":25420,
+"SENSEX":83180,
+"BANK NIFTY":57120,
+"TCS":3120,
+"INFY":1495,
+"RELIANCE":1420,
+"HDFC BANK":2010,
+"TATA MOTORS":685
+
+};
+
+let selectedAsset="NIFTY 50";
+
+let prices={...market};
+
+let historyData={};
+
+Object.keys(prices).forEach(name=>{
+
+historyData[name]=[];
+
+for(let i=0;i<60;i++){
+
+historyData[name].push(
+prices[name]+(Math.random()-.5)*prices[name]*.004
+);
+
+}
+
+});
+
 let virtualBalance=1000000;
 
-$('assets').innerHTML=
-assets.map((a,i)=>`
-<div class="asset ${i===0?'selected':''}"
-onclick="selectAsset(${i})">
-<span>${a[0]}</span>
-<b>${a[1].toLocaleString('en-IN')}</b>
-</div>
-`).join('');
+let positionQty=0;
+let positionValue=0;
 
-function selectAsset(i){
+const assetsDiv=
+document.getElementById("assets");
 
-  selectedAsset=i;
-  tradePrice=assets[i][1];
+function renderAssets(){
 
-  $('assetName').textContent=
-    assets[i][0];
+assetsDiv.innerHTML="";
 
-  $('tradePrice').textContent=
-    tradePrice.toLocaleString('en-IN');
+Object.keys(prices).forEach(name=>{
 
-  document.querySelectorAll('.asset').forEach((x,j)=>{
-    x.classList.toggle('selected',i===j);
-  });
+const div=
+document.createElement("div");
 
-  drawTradeChart();
+div.className=
+"asset "+
+(name===selectedAsset?"active":"");
+
+div.innerHTML=`
+
+<span>${name}</span>
+
+<b>${prices[name].toLocaleString(
+"en-IN",
+{maximumFractionDigits:2}
+)}</b>
+
+`;
+
+div.onclick=()=>{
+
+selectedAsset=name;
+
+renderAssets();
+
+updateTradingUI();
+
+drawAllTradingCharts();
+
+};
+
+assetsDiv.appendChild(div);
+
+});
+
 }
 
-function drawTradeChart(){
+renderAssets();
 
-  const c=$('tradeChart');
+function simulateMarket(){
 
-  if(!c)return;
+Object.keys(prices).forEach(name=>{
 
-  const rect=c.getBoundingClientRect();
+const old=prices[name];
 
-  if(!rect.width)return;
+const movement=
+( Math.random()-.49 )*
+old*
+0.0015;
 
-  const d=devicePixelRatio||1;
+prices[name]=Math.max(
+0.01,
+old+movement
+);
 
-  c.width=rect.width*d;
-  c.height=rect.height*d;
+historyData[name].push(prices[name]);
 
-  const ctx=c.getContext('2d');
+if(historyData[name].length>80)
+historyData[name].shift();
 
-  ctx.setTransform(d,0,0,d,0,0);
+});
 
-  ctx.clearRect(0,0,rect.width,rect.height);
+updateTradingUI();
 
-  ctx.strokeStyle='#222';
+drawAllTradingCharts();
 
-  for(let i=1;i<8;i++){
+}
 
-    ctx.beginPath();
-    ctx.moveTo(0,i*rect.height/8);
-    ctx.lineTo(rect.width,i*rect.height/8);
-    ctx.stroke();
+setInterval(simulateMarket,1000);
 
-  }
+function updateTradingUI(){
 
-  ctx.strokeStyle='#00eaff';
-  ctx.lineWidth=2;
+const price=
+prices[selectedAsset];
 
-  ctx.beginPath();
+const data=
+historyData[selectedAsset];
 
-  let y=rect.height*.5;
+const first=data[0];
 
-  for(let i=0;i<90;i++){
+const change=
+((price-first)/first)*100;
 
-    y+=Math.random()*20-10;
+document.getElementById("tradeAsset")
+.textContent=selectedAsset;
 
-    y=Math.max(15,
-      Math.min(rect.height-15,y));
+document.getElementById("tradePrice")
+.textContent=
+price.toLocaleString(
+"en-IN",
+{maximumFractionDigits:2}
+);
 
-    const x=i*rect.width/89;
+const changeEl=
+document.getElementById("tradeChange");
 
-    if(i===0)ctx.moveTo(x,y);
-    else ctx.lineTo(x,y);
+changeEl.textContent=
+(change>=0?"+":"")+
+change.toFixed(2)+"%";
 
-  }
+changeEl.className=
+change>=0?
+"price-up":
+"price-down";
 
-  ctx.stroke();
+document.getElementById("high")
+.textContent=
+Math.max(...data).toLocaleString(
+"en-IN",
+{maximumFractionDigits:2}
+);
+
+document.getElementById("low")
+.textContent=
+Math.min(...data).toLocaleString(
+"en-IN",
+{maximumFractionDigits:2}
+);
+
+document.getElementById("volume")
+.textContent=
+Math.floor(
+100000+
+Math.random()*900000
+).toLocaleString("en-IN");
+
+document.getElementById("balance")
+.textContent=
+"₹"+Math.round(virtualBalance)
+.toLocaleString("en-IN");
+
+if(positionQty){
+
+const pnl=
+(price*positionQty)-positionValue;
+
+document.getElementById("position").innerHTML=
+positionQty+
+" units<br>"+
+"Entry: ₹"+
+positionValue.toLocaleString("en-IN")+
+"<br>P&L: <b class='"+
+(pnl>=0?"price-up":"price-down")+
+"'>₹"+
+pnl.toFixed(2)+
+"</b>";
+
+}else{
+
+document.getElementById("position").textContent=
+"No position";
+
+}
 
 }
 
 function placeOrder(side){
 
-  const qty=
-    Math.max(
-      1,
-      Math.floor(Number($('qty').value)||1)
-    );
+const qty=
+Math.max(
+1,
+Number(document.getElementById("qty").value)||1
+);
 
-  const value=qty*tradePrice;
+const price=
+prices[selectedAsset];
 
-  if(side==='BUY' && value>virtualBalance){
+const value=
+qty*price;
 
-    toast('Insufficient virtual balance');
-    return;
-  }
+if(side==="BUY"){
 
-  if(side==='BUY'){
-    virtualBalance-=value;
-  }else{
-    virtualBalance+=value;
-  }
+if(value>virtualBalance){
 
-  $('balance').textContent=
-    '₹'+Math.round(virtualBalance)
-    .toLocaleString('en-IN');
+alert("Insufficient virtual balance.");
 
-  const row=document.createElement('tr');
+return;
 
-  [side,
-   assets[selectedAsset][0],
-   qty,
-   tradePrice.toLocaleString('en-IN'),
-   'FILLED'
-  ].forEach(v=>{
-
-    const td=document.createElement('td');
-    td.textContent=v;
-    row.appendChild(td);
-
-  });
-
-  $('history').appendChild(row);
-
-  toast(side+' order filled');
 }
 
-window.addEventListener('resize',()=>{
-  requestAnimationFrame(drawTradeChart);
+virtualBalance-=value;
+
+positionQty+=qty;
+
+positionValue+=value;
+
+}else{
+
+if(qty>positionQty){
+
+alert("Not enough virtual position.");
+
+return;
+
+}
+
+virtualBalance+=value;
+
+positionQty-=qty;
+
+positionValue=
+positionQty===0?
+0:
+positionValue-(value);
+
+}
+
+const row=
+document.createElement("tr");
+
+row.innerHTML=`
+
+<td class="${
+side==="BUY"?"price-up":"price-down"
+}">
+${side}
+</td>
+
+<td>${selectedAsset}</td>
+
+<td>${qty}</td>
+
+<td>₹${price.toFixed(2)}</td>
+
+<td>₹${value.toFixed(2)}</td>
+
+`;
+
+document.getElementById("history")
+.prepend(row);
+
+updateTradingUI();
+
+}
+
+function resetTrading(){
+
+virtualBalance=1000000;
+
+positionQty=0;
+positionValue=0;
+
+document.getElementById("history")
+.innerHTML="";
+
+updateTradingUI();
+
+}
+
+
+/* =========================
+TRADING CHART ENGINE
+========================= */
+
+function prepareCanvas(canvas){
+
+const rect=
+canvas.getBoundingClientRect();
+
+const ratio=
+window.devicePixelRatio||1;
+
+canvas.width=
+rect.width*ratio;
+
+canvas.height=
+rect.height*ratio;
+
+const c=
+canvas.getContext("2d");
+
+c.setTransform(
+ratio,
+0,
+0,
+ratio,
+0,
+0
+);
+
+return{
+ctx:c,
+w:rect.width,
+h:rect.height
+};
+
+}
+
+function drawLineChart(canvas,data){
+
+const p=prepareCanvas(canvas);
+
+const c=p.ctx;
+const w=p.w;
+const h=p.h;
+
+c.clearRect(0,0,w,h);
+
+c.strokeStyle="#202033";
+
+for(let i=1;i<6;i++){
+
+c.beginPath();
+
+c.moveTo(0,i*h/6);
+
+c.lineTo(w,i*h/6);
+
+c.stroke();
+
+}
+
+let min=Math.min(...data);
+let max=Math.max(...data);
+
+if(max===min)max=min+1;
+
+c.beginPath();
+
+data.forEach((v,i)=>{
+
+const x=
+i/(data.length-1)*w;
+
+const y=
+h-(v-min)/(max-min)*h*.85-h*.05;
+
+if(i===0)c.moveTo(x,y);
+else c.lineTo(x,y);
+
 });
 
-requestAnimationFrame(drawTradeChart);
+c.strokeStyle="#00eaff";
+c.lineWidth=2;
+c.stroke();
 
+}
 
-/* SEARCH */
-$('search').addEventListener('input',e=>{
+function drawAllTradingCharts(){
 
-  const q=e.target.value.toLowerCase();
+const data=
+historyData[selectedAsset];
 
-  document.querySelectorAll(
-    '.nav button,.gamegrid button,.toolgrid button,.dayBtn'
-  ).forEach(el=>{
+drawLineChart(
+document.getElementById("priceChart"),
+data
+);
 
-    el.style.display=
-      !q ||
-      el.textContent.toLowerCase().includes(q)
-      ? ''
-      : 'none';
+drawLineChart(
+document.getElementById("candleChart"),
+data
+);
 
-  });
+drawVolumeChart(
+document.getElementById("volumeChart"),
+data
+);
+
+drawRSI(
+document.getElementById("rsiChart"),
+data
+);
+
+drawMACD(
+document.getElementById("macdChart"),
+data
+);
+
+}
+
+function drawVolumeChart(canvas,data){
+
+const p=prepareCanvas(canvas);
+const c=p.ctx;
+const w=p.w;
+const h=p.h;
+
+c.clearRect(0,0,w,h);
+
+const barW=w/data.length;
+
+data.forEach((v,i)=>{
+
+const volume=
+20+Math.random()*80;
+
+const bh=
+volume/100*h*.8;
+
+c.fillStyle=
+i%2===0?
+"#7c4dff":
+"#00eaff";
+
+c.fillRect(
+i*barW,
+h-bh,
+Math.max(2,barW-2),
+bh
+);
 
 });
+
+}
+
+function calcRSI(data){
+
+let gains=0;
+let losses=0;
+
+const out=[];
+
+for(let i=1;i<data.length;i++){
+
+const diff=data[i]-data[i-1];
+
+if(diff>=0)gains+=diff;
+else losses-=diff;
+
+let avgGain=
+gains/i;
+
+let avgLoss=
+losses/i;
+
+let rsi=
+avgLoss===0?
+100:
+100-(100/(1+avgGain/avgLoss));
+
+out.push(rsi);
+
+}
+
+return out;
+
+}
+
+function drawRSI(canvas,data){
+
+const rsi=calcRSI(data);
+
+const p=prepareCanvas(canvas);
+const c=p.ctx;
+
+c.clearRect(0,0,p.w,p.h);
+
+c.strokeStyle="#303047";
+
+[30,50,70].forEach(level=>{
+
+const y=
+p.h-(level/100)*p.h;
+
+c.beginPath();
+c.moveTo(0,y);
+c.lineTo(p.w,y);
+c.stroke();
+
+});
+
+c.beginPath();
+
+rsi.forEach((v,i)=>{
+
+const x=
+i/(rsi.length-1)*p.w;
+
+const y=
+p.h-(v/100)*p.h;
+
+if(i===0)c.moveTo(x,y);
+else c.lineTo(x,y);
+
+});
+
+c.strokeStyle="#ff3cac";
+c.lineWidth=2;
+c.stroke();
+
+}
+
+function drawMACD(canvas,data){
+
+let fast=0;
+let slow=0;
+
+const result=[];
+
+data.forEach(v=>{
+
+fast=fast===0?v:fast*.8+v*.2;
+slow=slow===0?v:slow*.95+v*.05;
+
+result.push(fast-slow);
+
+});
+
+const p=prepareCanvas(canvas);
+const c=p.ctx;
+
+c.clearRect(0,0,p.w,p.h);
+
+c.strokeStyle="#303047";
+
+c.beginPath();
+c.moveTo(0,p.h/2);
+c.lineTo(p.w,p.h/2);
+c.stroke();
+
+const max=
+Math.max(
+...result.map(v=>Math.abs(v))
+)||1;
+
+result.forEach((v,i)=>{
+
+const x=
+i/result.length*p.w;
+
+const bh=
+Math.abs(v)/max*p.h*.4;
+
+c.fillStyle=
+v>=0?
+"#00e39a":
+"#ff4d6d";
+
+c.fillRect(
+x,
+v>=0?
+p.h/2-bh:
+p.h/2,
+Math.max(2,p.w/result.length-2),
+bh
+);
+
+});
+
+}
+
+
+/* =========================
+SMARTWATCH STOPWATCH
+========================= */
+
+let swInterval=null;
+let swStart=0;
+
+function toggleSW(){
+
+if(swInterval){
+
+clearInterval(swInterval);
+swInterval=null;
+
+}else{
+
+swStart=Date.now();
+
+swInterval=setInterval(()=>{
+
+document.getElementById("sw").textContent=
+((Date.now()-swStart)/1000)
+.toFixed(1)+"s";
+
+},100);
+
+}
+
+}
+
+function resetSW(){
+
+clearInterval(swInterval);
+
+swInterval=null;
+
+document.getElementById("sw")
+.textContent="0.0s";
+
+}
+
+
+/* =========================
+SEARCH
+========================= */
+
+function globalSearch(){
+
+const q=
+document.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+if(!q)return;
+
+document.querySelectorAll(
+".game-card,.tool-card,.card"
+).forEach(el=>{
+
+if(el.textContent.toLowerCase().includes(q)){
+
+el.style.outline=
+"1px solid #00eaff";
+
+}else{
+
+el.style.outline="";
+
+}
+
+});
+
+}
 
 </script>
 
 </body>
 </html>
-
 
 
 
