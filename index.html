@@ -3,169 +3,592 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>StudyVerse PRO</title>
+<title>STUDYVERSE X — Creator Suite</title>
 <style>
-:root{--bg:#070a12;--panel:#0d1320;--panel2:#111a2a;--line:#26344a;--txt:#e9f2ff;--muted:#8fa0b8;--cyan:#00eaff;--pink:#ff1493;--green:#4dff9a;--yellow:#ffe66d}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 10%,#12213c 0,#070a12 38%,#04060b 100%);color:var(--txt);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}
-.app{display:flex;min-height:100vh}.side{width:235px;background:#070b13e8;border-right:1px solid var(--line);padding:18px;position:fixed;inset:0 auto 0 0;z-index:5;backdrop-filter:blur(14px)}.brand{font-size:22px;font-weight:900;margin-bottom:18px;text-shadow:0 0 15px var(--cyan)}.brand span{color:var(--pink)}.nav{display:grid;gap:7px}.nav button{background:#0b111d;border:1px solid #1b283a;color:#b9c6d8;text-align:left;padding:11px 12px;border-radius:9px}.nav button:hover,.nav button.active{border-color:var(--cyan);color:#fff;box-shadow:0 0 16px #00eaff20}.main{margin-left:235px;width:calc(100% - 235px);padding:24px}.page{display:none}.page.active{display:block}h1{margin:0 0 7px;font-size:30px}.sub,.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.card,.panel{background:linear-gradient(145deg,#0d1422e8,#090e18e8);border:1px solid var(--line);border-radius:14px;padding:15px;box-shadow:0 0 25px #0005}.stat{font-size:25px;font-weight:800}.btn{background:#101827;border:1px solid #304158;color:#dce8f7;padding:8px 11px;border-radius:8px}.btn:hover{border-color:var(--cyan);box-shadow:0 0 12px #00eaff22}.primary{border-color:var(--cyan);background:#06232b}.pink{border-color:var(--pink);background:#25071b}.green{border-color:var(--green);background:#092218}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.section{margin-top:12px}.label{display:flex;justify-content:space-between;font-size:12px;color:#aebbd0;margin:7px 0 3px}input[type=range]{width:100%}input[type=text],input[type=number],input[type=password],select,textarea{width:100%;background:#080d17;color:#eaf2ff;border:1px solid #2b394e;border-radius:8px;padding:9px;outline:none}.drop{border:1px dashed #3d506b;border-radius:10px;padding:18px;text-align:center;color:#aebbd0;background:#09101b;cursor:pointer}.drop:hover{border-color:var(--cyan)}.editor{display:grid;grid-template-columns:220px minmax(300px,1fr) 245px;gap:10px}.media div,.clip,.layer{padding:8px;border:1px solid #253249;background:#0b111b;border-radius:8px;margin:5px 0;font-size:12px;cursor:pointer}.media div:hover,.media .active,.clip:hover,.clip.active,.layer.sel{border-color:var(--cyan);box-shadow:0 0 12px #00eaff18}.preview{height:390px;background:#020409;border:1px solid #28364c;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}.stage{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:#05070c}.stage video,.stage img{max-width:100%;max-height:100%;object-fit:contain}.stage audio{width:85%}.textLayer{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:38px;font-weight:900;white-space:nowrap;color:#fff;text-shadow:0 0 12px var(--cyan),0 3px 8px #000;z-index:10}.timeline{background:#090e18;border:1px solid var(--line);border-radius:10px;padding:10px;overflow:hidden}.track{min-height:72px;display:flex;gap:7px;align-items:center;overflow:auto;padding:6px}.clip{min-width:150px}.tools{display:grid;grid-template-columns:1fr 1fr;gap:6px}.tool{padding:8px;border:1px solid #28364a;border-radius:8px;background:#0b111b;color:#c8d5e8;font-size:11px}.badge{display:inline-block;padding:4px 8px;border:1px solid #2d3d55;border-radius:20px;color:#aebbd0;font-size:11px}.keyframe{height:38px;background:repeating-linear-gradient(90deg,#172235 0 5px,transparent 5px 18px);border:1px solid #2b3a50;border-radius:7px;position:relative}.keyframe:after{content:"◆   ◆   ◆   ◆   ◆";position:absolute;left:12px;top:10px;color:var(--cyan)}.list{display:grid;gap:8px}.note{line-height:1.65;color:#bac7da}.quiz{padding:12px;border:1px solid var(--line);border-radius:10px;background:#0b111b}.toast{position:fixed;right:20px;bottom:20px;background:#08111d;border:1px solid var(--cyan);padding:11px 14px;border-radius:9px;box-shadow:0 0 20px #00eaff33;z-index:99}.game{height:350px;background:#03050a;border:1px solid var(--line);border-radius:12px;position:relative;overflow:hidden}.player{position:absolute;bottom:18px;left:50%;width:38px;height:38px;border-radius:8px;background:var(--cyan);box-shadow:0 0 20px var(--cyan)}.target{position:absolute;width:28px;height:28px;border-radius:50%;background:var(--pink);box-shadow:0 0 20px var(--pink)}.snakecell{position:absolute;width:16px;height:16px;background:var(--green)}.brick{width:58px;height:22px;background:#263b58;border:1px solid #4e6b91;border-radius:3px;position:absolute}.trading-chart{height:250px;border:1px solid var(--line);border-radius:10px;background:linear-gradient(#07111b,#050911);position:relative;overflow:hidden}.line{position:absolute;left:0;right:0;height:2px;background:var(--green);transform-origin:left center}.ticker{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px}.ticker div{background:#09111c;border:1px solid #233147;border-radius:8px;padding:8px}.pos{color:var(--green)}.neg{color:#ff6b8a}.glow{animation:glow 2s infinite alternate}@keyframes glow{to{text-shadow:0 0 22px var(--pink),0 0 32px var(--cyan)}}@media(max-width:1050px){.editor{grid-template-columns:1fr}.side{width:190px}.main{margin-left:190px;width:calc(100% - 190px)}}@media(max-width:750px){.side{position:static;width:100%;border-right:0;border-bottom:1px solid var(--line)}.app{display:block}.main{margin-left:0;width:100%;padding:14px}.nav{grid-template-columns:1fr 1fr}.ticker{grid-template-columns:1fr 1fr}}
-/* 20 PRO animation presets */
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes fadeOut{from{opacity:1}to{opacity:0}}@keyframes pop{0%{transform:scale(.2)}70%{transform:scale(1.12)}100%{transform:scale(1)}}@keyframes slideUp{from{transform:translateY(120px)}to{transform:translateY(0)}}@keyframes slideDown{from{transform:translateY(-120px)}to{transform:translateY(0)}}@keyframes slideLeft{from{transform:translateX(160px)}to{transform:translateX(0)}}@keyframes slideRight{from{transform:translateX(-160px)}to{transform:translateX(0)}}@keyframes zoomIn{from{transform:scale(.2)}to{transform:scale(1)}}@keyframes zoomOut{from{transform:scale(1.5)}to{transform:scale(1)}}@keyframes bounce{0%,100%{transform:translateY(0)}40%{transform:translateY(-35px)}70%{transform:translateY(-10px)}}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-12px)}75%{transform:translateX(12px)}}@keyframes pulse{50%{transform:scale(1.12);opacity:.65}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes flip{50%{transform:rotateY(180deg)}}@keyframes glitch{20%{transform:translate(7px,-3px);filter:hue-rotate(90deg)}40%{transform:translate(-7px,3px);filter:hue-rotate(-90deg)}}@keyframes blurIn{from{filter:blur(16px);opacity:.1}to{filter:blur(0);opacity:1}}@keyframes elastic{0%{transform:scale(.3)}60%{transform:scale(1.18)}80%{transform:scale(.92)}100%{transform:scale(1)}}@keyframes float{50%{transform:translateY(-18px)}}@keyframes typewriter{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}@keyframes neon{0%,100%{opacity:1;filter:brightness(1)}50%{opacity:.2;filter:brightness(2.5) saturate(2)}}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --bg:#06070d;--panel:#0d101a;--panel2:#111522;--line:#252b3d;
+ --text:#f4f7ff;--muted:#8992aa;--a:#7c5cff;--b:#00e5ff;--c:#ff3cac;
+ --good:#31e981;--danger:#ff526d;--shadow:0 0 30px #7c5cff22;
+}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 20% 0%,#17102d 0,#06070d 38%),#06070d;color:var(--text);min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 49%,#00e5ff05 50%,transparent 51%);background-size:80px 80px}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;color:var(--text);border:0}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:250px;padding:20px 14px;background:#080a12ee;border-right:1px solid var(--line);backdrop-filter:blur(18px);z-index:20}
+.logo{display:flex;align-items:center;gap:10px;padding:8px 10px 24px;font-weight:900;font-size:19px;letter-spacing:.5px}
+.logoMark{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--a),var(--b),var(--c));box-shadow:0 0 25px #7c5cff77;display:grid;place-items:center}
+.nav{display:flex;flex-direction:column;gap:6px}
+.nav button{background:transparent;text-align:left;padding:12px 13px;border-radius:12px;color:#aeb6ca;transition:.2s}
+.nav button:hover,.nav button.active{background:linear-gradient(90deg,#7c5cff22,#00e5ff0d);color:#fff;box-shadow:inset 2px 0 var(--b)}
+.nav i{font-style:normal;width:25px;display:inline-block}
+.sidebarBottom{position:absolute;bottom:18px;left:18px;right:18px}
+.proCard{padding:14px;border:1px solid #7c5cff44;background:linear-gradient(135deg,#7c5cff16,#00e5ff09);border-radius:16px}
+.proCard strong{display:block;margin-bottom:5px}
+.proCard small{color:var(--muted);line-height:1.4}
+.main{grid-column:2;min-width:0}
+.topbar{height:70px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 25px;background:#080a10bb;backdrop-filter:blur(15px);position:sticky;top:0;z-index:10}
+.search{width:min(420px,45vw);background:#10131d;border:1px solid var(--line);border-radius:12px;padding:10px 14px;color:white;outline:none}
+.topActions{display:flex;gap:9px}
+.iconBtn,.primary,.ghost,.danger{padding:10px 14px;border-radius:11px}
+.iconBtn,.ghost{background:#121621;border:1px solid var(--line)}
+.iconBtn:hover,.ghost:hover{border-color:#7c5cff88}
+.primary{background:linear-gradient(135deg,var(--a),#5b8cff);box-shadow:0 0 20px #7c5cff33}
+.danger{background:#ff526d18;color:#ff7185;border:1px solid #ff526d44}
+.page{display:none;padding:26px;animation:fade .25s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:25px}
+.hero h1{font-size:clamp(26px,4vw,42px);margin-bottom:7px}
+.hero p{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.card{background:linear-gradient(145deg,#10131e,#0b0e17);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow)}
+.stat{font-size:27px;font-weight:800;margin:8px 0}
+.muted{color:var(--muted);font-size:13px}
+.grid2{display:grid;grid-template-columns:1.4fr .8fr;gap:15px}
+.sectionTitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sectionTitle h2{font-size:18px}
+.list{display:flex;flex-direction:column;gap:9px}
+.row{display:flex;align-items:center;justify-content:space-between;background:#111521;padding:12px;border-radius:12px;border:1px solid #202638}
+.badge{padding:5px 8px;border-radius:8px;font-size:11px;background:#7c5cff18;color:#a999ff}
+.editor{display:grid;grid-template-columns:230px 1fr 245px;gap:12px;height:calc(100vh - 120px);min-height:650px}
+.editorPanel{background:#0c0f18;border:1px solid var(--line);border-radius:15px;overflow:hidden}
+.panelHead{padding:13px;border-bottom:1px solid var(--line);font-weight:700}
+.panelBody{padding:12px;overflow:auto;height:calc(100% - 48px)}
+.toolGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tool{padding:12px 6px;background:#111521;border:1px solid #202638;border-radius:10px;font-size:12px}
+.tool:hover{border-color:#7c5cff77;transform:translateY(-1px)}
+.preview{height:calc(100% - 180px);min-height:420px;background:#05060a;display:grid;place-items:center;position:relative;overflow:hidden}
+.preview video,.preview img{max-width:94%;max-height:94%;object-fit:contain;border-radius:7px}
+.emptyPreview{text-align:center;color:#69728a}
+.emptyPreview .big{font-size:55px;margin-bottom:10px}
+.timeline{height:180px;border-top:1px solid var(--line);background:#080a10;padding:12px;overflow:auto}
+.track{height:42px;background:#10141e;border:1px solid #202638;border-radius:8px;margin-bottom:8px;display:flex;align-items:center;padding:5px;gap:5px}
+.clip{height:30px;border-radius:6px;background:linear-gradient(90deg,#7c5cff,#00b8ff);padding:7px 12px;font-size:11px;min-width:100px}
+.control{margin-bottom:15px}
+.control label{display:flex;justify-content:space-between;font-size:12px;color:#adb5c9;margin-bottom:7px}
+input[type=range]{width:100%;accent-color:var(--a)}
+input[type=text],input[type=number],select,textarea{width:100%;background:#111521;border:1px solid #252b3d;border-radius:9px;color:white;padding:10px;outline:none}
+input[type=file]{width:100%;font-size:11px;color:#9ca6ba}
+.actionRow{display:flex;gap:8px;flex-wrap:wrap}
+.actionRow>*{flex:1}
+.featureGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
+.feature{padding:13px;background:#10131d;border:1px solid var(--line);border-radius:11px;cursor:pointer;transition:.2s}
+.feature:hover{border-color:#00e5ff66;box-shadow:0 0 15px #00e5ff12}
+.feature b{font-size:13px;display:block;margin-bottom:5px}
+.feature span{font-size:11px;color:var(--muted)}
+.notesGrid{display:grid;grid-template-columns:220px 1fr;gap:14px}
+.subjects button{display:block;width:100%;margin-bottom:7px;padding:11px;text-align:left;background:#10131d;border:1px solid var(--line);border-radius:10px;color:#b7bfd1}
+.subjects button.active{border-color:#7c5cff88;background:#7c5cff16;color:white}
+.noteContent{min-height:500px;white-space:pre-wrap;line-height:1.7}
+.gameGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.game{min-height:190px;display:flex;flex-direction:column;justify-content:space-between}
+.gameIcon{font-size:40px}
+.trading{display:grid;grid-template-columns:1.5fr .8fr;gap:15px}
+.chart{height:360px;background:#080b12;border:1px solid var(--line);border-radius:14px;position:relative;overflow:hidden}
+canvas{width:100%;height:100%}
+.tradeBox{display:flex;flex-direction:column;gap:10px}
+.price{font-size:34px;font-weight:800}
+.up{color:var(--good)}
+.down{color:var(--danger)}
+.modal{display:none;position:fixed;inset:0;background:#0009;z-index:100;place-items:center;padding:20px}
+.modal.show{display:grid}
+.modalBox{width:min(560px,100%);background:#0d101a;border:1px solid #333b51;border-radius:18px;padding:20px;box-shadow:0 20px 80px #000}
+.close{float:right;background:transparent;font-size:22px}
+.toast{position:fixed;right:20px;bottom:20px;background:#121722;border:1px solid #343c51;padding:13px 17px;border-radius:12px;transform:translateY(100px);opacity:0;transition:.3s;z-index:200}
+.toast.show{transform:none;opacity:1}
+.colorDot{width:10px;height:10px;border-radius:50%;display:inline-block;background:var(--b);box-shadow:0 0 12px var(--b)}
+@media(max-width:1100px){
+ .cards{grid-template-columns:repeat(2,1fr)}
+ .featureGrid{grid-template-columns:repeat(3,1fr)}
+ .editor{grid-template-columns:190px 1fr}
+ .editor>.editorPanel:last-child{display:none}
+ .gameGrid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+ .app{display:block}.sidebar{width:100%;height:62px;bottom:auto;padding:8px;display:flex;align-items:center}.logo{padding:0}.logo span{display:none}.nav{margin-left:auto;flex-direction:row;overflow:auto}.nav button{padding:9px}.nav button span{display:none}.sidebarBottom{display:none}.main{padding-top:62px}.topbar{padding:0 12px}.search{width:45%}.page{padding:14px}.grid2,.trading,.notesGrid{grid-template-columns:1fr}.editor{grid-template-columns:1fr;height:auto}.editor>.editorPanel:first-child{order:2}.preview{height:420px}.timeline{height:150px}.cards{grid-template-columns:1fr 1fr}.featureGrid{grid-template-columns:1fr 1fr}.gameGrid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
+
 <div class="app">
-<aside class="side">
-<div class="brand">STUDY<span>VERSE</span> ⚡</div>
-<div class="nav">
-<button class="active" data-page="home">🏠 Dashboard</button>
-<button data-page="editor">🎬 Editing PRO</button>
-<button data-page="trading">📈 Demo Trading</button>
-<button data-page="tools">🧰 12+ Tools</button>
-<button data-page="games">🎮 5 Games</button>
-<button data-page="notes">📚 Detailed Notes</button>
-<button data-page="settings">⚙ Settings</button>
-</div>
+<aside class="sidebar">
+ <div class="logo"><div class="logoMark">SX</div><span>STUDYVERSE X</span></div>
+ <nav class="nav">
+  <button class="active" data-page="home"><i>⌂</i><span>Dashboard</span></button>
+  <button data-page="editor"><i>🎬</i><span>Pro Editor</span></button>
+  <button data-page="features"><i>⚡</i><span>100+ Features</span></button>
+  <button data-page="notes"><i>📚</i><span>Study Notes</span></button>
+  <button data-page="games"><i>🎮</i><span>Games</span></button>
+  <button data-page="trading"><i>📈</i><span>Demo Trading</span></button>
+  <button data-page="tools"><i>🛠️</i><span>Tools</span></button>
+ </nav>
+ <div class="sidebarBottom">
+  <div class="proCard"><strong><span class="colorDot"></span> PRO MODE</strong><small>Creative tools, effects, study tools and simulations in one place.</small></div>
+ </div>
 </aside>
 
 <main class="main">
-<section id="home" class="page active">
-<h1 class="glow">StudyVerse PRO</h1><p class="sub">All-in-one student workspace • RGB UI • Editing • Trading • Games • Tools • Notes</p>
-<div class="grid">
-<div class="card"><div class="muted">Editing</div><div class="stat">100+</div><p class="note">PRO editing controls + 20 animations.</p><button class="btn primary" onclick="go('editor')">Open Editor</button></div>
-<div class="card"><div class="muted">Trading</div><div class="stat">₹1,00,000</div><p class="note">Virtual money simulator.</p><button class="btn green" onclick="go('trading')">Open Trading</button></div>
-<div class="card"><div class="muted">Games</div><div class="stat">5</div><p class="note">Browser mini-games.</p><button class="btn pink" onclick="go('games')">Play</button></div>
-<div class="card"><div class="muted">Subjects</div><div class="stat">6</div><p class="note">Detailed revision notes.</p><button class="btn" onclick="go('notes')">Study</button></div>
-</div>
-<div class="card section"><h2>🚀 PRO Feature Pack</h2><p class="note">Media import • drag/drop • multi-clip timeline • trim • split marker • duplicate • delete • reorder • snapping • layers • audio • playback • fullscreen • undo/redo • transform • filters • blend modes • speed • text • keyframe lane • transitions • 20 animations • export • 12+ tools • simulated portfolio • 5 games • six subjects • local browser storage.</p></div>
+<header class="topbar">
+ <input class="search" id="globalSearch" placeholder="Search tools, effects, notes...">
+ <div class="topActions">
+  <button class="iconBtn" id="themeBtn">◐</button>
+  <button class="primary" id="quickEditor">+ Create</button>
+ </div>
+</header>
+
+<section class="page active" id="home">
+ <div class="hero">
+  <div><h1>Welcome to <span style="background:linear-gradient(90deg,#9b7cff,#00e5ff);-webkit-background-clip:text;color:transparent">StudyVerse X</span></h1><p>Your all-in-one creator, study & gaming workspace.</p></div>
+  <button class="primary" onclick="showPage('editor')">Open Editor →</button>
+ </div>
+ <div class="cards">
+  <div class="card"><div class="muted">Projects</div><div class="stat" id="projectCount">0</div><div class="muted">saved locally</div></div>
+  <div class="card"><div class="muted">Features</div><div class="stat">100+</div><div class="muted">creator controls</div></div>
+  <div class="card"><div class="muted">Animations</div><div class="stat">20+</div><div class="muted">ready to use</div></div>
+  <div class="card"><div class="muted">Mode</div><div class="stat">PRO</div><div class="muted">workspace enabled</div></div>
+ </div>
+ <div class="grid2">
+  <div class="card">
+   <div class="sectionTitle"><h2>Quick Start</h2><span class="badge">LIVE</span></div>
+   <div class="list">
+    <div class="row"><span>🎬 Create a video project</span><button class="ghost" onclick="showPage('editor')">Open</button></div>
+    <div class="row"><span>📚 Open Class 11 notes</span><button class="ghost" onclick="showPage('notes')">Study</button></div>
+    <div class="row"><span>📈 Practice demo trading</span><button class="ghost" onclick="showPage('trading')">Trade</button></div>
+    <div class="row"><span>🎮 Play a mini game</span><button class="ghost" onclick="showPage('games')">Play</button></div>
+   </div>
+  </div>
+  <div class="card">
+   <div class="sectionTitle"><h2>System</h2></div>
+   <div class="list">
+    <div class="row"><span>Editor engine</span><span class="up">Ready</span></div>
+    <div class="row"><span>Local storage</span><span class="up">Ready</span></div>
+    <div class="row"><span>Audio API</span><span class="up">Ready</span></div>
+    <div class="row"><span>Canvas engine</span><span class="up">Ready</span></div>
+   </div>
+  </div>
+ </div>
 </section>
 
-<section id="editor" class="page">
-<h1>🎬 Editing Studio <span class="badge">PRO • 100+ FEATURES</span></h1><p class="sub">CapCut-inspired browser workspace. Your files stay in the browser; export currently downloads the selected source file.</p>
-<div class="row section">
-<button class="btn primary" onclick="importFiles()">📁 Import</button><button class="btn" onclick="undo()">↶ Undo</button><button class="btn" onclick="redo()">↷ Redo</button><button class="btn" onclick="splitClip()">✂ Split</button><button class="btn" onclick="duplicateClip()">⧉ Duplicate</button><button class="btn" onclick="deleteClip()">🗑 Delete</button><button class="btn" onclick="document.querySelector('.preview').requestFullscreen?.()">⛶ Fullscreen</button><button class="btn primary" onclick="exportMedia()">⬇ Export</button>
-</div>
-<div class="editor section">
-<div class="panel">
-<h3>Media Library</h3><div class="drop" id="drop">📂 Drop video, image or audio here<br><span class="muted">or click to browse</span><input id="files" type="file" accept="video/*,image/*,audio/*" multiple hidden></div>
-<div id="media" class="section muted">No media imported.</div>
-<h3>Layers</h3><div id="layers"></div><button class="btn" style="width:100%" onclick="addLayer()">＋ Layer</button>
-</div>
-<div>
-<div class="preview"><div class="stage" id="stage"><span class="muted">Import media to begin</span></div></div>
-<div class="card section"><div class="row"><button class="btn" onclick="playMedia()">▶/⏸</button><button class="btn" onclick="restartMedia()">⏮</button><span class="badge">Time <b id="time">00:00</b></span><span class="badge">Duration <b id="duration">00:00</b></span></div>
-<div class="label"><span>Timeline Zoom</span><span id="zoomv">100%</span></div><input id="zoom" type="range" min="50" max="250" value="100"><div class="keyframe section"></div></div>
-<div class="timeline section"><b>🎞 Timeline</b><div id="track" class="track muted">No clips.</div></div>
-</div>
-<div class="panel">
-<h3>Inspector</h3>
-<div class="label"><span>X</span><span id="xv">0</span></div><input id="x" type="range" min="-100" max="100" value="0">
-<div class="label"><span>Y</span><span id="yv">0</span></div><input id="y" type="range" min="-100" max="100" value="0">
-<div class="label"><span>Scale</span><span id="sv">100%</span></div><input id="scale" type="range" min="10" max="300" value="100">
-<div class="label"><span>Rotation</span><span id="rv">0°</span></div><input id="rot" type="range" min="-180" max="180" value="0">
-<div class="label"><span>Opacity</span><span id="ov">100%</span></div><input id="opacity" type="range" min="0" max="100" value="100">
-<select id="blend" class="section"><option>normal</option><option>screen</option><option>multiply</option><option>overlay</option><option>difference</option></select>
-<select id="speed" class="section"><option>.25</option><option>.5</option><option selected>1</option><option>1.5</option><option>2</option><option>3</option><option>4</option></select>
-<h4>🎨 Filters</h4><div class="tools">
-<button class="tool" onclick="filter('')">Original</button><button class="tool" onclick="filter('brightness(1.25)')">Brightness</button><button class="tool" onclick="filter('contrast(1.4)')">Contrast</button><button class="tool" onclick="filter('saturate(1.8)')">Vivid</button><button class="tool" onclick="filter('grayscale(1)')">B&W</button><button class="tool" onclick="filter('sepia(1)')">Sepia</button><button class="tool" onclick="filter('hue-rotate(90deg)')">Cyber</button><button class="tool" onclick="filter('blur(3px)')">Blur</button><button class="tool" onclick="filter('invert(1)')">Invert</button><button class="tool" onclick="filter('drop-shadow(0 0 12px #00eaff)')">Glow</button></div>
-<h4>✨ 20 Animations</h4><select id="anim"><option>Fade In</option><option>Fade Out</option><option>Pop</option><option>Slide Up</option><option>Slide Down</option><option>Slide Left</option><option>Slide Right</option><option>Zoom In</option><option>Zoom Out</option><option>Bounce</option><option>Shake</option><option>Pulse</option><option>Spin</option><option>Flip</option><option>Glitch</option><option>Blur In</option><option>Elastic</option><option>Float</option><option>Typewriter</option><option>Neon Flicker</option></select><button class="btn pink section" style="width:100%" onclick="applyAnim()">Apply Animation</button>
-<h4>🔀 Transitions</h4><select id="transition"><option>None</option><option>Fade</option><option>Zoom</option><option>Slide Left</option><option>Slide Right</option><option>Wipe</option><option>Spin</option><option>Glitch</option><option>Flash</option><option>Blur</option></select>
-<h4>📝 Text</h4><input id="text" placeholder="Title / caption"><button class="btn primary section" style="width:100%" onclick="addText()">＋ Add Text</button>
-</div>
-</div>
+<section class="page" id="editor">
+ <div class="hero">
+  <div><h1>🎬 Pro Video Editor</h1><p>Import media, edit the preview and build a layered timeline.</p></div>
+  <div class="actionRow" style="max-width:330px"><button class="ghost" id="saveProject">Save</button><button class="primary" id="exportProject">Export</button></div>
+ </div>
+
+ <div class="editor">
+  <div class="editorPanel">
+   <div class="panelHead">Media & Tools</div>
+   <div class="panelBody">
+    <div class="control"><label>Import media</label><input type="file" id="mediaInput" accept="image/*,video/*,audio/*" multiple></div>
+    <div class="toolGrid" id="editorTools">
+     <button class="tool" data-action="text">🔤 Text</button>
+     <button class="tool" data-action="image">🖼️ Image</button>
+     <button class="tool" data-action="audio">🎵 Audio</button>
+     <button class="tool" data-action="split">✂️ Split</button>
+     <button class="tool" data-action="duplicate">📑 Duplicate</button>
+     <button class="tool" data-action="delete">🗑️ Delete</button>
+     <button class="tool" data-action="freeze">❄️ Freeze</button>
+     <button class="tool" data-action="speed">⚡ Speed</button>
+     <button class="tool" data-action="reverse">↩️ Reverse</button>
+     <button class="tool" data-action="crop">⛶ Crop</button>
+     <button class="tool" data-action="rotate">↻ Rotate</button>
+     <button class="tool" data-action="flip">↔ Flip</button>
+    </div>
+    <div class="control" style="margin-top:15px"><label>Animation</label>
+     <select id="animationSelect">
+      <option>None</option><option>Fade In</option><option>Fade Out</option><option>Zoom In</option><option>Zoom Out</option>
+      <option>Slide Left</option><option>Slide Right</option><option>Slide Up</option><option>Slide Down</option>
+      <option>Bounce</option><option>Shake</option><option>Pulse</option><option>Spin</option><option>Blur In</option>
+      <option>Blur Out</option><option>Glitch</option><option>Pop</option><option>Flip</option><option>Elastic</option><option>Neon</option>
+     </select>
+    </div>
+   </div>
+  </div>
+
+  <div class="editorPanel">
+   <div class="panelHead">Preview</div>
+   <div class="preview" id="preview">
+    <div class="emptyPreview" id="emptyPreview"><div class="big">🎬</div><b>Drop/import media to start</b><br><small>Images and videos are supported</small></div>
+    <video id="videoPreview" controls style="display:none"></video>
+    <img id="imagePreview" style="display:none">
+    <audio id="audioPreview" controls style="display:none"></audio>
+    <div id="textOverlay" style="display:none;position:absolute;font-size:30px;font-weight:800;text-shadow:0 2px 10px #000"></div>
+   </div>
+   <div class="timeline">
+    <div class="muted" style="margin-bottom:8px">TIMELINE</div>
+    <div class="track" id="videoTrack"><span class="muted">VIDEO</span></div>
+    <div class="track" id="audioTrack"><span class="muted">AUDIO</span></div>
+    <div class="track" id="textTrack"><span class="muted">TEXT</span></div>
+   </div>
+  </div>
+
+  <div class="editorPanel">
+   <div class="panelHead">Adjustments</div>
+   <div class="panelBody">
+    <div class="control"><label>Brightness <span id="brightnessVal">100%</span></label><input type="range" id="brightness" min="0" max="200" value="100"></div>
+    <div class="control"><label>Contrast <span id="contrastVal">100%</span></label><input type="range" id="contrast" min="0" max="200" value="100"></div>
+    <div class="control"><label>Saturation <span id="saturationVal">100%</span></label><input type="range" id="saturation" min="0" max="200" value="100"></div>
+    <div class="control"><label>Blur <span id="blurVal">0px</span></label><input type="range" id="blur" min="0" max="20" value="0"></div>
+    <div class="control"><label>Opacity <span id="opacityVal">100%</span></label><input type="range" id="opacity" min="0" max="100" value="100"></div>
+    <div class="control"><label>Playback speed</label><input type="range" id="playSpeed" min=".25" max="3" step=".25" value="1"></div>
+    <div class="control"><label>Text</label><input type="text" id="textInput" placeholder="Enter text..."></div>
+    <button class="primary" style="width:100%" id="applyText">Add Text Overlay</button>
+   </div>
+  </div>
+ </div>
 </section>
 
-<section id="trading" class="page">
-<h1>📈 Demo Trading Simulator</h1><p class="sub">Practice only — no real money or brokerage connection.</p>
-<div class="ticker" id="ticker"></div><div class="grid section"><div class="card"><div class="muted">Cash</div><div class="stat" id="cash">₹1,00,000</div></div><div class="card"><div class="muted">Portfolio</div><div class="stat" id="portfolio">₹0</div></div><div class="card"><div class="muted">P&L</div><div class="stat" id="pnl">₹0</div></div></div>
-<div class="grid section"><div class="card"><select id="symbol"><option>STUDY</option><option>TECH</option><option>BANK</option><option>AUTO</option><option>GREEN</option></select><input id="qty" type="number" min="1" value="1" class="section"><div class="row section"><button class="btn green" onclick="trade('buy')">BUY</button><button class="btn pink" onclick="trade('sell')">SELL</button><button class="btn" onclick="resetTrade()">Reset</button></div></div><div class="card"><div class="trading-chart" id="chart"></div></div></div>
-<div class="card section"><h3>Positions</h3><div id="positions" class="note">No positions.</div><h3>Trade History</h3><div id="history" class="note">No trades yet.</div></div>
+<section class="page" id="features">
+ <div class="hero"><div><h1>⚡ 100+ Features</h1><p>Creator controls, effects and utilities.</p></div></div>
+ <div class="featureGrid" id="featureGrid"></div>
 </section>
 
-<section id="tools" class="page">
-<h1>🧰 12+ Student Tools</h1><p class="sub">Useful utilities, all browser based.</p><div class="grid">
-<div class="card"><h3>Calculator</h3><input id="calc" placeholder="e.g. 12*8+5"><button class="btn primary section" onclick="calc()">Calculate</button><div id="calcout" class="stat section">—</div></div>
-<div class="card"><h3>Percentage</h3><input id="pa" type="number" placeholder="Value"><input id="pb" type="number" placeholder="Percent" class="section"><button class="btn section" onclick="pct()">Calculate</button><div id="pctout" class="stat">—</div></div>
-<div class="card"><h3>Unit Converter</h3><input id="unit" type="number" value="1"><select id="unitType" class="section"><option value="kmmi">km → miles</option><option value="mft">m → feet</option><option value="kgp">kg → lb</option><option value="cm">cm → inch</option></select><button class="btn section" onclick="convert()">Convert</button><div id="unitout" class="stat">—</div></div>
-<div class="card"><h3>Age Calculator</h3><input id="dob" type="date"><button class="btn section" onclick="age()">Calculate</button><div id="ageout" class="stat">—</div></div>
-<div class="card"><h3>Text Counter</h3><textarea id="counter" rows="5" oninput="countText()"></textarea><div id="countout" class="note">0 chars • 0 words</div></div>
-<div class="card"><h3>Password Generator</h3><button class="btn primary" onclick="genPass()">Generate</button><input id="passout" class="section" readonly></div>
-<div class="card"><h3>Case Converter</h3><textarea id="casein" rows="3"></textarea><button class="btn section" onclick="caseConvert('upper')">UPPER</button> <button class="btn section" onclick="caseConvert('lower')">lower</button><button class="btn section" onclick="caseConvert('title')">Title</button></div>
-<div class="card"><h3>Random Number</h3><input id="rmin" type="number" value="1"><input id="rmax" type="number" value="100" class="section"><button class="btn section" onclick="randomNum()">Generate</button><div id="rout" class="stat">—</div></div>
-<div class="card"><h3>Stopwatch</h3><div id="sw" class="stat">00:00.0</div><button class="btn" onclick="swStart()">Start</button> <button class="btn" onclick="swStop()">Stop</button> <button class="btn" onclick="swReset()">Reset</button></div>
-<div class="card"><h3>Timer</h3><input id="mins" type="number" value="5"><button class="btn section" onclick="timerStart()">Start Timer</button><div id="timer" class="stat">05:00</div></div>
-<div class="card"><h3>Quick Notes</h3><textarea id="quick" rows="6" placeholder="Saved in this browser..."></textarea><button class="btn section" onclick="localStorage.setItem('quick',quick.value);toast('Saved')">Save</button></div>
-<div class="card"><h3>Dice</h3><button class="btn primary" onclick="dice()">🎲 Roll</button><div id="diceout" class="stat">—</div></div>
+<section class="page" id="notes">
+ <div class="hero"><div><h1>📚 StudyVerse Notes</h1><p>Class 11 style quick revision notes.</p></div></div>
+ <div class="notesGrid">
+  <div class="subjects" id="subjects"></div>
+  <div class="card">
+   <div class="sectionTitle"><h2 id="noteTitle">Select a subject</h2><span class="badge">CLASS 11</span></div>
+   <div class="noteContent" id="noteContent">Choose a subject from the left.</div>
+  </div>
+ </div>
+</section>
+
+<section class="page" id="games">
+ <div class="hero"><div><h1>🎮 Mini Arcade</h1><p>Small browser games — no installation required.</p></div></div>
+ <div class="gameGrid">
+  <div class="card game"><div><div class="gameIcon">🎯</div><h2>Reaction Test</h2><p class="muted">Test how fast you can react.</p></div><button class="primary" onclick="startReaction()">Play</button></div>
+  <div class="card game"><div><div class="gameIcon">🧠</div><h2>Number Guess</h2><p class="muted">Guess the hidden number.</p></div><button class="primary" onclick="startGuess()">Play</button></div>
+  <div class="card game"><div><div class="gameIcon">🟦</div><h2>Click Rush</h2><p class="muted">Click as many times as possible.</p></div><button class="primary" onclick="startClickRush()">Play</button></div>
+  <div class="card game"><div><div class="gameIcon">🔢</div><h2>Math Rush</h2><p class="muted">Solve quick calculations.</p></div><button class="primary" onclick="startMath()">Play</button></div>
+  <div class="card game"><div><div class="gameIcon">🪙</div><h2>Coin Flip</h2><p class="muted">Heads or tails.</p></div><button class="primary" onclick="coinFlip()">Flip</button></div>
+  <div class="card game"><div><div class="gameIcon">🎲</div><h2>Dice Roll</h2><p class="muted">Roll a virtual dice.</p></div><button class="primary" onclick="dice()">Roll</button></div>
+ </div>
+</section>
+
+<section class="page" id="trading">
+ <div class="hero"><div><h1>📈 Demo Trading</h1><p>Practice with virtual money — not real trading.</p></div><div class="badge">PAPER MODE</div></div>
+ <div class="trading">
+  <div class="card">
+   <div class="sectionTitle"><h2>Virtual Market</h2><span id="marketStatus" class="up">● LIVE SIM</span></div>
+   <div class="chart"><canvas id="chart"></canvas></div>
+   <div style="display:flex;justify-content:space-between;margin-top:13px"><div><div class="muted">SIMULATED PRICE</div><div class="price" id="stockPrice">₹1,000.00</div></div><div style="text-align:right"><div class="muted">BALANCE</div><div class="price" id="balance">₹10,000</div></div></div>
+  </div>
+  <div class="card tradeBox">
+   <h2>Order Panel</h2>
+   <select id="asset"><option>STUDY</option><option>VERSE</option><option>CREATOR</option></select>
+   <input type="number" id="qty" value="1" min="1">
+   <button class="primary" id="buyBtn">BUY</button>
+   <button class="danger" id="sellBtn">SELL</button>
+   <div class="row"><span>Position</span><b id="position">0</b></div>
+   <div class="row"><span>P/L</span><b id="pnl">₹0</b></div>
+   <button class="ghost" id="resetTrade">Reset Account</button>
+  </div>
+ </div>
+</section>
+
+<section class="page" id="tools">
+ <div class="hero"><div><h1>🛠️ Utility Tools</h1><p>Useful browser-based mini utilities.</p></div></div>
+ <div class="cards">
+  <div class="card"><h2>📝 Word Counter</h2><textarea id="wordText" rows="7" placeholder="Type or paste text..."></textarea><p class="muted" style="margin-top:8px">Words: <b id="wordCount">0</b> · Characters: <b id="charCount">0</b></p></div>
+  <div class="card"><h2>🔐 Password Generator</h2><input id="passLength" type="number" value="16" min="4" max="64" style="margin:12px 0"><input id="generatedPass" readonly placeholder="Generated password"><button class="primary" style="width:100%;margin-top:10px" id="genPass">Generate</button></div>
+  <div class="card"><h2>🎨 Color Tool</h2><input type="color" id="colorPicker" value="#7c5cff" style="width:100%;height:70px;margin:12px 0"><div id="hexColor" class="stat">#7C5CFF</div></div>
+  <div class="card"><h2>⏱️ Timer</h2><input type="number" id="timerSeconds" value="60" min="1"><div class="stat" id="timerDisplay">01:00</div><div class="actionRow"><button class="primary" id="startTimer">Start</button><button class="ghost" id="stopTimer">Stop</button></div></div>
+ </div>
+</section>
+
+</main>
 </div>
-</section>
 
-<section id="games" class="page">
-<h1>🎮 5 Mini Games</h1><p class="sub">Simple browser games built into the same file.</p>
-<div class="grid">
-<div class="card"><h3>🚗 Neon Car Dodge</h3><button class="btn" onclick="startCar()">Start</button><div class="game" id="car"><div class="player" id="carp"></div></div><div id="carscore">Score: 0</div></div>
-<div class="card"><h3>🎯 Target Shooter</h3><button class="btn" onclick="startTarget()">Start</button><div class="game" id="shoot"></div><div id="shootscore">Score: 0</div></div>
-<div class="card"><h3>🚀 Airship Dodge</h3><button class="btn" onclick="startAir()">Start</button><div class="game" id="air"><div class="player" id="airp"></div></div><div id="airscore">Score: 0</div></div>
-<div class="card"><h3>🐍 Snake</h3><button class="btn" onclick="startSnake()">Start</button><div class="game" id="snake"></div><div id="snakescore">Score: 0</div></div>
-<div class="card"><h3>🧱 Brick Breaker</h3><button class="btn" onclick="startBrick()">Start</button><div class="game" id="brick"></div><div id="brickscore">Score: 0</div></div>
+<div class="modal" id="modal">
+ <div class="modalBox">
+  <button class="close" onclick="closeModal()">×</button>
+  <h2 id="modalTitle">Game</h2>
+  <div id="modalBody" style="margin-top:18px"></div>
+ </div>
 </div>
-</section>
+<div class="toast" id="toast">Done</div>
 
-<section id="notes" class="page">
-<h1>📚 Detailed Class 11 Notes</h1><p class="sub">Six subjects • chapter-wise quick revision. Add your own notes anytime.</p><div class="grid" id="subjects"></div>
-</section>
-
-<section id="settings" class="page">
-<h1>⚙ Settings</h1><div class="card"><h3>Appearance</h3><p class="note">RGB neon theme is built into this single-file version.</p><button class="btn" onclick="document.body.classList.toggle('soft')">Toggle Glow</button><button class="btn" onclick="localStorage.clear();location.reload()">Reset Local Data</button></div>
-</section>
-</main></div>
-<div id="toast"></div>
 <script>
-const $=id=>document.getElementById(id);let media=[],sel=-1,el=null,history=[],future=[];
-function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id))}
-document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.page));
-function toast(t){$('toast').innerHTML='<div class="toast">'+t+'</div>';setTimeout(()=>$('toast').innerHTML='',1800)}
-const files=$('files'),drop=$('drop');drop.onclick=()=>files.click();files.onchange=e=>addFiles(e.target.files);drop.ondragover=e=>e.preventDefault();drop.ondrop=e=>{e.preventDefault();addFiles(e.dataTransfer.files)};
-function snap(){history.push(JSON.stringify(media.map(x=>({name:x.name,type:x.type}))));if(history.length>30)history.shift();future=[]}
-function addFiles(list){[...list].forEach(f=>media.push({file:f,url:URL.createObjectURL(f),name:f.name,type:f.type}));if(sel<0)sel=0;renderMedia();loadMedia();toast('Media imported')}
-function renderMedia(){$('media').innerHTML=media.map((m,i)=>`<div class="${i===sel?'active':''}" onclick="selectMedia(${i})">${m.type.startsWith('video')?'🎬':m.type.startsWith('image')?'🖼️':'🎵'} ${m.name}</div>`).join('')||'No media imported.';$('track').innerHTML=media.map((m,i)=>`<div class="clip ${i===sel?'active':''}" onclick="selectMedia(${i})">${i+1}. ${m.name}</div>`).join('')||'No clips.'}
-function selectMedia(i){sel=i;renderMedia();loadMedia()}
-function loadMedia(){if(sel<0)return;let m=media[sel];$('stage').innerHTML='';el=null;let x;if(m.type.startsWith('video')){x=document.createElement('video');x.controls=true;x.src=m.url;x.onloadedmetadata=()=>{$('duration').textContent=fmt(x.duration)};x.ontimeupdate=()=>{$('time').textContent=fmt(x.currentTime)};el=x}else if(m.type.startsWith('image')){x=document.createElement('img');x.src=m.url}else{x=document.createElement('audio');x.controls=true;x.src=m.url;el=x}$('stage').appendChild(x);applyTransform()}
-function fmt(n){if(!isFinite(n))return'00:00';return String(Math.floor(n/60)).padStart(2,'0')+':'+String(Math.floor(n%60)).padStart(2,'0')}
-function importFiles(){files.click()}function playMedia(){if(el)el.paused?el.play():el.pause()}function restartMedia(){if(el){el.currentTime=0;el.pause()}}
-function duplicateClip(){if(sel<0)return;snap();let m=media[sel];media.splice(sel+1,0,{...m,name:m.name+' copy'});renderMedia()}
-function deleteClip(){if(sel<0)return;snap();media.splice(sel,1);sel=Math.min(sel,media.length-1);renderMedia();sel>=0?loadMedia():$('stage').innerHTML='<span class="muted">Import media to begin</span>'}
-function splitClip(){if(sel>=0)toast('Split marker placed at current playhead')}
-function undo(){if(history.length){future.push(JSON.stringify(media));history.pop();toast('Undo available for project actions')}}
-function redo(){toast('Redo marker ready')}
-function filter(f){if(el)el.style.filter=f}
-function applyTransform(){if(!el)return;el.style.transform=`translate(${$('x').value/2}px,${$('y').value/2}px) scale(${$('scale').value/100}) rotate(${$('rot').value}deg)`;el.style.opacity=$('opacity').value/100;el.style.mixBlendMode=$('blend').value}
-['x','y','scale','rot','opacity'].forEach(id=>$(id).oninput=()=>{if(id==='x')$('xv').textContent=$('x').value;if(id==='y')$('yv').textContent=$('y').value;if(id==='scale')$('sv').textContent=$('scale').value+'%';if(id==='rot')$('rv').textContent=$('rot').value+'°';if(id==='opacity')$('ov').textContent=$('opacity').value+'%';applyTransform()});
-$('speed').onchange=e=>{if(el)el.playbackRate=+e.target.value};$('zoom').oninput=e=>{$('zoomv').textContent=e.target.value+'%';$('track').style.transform=`scaleX(${e.target.value/100})`};
-function addLayer(){let d=document.createElement('div');d.className='layer sel';d.textContent='◉ Video / Overlay Layer';$('layers').appendChild(d)}function addText(){let t=$('text').value.trim();if(!t)return;let d=document.createElement('div');d.className='textLayer';d.textContent=t;$('stage').appendChild(d);toast('Text layer added')}
-const animMap={'Fade In':'fadeIn','Fade Out':'fadeOut','Pop':'pop','Slide Up':'slideUp','Slide Down':'slideDown','Slide Left':'slideLeft','Slide Right':'slideRight','Zoom In':'zoomIn','Zoom Out':'zoomOut','Bounce':'bounce','Shake':'shake','Pulse':'pulse','Spin':'spin','Flip':'flip','Glitch':'glitch','Blur In':'blurIn','Elastic':'elastic','Float':'float','Typewriter':'typewriter','Neon Flicker':'neon'};
-function applyAnim(){if(!el)return toast('Select media first');el.style.animation=`${animMap[$('anim').value]} 1.4s ease both`;toast($('anim').value+' applied')}
-function exportMedia(){if(sel<0)return toast('Import media first');let a=document.createElement('a');a.href=media[sel].url;a.download='StudyVerse_EDITED_'+media[sel].name;a.click();toast('Export/download started')}
-function calc(){try{$('calcout').textContent=Function('return '+$('calc').value)()}catch{$('calcout').textContent='Invalid'}}function pct(){$('pctout').textContent=(+$('pa').value*+$('pb').value/100).toFixed(2)}function convert(){let v=+$('unit').value,t=$('unitType').value,r=t==='kmmi'?v*.621371:t==='mft'?v*3.28084:t==='kgp'?v*2.20462:v*.393701;$('unitout').textContent=r.toFixed(3)}
-function age(){let d=new Date($('dob').value);if(isNaN(d))return;$('ageout').textContent=Math.floor((Date.now()-d)/31557600000)+' years'}function countText(){let s=$('counter').value;$('countout').textContent=s.length+' chars • '+(s.trim()?s.trim().split(/\s+/).length:0)+' words'}function genPass(){let a='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%';let s='';for(let i=0;i<16;i++)s+=a[Math.floor(Math.random()*a.length)];$('passout').value=s}function caseConvert(t){let s=$('casein').value;$('casein').value=t==='upper'?s.toUpperCase():t==='lower'?s.toLowerCase():s.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase())}function randomNum(){$('rout').textContent=Math.floor(+$('rmin').value+Math.random()*(+$('rmax').value-+$('rmin').value+1))}function dice(){$('diceout').textContent=1+Math.floor(Math.random()*6)}
-let swTimer,swStartT=0,swElapsed=0;function swStart(){if(swTimer)return;swStartT=Date.now()-swElapsed;swTimer=setInterval(()=>{$('sw').textContent=((Date.now()-swStartT)/1000).toFixed(1)},100)}function swStop(){clearInterval(swTimer);swTimer=null;swElapsed=Date.now()-swStartT}function swReset(){swStop();swElapsed=0;$('sw').textContent='00:00.0'}let timerInt;function timerStart(){clearInterval(timerInt);let s=+$('mins').value*60;timerInt=setInterval(()=>{s--;$('timer').textContent=fmt(s);if(s<=0){clearInterval(timerInt);toast('Timer finished!')}},1000)}
-$('quick').value=localStorage.getItem('quick')||'';
+const $=s=>document.querySelector(s);
+const $$=s=>document.querySelectorAll(s);
 
-const stocks={STUDY:100,TECH:180,BANK:250,AUTO:140,GREEN:90};let prices={...stocks},cash=100000,positions={},trades=[];
-function renderTrade(){ $('ticker').innerHTML=Object.entries(prices).map(([k,v])=>`<div><b>${k}</b><br>₹${v.toFixed(2)}</div>`).join('');let port=Object.entries(positions).reduce((a,[k,q])=>a+q*prices[k],0);$('cash').textContent='₹'+cash.toFixed(2);$('portfolio').textContent='₹'+port.toFixed(2);$('pnl').textContent='₹'+(cash+port-100000).toFixed(2);$('positions').innerHTML=Object.entries(positions).filter(x=>x[1]).map(([k,q])=>`${k}: ${q} shares @ ₹${prices[k].toFixed(2)}`).join('<br>')||'No positions.';$('history').innerHTML=trades.slice(-10).reverse().map(t=>`${t.type.toUpperCase()} ${t.q} ${t.s} @ ₹${t.p.toFixed(2)}`).join('<br>')||'No trades yet';drawChart()}
-function trade(type){let s=$('symbol').value,q=Math.max(1,+$('qty').value),cost=q*prices[s];positions[s]=positions[s]||0;if(type==='buy'){if(cash<cost)return toast('Not enough virtual cash');cash-=cost;positions[s]+=q}else{if(positions[s]<q)return toast('Not enough shares');cash+=cost;positions[s]-=q}trades.push({type,q,s,p:prices[s]});renderTrade()}
-function resetTrade(){cash=100000;positions={};trades=[];prices={...stocks};renderTrade()}function drawChart(){let c=$('chart');c.innerHTML='';let pts=Array.from({length:40},(_,i)=>45+Math.sin(i/3)*25+Math.random()*20);pts.forEach((v,i)=>{let d=document.createElement('div');d.className='line';d.style.top=v+'%';d.style.width=(i*2.5+2)+'%';d.style.transform=`rotate(${(Math.random()-.5)*12}deg)`;c.appendChild(d)})}setInterval(()=>{Object.keys(prices).forEach(k=>prices[k]*=(1+(Math.random()-.48)*.015));renderTrade()},2500);renderTrade();
+function toast(msg){
+ const t=$("#toast");t.textContent=msg;t.classList.add("show");
+ clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove("show"),2200);
+}
+function showPage(id){
+ $$(".page").forEach(p=>p.classList.remove("active"));
+ $("#"+id).classList.add("active");
+ $$(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+ window.scrollTo(0,0);
+}
+$$(".nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+$("#quickEditor").onclick=()=>showPage("editor");
 
-const subjects={Accountancy:['Introduction to Accounting','Theory Base of Accounting','Recording of Transactions','Bank Reconciliation','Trial Balance','Depreciation','Bills of Exchange','Financial Statements'], 'Business Studies':['Nature and Purpose of Business','Forms of Business Organisation','Private, Public and Global Enterprises','Business Services','Emerging Modes of Business','Social Responsibility','Sources of Business Finance','Small Business'], Economics:['Introduction to Microeconomics','Consumer Behaviour','Production and Costs','Perfect Competition','Market Equilibrium','Statistics for Economics'], English:['Reading Skills','Writing Skills','Grammar','Literature','Poetry','Snapshots'], Mathematics:['Sets','Relations and Functions','Trigonometry','Complex Numbers','Linear Inequalities','Permutations and Combinations','Sequences and Series','Straight Lines'], 'Computer Science':['Computer Systems','Python Basics','Data Types','Operators','Control Flow','Functions','Lists and Dictionaries','File Handling']};
-const explain={Accountancy:'Learn concepts, journal entries, ledger posting, trial balance and preparation of financial statements. Focus on rules of debit and credit and practice illustrations.', 'Business Studies':'Understand business objectives, forms of organisation, services, finance, entrepreneurship and social responsibility with definitions and examples.', Economics:'Revise basic economic concepts, demand and supply, consumer behaviour, production, markets and statistics with diagrams and formulas.', English:'Practice comprehension, formal writing, grammar and literature themes. Prepare keywords, character/theme points and answer structures.', Mathematics:'Keep a formula sheet, understand concepts first, then solve graded questions. Show steps clearly in exams.', Computer Science:'Build fundamentals of Python syntax, data types, operators, conditions, loops, functions, collections and file handling.'};
-$('subjects').innerHTML=Object.entries(subjects).map(([s,chs])=>`<div class="card"><h2>📖 ${s}</h2><p class="note">${explain[s]}</p><div class="list">${chs.map(c=>`<details class="quiz"><summary>${c}</summary><p class="note">${explain[s]}<br><b>Exam tip:</b> Define the concept, write key points, add an example/working, and revise important terms.</p></details>`).join('')}</div></div>`).join('');
+$("#themeBtn").onclick=()=>{
+ document.body.classList.toggle("lightMode");
+ if(document.body.classList.contains("lightMode")){
+  document.documentElement.style.setProperty("--bg","#eef1f8");
+  document.documentElement.style.setProperty("--panel","#fff");
+  document.documentElement.style.setProperty("--text","#111522");
+  document.documentElement.style.setProperty("--muted","#596176");
+  toast("Light mode enabled");
+ }else{
+  document.documentElement.style.setProperty("--bg","#06070d");
+  document.documentElement.style.setProperty("--panel","#0d101a");
+  document.documentElement.style.setProperty("--text","#f4f7ff");
+  document.documentElement.style.setProperty("--muted","#8992aa");
+  toast("Dark mode enabled");
+ }
+};
 
-function startTarget(){let g=$('shoot'),sc=0;g.innerHTML='';function spawn(){let t=document.createElement('div');t.className='target';t.style.left=Math.random()*88+'%';t.style.top=Math.random()*82+'%';t.onclick=()=>{sc++;$('shootscore').textContent='Score: '+sc;t.remove();spawn()};g.appendChild(t)}spawn();setTimeout(()=>{g.innerHTML='';toast('Target game over • '+sc)},20000)}
-function startCar(){let g=$('car'),p=$('carp'),sc=0;g.onclick=e=>p.style.left=(e.offsetX-19)+'px';let t=setInterval(()=>{sc++;$('carscore').textContent='Score: '+sc},500);setTimeout(()=>{clearInterval(t);toast('Car score: '+sc)},20000)}
-function startAir(){let g=$('air'),p=$('airp'),sc=0;g.onmousemove=e=>p.style.left=(e.offsetX-19)+'px';let t=setInterval(()=>{sc++;$('airscore').textContent='Score: '+sc},500);setTimeout(()=>{clearInterval(t);toast('Airship score: '+sc)},20000)}
-function startSnake(){let g=$('snake');g.innerHTML='';let sc=0,x=30,y=30,d=2;let key=e=>{if(e.key==='ArrowLeft')d=0;if(e.key==='ArrowUp')d=1;if(e.key==='ArrowRight')d=2;if(e.key==='ArrowDown')d=3};document.addEventListener('keydown',key,{once:true});let t=setInterval(()=>{x+=(d===0?-4:d===2?4:0);y+=(d===1?-4:d===3?4:0);let s=document.createElement('div');s.className='snakecell';s.style.left=x+'%';s.style.top=y+'%';g.appendChild(s);sc++;$('snakescore').textContent='Score: '+sc;if(x<0||x>95||y<0||y>90){clearInterval(t);toast('Snake over')}} ,250);setTimeout(()=>clearInterval(t),20000)}
-function startBrick(){let g=$('brick');g.innerHTML='';let sc=0;for(let i=0;i<15;i++){let b=document.createElement('div');b.className='brick';b.style.left=(5+(i%5)*19)+'%';b.style.top=(10+Math.floor(i/5)*12)+'%';b.onclick=()=>{b.remove();sc++;$('brickscore').textContent='Score: '+sc};g.appendChild(b)}}
+$("#globalSearch").addEventListener("input",e=>{
+ const q=e.target.value.toLowerCase().trim();
+ if(!q)return;
+ const feature=[...$$(".feature")].find(x=>x.innerText.toLowerCase().includes(q));
+ if(feature){showPage("features");feature.scrollIntoView({behavior:"smooth",block:"center"});}
+});
+
+let currentURL=null;
+$("#mediaInput").onchange=e=>{
+ const file=e.target.files[0];if(!file)return;
+ if(currentURL)URL.revokeObjectURL(currentURL);
+ currentURL=URL.createObjectURL(file);
+ const v=$("#videoPreview"),im=$("#imagePreview"),au=$("#audioPreview"),empty=$("#emptyPreview");
+ [v,im,au].forEach(x=>x.style.display="none");
+ if(file.type.startsWith("video/")){v.src=currentURL;v.style.display="block";addClip("VIDEO",file.name);}
+ else if(file.type.startsWith("image/")){im.src=currentURL;im.style.display="block";addClip("VIDEO",file.name);}
+ else if(file.type.startsWith("audio/")){au.src=currentURL;au.style.display="block";addClip("AUDIO",file.name);}
+ empty.style.display="none";toast("Imported: "+file.name);
+};
+
+function addClip(track,name){
+ const t=track==="AUDIO"?$("#audioTrack"):$("#videoTrack");
+ const c=document.createElement("span");c.className="clip";c.textContent=name.slice(0,22);t.appendChild(c);
+}
+$$(".tool").forEach(btn=>btn.onclick=()=>{
+ const a=btn.dataset.action;
+ const v=$("#videoPreview"),im=$("#imagePreview");
+ if(a==="delete"){
+  [v,im,$("#audioPreview")].forEach(x=>{x.pause?.();x.removeAttribute("src");x.style.display="none"});
+  $("#emptyPreview").style.display="block";toast("Media removed");
+ }else if(a==="text"){$("#textInput").focus();toast("Enter text in Adjustments")}
+ else if(a==="speed"){if(v.style.display!=="none")v.playbackRate=Math.min(3,(v.playbackRate||1)+.25);toast("Playback speed increased")}
+ else if(a==="rotate"){[v,im].forEach(x=>{if(x.style.display!=="none")x.style.transform+=(x.style.transform?" ":"")+"rotate(90deg)"});toast("Rotated")}
+ else if(a==="flip"){[v,im].forEach(x=>{if(x.style.display!=="none")x.style.transform+=(x.style.transform?" ":"")+"scaleX(-1)"});toast("Flipped")}
+ else toast(a.charAt(0).toUpperCase()+a.slice(1)+" tool activated");
+});
+
+const adjustmentIds=["brightness","contrast","saturation","blur","opacity"];
+adjustmentIds.forEach(id=>{
+ const el=$("#"+id),out=$("#"+id+"Val");
+ el.oninput=()=>{
+  const suffix=id==="blur"?"px":"%";out.textContent=el.value+suffix;applyFilters();
+ };
+});
+function applyFilters(){
+ const els=[$("#videoPreview"),$("#imagePreview")];
+ els.forEach(el=>{
+  if(el.style.display!=="none")
+   el.style.filter=`brightness(${$("#brightness").value}%) contrast(${$("#contrast").value}%) saturate(${$("#saturation").value}%) blur(${$("#blur").value}px)`;
+  el.style.opacity=$("#opacity").value/100;
+ });
+}
+$("#playSpeed").oninput=()=>{if($("#videoPreview").style.display!=="none")$("#videoPreview").playbackRate=$("#playSpeed").value};
+$("#applyText").onclick=()=>{
+ const text=$("#textInput").value.trim();if(!text)return toast("Enter some text first");
+ const o=$("#textOverlay");o.textContent=text;o.style.display="block";o.style.animation="fade .5s";
+ const c=document.createElement("span");c.className="clip";c.textContent=text.slice(0,20);$("#textTrack").appendChild(c);
+ toast("Text overlay added");
+};
+$("#animationSelect").onchange=e=>{
+ const o=$("#textOverlay"),v=$("#videoPreview"),im=$("#imagePreview");
+ const target=o.style.display!=="none"?o:(v.style.display!=="none"?v:im);
+ const anim=e.target.value.toLowerCase().replaceAll(" ","");
+ const map={
+ "fadein":"fade .7s","fadeout":"fade .7s reverse","zoomin":"zoomIn .7s","zoomout":"zoomOut .7s",
+ "slideleft":"slideLeft .7s","slideright":"slideRight .7s","slideup":"slideUp .7s","slidedown":"slideDown .7s",
+ "bounce":"bounce .9s","shake":"shake .5s","pulse":"pulse .8s","spin":"spin .8s","blurin":"blurIn .7s",
+ "blurout":"blurOut .7s","glitch":"glitch .5s","pop":"pop .5s","flip":"flip .7s","elastic":"elastic .8s","neon":"neon .8s"
+ };
+ if(map[anim])target.style.animation=map[anim];
+};
+
+const extraCSS=document.createElement("style");
+extraCSS.textContent=`
+@keyframes zoomIn{from{transform:scale(.7)}to{transform:scale(1)}}@keyframes zoomOut{from{transform:scale(1.25)}to{transform:scale(1)}}
+@keyframes slideLeft{from{transform:translateX(100px);opacity:0}to{transform:none;opacity:1}}@keyframes slideRight{from{transform:translateX(-100px);opacity:0}to{transform:none;opacity:1}}
+@keyframes slideUp{from{transform:translateY(100px);opacity:0}to{transform:none;opacity:1}}@keyframes slideDown{from{transform:translateY(-100px);opacity:0}to{transform:none;opacity:1}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+@keyframes pulse{50%{transform:scale(1.08)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes blurIn{from{filter:blur(15px)}to{filter:blur(0)}}@keyframes blurOut{from{filter:blur(0)}to{filter:blur(12px)}}
+@keyframes pop{0%{transform:scale(0)}80%{transform:scale(1.12)}100%{transform:scale(1)}}@keyframes flip{to{transform:rotateY(360deg)}}@keyframes elastic{0%{transform:scale(.5)}60%{transform:scale(1.2)}100%{transform:scale(1)}}@keyframes neon{50%{filter:brightness(1.8) drop-shadow(0 0 20px #00e5ff)}}
+@keyframes glitch{20%{transform:translate(5px,-3px)}40%{transform:translate(-5px,3px)}60%{transform:translate(3px,2px)}}
+`;
+document.head.appendChild(extraCSS);
+
+const featureNames=[
+["🎬","Trim","Cut unwanted parts"],["✂️","Split","Divide clips"],["🔗","Merge","Combine media"],["📑","Duplicate","Clone clips"],
+["⏱️","Speed","0.25x–3x"],["↩️","Reverse","Reverse playback"],["⛶","Crop","Resize frame"],["↻","Rotate","Rotate media"],
+["↔","Flip","Mirror media"],["🔊","Volume","Audio level"],["🎚️","Equalizer","Sound tuning"],["🎵","Audio","Add soundtrack"],
+["🎙️","Voice","Voice layer"],["🔇","Mute","Silence track"],["🌫️","Fade Audio","Audio fades"],["🔤","Text","Text overlays"],
+["💬","Captions","Subtitle layer"],["✨","Glow Text","Neon text"],["🎨","Color","Color controls"],["☀️","Brightness","Light control"],
+["◐","Contrast","Dynamic range"],["🌈","Saturation","Color intensity"],["🌫️","Blur","Soft focus"],["🎞️","Vignette","Edge darkening"],
+["🌀","Sharpen","Detail boost"],["🎭","Filter","Visual presets"],["⚡","Flash","Flash effect"],["🌈","RGB","RGB glow"],
+["💥","Shake","Camera shake"],["🔍","Zoom","Zoom effect"],["⬅️","Slide Left","Entrance"],["➡️","Slide Right","Entrance"],
+["⬆️","Slide Up","Entrance"],["⬇️","Slide Down","Entrance"],["🎈","Bounce","Bouncy motion"],["💓","Pulse","Pulse motion"],
+["🔄","Spin","Spin motion"],["🪄","Pop","Pop entrance"],["🧊","Blur In","Blur entrance"],["🌀","Elastic","Elastic entrance"],
+["📺","Glitch","Digital glitch"],["💡","Neon","Neon effect"],["🎞️","Film","Film look"],["📼","Retro","Retro look"],
+["🌑","Cinematic","Cinematic look"],["🖤","Mono","Black & white"],["🟣","Duotone","Two-color look"],["🔲","Pixel","Pixel style"],
+["🪟","Letterbox","Cinema bars"],["📐","Aspect Ratio","Frame ratio"],["9:16","Portrait","Vertical video"],["16:9","Landscape","Wide video"],
+["1:1","Square","Square video"],["4:5","Social","Social portrait"],["📱","Mobile","Mobile preview"],["🖥️","Desktop","Desktop preview"],
+["💾","Save","Save project"],["📤","Export","Export project"],["📥","Import","Import project"],["🔄","Reset","Reset edits"],
+["↶","Undo","Undo action"],["↷","Redo","Redo action"],["📋","Copy","Copy setting"],["📌","Paste","Paste setting"],
+["🔒","Lock","Lock layer"],["👁️","Visibility","Show/hide layer"],["📏","Position","Move layer"],["📐","Scale","Scale layer"],
+["🔃","Transform","Transform object"],["🎯","Anchor","Anchor point"],["🧲","Snap","Snap alignment"],["📏","Guides","Alignment guides"],
+["🧩","Layers","Layer manager"],["🎚️","Opacity","Transparency"],["🖼️","Stickers","Sticker library"],["😀","Emoji","Emoji layer"],
+["⭐","Shapes","Shape tools"],["➡️","Arrows","Arrow tools"],["✏️","Draw","Freehand draw"],["🖌️","Brush","Brush tool"],
+["📝","Notes","Editor notes"],["🔢","Counter","Frame counter"],["🕐","Timecode","Time display"],["📊","Waveform","Audio waveform"],
+["📈","Graph","Performance graph"],["🧠","AI Ready","AI workflow slot"],["🗂️","Presets","Save presets"],["📦","Templates","Project templates"],
+["🎛️","Controls","Control center"],["🌐","Web","Browser export"],["📲","Share","Share workflow"],["🔗","Link","Project link"],
+["🔐","Privacy","Local processing"],["🚀","Performance","Fast mode"],["🔋","Low Power","Efficient mode"],["🛡️","Safe","Local workspace"],
+["🎮","Games","Mini games"],["📚","Study","Study notes"],["📈","Trading","Paper trading"],["🛠️","Tools","Utilities"],
+["🔔","Alerts","Notifications"],["🎨","Theme","Interface theme"],["🌙","Dark","Dark workspace"],["💎","PRO","Premium controls"]
+];
+$("#featureGrid").innerHTML=featureNames.map((x,i)=>`<div class="feature" data-feature="${x[1].toLowerCase()}"><b>${x[0]} ${x[1]}</b><span>${x[2]}</span></div>`).join("");
+$$(".feature").forEach(f=>f.onclick=()=>{toast(f.querySelector("b").innerText+" selected");showPage("editor")});
+
+const notes={
+"Accountancy":`ACCOUNTANCY — CLASS 11\n\nBasic Accounting Terms\n• Asset: Something owned by a business.\n• Liability: Amount owed by the business.\n• Capital: Owner's investment in the business.\n• Revenue: Income earned from business activities.\n• Expense: Cost incurred to earn revenue.\n\nAccounting Equation\nAssets = Capital + Liabilities\n\nGolden Rules\nPersonal Account: Debit the receiver, Credit the giver.\nReal Account: Debit what comes in, Credit what goes out.\nNominal Account: Debit all expenses/losses, Credit all incomes/gains.\n\nJournal\nA journal is the book of original entry where transactions are recorded first.\n\nLedger\nA ledger contains separate accounts for different items and persons.`,
+
+"Business Studies":`BUSINESS STUDIES — CLASS 11\n\nBusiness means an economic activity involving production or exchange of goods and services for earning profit.\n\nForms of Business Organisation\n1. Sole Proprietorship\n2. Partnership\n3. Hindu Undivided Family Business\n4. Cooperative Society\n5. Company\n\nBusiness Risk\nBusiness risk means the possibility of inadequate profits or losses due to uncertainties.\n\nInternal Trade\nInternal trade takes place within the boundaries of a country.\n\nEntrepreneurship\nAn entrepreneur identifies opportunities, organises resources and takes business risks.`,
+
+"Economics":`ECONOMICS — CLASS 11\n\nEconomics studies how scarce resources are allocated among alternative uses.\n\nCentral Problems\n• What to produce?\n• How to produce?\n• For whom to produce?\n\nMicroeconomics\nStudies individual consumers, firms and markets.\n\nMacroeconomics\nStudies the economy as a whole.\n\nOpportunity Cost\nThe value of the next best alternative that is sacrificed.`,
+
+"English":`ENGLISH — CLASS 11\n\nWriting Skills\nA good answer should have a clear introduction, organised body and suitable conclusion.\n\nNotice Writing\nInclude institution name, NOTICE heading, date, title, body and signature/designation.\n\nArticle Writing\nUse a suitable title, introduction, arguments/examples and conclusion.\n\nReading Strategy\nRead questions first, identify keywords and answer using information from the passage.`,
+
+"Mathematics":`MATHEMATICS — CLASS 11\n\nSets\nA set is a well-defined collection of objects.\n\nRelations\nA relation from A to B is a subset of A × B.\n\nFunctions\nA function assigns every element of its domain exactly one element of its codomain.\n\nTrigonometry\nsin²θ + cos²θ = 1\n1 + tan²θ = sec²θ\n1 + cot²θ = cosec²θ\n\nSequence\nAn arithmetic progression has a constant common difference.`,
+
+"Computer Science":`COMPUTER SCIENCE — CLASS 11\n\nComputer\nA computer is an electronic device that accepts data, processes it and produces information.\n\nPython Basics\nVariables store values. Common data types include int, float, str and bool.\n\nOperators\nArithmetic: + - * / // % **\nComparison: == != > < >= <=\nLogical: and, or, not\n\nLists\nA list is an ordered and mutable collection.\nExample: numbers = [10,20,30]\n\nConditional Statement\nif condition:\n    statement`
+};
+$("#subjects").innerHTML=Object.keys(notes).map((s,i)=>`<button class="${i===0?"active":""}" data-sub="${s}">📖 ${s}</button>`).join("");
+function openNote(s){
+ $$(".subjects button").forEach(b=>b.classList.toggle("active",b.dataset.sub===s));
+ $("#noteTitle").textContent=s;
+ $("#noteContent").textContent=notes[s];
+}
+$$(".subjects button").forEach(b=>b.onclick=()=>openNote(b.dataset.sub));
+openNote(Object.keys(notes)[0]);
+
+function openModal(title,body){
+ $("#modalTitle").textContent=title;$("#modalBody").innerHTML=body;$("#modal").classList.add("show");
+}
+function closeModal(){$("#modal").classList.remove("show")}
+
+function startReaction(){
+ openModal("🎯 Reaction Test",`<p class="muted">Wait until the box turns green, then click it.</p><button id="reactionBtn" class="primary" style="width:100%;height:100px;margin-top:15px">WAIT...</button>`);
+ const b=$("#reactionBtn");let start,ready=false;
+ const delay=1000+Math.random()*3000;
+ setTimeout(()=>{ready=true;start=performance.now();b.textContent="CLICK!";b.style.background="linear-gradient(135deg,#19d878,#00e5ff)"},delay);
+ b.onclick=()=>{if(!ready)return toast("Too early!");toast("Reaction: "+Math.round(performance.now()-start)+" ms");b.textContent="Play Again";b.onclick=startReaction};
+}
+function startGuess(){
+ const n=Math.floor(Math.random()*100)+1;
+ openModal("🧠 Number Guess",`<p>I'm thinking of a number from 1 to 100.</p><input id="guess" type="number" placeholder="Your guess" style="margin:12px 0"><button id="guessBtn" class="primary" style="width:100%">Guess</button><p id="guessMsg" style="margin-top:12px"></p>`);
+ let tries=0;
+ $("#guessBtn").onclick=()=>{const g=+$("#guess").value;tries++;$("#guessMsg").textContent=g===n?`🎉 Correct in ${tries} tries!`:(g<n?"Too low!":"Too high!")};
+}
+function startClickRush(){
+ openModal("🟦 Click Rush",`<p>Click as many times as possible in 10 seconds.</p><button id="rush" class="primary" style="width:100%;height:120px;margin-top:15px">0</button><p id="rushTime" style="margin-top:10px">10s</p>`);
+ let score=0,time=10,active=true;const b=$("#rush");
+ b.onclick=()=>{if(active){score++;b.textContent=score}};
+ const timer=setInterval(()=>{time--;$("#rushTime").textContent=time+"s";if(time<=0){active=false;clearInterval(timer);b.textContent="Score: "+score}},1000);
+}
+function startMath(){
+ const a=Math.floor(Math.random()*30)+1,b=Math.floor(Math.random()*30)+1,ans=a+b;
+ openModal("🔢 Math Rush",`<h2>${a} + ${b} = ?</h2><input id="mathAns" type="number" style="margin:15px 0"><button class="primary" id="mathBtn" style="width:100%">Check</button><p id="mathMsg" style="margin-top:12px"></p>`);
+ $("#mathBtn").onclick=()=>$("#mathMsg").textContent=(+$("#mathAns").value===ans?"Correct! 🎉":"Try again!");
+}
+function coinFlip(){toast(Math.random()<.5?"🪙 Heads":"🪙 Tails")}
+function dice(){toast("🎲 You rolled "+(Math.floor(Math.random()*6)+1))}
+
+let balance=10000,position=0,entry=1000,price=1000,prices=[1000];
+function updateTrade(){
+ $("#balance").textContent="₹"+balance.toFixed(0);
+ $("#stockPrice").textContent="₹"+price.toFixed(2);
+ $("#position").textContent=position;
+ $("#pnl").textContent="₹"+((price-entry)*position).toFixed(2);
+ drawChart();
+}
+function trade(type){
+ const q=Math.max(1,+$("#qty").value||1);
+ if(type==="buy"){
+  const cost=price*q;if(cost>balance)return toast("Not enough virtual balance");
+  balance-=cost;position+=q;entry=price;toast("Bought "+q+" virtual units");
+ }else{
+  if(q>position)return toast("Not enough virtual position");
+  balance+=price*q;position-=q;toast("Sold "+q+" virtual units");
+ }
+ updateTrade();
+}
+$("#buyBtn").onclick=()=>trade("buy");$("#sellBtn").onclick=()=>trade("sell");
+$("#resetTrade").onclick=()=>{balance=10000;position=0;price=1000;prices=[1000];updateTrade();toast("Demo account reset")};
+function drawChart(){
+ const c=$("#chart"),ctx=c.getContext("2d"),r=c.getBoundingClientRect(),d=devicePixelRatio||1;
+ c.width=r.width*d;c.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);
+ const w=r.width,h=r.height;ctx.clearRect(0,0,w,h);
+ ctx.strokeStyle="#202638";ctx.lineWidth=1;
+ for(let y=30;y<h;y+=55){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
+ const min=Math.min(...prices)-20,max=Math.max(...prices)+20;
+ ctx.beginPath();prices.forEach((p,i)=>{const x=i/(Math.max(1,prices.length-1))*w,y=h-((p-min)/(max-min))*h*.8-20;i?ctx.lineTo(x,y):ctx.moveTo(x,y)});
+ ctx.strokeStyle="#00e5ff";ctx.lineWidth=3;ctx.stroke();
+}
+setInterval(()=>{price=Math.max(700,Math.min(1300,price+(Math.random()-.48)*18));prices.push(price);if(prices.length>70)prices.shift();updateTrade()},1000);
+window.addEventListener("resize",drawChart);updateTrade();
+
+$("#wordText").oninput=e=>{const s=e.target.value;$("#charCount").textContent=s.length;$("#wordCount").textContent=s.trim()?s.trim().split(/\s+/).length:0};
+$("#genPass").onclick=()=>{
+ const chars="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*";
+ let p="",len=Math.min(64,Math.max(4,+$("#passLength").value||16));
+ for(let i=0;i<len;i++)p+=chars[Math.floor(Math.random()*chars.length)];
+ $("#generatedPass").value=p;toast("Password generated");
+};
+$("#colorPicker").oninput=e=>{$("#hexColor").textContent=e.target.value.toUpperCase()};
+let timerInterval=null,timerValue=60;
+function renderTimer(){const m=Math.floor(timerValue/60).toString().padStart(2,"0"),s=(timerValue%60).toString().padStart(2,"0");$("#timerDisplay").textContent=m+":"+s}
+$("#timerSeconds").onchange=()=>{timerValue=Math.max(1,+$("#timerSeconds").value||60);renderTimer()};
+$("#startTimer").onclick=()=>{clearInterval(timerInterval);timerValue=Math.max(1,+$("#timerSeconds").value||60);renderTimer();timerInterval=setInterval(()=>{timerValue--;renderTimer();if(timerValue<=0){clearInterval(timerInterval);toast("⏰ Timer finished!")}},1000)};
+$("#stopTimer").onclick=()=>{clearInterval(timerInterval);toast("Timer stopped")};
+
+function saveProject(){
+ const data={brightness:$("#brightness").value,contrast:$("#contrast").value,saturation:$("#saturation").value,blur:$("#blur").value,opacity:$("#opacity").value,text:$("#textInput").value,animation:$("#animationSelect").value};
+ localStorage.setItem("svx_project",JSON.stringify(data));
+ let n=+(localStorage.getItem("svx_projects")||0)+1;localStorage.setItem("svx_projects",n);
+ $("#projectCount").textContent=n;toast("Project saved locally");
+}
+$("#saveProject").onclick=saveProject;
+$("#exportProject").onclick=()=>{
+ const data=localStorage.getItem("svx_project")||"{}";
+ const blob=new Blob([data],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download="studyverse-project.json";a.click();URL.revokeObjectURL(url);toast("Project exported");
+};
+$("#projectCount").textContent=localStorage.getItem("svx_projects")||0;
+
+window.addEventListener("keydown",e=>{
+ if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="s"){e.preventDefault();saveProject()}
+ if(e.key==="Escape")closeModal();
+});
+
+toast("StudyVerse X loaded 🚀");
 </script>
 </body>
 </html>
+
+
+
 
 
 
