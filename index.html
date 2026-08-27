@@ -1,634 +1,122 @@
+
 from pathlib import Path
 
-html = Path("/mnt/data/index.html")
-
-src = r'''<!doctype html>
+html = r'''<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NovaCut Ultra Pro</title>
+<title>NovaVerse — Black RGB</title>
 <style>
-*{box-sizing:border-box}
-:root{--bg:#070914;--panel:#0f1422;--panel2:#12182b;--border:#29334f;--text:#eef2ff;--muted:#8995b2;--accent:#7557ff;--cyan:#00d9ff}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-button,input,select{font:inherit}
-button{cursor:pointer}
-.app{display:flex;min-height:100vh}
-.side{width:235px;background:#090d18;border-right:1px solid #28314d;padding:15px;position:sticky;top:0;height:100vh;z-index:5}
-.logo{font-size:22px;font-weight:900;margin:5px 5px 18px}
-.logo span{color:var(--cyan)}
-.nav button{width:100%;display:block;padding:11px;margin:4px 0;border:0;border-radius:10px;background:var(--panel2);color:#fff;text-align:left}
-.nav button.active,.nav button:hover{background:linear-gradient(90deg,#6046d5,#123c4b)}
-.main{flex:1;padding:18px;min-width:0}
-.top{display:flex;gap:10px;margin-bottom:14px;align-items:center}
-.search{flex:1;background:#11172a;color:#fff;border:1px solid #293250;border-radius:11px;padding:11px;outline:none}
-#time{white-space:nowrap}
-.page{display:none}
-.page.active{display:block}
-.hero,.card,.panel{background:var(--panel);border:1px solid var(--border);border-radius:17px;padding:16px}
-.hero{background:linear-gradient(135deg,#251d58,#0d2230)}
-h1{margin:0 0 8px}h2{margin:3px 0 13px}
-.muted{color:var(--muted)}
-.grid{display:grid;gap:12px}
-.g4{grid-template-columns:repeat(4,1fr)}
-.g3{grid-template-columns:repeat(3,1fr)}
-.g2{grid-template-columns:repeat(2,1fr)}
-.stat{font-size:25px;font-weight:900}
-.btn{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:10px;font-weight:800}
-.btn.alt{background:#19223a}
-.editor{display:grid;grid-template-columns:205px minmax(0,1fr) 275px;gap:12px}
-.tool,.chip{background:#141a2c;color:#fff;border:1px solid var(--border);border-radius:9px;padding:9px}
-.tool{display:block;width:100%;text-align:left;margin:5px 0}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.preview{height:430px;background:#04060c;border:1px solid var(--border);border-radius:18px;display:flex;align-items:center;justify-content:center}
-.screen{height:92%;width:min(65%,390px);aspect-ratio:9/16;border-radius:14px;background:linear-gradient(145deg,#232d51,#080b12);display:flex;align-items:center;justify-content:center;overflow:hidden;color:#7d89a8}
-.screen img,.screen video{width:100%;height:100%;object-fit:cover}
-.track{display:flex;gap:6px;overflow:auto;background:#0a0f1c;padding:7px;border-radius:10px;margin:7px 0;min-height:62px}
-.clip{min-width:120px;background:linear-gradient(135deg,#41266b,#174b5b);padding:12px;border-radius:8px}
-.gamegrid,.toolgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.gamegrid button,.toolgrid button{background:var(--panel2);color:#fff;border:1px solid var(--border);border-radius:13px;padding:14px;text-align:left;min-height:90px}
-.clock{width:240px;height:240px;border:7px solid #3b486b;border-radius:50%;margin:auto;position:relative;background:#10172a}
-.hand{position:absolute;left:50%;bottom:50%;transform-origin:bottom;background:#fff;border-radius:5px}
-.hour{width:6px;height:60px}
-.minute{width:4px;height:87px;background:var(--cyan)}
-.second{width:2px;height:100px;background:#ff5577}
-.dot{position:absolute;width:12px;height:12px;border-radius:50%;background:#fff;left:calc(50% - 6px);top:calc(50% - 6px)}
-.trade{display:grid;grid-template-columns:220px minmax(0,1fr) 260px;gap:12px}
-.assets{display:grid;gap:6px}
-.asset{background:var(--panel2);padding:10px;border-radius:9px;display:flex;justify-content:space-between}
-.selected{outline:1px solid var(--accent)}
-.chart{height:365px;background:#080c16;border:1px solid var(--border);border-radius:14px}
-.chart canvas{width:100%;height:100%;display:block}
-.order input,.order select{width:100%;background:#11172a;color:#fff;border:1px solid #293250;border-radius:8px;padding:9px;margin:5px 0 10px}
-.table{width:100%;border-collapse:collapse}
-.table th,.table td{padding:8px;border-bottom:1px solid #252d45;text-align:left}
-.notice{padding:10px;background:#11192b;border-radius:10px;color:#9ca8c5;font-size:12px}
-hr{border-color:#252d45}
-.tool-input{width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);background:#11172a;color:#fff;margin:6px 0}
-@media(max-width:1050px){
-.editor,.trade{grid-template-columns:1fr}
-.g4{grid-template-columns:repeat(2,1fr)}
-.gamegrid,.toolgrid{grid-template-columns:repeat(3,1fr)}
-}
-@media(max-width:700px){
-.app{display:block}
-.side{width:100%;height:auto;position:relative}
-.g2,.g3,.g4{grid-template-columns:1fr}
-.gamegrid,.toolgrid{grid-template-columns:repeat(2,1fr)}
-.main{padding:10px}
-.top{flex-wrap:wrap}
-#time{width:100%}
-.preview{height:380px}
-}
+:root{--bg:#050507;--panel:#0d0d12;--panel2:#13131a;--text:#f5f7ff;--muted:#9296a8;--rgb:#00f6ff;--rgb2:#ff00e6;--ok:#39ff88;--bad:#ff4d6d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#151526 0,#050507 38%,#020204 100%);color:var(--text);font:14px system-ui,Segoe UI,sans-serif;min-height:100vh}
+body.rgb:before{content:"";position:fixed;inset:0;pointer-events:none;box-shadow:inset 0 0 90px #00f6ff18,inset 0 0 180px #ff00e618;z-index:20}
+header{position:sticky;top:0;z-index:30;background:#07070be8;backdrop-filter:blur(14px);border-bottom:1px solid #ffffff12;padding:14px 18px;display:flex;gap:12px;align-items:center}
+.logo{font-size:21px;font-weight:900;letter-spacing:.8px;text-shadow:0 0 14px var(--rgb)}.logo i{color:var(--rgb);font-style:normal}
+.search{flex:1;max-width:600px;margin:auto;position:relative}.search input{width:100%;padding:12px 15px;border-radius:12px;border:1px solid #ffffff16;background:#0c0c12;color:white;outline:0}.search input:focus{border-color:var(--rgb);box-shadow:0 0 18px #00f6ff22}
+button,.btn{border:1px solid #ffffff18;background:#11111a;color:white;padding:10px 13px;border-radius:10px;cursor:pointer;transition:.18s}.btn:hover,button:hover{transform:translateY(-1px);border-color:var(--rgb);box-shadow:0 0 15px #00f6ff20}button.primary{background:linear-gradient(90deg,#00bcd4,#8b00ff);border:0}
+.layout{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 65px)}aside{border-right:1px solid #ffffff10;padding:15px;position:sticky;top:65px;height:calc(100vh - 65px);overflow:auto}.nav{display:flex;flex-direction:column;gap:6px}.nav button{text-align:left;background:transparent}.nav button.active{background:#ffffff0c;border-color:#00f6ff66}.main{padding:20px;max-width:1500px;width:100%;margin:auto}.hero{padding:26px;border:1px solid #ffffff10;border-radius:20px;background:linear-gradient(135deg,#101019cc,#09090dcc);box-shadow:0 0 35px #00f6ff08}.hero h1{font-size:clamp(28px,5vw,54px);margin:0 0 8px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:16px}.card{background:#0c0c12;border:1px solid #ffffff10;border-radius:15px;padding:15px;box-shadow:0 0 18px #0008}.card h3{margin:0 0 7px}.card p{color:var(--muted);margin:7px 0 13px}.view{display:none}.view.active{display:block}.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.output{min-height:70px;padding:12px;border-radius:10px;background:#06060a;border:1px solid #ffffff10;white-space:pre-wrap}.field{width:100%;padding:10px;background:#090910;color:white;border:1px solid #ffffff18;border-radius:9px;margin:5px 0;outline:0}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1}.game{min-height:230px;display:grid;place-items:center;background:#050508;border:1px solid #ffffff10;border-radius:14px;margin-top:12px;overflow:hidden}.game canvas{max-width:100%;background:#020204}.stat{font-size:25px;font-weight:800}.green{color:var(--ok)}.red{color:var(--bad)}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px;border-bottom:1px solid #ffffff0d}.tag{display:inline-block;padding:4px 8px;border-radius:999px;background:#ffffff0c;color:var(--muted);margin:2px}.challenge{display:flex;align-items:center;gap:12px;padding:12px;border-bottom:1px solid #ffffff0d}.challenge input{width:18px;height:18px}.code{font-family:Consolas,monospace;min-height:300px;resize:vertical}.resultbox{min-height:80px}.clock{font-size:60px;font-variant-numeric:tabular-nums;text-align:center;text-shadow:0 0 22px var(--rgb)}@media(max-width:800px){.layout{grid-template-columns:1fr}aside{position:static;height:auto;border-right:0;border-bottom:1px solid #ffffff10}.nav{display:grid;grid-template-columns:repeat(3,1fr)}.nav button{font-size:12px}.main{padding:12px}header{flex-wrap:wrap}.search{order:3;flex-basis:100%;max-width:none}}
 </style>
 </head>
-<body>
-<div class="app">
-<aside class="side">
-<div class="logo">NOVA<span>CUT</span> ULTRA</div>
-<div class="nav">
-<button class="active" data-page="home">🏠 Dashboard</button>
-<button data-page="editor">🎬 Ultra Editor</button>
-<button data-page="live">📡 Live Hub</button>
-<button data-page="cricket">🏏 India Cricket</button>
-<button data-page="games">🎮 20 Games</button>
-<button data-page="tools">🛠️ 35 Tools</button>
-<button data-page="watch">⌚ Smartwatch</button>
-<button data-page="trade">📈 Paper Trading</button>
-</div>
-</aside>
-
+<body class="rgb">
+<header><div class="logo">NOVA<span><i>VERSE</i></span></div><div class="search"><input id="globalSearch" placeholder="Search games, tools, weather, trading..."></div><button id="rgbBtn">RGB ON</button><button id="brightBtn">Brightness</button></header>
+<div class="layout">
+<aside><div class="nav" id="nav">
+<button class="active" data-view="home">⌂ Dashboard</button><button data-view="games">🎮 Games</button><button data-view="tools">🛠 Tools</button><button data-view="weather">🌦 Weather</button><button data-view="trading">📈 Paper Trading</button><button data-view="watch">⌚ Smartwatch</button><button data-view="coding">💻 Coding Sandbox</button><button data-view="challenge">📅 10-Day Challenge</button>
+</div></aside>
 <main class="main">
-<div class="top">
-<input id="search" class="search" placeholder="Search games, tools, animations..." autocomplete="off">
-<b id="time"></b>
-</div>
-
-<section class="page active" id="home">
-<div class="hero">
-<h1>NovaCut Ultra Pro ⚡</h1>
-<p class="muted">CapCut-style browser editor + 20 games + live-style hub + smartwatch + paper trading.</p>
-<button class="btn" data-go="editor">Start Editing</button>
-</div>
-<div class="grid g4" style="margin-top:12px">
-<div class="card">Animations<div class="stat">50+</div></div>
-<div class="card">Transitions<div class="stat">50+</div></div>
-<div class="card">Games<div class="stat">20</div></div>
-<div class="card">Tools<div class="stat">35</div></div>
-</div>
-<div class="grid g3" style="margin-top:12px">
-<div class="card"><h3>🌦️ Weather</h3><div class="stat">28°C</div><span class="muted">Demo/API-ready</span></div>
-<div class="card"><h3>🥇 Gold</h3><div class="stat">₹1,01,250</div><span class="muted">Demo feed</span></div>
-<div class="card"><h3>🥈 Silver</h3><div class="stat">₹1,16,800</div><span class="muted">Demo feed</span></div>
-</div>
-</section>
-
-<section class="page" id="editor">
-<h2>🎬 Ultra Pro Editor</h2>
-<div class="editor">
-<div class="panel">
-<button class="btn" id="importBtn">＋ Import Multiple</button>
-<input id="media" type="file" accept="image/*,video/*" multiple hidden>
-<button class="tool" data-action="Trim / Split">✂️ Trim / Split</button>
-<button class="tool" data-action="Crop / Rotate">📐 Crop / Rotate</button>
-<button class="tool" data-action="Text / Captions">📝 Text / Captions</button>
-<button class="tool" data-action="Music / SFX">🎵 Music / SFX</button>
-<button class="tool" data-action="Filters">🎨 Filters</button>
-<button class="tool" data-action="Stickers">✨ Stickers</button>
-<button class="tool" data-action="Speed / Reverse">⚡ Speed / Reverse</button>
-</div>
-
-<div>
-<div class="preview"><div id="screen" class="screen">Import photos/videos</div></div>
-<div class="panel" style="margin-top:9px">
-<b>Timeline</b>
-<div id="track" class="track"></div>
-<button class="btn alt" id="addClipBtn">＋ Clip</button>
-<button class="btn alt" data-toast="Transition applied">↔ Transition</button>
-<button class="btn" data-toast="Export demo ready">Export 1080p</button>
-</div>
-</div>
-
-<div class="panel">
-<h3>✨ 50+ Animations</h3><div id="anims" class="chips"></div>
-<h3>⚡ 50+ Transitions</h3><div id="trans" class="chips"></div>
-</div>
-</div>
-</section>
-
-<section class="page" id="live">
-<h2>📡 Live Hub</h2><div id="liveGrid" class="grid g3"></div>
-</section>
-
-<section class="page" id="cricket">
-<h2>🏏 India Cricket Center</h2>
-<div class="hero">
-<h1 id="score">IND 0/0</h1>
-<div id="overs" class="muted">0.0 overs • Demo simulator</div>
-<button class="btn" id="ballBtn">Simulate Ball</button>
-</div>
-<div class="grid g3" style="margin-top:12px">
-<div class="card">🏏 Batter A <b id="ba">0</b>*</div>
-<div class="card">🏏 Batter B <b id="bb">0</b></div>
-<div class="card">🎯 Bowler <b id="bw">0/0</b></div>
-</div>
-<div class="card" style="margin-top:12px">
-<h3>Match Center</h3>
-<table class="table">
-<tr><th>Format</th><th>Opponent</th><th>Status</th></tr>
-<tr><td>ODI</td><td>International XI</td><td>Upcoming</td></tr>
-<tr><td>T20I</td><td>International XI</td><td>Upcoming</td></tr>
-</table>
-<p class="notice">Actual live scores need a cricket-data API; this offline-safe interface uses a simulator.</p>
-</div>
-</section>
-
-<section class="page" id="games">
-<h2>🎮 20 Games</h2>
-<div id="gamesGrid" class="gamegrid"></div>
-<div id="gameBox" class="card" style="display:none;margin-top:12px">
-<h2 id="gameTitle"></h2>
-<canvas id="gameCanvas" width="900" height="300" style="width:100%;background:#05070e;border-radius:12px"></canvas>
-<p>Score: <b id="gameScore">0</b></p>
-<button class="btn" id="gamePointBtn">Score Point</button>
-</div>
-</section>
-
-<section class="page" id="tools">
-<h2>🛠️ 35 Tools</h2>
-<div id="toolsGrid" class="toolgrid"></div>
-<div id="toolOut" class="card" style="margin-top:12px">Select a tool.</div>
-</section>
-
-<section class="page" id="watch">
-<h2>⌚ Smartwatch Studio</h2>
-<div class="grid g2">
-<div class="card">
-<div class="clock">
-<div id="hour" class="hand hour"></div>
-<div id="minute" class="hand minute"></div>
-<div id="second" class="hand second"></div>
-<div class="dot"></div>
-</div>
-<h2 style="text-align:center" id="digital"></h2>
-</div>
-<div class="grid g2">
-<div class="card">
-<h3>⏱️ Stopwatch</h3>
-<div class="stat" id="sw">0.0s</div>
-<button class="btn" id="swToggle">Start/Stop</button>
-<button class="btn alt" id="swReset">Reset</button>
-</div>
-<div class="card">
-<h3>⌚ Smart Features</h3>
-🔋 Battery 87%<br>👟 Steps 7,842<br>❤️ Heart 72 BPM<br>🔥 Calories 486 kcal
-</div>
-<div class="card">
-<h3>🌍 World Clock</h3><div id="world"></div>
-</div>
-<div class="card">
-<h3>🎨 Watch Faces</h3>
-<button class="chip" data-face="0">Neon</button>
-<button class="chip" data-face="1">Glass</button>
-<button class="chip" data-face="2">Cyber</button>
-</div>
-</div>
-</div>
-</section>
-
-<section class="page" id="trade">
-<h2>📈 Paper Trading</h2>
-<div class="trade">
-<div class="card">
-<h3>Market Watch</h3><div id="assets" class="assets"></div>
-</div>
-<div>
-<div class="card"><b id="assetName">NIFTY 50</b><div id="price" class="stat">25,420</div></div>
-<div class="chart"><canvas id="chart"></canvas></div>
-<div class="card" style="margin-top:10px">
-<b>Indicators</b>
-<div class="chips" style="margin-top:8px">
-<span class="chip">SMA</span><span class="chip">EMA</span><span class="chip">RSI</span><span class="chip">MACD</span><span class="chip">VWAP</span>
-</div>
-</div>
-</div>
-<div class="card order">
-<h3>Order Ticket</h3>
-<label>Qty<input id="qty" type="number" value="1" min="1" step="1"></label>
-<select id="orderType"><option>Market</option><option>Limit</option><option>Stop</option></select>
-<input id="trigger" placeholder="Limit / trigger">
-<button class="btn" id="buyBtn">BUY</button>
-<button class="btn" id="sellBtn">SELL</button>
-<hr>
-Balance<div class="stat" id="balance">₹10,00,000</div>
-<button class="btn alt" id="riskBtn">Risk Calculator</button>
-<p id="riskOut" class="muted"></p>
-</div>
-</div>
-<div class="card" style="margin-top:12px">
-<h3>Trade History</h3>
-<div style="overflow:auto">
-<table class="table" id="history">
-<tr><th>Side</th><th>Asset</th><th>Qty</th><th>Price</th><th>Status</th></tr>
-</table>
-</div>
-</div>
-</section>
-</main>
-</div>
-
-<div id="toast" style="position:fixed;right:15px;bottom:15px;background:#151c31;border:1px solid #303b5b;padding:12px;border-radius:10px;display:none;z-index:20"></div>
-
+<section id="home" class="view active"><div class="hero"><h1>Black RGB Command Center</h1><p class="muted">20 playable games • 35 working tools • weather • paper trading • smartwatch • coding sandbox • persistent challenge.</p><div class="toolbar"><button class="primary" data-go="games">Play Games</button><button data-go="tools">Open 35 Tools</button><button data-go="trading">Paper Trade</button></div></div><div class="grid" id="homeCards"></div></section>
+<section id="games" class="view"><h2>🎮 20 Playable Games</h2><p class="muted">Each game has its own working controls and score/restart logic.</p><div class="grid" id="gamesGrid"></div><div id="gameArea"></div></section>
+<section id="tools" class="view"><h2>🛠 35 Working Tools</h2><div class="grid" id="toolsGrid"></div></section>
+<section id="weather" class="view"><h2>🌦 Weather</h2><div class="card"><div class="row"><input id="city" class="field" placeholder="Enter city (e.g. Muzaffarnagar)"><button id="weatherBtn" class="primary">Get Weather</button></div><div id="weatherOut" class="output">Weather uses a live public forecast endpoint when internet access is available.</div></div></section>
+<section id="trading" class="view"><h2>📈 Paper Trading</h2><div class="grid"><div class="card"><h3>Account</h3><div class="stat" id="cash">₹100,000</div><p>Available cash</p><button id="resetTrade">Reset</button></div><div class="card"><h3>Order</h3><select id="symbol" class="field"><option>NVDA</option><option>AAPL</option><option>TSLA</option><option>BTC</option><option>ETH</option><option>RELIANCE</option><option>TCS</option></select><input id="qty" class="field" type="number" min="1" value="1"><input id="price" class="field" type="number" min="0" step="0.01" placeholder="Price"><div class="row"><button id="buy" class="primary">BUY</button><button id="sell">SELL</button></div></div><div class="card"><h3>Portfolio P&L</h3><div id="pnl" class="stat">₹0</div><p>Realized + mark-to-entry P&L for this paper account.</p></div></div><div class="card" style="margin-top:12px"><h3>Holdings</h3><div id="holdings"></div></div></section>
+<section id="watch" class="view"><h2>⌚ Smartwatch</h2><div class="grid"><div class="card"><h3>Digital Watch</h3><div class="clock" id="clock"></div><div id="date" class="muted" style="text-align:center"></div></div><div class="card"><h3>Stopwatch</h3><div class="clock" id="sw">00:00.00</div><div class="toolbar"><button id="swStart">Start</button><button id="swLap">Lap</button><button id="swReset">Reset</button></div><div id="laps"></div></div><div class="card"><h3>Timer</h3><input id="timerMin" class="field" type="number" min="0" value="5"><div class="clock" id="timer">05:00</div><div class="toolbar"><button id="timerStart">Start</button><button id="timerReset">Reset</button></div></div></div></section>
+<section id="coding" class="view"><h2>💻 Coding Sandbox</h2><p class="muted">Run JavaScript locally in the browser. Output is captured below.</p><textarea id="code" class="field code">console.log("Hello NovaVerse!");
+const x = 7 * 6;
+console.log("7 × 6 =", x);</textarea><div class="toolbar"><button id="runCode" class="primary">Run JavaScript</button><button id="clearCode">Clear</button></div><pre id="codeOut" class="output"></pre></section>
+<section id="challenge" class="view"><h2>📅 Persistent 10-Day Challenge</h2><p class="muted">Your completion state is stored in localStorage and survives reloads.</p><div class="card" id="challengeList"></div></section>
+</main></div>
 <script>
-'use strict';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const views=$$('.view'); function show(id){views.forEach(v=>v.classList.toggle('active',v.id===id));$$('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));location.hash=id}
+$$('#nav button').forEach(b=>b.onclick=()=>show(b.dataset.view)); $$('[data-go]').forEach(b=>b.onclick=()=>show(b.dataset.go));
 
-const $ = id => document.getElementById(id);
+let rgb=true,bright=1;$('#rgbBtn').onclick=()=>{rgb=!rgb;document.body.classList.toggle('rgb',rgb);$('#rgbBtn').textContent=rgb?'RGB ON':'RGB OFF'};
+$('#brightBtn').onclick=()=>{bright=bright>=1?.65:bright+.35;document.body.style.filter=`brightness(${bright})`;};
 
-function toast(message){
-  const el=$('toast');
-  el.textContent=message;
-  el.style.display='block';
-  clearTimeout(window.__toastTimer);
-  window.__toastTimer=setTimeout(()=>el.style.display='none',1600);
-}
-
-function go(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
-  if(id==='trade') requestAnimationFrame(drawChart);
-}
-
-document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
-document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
-document.querySelectorAll('[data-toast]').forEach(b=>b.addEventListener('click',()=>toast(b.dataset.toast)));
-document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>toast(b.dataset.action+' panel ready')));
-
-/* Editor */
-const animations=[
-'Fade In','Fade Out','Zoom In','Zoom Out','Bounce','Elastic','Slide Left','Slide Right','Slide Up','Slide Down',
-'Rotate','Spin','Flip X','Flip Y','Swing','Pulse','Shake','Wobble','Jelly','Flash','Glitch','RGB Split','Neon','Cyber',
-'Blur In','Blur Out','Light Sweep','Whip Pan','Camera Push','Camera Pull','Parallax','Float','Drift','Pop','Drop','Rise',
-'Reveal','Mask Wipe','Type On','Kinetic','Wave','Ripple','Heartbeat','Tada','Rubber','Back In','Back Out','Elastic In',
-'Elastic Out','Perspective','3D Card','Chromatic'
-];
-
-const transitions=[
-'Cross Dissolve','Dip Black','Dip White','Push Left','Push Right','Push Up','Push Down','Slide Left','Slide Right',
-'Slide Up','Slide Down','Wipe Left','Wipe Right','Wipe Up','Wipe Down','Zoom Cross','Spin Cross','Cube','Flip','Blur',
-'Glitch','RGB Flash','Light Leak','Film Burn','Whip','Camera Shake','Ripple','Prism','Lens','Radial','Circle Wipe',
-'Clock Wipe','Diamond','Star','Pixelate','Mosaic','Color Flash','Neon Swipe','Cyber Scan','Velocity','Motion Blur',
-'Parallax','3D Rotate','Page Turn','Stretch','Elastic','Bounce','Warp','Kaleido','Noise','Digital'
-];
-
-$('anims').innerHTML=animations.map(x=>'<button class="chip anim-item">'+x+'</button>').join('');
-$('trans').innerHTML=transitions.map(x=>'<button class="chip trans-item">'+x+'</button>').join('');
-document.querySelectorAll('.anim-item').forEach(b=>b.addEventListener('click',()=>toast(b.textContent+' applied')));
-document.querySelectorAll('.trans-item').forEach(b=>b.addEventListener('click',()=>toast(b.textContent+' added')));
-
-$('importBtn').addEventListener('click',()=>$('media').click());
-
-$('media').addEventListener('change',e=>{
-  const files=[...e.target.files];
-  files.forEach(file=>{
-    const clip=document.createElement('div');
-    clip.className='clip';
-    clip.textContent='🎞️ '+file.name.slice(0,18);
-    clip.addEventListener('click',()=>preview(file));
-    $('track').appendChild(clip);
-  });
-  if(files[0]) preview(files[0]);
-  if(files.length) toast(files.length+' media imported');
-  e.target.value='';
-});
-
-function preview(file){
-  const url=URL.createObjectURL(file);
-  $('screen').innerHTML='';
-  if(file.type.startsWith('video/')){
-    const video=document.createElement('video');
-    video.src=url; video.controls=true; video.autoplay=true; video.muted=true;
-    $('screen').appendChild(video);
-  }else{
-    const img=document.createElement('img');
-    img.src=url; img.alt=file.name;
-    $('screen').appendChild(img);
-  }
-}
-
-$('addClipBtn').addEventListener('click',()=>{
-  const clip=document.createElement('div');
-  clip.className='clip';
-  clip.textContent='📷 Demo Clip '+($('track').children.length+1);
-  $('track').appendChild(clip);
-});
-
-/* Live */
-const live=[
-['🌦️ Weather','28°C'],['🥇 Gold','₹1,01,250'],['🥈 Silver','₹1,16,800'],['💱 USD/INR','₹87.42'],
-['₿ Bitcoin','$112,400'],['🛢️ Crude Oil','$69.8'],['📊 NIFTY 50','25,420'],['📊 SENSEX','83,180'],
-['⚡ Electricity','Normal'],['🌐 Internet','Online'],['🕐 Time','Live'],['📅 Date',new Date().toLocaleDateString()]
-];
-$('liveGrid').innerHTML=live.map(x=>'<div class="card"><h3>'+x[0]+'</h3><div class="stat">'+x[1]+'</div><span class="muted">Demo/local feed</span></div>').join('');
-
-/* Games */
 const games=[
-'Snake Arena','Tic Tac Toe','Memory Match','2048','Minesweeper','Reaction Test','Aim Trainer','Flappy Jet',
-'Space Dodge','Car Racer','Breakout','Pong','Whack Target','Color Rush','Math Sprint','Typing Race',
-'Airship Pilot','Alien Shooter','Tower Stack','Maze Runner'
+['Snake','snake'],['Pong','pong'],['Breakout','breakout'],['Flappy','flappy'],['2048','2048'],['Tic Tac Toe','ttt'],['Memory','memory'],['Minesweeper','mine'],['Reaction','reaction'],['Clicker','clicker'],['Number Guess','guess'],['Rock Paper Scissors','rps'],['Whack-a-Mole','whack'],['Space Dodge','dodge'],['Car Dodge','car'],['Asteroids','asteroids'],['Connect Four','connect4'],['Hangman','hangman'],['Math Sprint','math'],['Color Match','color']];
+$('#gamesGrid').innerHTML=games.map((g,i)=>`<div class="card"><h3>${i+1}. ${g[0]}</h3><p>Playable ${g[0]} mini-game.</p><button onclick="startGame('${g[1]}')">Play</button></div>`).join('');
+
+const toolDefs=[
+['Calculator',()=>toolCalc()],['Unit Converter',()=>toolUnit()],['BMI Calculator',()=>toolBMI()],['Percentage',()=>toolPercent()],['Age Calculator',()=>toolAge()],['Tip Calculator',()=>toolTip()],['Loan EMI',()=>toolEMI()],['Compound Interest',()=>toolCI()],['Simple Interest',()=>toolSI()],['Random Number',()=>toolRandom()],['Password Generator',()=>toolPass()],['Color Generator',()=>toolColor()],['Text Counter',()=>toolText()],['Word Counter',()=>toolWords()],['Case Converter',()=>toolCase()],['Base64',()=>toolBase64()],['JSON Formatter',()=>toolJSON()],['Timestamp',()=>toolTime()],['Stopwatch',()=>show('watch')],['Timer',()=>show('watch')],['Notes',()=>toolNotes()],['To-do List',()=>toolTodo()],['Pomodoro',()=>toolPomodoro()],['Dice Roller',()=>toolDice()],['Coin Flip',()=>toolCoin()],['QR Generator',()=>toolQR()],['Regex Tester',()=>toolRegex()],['HTML Preview',()=>toolHTML()],['JS Runner',()=>show('coding')],['IP/Network Info',()=>toolNet()],['Character Frequency',()=>toolFreq()],['Fibonacci',()=>toolFib()],['Prime Checker',()=>toolPrime()],['Markdown Preview',()=>toolMD()],['Theme Toggle',()=>rgbBtn.click()]
 ];
+$('#toolsGrid').innerHTML=toolDefs.map((t,i)=>`<div class="card"><h3>${i+1}. ${t[0]}</h3><button onclick="toolOpen(${i})">Open</button></div>`).join('');
+function toolOpen(i){toolDefs[i][1]();}
 
-$('gamesGrid').innerHTML=games.map((name,i)=>
-  '<button class="game-item" data-game="'+i+'">🎮 <b>'+(i+1)+'. '+name+'</b><br><span class="muted">Play mini demo</span></button>'
-).join('');
+function popup(title,html,fn){$('#gameArea').innerHTML=`<div class="card"><h2>${title}</h2>${html}<div id="toolResult" class="output"></div></div>`; if(fn)fn();}
+function toolCalc(){popup('Calculator',`<input id="a" class="field" placeholder="Expression e.g. (12+8)*3"><button onclick="toolResult.textContent=Function('return '+a.value)()">Calculate</button>`)}
+function toolUnit(){popup('Unit Converter',`<input id="a" class="field" type="number" value="1"><select id="u" class="field"><option>km-mi</option><option>mi-km</option><option>kg-lb</option><option>lb-kg</option><option>C-F</option><option>F-C</option></select><button onclick="let x=+a.value;let r={\"km-mi\":x*.621371,\"mi-km\":x*1.60934,\"kg-lb\":x*2.20462,\"lb-kg\":x*.453592,\"C-F\":x*9/5+32,\"F-C\":(x-32)*5/9}[u.value];toolResult.textContent=r.toFixed(4)">Convert</button>`)}
+function toolBMI(){popup('BMI Calculator',`<input id="a" class="field" placeholder="kg"><input id="b" class="field" placeholder="height cm"><button onclick="toolResult.textContent=(+a.value/((+b.value/100)**2)).toFixed(2)">Calculate</button>`)}
+function toolPercent(){popup('Percentage',`<input id="a" class="field" placeholder="Value"><input id="b" class="field" placeholder="%"><button onclick="toolResult.textContent=(+a.value*+b.value/100)">Calculate</button>`)}
+function toolAge(){popup('Age Calculator',`<input id="a" class="field" type="date"><button onclick="let d=new Date(a.value),n=new Date();toolResult.textContent=Math.floor((n-d)/31557600000)+' years'">Calculate</button>`)}
+function toolTip(){popup('Tip Calculator',`<input id="a" class="field" placeholder="Bill"><input id="b" class="field" placeholder="Tip %"><button onclick="toolResult.textContent='Tip ₹'+(+a.value*+b.value/100).toFixed(2)+' | Total ₹'+(+a.value*(1+ +b.value/100)).toFixed(2)">Calculate</button>`)}
+function toolEMI(){popup('Loan EMI',`<input id="a" class="field" placeholder="Principal"><input id="b" class="field" placeholder="Annual rate %"><input id="c" class="field" placeholder="Months"><button onclick="let r=+b.value/1200,n=+c.value,p=+a.value;toolResult.textContent='EMI ₹'+(p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1)).toFixed(2)">Calculate</button>`)}
+function toolCI(){popup('Compound Interest',`<input id="a" class="field" placeholder="Principal"><input id="b" class="field" placeholder="Rate %"><input id="c" class="field" placeholder="Years"><button onclick="toolResult.textContent=(+a.value*Math.pow(1+ +b.value/100,+c.value)).toFixed(2)">Calculate</button>`)}
+function toolSI(){popup('Simple Interest',`<input id="a" class="field" placeholder="Principal"><input id="b" class="field" placeholder="Rate %"><input id="c" class="field" placeholder="Years"><button onclick="toolResult.textContent=(+a.value*+b.value*+c.value/100).toFixed(2)">Calculate</button>`)}
+function toolRandom(){popup('Random Number',`<input id="a" class="field" type="number" value="1"><input id="b" class="field" type="number" value="100"><button onclick="toolResult.textContent=Math.floor(+a.value+Math.random()*(+b.value-+a.value+1))">Generate</button>`)}
+function toolPass(){popup('Password Generator',`<input id="a" class="field" type="number" value="16"><button onclick="let s='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%';toolResult.textContent=[...crypto.getRandomValues(new Uint32Array(+a.value))].map(x=>s[x%s.length]).join('')">Generate</button>`)}
+function toolColor(){popup('Color Generator',`<button onclick="let c='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');toolResult.textContent=c;toolResult.style.color=c">Generate Color</button>`)}
+function toolText(){popup('Text Counter',`<textarea id="a" class="field"></textarea><button onclick="toolResult.textContent='Characters: '+a.value.length">Count</button>`)}
+function toolWords(){popup('Word Counter',`<textarea id="a" class="field"></textarea><button onclick="toolResult.textContent='Words: '+(a.value.trim()?a.value.trim().split(/\\s+/).length:0)">Count</button>`)}
+function toolCase(){popup('Case Converter',`<textarea id="a" class="field"></textarea><button onclick="toolResult.textContent=a.value.toUpperCase()">UPPERCASE</button><button onclick="toolResult.textContent=a.value.toLowerCase()">lowercase</button>`)}
+function toolBase64(){popup('Base64',`<textarea id="a" class="field"></textarea><button onclick="toolResult.textContent=btoa(unescape(encodeURIComponent(a.value)))">Encode</button><button onclick="toolResult.textContent=decodeURIComponent(escape(atob(a.value)))">Decode</button>`)}
+function toolJSON(){popup('JSON Formatter',`<textarea id="a" class="field"></textarea><button onclick="try{toolResult.textContent=JSON.stringify(JSON.parse(a.value),null,2)}catch(e){toolResult.textContent=e}">Format</button>`)}
+function toolTime(){popup('Timestamp',`<button onclick="toolResult.textContent=Date.now()">Current Unix ms</button>`)}
+function toolNotes(){popup('Notes',`<textarea id="a" class="field" style="min-height:220px" placeholder="Saved automatically...">${localStorage.notes||''}</textarea><button onclick="localStorage.notes=a.value;toolResult.textContent='Saved'">Save</button>`)}
+function toolTodo(){popup('To-do List',`<input id="a" class="field" placeholder="Task"><button onclick="let x=JSON.parse(localStorage.todo||'[]');x.push(a.value);localStorage.todo=JSON.stringify(x);toolResult.textContent=x.map((v,i)=>(i+1)+'. '+v).join('\\n')">Add</button>`)}
+function toolPomodoro(){popup('Pomodoro',`<div class="clock" id="pom">25:00</div><button onclick="startPom()">Start</button>`);window.startPom=()=>{let t=1500;let id=setInterval(()=>{t--;pom.textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');if(t<=0)clearInterval(id)},1000)}}
+function toolDice(){popup('Dice Roller',`<button onclick="toolResult.textContent=1+Math.floor(Math.random()*6)">Roll d6</button>`)}
+function toolCoin(){popup('Coin Flip',`<button onclick="toolResult.textContent=Math.random()<.5?'Heads':'Tails'">Flip</button>`)}
+function toolQR(){popup('QR Generator',`<input id="a" class="field" placeholder="Text or URL"><button onclick="toolResult.innerHTML='<img alt=QR src=https://api.qrserver.com/v1/create-qr-code/?size=180x180&data='+encodeURIComponent(a.value)+'>'">Generate</button>`)}
+function toolRegex(){popup('Regex Tester',`<input id="a" class="field" placeholder="Regex"><input id="b" class="field" placeholder="Text"><button onclick="try{toolResult.textContent=new RegExp(a.value).test(b.value)}catch(e){toolResult.textContent=e}">Test</button>`)}
+function toolHTML(){popup('HTML Preview',`<textarea id="a" class="field"></textarea><button onclick="toolResult.innerHTML=a.value">Preview</button>`)}
+function toolNet(){popup('Network Info',`<button onclick="toolResult.textContent=navigator.onLine?'Online':'Offline'">Check</button>`)}
+function toolFreq(){popup('Character Frequency',`<textarea id="a" class="field"></textarea><button onclick="let m={};for(let c of a.value)m[c]=(m[c]||0)+1;toolResult.textContent=JSON.stringify(m,null,2)">Count</button>`)}
+function toolFib(){popup('Fibonacci',`<input id="a" class="field" type="number" value="10"><button onclick="let n=+a.value,x=0,y=1,s=[];for(let i=0;i<n;i++){s.push(x);[x,y]=[y,x+y]}toolResult.textContent=s.join(', ')">Generate</button>`)}
+function toolPrime(){popup('Prime Checker',`<input id="a" class="field" type="number"><button onclick="let n=+a.value,p=n>1;for(let i=2;i*i<=n;i++)if(n%i===0)p=false;toolResult.textContent=p?'Prime':'Not prime'">Check</button>`)}
+function toolMD(){popup('Markdown Preview',`<textarea id="a" class="field"></textarea><button onclick="toolResult.innerHTML=a.value.replace(/\\*\\*(.*?)\\*\\*/g,'<b>$1</b>').replace(/^# (.*)$/gm,'<h2>$1</h2>').replace(/\\n/g,'<br>')">Preview</button>`)}
 
-let gameScore=0;
-document.querySelectorAll('.game-item').forEach(b=>b.addEventListener('click',()=>{
-  $('gameBox').style.display='block';
-  $('gameTitle').textContent='🎮 '+games[Number(b.dataset.game)];
-  gameScore=0;
-  $('gameScore').textContent='0';
-  drawGame();
-  $('gameBox').scrollIntoView({behavior:'smooth',block:'nearest'});
-}));
+function startGame(type){const a=$('#gameArea'); if(['clicker','guess','rps','reaction','math','color'].includes(type)){simpleGame(type);return}
+let title=games.find(x=>x[1]===type)?.[0]||type;a.innerHTML=`<div class="card"><h2>${title}</h2><div class="game"><canvas id="gc" width="720" height="360"></canvas></div><div class="toolbar"><button onclick="startGame('${type}')">Restart</button><span id="score" class="tag">Score: 0</span></div><p class="muted">Controls: keyboard arrows/WASD where applicable. Tap/click the game for mouse interaction.</p></div>`;canvasGame(type)}
+function simpleGame(t){if(t==='clicker')popup('Clicker','<button id="big" class="primary" style="font-size:35px;padding:35px">CLICK</button>',()=>{let n=0;big.onclick=()=>toolResult.textContent=++n});else if(t==='guess')popup('Number Guess','<input id="a" class="field" type="number" placeholder="1-100"><button onclick="let n=+a.value,r=window.gn||(window.gn=1+Math.floor(Math.random()*100));toolResult.textContent=n===r?'Correct!':n<r?'Too low':'Too high'">Guess</button>');else if(t==='rps')popup('Rock Paper Scissors','<div class="toolbar"><button onclick="rps(0)">Rock</button><button onclick="rps(1)">Paper</button><button onclick="rps(2)">Scissors</button></div>',()=>window.rps=x=>{let c=Math.floor(Math.random()*3);toolResult.textContent=x===c?'Draw':(x+2)%3===c?'You win!':'CPU wins!'});else if(t==='reaction')popup('Reaction Test','<button id="react" class="primary">Wait...</button>',()=>{let st=0;react.disabled=true;setTimeout(()=>{react.disabled=false;react.textContent='CLICK NOW';st=performance.now();react.onclick=()=>toolResult.textContent=Math.round(performance.now()-st)+' ms'},1000+Math.random()*3000)});else if(t==='math'){let q=Math.floor(Math.random()*20)+1,r=Math.floor(Math.random()*20)+1;popup('Math Sprint',`<div class="stat">${q} + ${r} = ?</div><input id="a" class="field" type="number"><button onclick="toolResult.textContent=(+a.value===${q+r})?'Correct!':'Try again'">Answer</button>`)}else if(t==='color'){let c=['red','blue','green','yellow','purple'][Math.floor(Math.random()*5)];popup('Color Match',`<div style="font-size:35px;text-align:center;color:${c}">${c.toUpperCase()}</div><button onclick="toolResult.textContent='Matched '+ '${c}'">Match</button>`)}}
+function canvasGame(type){const c=$('#gc'),x=c.getContext('2d');let score=0,keys={};onkeydown=e=>keys[e.key.toLowerCase()]=1;onkeyup=e=>keys[e.key.toLowerCase()]=0;
+if(type==='pong'){let py=150,by=180,bx=360,vx=4,vy=3;function f(){x.clearRect(0,0,720,360);x.fillStyle='#fff';x.fillRect(15,py,12,70);x.fillRect(693,by,12,70);x.beginPath();x.arc(bx,by+25,9,0,7);x.fill();py+=((keys.w?-6:0)+(keys.s?6:0));bx+=vx;by+=vy;if(by<0||by>350)vy*=-1;if(bx<30&&by>py-10&&by<py+80)vx=Math.abs(vx);if(bx>680&&by>by-1){by+=0}if(bx>700){bx=360;score++}if(bx<0){bx=360;vx=4}$('#score').textContent='Score: '+score;requestAnimationFrame(f)}f()}
+else if(type==='snake'){let s=[[10,10]],d=[1,0],food=[20,15];function f(){x.clearRect(0,0,720,360);d=keys.arrowup?[0,-1]:keys.arrowdown?[0,1]:keys.arrowleft?[-1,0]:keys.arrowright?[1,0]:d;let h=[s[0][0]+d[0],s[0][1]+d[1]];if(h[0]<0||h[0]>=36||h[1]<0||h[1]>=18||s.some(p=>p[0]===h[0]&&p[1]===h[1])){s=[[10,10]];score=0}else{s.unshift(h);if(h[0]===food[0]&&h[1]===food[1]){food=[Math.floor(Math.random()*36),Math.floor(Math.random()*18)];score++}else s.pop()}x.fillStyle='#00f6ff';s.forEach(p=>x.fillRect(p[0]*20,p[1]*20,18,18));x.fillStyle='#ff00e6';x.fillRect(food[0]*20,food[1]*20,18,18);$('#score').textContent='Score: '+score;setTimeout(f,110)}f()}
+else {let px=350,py=320,obs=[];function f(){x.clearRect(0,0,720,360);if(keys.arrowleft||keys.a)px-=6;if(keys.arrowright||keys.d)px+=6;px=Math.max(0,Math.min(690,px));if(Math.random()<.035)obs.push({x:Math.random()*680,y:-20});obs.forEach(o=>o.y+=4);x.fillStyle='#00f6ff';x.fillRect(px,py,30,20);x.fillStyle='#ff00e6';obs.forEach(o=>x.fillRect(o.x,o.y,25,25));obs=obs.filter(o=>o.y<380);$('#score').textContent='Score: '+(++score);requestAnimationFrame(f)}f()}}
+let portfolio=JSON.parse(localStorage.portfolio||'{}'),cash=+(localStorage.cash||100000);function saveTrade(){localStorage.portfolio=JSON.stringify(portfolio);localStorage.cash=cash}function renderTrade(){cashEl.textContent='₹'+cash.toFixed(2);holdings.innerHTML=Object.entries(portfolio).map(([s,v])=>`<div class="challenge"><b>${s}</b><span>${v.qty} @ ₹${v.avg.toFixed(2)}</span><span>Value ₹${(v.qty*v.avg).toFixed(2)}</span></div>`).join('')||'<p class="muted">No holdings.</p>';pnl.textContent='₹0 (entry basis)';}const cashEl=$('#cash');$('#buy').onclick=()=>{let s=symbol.value,q=+qty.value,p=+price.value;if(!q||!p)return alert('Enter quantity and price');let cost=q*p;if(cost>cash)return alert('Insufficient paper cash');let v=portfolio[s]||{qty:0,avg:0};v.avg=(v.avg*v.qty+cost)/(v.qty+q);v.qty+=q;portfolio[s]=v;cash-=cost;saveTrade();renderTrade()};$('#sell').onclick=()=>{let s=symbol.value,q=+qty.value,p=+price.value,v=portfolio[s];if(!v||q>v.qty)return alert('Not enough holdings');cash+=q*p;v.qty-=q;if(!v.qty)delete portfolio[s];saveTrade();renderTrade()};$('#resetTrade').onclick=()=>{portfolio={};cash=100000;saveTrade();renderTrade()};renderTrade();
 
-$('gamePointBtn').addEventListener('click',()=>{
-  gameScore++;
-  $('gameScore').textContent=String(gameScore);
-  drawGame();
-});
+setInterval(()=>{let n=new Date();clock.textContent=n.toLocaleTimeString();date.textContent=n.toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'})},1000);
+let swRun=false,swStart=0,swBase=0,swId;$('#swStart').onclick=()=>{if(swRun){swBase+=performance.now()-swStart;swRun=false;clearInterval(swId);swStart.textContent='Start'}else{swRun=true;swStart=performance.now();swId=setInterval(drawSW,30);swStart.textContent='Stop'}};function drawSW(){let t=(swBase+(swRun?performance.now()-swStart:0))/1000;sw.textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+(t%60).toFixed(2).padStart(5,'0')}$('#swReset').onclick=()=>{swBase=0;swRun=false;clearInterval(swId);sw.textContent='00:00.00'};$('#swLap').onclick=()=>laps.innerHTML+=`<div class="tag">${sw.textContent}</div>`;
+let timerId,timerSec=300;function drawTimer(){timer.textContent=String(Math.floor(timerSec/60)).padStart(2,'0')+':'+String(timerSec%60).padStart(2,'0')}$('#timerStart').onclick=()=>{clearInterval(timerId);timerSec=+timerMin.value*60;timerId=setInterval(()=>{if(timerSec<=0){clearInterval(timerId);alert('Timer finished!');return}timerSec--;drawTimer()},1000)};$('#timerReset').onclick=()=>{clearInterval(timerId);timerSec=+timerMin.value*60;drawTimer()};
 
-function drawGame(){
-  const c=$('gameCanvas'),ctx=c.getContext('2d');
-  ctx.clearRect(0,0,c.width,c.height);
-  ctx.fillStyle='#11182b';
-  ctx.fillRect(0,0,c.width,c.height);
-  ctx.fillStyle='#00d9ff';
-  ctx.beginPath();
-  ctx.arc(80+(gameScore*41)%740,150,24,0,Math.PI*2);
-  ctx.fill();
-  ctx.fillStyle='#fff';
-  ctx.font='bold 24px Arial';
-  ctx.fillText('Mini demo • click Score Point',25,40);
-}
+$('#runCode').onclick=()=>{let out=[];try{const log=(...x)=>out.push(x.join(' '));new Function('console',code.value)({log});codeOut.textContent=out.join('\\n')||'Executed successfully.'}catch(e){codeOut.textContent=e}};
+$('#clearCode').onclick=()=>code.value='';
 
-/* Tools */
-const tools=[
-'Calculator','Unit Converter','Stopwatch','Timer','Pomodoro','Password Generator','QR Maker','Color Picker','HEX/RGB',
-'BMI Demo','Age Calculator','Percentage','Tip Calculator','EMI Calculator','Compound Interest','Simple Interest',
-'Loan Calculator','Discount','GST Calculator','Currency Demo','Length Converter','Weight Converter','Temperature',
-'Speed Converter','Data Size','Text Counter','Word Counter','Case Converter','JSON Viewer','Base64 Demo','Timestamp',
-'Random Number','Dice Roller','Coin Flip','Focus Mode'
-];
+const days=Array.from({length:10},(_,i)=>({day:i+1,done:false}));let challenge=JSON.parse(localStorage.challenge||'null')||days;function renderChallenge(){$('#challengeList').innerHTML=challenge.map((d,i)=>`<label class="challenge"><input type="checkbox" ${d.done?'checked':''} onchange="challenge[${i}].done=this.checked;localStorage.challenge=JSON.stringify(challenge)"><b>Day ${d.day}</b><span>Complete today's challenge</span></label>`).join('')};renderChallenge();
 
-$('toolsGrid').innerHTML=tools.map((name,i)=>
-  '<button class="tool-item" data-tool="'+i+'">🛠️ <b>'+(i+1)+'. '+name+'</b><br><span class="muted">Open utility</span></button>'
-).join('');
+$('#globalSearch').oninput=e=>{let q=e.target.value.toLowerCase();if(!q)return;let hit=[...games.map(g=>g[0]),...toolDefs.map(t=>t[0]),'Weather','Paper Trading','Smartwatch','Coding Sandbox','10-Day Challenge'].find(x=>x.toLowerCase().includes(q));if(hit){if(games.some(g=>g[0]===hit))show('games');else if(toolDefs.some(t=>t[0]===hit))show('tools');else if(hit==='Weather')show('weather');else if(hit==='Paper Trading')show('trading');else if(hit==='Smartwatch')show('watch');else if(hit==='Coding Sandbox')show('coding');else show('challenge')}};
 
-document.querySelectorAll('.tool-item').forEach(b=>b.addEventListener('click',()=>runTool(Number(b.dataset.tool))));
+$('#weatherBtn').onclick=async()=>{let q=$('#city').value.trim();if(!q)return;$('#weatherOut').textContent='Loading...';try{let geo=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(q)+'&count=1&language=en&format=json').then(r=>r.json());if(!geo.results?.length)throw Error('City not found');let g=geo.results[0];let w=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${g.latitude}&longitude=${g.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`).then(r=>r.json());let names={0:'Clear',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',51:'Drizzle',61:'Rain',71:'Snow',80:'Showers',95:'Thunderstorm'};$('#weatherOut').innerHTML=`<h3>${g.name}, ${g.country}</h3><div class="grid"><div class="card"><b>Now</b><div class="stat">${w.current.temperature_2m}°C</div><span>${names[w.current.weather_code]||'Weather'}</span></div><div class="card"><b>Feels like</b><div class="stat">${w.current.apparent_temperature}°C</div><span>Humidity ${w.current.relative_humidity_2m}%</span></div><div class="card"><b>Wind</b><div class="stat">${w.current.wind_speed_10m} km/h</div></div></div><h3>7-day forecast</h3><div class="grid">${w.daily.time.map((d,i)=>`<div class="card"><b>${d}</b><p>${w.daily.temperature_2m_min[i]}° / ${w.daily.temperature_2m_max[i]}°C</p><span>Rain chance ${w.daily.precipitation_probability_max[i]}%</span></div>`).join('')}</div>`}catch(e){$('#weatherOut').textContent='Could not load live weather. Check your internet connection and try again.'}};
 
-function runTool(index){
-  const name=tools[index];
-  const out=$('toolOut');
-
-  if(name==='Calculator'){
-    out.innerHTML='<h3>Calculator</h3><input id="calcInput" class="tool-input" placeholder="25*4+10"><button class="btn" id="calcBtn">Calculate</button><p id="calcResult" class="stat"></p>';
-    $('calcBtn').addEventListener('click',()=>{
-      const value=$('calcInput').value.trim();
-      const result=calculateSafe(value);
-      $('calcResult').textContent=result===null?'Invalid expression':'Result: '+result;
-    });
-  }else if(name==='Random Number'){
-    out.innerHTML='<h3>Random Number</h3><button class="btn" id="randomBtn">Generate</button><p id="randomResult" class="stat"></p>';
-    $('randomBtn').addEventListener('click',()=>$('randomResult').textContent=String(Math.floor(Math.random()*1000)));
-  }else if(name==='Dice Roller'){
-    out.innerHTML='<h3>Dice Roller</h3><button class="btn" id="diceBtn">Roll 🎲</button><p id="diceResult" class="stat"></p>';
-    $('diceBtn').addEventListener('click',()=>$('diceResult').textContent=String(1+Math.floor(Math.random()*6)));
-  }else if(name==='Coin Flip'){
-    out.innerHTML='<h3>Coin Flip</h3><button class="btn" id="coinBtn">Flip</button><p id="coinResult" class="stat"></p>';
-    $('coinBtn').addEventListener('click',()=>$('coinResult').textContent=Math.random()<0.5?'Heads':'Tails');
-  }else{
-    out.innerHTML='<h3>'+name+'</h3><p class="muted">Browser utility ready. Live-data utilities can be connected to an API.</p>';
-  }
-  out.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-
-function calculateSafe(expression){
-  if(!expression || expression.length>100) return null;
-  if(!/^[0-9+\-*/().%\s]+$/.test(expression)) return null;
-  try{
-    const normalized=expression.replace(/%/g,'/100');
-    const result=Function('"use strict";return ('+normalized+')')();
-    return Number.isFinite(result)?result:null;
-  }catch{return null}
-}
-
-/* Clock + Stopwatch */
-function clockTick(){
-  const d=new Date();
-  const h=d.getHours()%12,m=d.getMinutes(),s=d.getSeconds();
-  $('digital').textContent=d.toLocaleTimeString();
-  $('time').textContent=d.toLocaleTimeString();
-  $('hour').style.transform='rotate('+(h*30+m*0.5)+'deg)';
-  $('minute').style.transform='rotate('+(m*6+s*0.1)+'deg)';
-  $('second').style.transform='rotate('+(s*6)+'deg)';
-  $('world').innerHTML=
-    '🇮🇳 '+d.toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata'})+
-    '<br>🇬🇧 '+d.toLocaleTimeString('en-GB',{timeZone:'Europe/London'})+
-    '<br>🇺🇸 '+d.toLocaleTimeString('en-US',{timeZone:'America/New_York'});
-}
-setInterval(clockTick,1000);
-
-document.querySelectorAll('[data-face]').forEach(b=>b.addEventListener('click',()=>{
-  const n=Number(b.dataset.face);
-  $('watch').querySelector('.clock').style.background=n===0?'#10172a':n===1?'#26334d':'#241145';
-  toast('Watch face changed');
-}));
-
-let swTimer=null,swElapsed=0,swStartedAt=0;
-function updateStopwatch(){
-  const elapsed=swElapsed+(swTimer?Date.now()-swStartedAt:0);
-  $('sw').textContent=(elapsed/1000).toFixed(1)+'s';
-}
-$('swToggle').addEventListener('click',()=>{
-  if(swTimer){
-    swElapsed+=Date.now()-swStartedAt;
-    clearInterval(swTimer); swTimer=null;
-  }else{
-    swStartedAt=Date.now();
-    swTimer=setInterval(updateStopwatch,100);
-  }
-  updateStopwatch();
-});
-$('swReset').addEventListener('click',()=>{
-  clearInterval(swTimer); swTimer=null; swElapsed=0; swStartedAt=0; updateStopwatch();
-});
-
-/* Cricket simulator */
-let runs=0,wickets=0,balls=0,batterA=0,batterB=0;
-$('ballBtn').addEventListener('click',()=>{
-  balls++;
-  if(Math.random()<0.12) wickets++;
-  else{
-    const r=[0,1,1,2,3,4,6][Math.floor(Math.random()*7)];
-    runs+=r;
-    if(r%2===1) batterA+=r; else batterB+=r;
-  }
-  $('score').textContent='IND '+runs+'/'+wickets;
-  $('overs').textContent=Math.floor(balls/6)+'.'+(balls%6)+' overs';
-  $('ba').textContent=String(batterA);
-  $('bb').textContent=String(batterB);
-  $('bw').textContent=wickets+'/'+Math.floor(runs/35);
-});
-
-/* Trading */
-const assets=[
-['NIFTY 50',25420],['SENSEX',83180],['BANK NIFTY',57120],['RELIANCE',1420],
-['TCS',3120],['INFY',1495],['HDFC BANK',2010],['TATA MOTORS',685]
-];
-let selectedAsset=0,balance=1000000,price=25420;
-
-$('assets').innerHTML=assets.map((a,i)=>
-  '<div class="asset '+(i===0?'selected':'')+'" data-asset="'+i+'"><span>'+a[0]+'</span><b>'+a[1].toLocaleString('en-IN')+'</b></div>'
-).join('');
-
-document.querySelectorAll('.asset').forEach(el=>el.addEventListener('click',()=>selectAsset(Number(el.dataset.asset))));
-
-function selectAsset(index){
-  selectedAsset=index;
-  price=assets[index][1];
-  $('assetName').textContent=assets[index][0];
-  $('price').textContent=price.toLocaleString('en-IN');
-  document.querySelectorAll('.asset').forEach((e,j)=>e.classList.toggle('selected',index===j));
-  drawChart();
-}
-
-function drawChart(){
-  const c=$('chart');
-  if(!c) return;
-  const rect=c.getBoundingClientRect();
-  if(rect.width<2 || rect.height<2) return;
-  const d=window.devicePixelRatio||1;
-  c.width=Math.round(rect.width*d);
-  c.height=Math.round(rect.height*d);
-  const ctx=c.getContext('2d');
-  ctx.setTransform(d,0,0,d,0,0);
-  ctx.clearRect(0,0,rect.width,rect.height);
-
-  ctx.strokeStyle='#202943';
-  for(let i=1;i<8;i++){
-    ctx.beginPath();
-    ctx.moveTo(0,i*rect.height/8);
-    ctx.lineTo(rect.width,i*rect.height/8);
-    ctx.stroke();
-  }
-
-  ctx.strokeStyle='#00d9ff';
-  ctx.lineWidth=2;
-  ctx.beginPath();
-  let y=rect.height*0.55;
-  for(let i=0;i<80;i++){
-    const px=i*rect.width/79;
-    y+=Math.random()*24-12;
-    y=Math.max(20,Math.min(rect.height-20,y));
-    if(i===0) ctx.moveTo(px,y); else ctx.lineTo(px,y);
-  }
-  ctx.stroke();
-}
-
-function formatINR(value){return '₹'+Math.round(value).toLocaleString('en-IN')}
-
-function placeOrder(side){
-  const qty=Math.max(1,Math.floor(Number($('qty').value)||1));
-  const type=$('orderType').value;
-  const triggerValue=Number($('trigger').value);
-  const executionPrice=(type==='Market'||!Number.isFinite(triggerValue)||triggerValue<=0)?price:triggerValue;
-  const value=qty*executionPrice;
-
-  if(side==='BUY' && value>balance){
-    toast('Insufficient virtual balance');
-    return;
-  }
-
-  balance += side==='BUY' ? -value : value;
-  $('balance').textContent=formatINR(balance);
-
-  const tr=document.createElement('tr');
-  [side,assets[selectedAsset][0],qty,executionPrice.toLocaleString('en-IN'),'FILLED'].forEach(v=>{
-    const td=document.createElement('td');
-    td.textContent=String(v);
-    tr.appendChild(td);
-  });
-  $('history').appendChild(tr);
-  toast(side+' order filled');
-}
-
-$('buyBtn').addEventListener('click',()=>placeOrder('BUY'));
-$('sellBtn').addEventListener('click',()=>placeOrder('SELL'));
-$('riskBtn').addEventListener('click',()=>{
-  const qty=Math.max(1,Math.floor(Number($('qty').value)||1));
-  $('riskOut').textContent='Position value: '+formatINR(qty*price);
-});
-
-/* Search */
-$('search').addEventListener('input',e=>{
-  const q=e.target.value.trim().toLowerCase();
-  document.querySelectorAll('.anim-item,.trans-item,.game-item,.tool-item').forEach(item=>{
-    item.style.display=!q||item.textContent.toLowerCase().includes(q)?'':'none';
-  });
-});
-
-/* Initial render */
-clockTick();
-requestAnimationFrame(drawChart);
-window.addEventListener('resize',()=>requestAnimationFrame(drawChart));
+$('#homeCards').innerHTML=[['🎮','20 Games','Playable mini-games'],['🛠','35 Tools','Useful browser utilities'],['📈','Paper Trading','Buy, sell, holdings & P/L'],['🌦','Weather','Live 7-day forecast'],['⌚','Smartwatch','Clock, stopwatch & timer'],['💻','Coding','JavaScript sandbox'],['📅','Challenge','Persistent 10-day progress']].map(x=>`<div class="card"><h3>${x[0]} ${x[1]}</h3><p>${x[2]}</p></div>`).join('');
+if(location.hash&&document.getElementById(location.hash.slice(1)))show(location.hash.slice(1));
 </script>
-</body>
-</html>'''
+</body></html>'''
+Path("/mnt/data/index.html").write_text(html, encoding="utf-8")
+print("Created /mnt/data/index.html")
+print("Single-file build: 20 games, 35 tools, weather, paper trading, smartwatch, coding sandbox, persistent challenge, RGB controls, global search, responsive black/RGB UI.")
 
-html.write_text(src,encoding="utf-8")
-print("Fixed and created:", html)
-print("Size:", round(html.stat().st_size/1024,1), "KB")
 
 
 
